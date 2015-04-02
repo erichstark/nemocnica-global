@@ -17,28 +17,6 @@ http://www.springframework.org/schema/context/spring-context-3.0.xsd http://www.
     <mvc:resources mapping="/img/**" location="/WEB-INF/img/"/>
     <mvc:resources mapping="/js/**" location="/WEB-INF/js/"/>
 
-
-    <bean id="sessionFactory"
-          class="org.springframework.orm.hibernate4.LocalSessionFactoryBean">
-        <property name="annotatedClasses">
-            <list>
-                <!-- List of annotated classes to store in DB -->
-                <!--<value>sk.stuba.fei.nemocnica.model.User</value>-->
-            </list>
-        </property>
-        <property name="hibernateProperties">
-            <props>
-                <prop key="hibernate.connection.driver_class">org.postgresql.Driver</prop>
-                <prop key="hibernate.connection.datasource">java:jboss/datasources/PostgreSQLDS</prop>
-                <prop key="hibernate.dialect">org.hibernate.dialect.PostgreSQL9Dialect</prop>
-                <!-- IDEA 'Cannot resolve schema' due to used jndi datasource. Please ignore it. -->
-                <prop key="hibernate.default_schema">public</prop>
-                <prop key="show_sql">true</prop>
-                <prop key="hibernate.hbm2ddl.auto">update</prop>
-            </props>
-        </property>
-    </bean>
-
     <tx:annotation-driven/>
 
     <bean id="transactionManager"
