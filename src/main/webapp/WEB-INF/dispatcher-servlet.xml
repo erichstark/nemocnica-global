@@ -19,11 +19,6 @@ http://www.springframework.org/schema/context/spring-context-3.0.xsd http://www.
 
     <tx:annotation-driven/>
 
-    <bean id="transactionManager"
-          class="org.springframework.orm.hibernate4.HibernateTransactionManager">
-        <property name="sessionFactory" ref="sessionFactory"/>
-    </bean>
-
     <!-- Example of creating DAO bean which can be later injected to controller by using @Autowired annotation -->
     <!--<bean id="userDao" class="sk.stuba.fei.nemocnica.dao.UserDAOImpl">-->
     <!--<constructor-arg ref="sessionFactory"/>-->
