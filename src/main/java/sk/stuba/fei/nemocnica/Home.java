@@ -1,4 +1,4 @@
-package sk.stuba.fei;
+package sk.stuba.fei.nemocnica;
 
 import org.springframework.stereotype.*;
 import org.springframework.web.bind.annotation.*;

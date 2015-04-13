@@ -19,6 +19,8 @@
 		<maven.compiler.source>1.8</maven.compiler.source>
 		<maven.compiler.target>1.8</maven.compiler.target>
 		<spring.version>4.1.5.RELEASE</spring.version>
+		<spring.security.version>4.0.0.RELEASE</spring.security.version>
+		<hibernate.version>4.3.8.Final</hibernate.version>
 	</properties>
 
 	<repositories>
@@ -77,18 +79,10 @@
 				</configuration>
 			</plugin>
 			<!-- JETTY MAVEN PLUGIN - nepotrebne, ale necham zatial -->
-			<!-- <plugin>
-				<groupId>org.eclipse.jetty</groupId>
-				<artifactId>jetty-maven-plugin</artifactId>
-				<version>${jetty.version}</version>
-				<configuration>
-					<httpConnector>
-						<port>8080</port>
-						<host>localhost</host>
-					</httpConnector>
-					<scanIntervalSeconds>10</scanIntervalSeconds>
-				</configuration>
-			</plugin> -->
+			<!-- <plugin> <groupId>org.eclipse.jetty</groupId> <artifactId>jetty-maven-plugin</artifactId> 
+				<version>${jetty.version}</version> <configuration> <httpConnector> <port>8080</port> 
+				<host>localhost</host> </httpConnector> <scanIntervalSeconds>10</scanIntervalSeconds> 
+				</configuration> </plugin> -->
 			<!-- JETTY RUNNER CEZ DEPENDENCY PLUGIN - nutne!!! -->
 			<plugin>
 				<groupId>org.apache.maven.plugins</groupId>
@@ -117,6 +111,13 @@
 	</build>
 
 	<dependencies>
+
+		<dependency>
+			<groupId>javax</groupId>
+			<artifactId>javaee-api</artifactId>
+			<version>7.0</version>
+			<scope>provided</scope>
+		</dependency>
 
 		<!-- SPRING DEPENDENCIES -->
 		<dependency>
@@ -149,6 +150,28 @@
 			<artifactId>spring-orm</artifactId>
 			<version>${spring.version}</version>
 		</dependency>
+		
+		<!-- Spring Security -->
+        <dependency>
+            <groupId>org.springframework.security</groupId>
+            <artifactId>spring-security-core</artifactId>
+            <version>${spring.security.version}</version>
+        </dependency>
+        <dependency>
+            <groupId>org.springframework.security</groupId>
+            <artifactId>spring-security-config</artifactId>
+            <version>${spring.security.version}</version>
+        </dependency>
+        <dependency>
+            <groupId>org.springframework.security</groupId>
+            <artifactId>spring-security-web</artifactId>
+            <version>${spring.security.version}</version>
+        </dependency>
+        <dependency>
+            <groupId>org.springframework.security</groupId>
+            <artifactId>spring-security-taglibs</artifactId>
+            <version>${spring.security.version}</version>
+        </dependency>
 
 		<!-- JETTY DEPENDENCIES -->
 		<dependency>
@@ -197,12 +220,12 @@
 		<dependency>
 			<groupId>org.hibernate</groupId>
 			<artifactId>hibernate-core</artifactId>
-			<version>4.3.8.Final</version>
+			<version>${hibernate.version}</version>
 		</dependency>
 		<dependency>
 			<groupId>org.hibernate</groupId>
 			<artifactId>hibernate-entitymanager</artifactId>
-			<version>4.3.8.Final</version>
+			<version>${hibernate.version}</version>
 		</dependency>
 
 		<!-- Database Connection Pools for transactions -->

@@ -1,0 +1,32 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<b:beans xmlns:b="http://www.springframework.org/schema/beans"
+         xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns="http://www.springframework.org/schema/security"
+         xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans-3.0.xsd
+	http://www.springframework.org/schema/security http://www.springframework.org/schema/security/spring-security.xsd">
+
+    <global-method-security pre-post-annotations="enabled"/>
+
+    <http auto-config="true" disable-url-rewriting="true" use-expressions="true">
+        <csrf disabled="true"/>
+
+        <intercept-url pattern="/login**" access="permitAll()"/>
+        <intercept-url pattern="/admin/**" access="hasRole('ROLE_ADMIN')"/>
+        <intercept-url pattern="/" access="hasRole('ROLE_ADMIN') or hasRole('ROLE_USER')"/>
+
+        <form-login login-page="/login" login-processing-url="/login.do" default-target-url="/"
+                    authentication-failure-url="/login?err=1" username-parameter="username"
+                    always-use-default-target="false"
+                    password-parameter="password"/>
+
+        <logout logout-url="/logout" logout-success-url="/login?out=1" delete-cookies="JSESSIONID"
+                invalidate-session="true"/>
+
+        <session-management invalid-session-url="/login?time=1">
+            <concurrency-control max-sessions="1" expired-url="/login?time=1"/>
+        </session-management>
+    </http>
+
+    <authentication-manager>
+        <authentication-provider ref="customAuthenticationProvider"/>
+    </authentication-manager>
+</b:beans>
