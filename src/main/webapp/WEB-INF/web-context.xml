@@ -30,9 +30,4 @@ http://www.springframework.org/schema/context/spring-context-3.0.xsd">
 		<property name="suffix" value=".jsp" />
 	</bean>
 
-	<!-- DAO Beans -->
-	<bean id="zamestnanecDao" class="sk.stuba.fei.nemocnica.dao.ZamestnanecDAOImpl">
-		<constructor-arg ref="sessionFactory" />
-	</bean>
-
 </beans>
