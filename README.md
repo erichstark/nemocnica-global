@@ -3,7 +3,8 @@ Global Server - Timovy projekt
 
 Priprava localhostu
 -------------------
-
+- je potrebna enviroment premenna `DATABASE_URL` - `DATABASE_URL=postgres://postgres:postgres@localhost:5432/postgres`
+- databaza `postgres` a uzivatel `postgres`, musi byt prava!
 
 Spustenie na localhoste
 -----------------------
