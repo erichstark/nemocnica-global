@@ -3,7 +3,9 @@ package sk.stuba.fei.nemocnica.dao;
 import org.hibernate.Query;
 import org.hibernate.Session;
 import org.hibernate.SessionFactory;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.transaction.annotation.Transactional;
+
 import sk.stuba.fei.nemocnica.model.Zamestnanec;
 
 import java.util.List;
@@ -15,6 +17,7 @@ public class ZamestnanecDAOImpl implements ZamestnanecDAO {
 
     private static final String BY_USERNAME = "FROM Zamestnanec Z WHERE username = :username";
 
+    @Autowired
     private SessionFactory sessionFactory;
 
     public ZamestnanecDAOImpl(SessionFactory sessionFactory) {
