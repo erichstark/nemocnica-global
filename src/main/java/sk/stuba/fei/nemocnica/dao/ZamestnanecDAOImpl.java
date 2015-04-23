@@ -17,7 +17,6 @@ public class ZamestnanecDAOImpl implements ZamestnanecDAO {
 
     private static final String BY_USERNAME = "FROM Zamestnanec Z WHERE username = :username";
 
-    @Autowired
     private SessionFactory sessionFactory;
 
     public ZamestnanecDAOImpl(SessionFactory sessionFactory) {
