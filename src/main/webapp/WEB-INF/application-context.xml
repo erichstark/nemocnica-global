@@ -20,7 +20,7 @@ http://www.springframework.org/schema/context/spring-context-3.0.xsd">
 	<context:property-placeholder location="classpath*:META-INF/*.properties"/>
 	
 	<bean class="java.net.URI" id="dbUrl">
-	    <constructor-arg value="#{systemEnvironment['DATABASE_URL']}"/>
+	    <constructor-arg value="#{systemEnvironment['DB_URL']}"/>
 	</bean>
 	
 	<bean id="dataSource" class="org.apache.commons.dbcp2.BasicDataSource">
