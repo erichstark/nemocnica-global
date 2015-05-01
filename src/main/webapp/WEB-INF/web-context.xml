@@ -24,6 +24,11 @@ http://www.springframework.org/schema/context/spring-context-3.0.xsd">
 	<!-- freemarker config -->
     <bean id="freemarkerConfig" class="org.springframework.web.servlet.view.freemarker.FreeMarkerConfigurer">
       <property name="templateLoaderPath" value="/WEB-INF/views/" />
+      <property name="freemarkerSettings">
+	     <props>
+	       <prop key="number_format">#</prop>
+	     </props>
+	   </property>
     </bean>
      
     <!-- 
@@ -31,10 +36,9 @@ http://www.springframework.org/schema/context/spring-context-3.0.xsd">
       different view resolving based on Locale, you have to use the resource bundle resolver.
     -->
     <bean id="viewResolver" class="org.springframework.web.servlet.view.freemarker.FreeMarkerViewResolver">
-      <property name="cache" value="false" />
+      <property name="cache" value="true" />
       <property name="prefix" value="" />
       <property name="suffix" value=".ftl" />
-      <property name="exposeSpringMacroHelpers" value="true"/>
     </bean>
 
 </beans>

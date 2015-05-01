@@ -1,4 +1,3 @@
-<#import "spring.ftl" as spring />
 <!DOCTYPE html>
 <html>
 <head>
@@ -7,7 +6,7 @@
 <body>
 <#global test="omg">
 
-<h2>${header}</h2>
+<h2>${wmsg}</h2>
 ${test}
 <div class="container">
   <div class="row">
