@@ -1,1 +1,1 @@
-java -Dserver.port=$PORT -jar app.jar --spring.profiles.active=heroku
+java -jar app.jar --spring.profiles.active=heroku
