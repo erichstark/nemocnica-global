@@ -90,6 +90,6 @@ task stopServer(type: Exec) {
     }
 }
 
-defaultTasks "clean", "build", "installApp"
+defaultTasks "clean", "bootRepackage"
 
 bootRun.dependsOn stopServer
