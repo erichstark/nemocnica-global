@@ -7,7 +7,6 @@ import org.springframework.boot.autoconfigure.security.SecurityProperties;
 import org.springframework.context.ConfigurableApplicationContext;
 import org.springframework.context.annotation.Bean;
 import org.springframework.core.annotation.Order;
-import org.springframework.jms.annotation.EnableJms;
 import org.springframework.security.config.annotation.authentication.builders.AuthenticationManagerBuilder;
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
 import org.springframework.security.config.annotation.web.configuration.WebSecurityConfigurerAdapter;
@@ -73,11 +72,6 @@ public class MainApplication extends WebMvcConfigurerAdapter {
         LocaleChangeInterceptor lci = new LocaleChangeInterceptor();
         lci.setParamName("lang");
         return lci;
-    }
-
-    @Bean
-    public JmsProducer jmsProducer() {
-        return new JmsProducer();
     }
 
     @Override
