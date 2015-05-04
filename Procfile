@@ -1,1 +1,1 @@
-web: java $JAVA_OPTS -jar app.jar -Dport=$PORT --spring.profiles.active=heroku
+web: java $JAVA_OPTS -jar app.jar --spring.profiles.active=heroku
