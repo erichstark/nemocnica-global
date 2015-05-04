@@ -1,28 +1,50 @@
-Global Server - Timovy projekt
-=============================
+# Prerequisite
 
-Priprava localhostu
--------------------
-- je potrebna enviroment premenna `DB_URL` - `DB_URL=postgres://postgres:postgres@localhost:5432/postgres`
-- databaza `postgres` a uzivatel `postgres`, musi byt prava!
+Before we can start building the application, we need to have an OpenShift free account and client tools installed.
 
-Spustenie na localhoste
------------------------
+# Step 1: Create DIY application
 
-- Najprv spravit `mvn clean package`
-- Potom sa server pusta runnerom: `java -jar target/dependency/jetty-runner.jar target/*.war`
-- Nie je potrebna ziadna dalsia instalacia
+To create an application using client tools, type the following command:
 
-Heroku
-------
+    rhc app create <app-name> diy-0.1
 
-- Autodeploy je nastaveny na *master* branch
-- Build a deploy trva od par sec do minuty
-- logy je mozne si pozriet (je potrebne mat heroku toolbelt):
- - prikaz `heroku login` a prihlasenie s nemocnica.openshift@gmail.com a heslo
- - prikaz `heroku logs -n 500 --app nemocnica-global` - prepinac n je na pocet riadkov, max. 1500
+This command creates an application *<app-name>* using *DIY* cartridge and clones the repository to *<app-name>* directory.
 
-Git Flow
---------
+# Step 2: Delete Template Application Source code
 
-- http://danielkummer.github.io/git-flow-cheatsheet/
+OpenShift creates a template project that can be freely removed:
+
+    git rm -rf .openshift README.md diy misc
+
+Commit the changes:
+
+    git commit -am "Removed template application source code"
+
+# Step 3: Pull Source code from GitHub
+
+    git remote add upstream https://github.com/kolorobot/openshift-diy-spring-boot-gradle.git
+    git pull -s recursive -X theirs upstream master
+
+# Step 4: Push changes
+
+The basic template is ready to be pushed to OpenShift:
+
+	git push
+
+The initial deployment (build and application startup) will take some time (up to several minutes). Subsequent deployments are a bit faster:
+
+    remote: BUILD SUCCESSFUL
+    remote: Starting DIY cartridge
+    remote: XNIO NIO Implementation Version 3.3.0.Final
+    remote: b.c.e.u.UndertowEmbeddedServletContainer : Undertow started on port(s) 8080 (http)
+    remote: Started DemoApplication in 15.156 seconds (JVM running for 17.209)
+
+You can now browse to: `http://<app-name>.rhcloud.com/manage/health` and you should see:
+
+	{
+		"status": "UP",
+	}
+
+# Under the hood
+
+See: http://blog.codeleak.pl/2015/02/openshift-diy-build-spring-boot.html
