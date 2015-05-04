@@ -32,7 +32,6 @@ import java.util.logging.Level;
 import java.util.logging.Logger;
 
 @SpringBootApplication
-@EnableJms
 public class MainApplication extends WebMvcConfigurerAdapter {
 
     public static final Logger LOGGER = Logger.getLogger(MainApplication.class.getName());
