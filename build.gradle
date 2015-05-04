@@ -32,7 +32,7 @@ heroku {
 }
 
 jar {
-    baseName = 'demo'
+    baseName = 'nemocnica-global'
     version = '0.0.1-SNAPSHOT'
 }
 
@@ -41,9 +41,6 @@ targetCompatibility = 1.8
 
 repositories {
     mavenCentral()
-    maven {
-        url "https://repository.jboss.org/"
-    }
 }
 
 
@@ -56,15 +53,9 @@ dependencies {
     compile("org.springframework.boot:spring-boot-starter-data-jpa")
     runtime("org.postgresql:postgresql:9.2-1004-jdbc41")
 
-    compile("org.springframework:spring-jms")
-    compile("org.springframework.boot:spring-boot-starter-hornetq")
-    compile("org.hornetq:hornetq-jms-server:2.4.7.Final")
-
     compile("org.springframework.boot:spring-boot-starter-security")
 
     compile("org.springframework.boot:spring-boot-starter-logging")
-
-    testCompile("org.springframework.boot:spring-boot-starter-test")
 }
 
 eclipse {
