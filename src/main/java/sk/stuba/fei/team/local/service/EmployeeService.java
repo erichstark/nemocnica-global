@@ -2,11 +2,20 @@ package sk.stuba.fei.team.local.service;
 
 import sk.stuba.fei.team.local.domain.Employee;
 
-/**
- * Created by loucher on 29.4.2015.
- */
+import java.util.List;
+
 public interface EmployeeService {
-    Employee findByUsername(String username);
+
+    Employee findOne(Long id);
+
+    List<Employee> findByLastName(String lastName);
+
+    Iterable<Employee> findAll();
+
+    boolean exists(Long id);
 
     void save(Employee employee);
+
+    void delete(Long id);
+
 }

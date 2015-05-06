@@ -19,10 +19,10 @@ import org.springframework.web.servlet.config.annotation.ViewControllerRegistry;
 import org.springframework.web.servlet.config.annotation.WebMvcConfigurerAdapter;
 import org.springframework.web.servlet.i18n.LocaleChangeInterceptor;
 import org.springframework.web.servlet.i18n.SessionLocaleResolver;
-import sk.stuba.fei.team.local.domain.Employee;
+import sk.stuba.fei.team.local.domain.Patient;
 import sk.stuba.fei.team.local.security.CustomUserDetailService;
 import sk.stuba.fei.team.local.security.PBKDF2WithHmacSHA1;
-import sk.stuba.fei.team.local.service.EmployeeService;
+import sk.stuba.fei.team.local.service.PatientService;
 
 import javax.sql.DataSource;
 import java.util.ArrayList;
@@ -41,19 +41,19 @@ public class MainApplication extends WebMvcConfigurerAdapter {
     }
 
     private static void initializeUsers(ConfigurableApplicationContext context) {
-        EmployeeService employeeService = context.getBean(EmployeeService.class);
+        PatientService patientService = context.getBean(PatientService.class);
         PasswordEncoder encoder = new PBKDF2WithHmacSHA1();
-        if (employeeService.findByUsername("user") == null) {
+        if (patientService.findByUsername("user") == null) {
             List<GrantedAuthority> authorities = new ArrayList<>();
             authorities.add(new SimpleGrantedAuthority("USER"));
-            Employee userDetails = new Employee("user", encoder.encode("user123"), authorities);
-            employeeService.save(userDetails);
+            Patient userDetails = new Patient("user", encoder.encode("user123"), "user@fei.stuba.sk", authorities);
+            patientService.save(userDetails);
         }
-        if (employeeService.findByUsername("admin") == null) {
+        if (patientService.findByUsername("admin") == null) {
             List<GrantedAuthority> authorities = new ArrayList<>();
             authorities.add(new SimpleGrantedAuthority("ADMIN"));
-            Employee userDetails = new Employee("admin", encoder.encode("admin123"), authorities);
-            employeeService.save(userDetails);
+            Patient userDetails = new Patient("admin", encoder.encode("admin123"), "admin@fei.stuba.sk", authorities);
+            patientService.save(userDetails);
         }
     }
 
@@ -95,7 +95,7 @@ public class MainApplication extends WebMvcConfigurerAdapter {
         private DataSource dataSource;
 
         @Autowired
-        private EmployeeService employeeService;
+        private PatientService patientService;
 
         @Override
         protected void configure(HttpSecurity http) throws Exception {
@@ -112,7 +112,7 @@ public class MainApplication extends WebMvcConfigurerAdapter {
 
         @Override
         public void configure(AuthenticationManagerBuilder auth) throws Exception {
-            auth.userDetailsService(new CustomUserDetailService(employeeService)).passwordEncoder(new PBKDF2WithHmacSHA1());
+            auth.userDetailsService(new CustomUserDetailService(patientService)).passwordEncoder(new PBKDF2WithHmacSHA1());
             auth.jdbcAuthentication().dataSource(dataSource);
         }
     }

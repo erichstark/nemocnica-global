@@ -4,38 +4,38 @@ import org.springframework.security.core.userdetails.User;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.security.core.userdetails.UsernameNotFoundException;
-import sk.stuba.fei.team.local.domain.Employee;
-import sk.stuba.fei.team.local.service.EmployeeService;
+import sk.stuba.fei.team.local.domain.Patient;
+import sk.stuba.fei.team.local.service.PatientService;
 
 public class CustomUserDetailService implements UserDetailsService {
 
-    private EmployeeService employeeService;
+    private PatientService patientService;
 
 
-    public CustomUserDetailService(EmployeeService employeeService) {
-        this.employeeService = employeeService;
+    public CustomUserDetailService(PatientService patientService) {
+        this.patientService = patientService;
     }
 
     @Override
     public UserDetails loadUserByUsername(String username) throws UsernameNotFoundException {
-        if (employeeService == null) {
+        if (patientService == null) {
             throw new UsernameNotFoundException("Failed to autowire employeeService.");
         }
-        Employee z = employeeService.findByUsername(username);
-        if (z == null) {
+        Patient p = patientService.findByUsername(username);
+        if (p == null) {
             throw new UsernameNotFoundException("User with username " + username + " not found.");
         }
-        if (z.getAuthorities() == null || z.getAuthorities().isEmpty()) {
+        if (p.getAuthorities() == null || p.getAuthorities().isEmpty()) {
             throw new UsernameNotFoundException("User has no granted authorities.");
         }
         return new User(
-                z.getUsername(),
-                z.getPassword(),
-                z.isEnabled(),
-                z.isAccountNonExpired(),
-                z.isCredentialsNonExpired(),
-                z.isAccountNonLocked(),
-                z.getAuthorities()
+                p.getUsername(),
+                p.getPassword(),
+                p.isEnabled(),
+                p.isAccountNonExpired(),
+                p.isCredentialsNonExpired(),
+                p.isAccountNonLocked(),
+                p.getAuthorities()
         );
     }
 }
