@@ -3,8 +3,10 @@ package sk.stuba.fei.team.local.repository;
 import org.springframework.data.repository.CrudRepository;
 import sk.stuba.fei.team.local.domain.Employee;
 
-public interface EmployeeRepository extends CrudRepository<Employee, String> {
+import java.util.List;
 
-    Employee findByUsername(String username);
+public interface EmployeeRepository extends CrudRepository<Employee, Long> {
+
+    List<Employee> findByLastNameContainingIgnoreCase(String lastName);
 
 }

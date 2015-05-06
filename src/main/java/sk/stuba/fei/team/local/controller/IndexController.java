@@ -12,7 +12,6 @@ public class IndexController {
     public String index(Map<String, Object> model) {
 
         model.put("pageTitle", "Hello Title");
-        model.put("user", "USER");
 
         return "index";
     }
