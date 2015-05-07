@@ -11,6 +11,7 @@
     <link type="text/css" href="<@spring.url '/css/bootstrap.min.css'/>" rel="stylesheet"/>
     <link type="text/css" href="<@spring.url '/css/custom.css'/>" rel="stylesheet"/>
     <script src="<@spring.url '/js/jquery-2.1.4.min.js'/>"></script>
+    <script src="<@spring.url '/js/custom.js'/>"></script>
     <title>${pageTitle}</title>
 </head>
 <body>
