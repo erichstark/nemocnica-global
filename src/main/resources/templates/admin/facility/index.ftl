@@ -1,3 +1,4 @@
+<#-- @ftlvariable name="facilities" type="sk.stuba.fei.team.local.domain.Facility[]" -->
 <#import "../../lib/pageTemplates.ftl" as pt>
 <#import "/spring.ftl" as spring>
 <@pt.dashboardPage>
@@ -6,11 +7,11 @@
 <div class="row">
     <div class="col-md-12">
         <a class="btn btn-info btn-sm" href="<@spring.url '/admin/facility/add'/>" role="button">Vytvoriť
-            facility</a>
+            zariadenie</a>
     </div>
 </div>
 
-<h2 class="sub-header">Facilities</h2>
+<h2 class="sub-header">Zariadenia</h2>
 
 <div class="row">
     <div class="col-md-12">
@@ -21,7 +22,7 @@
                        value="${search!""}">
             </div>
             <input type="submit" value="Hľadaj" class="btn btn-default">
-            <a class="btn btn-default" href="<@spring.url '/admin/facility/clear'/>">Reset</a>
+            <a class="btn btn-default" href="<@spring.url '/admin/facility/clear'/>">Zruš</a>
         </form>
     </div>
 </div>
@@ -32,7 +33,7 @@
         <tr>
             <th style="width: 60px;">#</th>
             <th style="width: 60px;">ID</th>
-            <th>Názov facilities</th>
+            <th>Názov zariadenia</th>
             <th>Adresa</th>
             <th style="width: 60px;">Akcia</th>
         </tr>

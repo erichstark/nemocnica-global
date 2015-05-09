@@ -1,7 +1,8 @@
+<#-- @ftlvariable name="facilities" type="sk.stuba.fei.team.local.domain.Facility[]" -->
 <#import "../../lib/pageTemplates.ftl" as pt>
 <#import "/spring.ftl" as spring>
 <@pt.dashboardPage>
-<h1 class="page-header">Pridanie novej offices</h1>
+<h1 class="page-header">Pridanie novej ambulancie</h1>
 
 <div class="row">
     <div class="col-md-12">
@@ -12,9 +13,9 @@
 <br>
 
     <#if facilities?size == 0>
-    <h2>Najskôr treba vytvoriť facilities!</h2>
+    <h2>Najskôr treba vytvoriť zariadenie!</h2>
     <br>
-    <a class="btn btn-warning btn-sm" href="<@spring.url '/admin/facility/add'/>" role="button">Pridať facility</a>
+    <a class="btn btn-warning btn-sm" href="<@spring.url '/admin/facility/add'/>" role="button">Pridať zariadenie</a>
     <#else>
     <div class="table-responsive">
 
@@ -30,7 +31,7 @@
                        value="${office.name!""}">
             </div>
             <div class="form-group">
-                <label for="office-facility">Facility</label>
+                <label for="office-facility">Zariadenie</label>
                 <select name="id_facility" class="form-control" id="office-facility">
                     <#list facilities as facility>
                         <option value="${facility.id}">${facility.name}</option>

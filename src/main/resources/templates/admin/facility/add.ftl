@@ -1,7 +1,8 @@
+<#-- @ftlvariable name="facility" type="sk.stuba.fei.team.local.domain.Facility" -->
 <#import "../../lib/pageTemplates.ftl" as pt>
 <#import "/spring.ftl" as spring>
 <@pt.dashboardPage>
-<h1 class="page-header">Pridanie nového facilities</h1>
+<h1 class="page-header">Pridanie nového zariadenia</h1>
 
 <div class="row">
     <div class="col-md-12">

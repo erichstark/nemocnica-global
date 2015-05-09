@@ -46,7 +46,7 @@ public class AdminInsuranceController {
     }
 
     @RequestMapping(value = "/save", method = RequestMethod.POST)
-    public String save(@ModelAttribute("insurance") Insurance insurance, Map<String, Object> model) {
+    public String save(@ModelAttribute("insurance") Insurance insurance) {
 
         insuranceService.save(insurance);
 
@@ -54,14 +54,14 @@ public class AdminInsuranceController {
     }
 
     @RequestMapping(value = "/delete/{id}")
-    public String delete(@PathVariable Long id, Map<String, Object> model) {
+    public String delete(@PathVariable Long id) {
 
         insuranceService.delete(id);
 
         return "redirect:/admin/insurance";
     }
 
-    @RequestMapping(value = "/search", method = RequestMethod.POST, params = {"text"})
+    @RequestMapping(value = "/search", method = RequestMethod.POST)
     public String search(@RequestParam("text") String text, Map<String, Object> model) {
 
         Iterable<Insurance> offices = insuranceService.findByName(text);

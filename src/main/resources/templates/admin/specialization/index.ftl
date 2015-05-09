@@ -22,7 +22,7 @@
                        value="${search!""}">
             </div>
             <input type="submit" value="Hľadaj" class="btn btn-default">
-            <a class="btn btn-default" href="<@spring.url '/admin/specialization/clear'/>">Reset</a>
+            <a class="btn btn-default" href="<@spring.url '/admin/specialization/clear'/>">Zruš</a>
         </form>
     </div>
 </div>
