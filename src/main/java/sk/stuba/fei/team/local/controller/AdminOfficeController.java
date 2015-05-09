@@ -62,15 +62,6 @@ public class AdminOfficeController {
 
     @RequestMapping(value = "/save", method = RequestMethod.POST)
     public String save(@ModelAttribute("office") Office office, @RequestParam Long id_facility) {
-        /*
-        Office newAmb = new Office();
-        if (officeService.exists(office.getId())) {
-            newAmb = officeService.findOne(office.getId());
-        } else {
-            newAmb.setId(office.getId());
-        }
-        newAmb.setName(office.getName());
-        */
 
         Facility facility = facilityService.findOne(id_facility);
         office.setFacility(facility);

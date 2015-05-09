@@ -8,7 +8,7 @@ public interface EmployeeService {
 
     Employee findOne(Long id);
 
-    List<Employee> findByLastName(String lastName);
+    List<Employee> findByFirstnameOrLastname(String text);
 
     Iterable<Employee> findAll();
 

@@ -121,6 +121,7 @@
                     <li><a href="<@spring.url '/admin/insurance'/>">Poistovne</a></li>
                     <li><a href="<@spring.url '/admin/specialization'/>">Špecializácie</a></li>
                     <li><a href="<@spring.url '/admin/patient'/>">Pacienti</a></li>
+                    <li><a href="<@spring.url '/admin/employee'/>">Zamestnanci</a></li>
                 </ul>
             </div>
             <div class="col-sm-9 col-sm-offset-3 col-md-10 col-md-offset-2 main">
