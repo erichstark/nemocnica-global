@@ -118,4 +118,26 @@ public class AdminEmployeeController {
 
         return "redirect:/admin/employee/edit/" + id_employee;
     }
+
+    @RequestMapping(value = "/specialization/add", method = RequestMethod.POST)
+    public String specializationAdd(@RequestParam("id_employee") Long id_employee, @RequestParam("specialization") String specialization) {
+
+        Employee employee = employeeService.findOne(id_employee);
+        employee.getSpecializations().add(specialization);
+
+        employeeService.save(employee);
+
+        return "redirect:/admin/employee/edit/" + id_employee;
+    }
+
+    @RequestMapping(value = "{id_employee}/specialization/{specialization}/delete")
+    public String specializationDelete(@PathVariable("id_employee") Long id_employee, @PathVariable("specialization") int specialization) {
+
+        Employee employee = employeeService.findOne(id_employee);
+        employee.getSpecializations().remove(specialization);
+
+        employeeService.save(employee);
+
+        return "redirect:/admin/employee/edit/" + id_employee;
+    }
 }

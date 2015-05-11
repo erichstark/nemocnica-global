@@ -57,6 +57,47 @@
 <br>
 
 <div class="row">
+    <h2>Špecializácia</h2>
+    <hr>
+
+    <div class="col-md-12">
+        <form class="form-inline" method="POST" action="<@spring.url '/admin/employee/specialization/add'/>">
+            <div class="form-group">
+                <label for="employee-office">Specializácia:</label>
+                <input type="text" class="form-control" name="specialization" value="">
+                <input type="hidden" name="id_employee" value="${employee.id}">
+            </div>
+            <input type="submit" value="Pridaj" class="btn btn-success">
+        </form>
+    </div>
+
+    <div class="col-md-12">
+        <table class="table table-striped">
+            <thead>
+            <tr>
+                <th style="width: 60px;">#</th>
+                <th>Názov špecializácie</th>
+                <th style="width: 60px;">Akcia</th>
+            </tr>
+            </thead>
+            <tbody>
+                <#if employee.specializations??>
+                    <#list employee.specializations as specialization>
+                    <tr>
+                        <td>${specialization_index + 1}</td>
+                        <td>${specialization}</td>
+                        <td>
+                            <a href="<@spring.url '/admin/employee/'+employee.id+'/specialization/'+specialization_index+'/delete' />"
+                               onclick="return confirm('Naozaj?');">Zmazať</a></td>
+                    </tr>
+                    </#list>
+                </#if>
+            </tbody>
+        </table>
+    </div>
+</div>
+
+<div class="row">
     <h2>Zamestnanec - ambulancie</h2>
     <hr>
 
