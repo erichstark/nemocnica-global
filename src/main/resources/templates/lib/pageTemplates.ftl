@@ -16,6 +16,7 @@
 </head>
 <body>
     <#nested>
+<script src="<@spring.url '/js/jquery-2.1.4.min.js'/>"></script>
 <script src="<@spring.url '/js/bootstrap.min.js'/>"></script>
 </body>
 </html>
@@ -26,36 +27,36 @@
     <nav class="navbar navbar-default navbar-fixed-top">
         <div class="container">
             <div class="navbar-header">
-                <a class="navbar-brand" href="<@spring.url '/'/>"><@spring.message "ProjectName"/></a>
+                <a class="navbar-brand" href="<@spring.url '/'/>">WeCare</a>
             </div>
             <div class="navbar-header pull-right">
                 <ul class="nav navbar-nav navbar-right">
                     <li class="dropdown">
-                        <a href="#" class="dropdown-toggle" data-toggle="dropdown" aria-expanded="false"><i
-                                class="glyphicon glyphicon-user"></i> <#if user??>${user.getUsername()}</#if> </a>
+                        <#if user??>
+                        <a href="#" class="dropdown-toggle" data-toggle="dropdown" aria-expanded="false"> <i
+                                class="glyphicon glyphicon-user"></i>${user.getUsername()}</a>
                         <ul class="dropdown-menu">
                             <li>
-                                <a href="#"><i class="glyphicon glyphicon-user"></i> Profile</a>
+                                <a href="<@spring.url '/order'/>">Moje Objednavky</a>
                             </li>
-                            <li>
-                                <a href="#"><i class="glyphicon glyphicon-envelope"></i> Inbox</a>
-                            </li>
-                            <li>
-                                <a href="#"><i class="glyphicon glyphicon-cog"></i> Settings</a>
-                            </li>
+
                             <li class="divider"></li>
                             <li>
                                 <a href="<@spring.url '/logout'/>"><i class="glyphicon glyphicon-log-out"></i> <@spring.message "SignOut" /></a>
                             </li>
-                        </ul>
+                        </ul></#if>
                     </li>
                 </ul>
             </div>
             <div id="navbar" class="navbar-collapse collapse">
                 <ul class="nav navbar-nav">
+                    <#if user??>
                     <#if user.stringAuthorities?seq_contains("ADMIN")>
                         <li><a href="<@spring.url '/admin'/>">Administrácia</a></li>
                     </#if>
+                    </ul>
+                    </#if>
+
                 </ul>
             </div>
         </div>
@@ -130,4 +131,37 @@
         </div>
     </div>
     </@genericPage>
+</#macro>
+
+<#macro simpleSearch>
+
+<div class="row">
+
+
+        <form name="searchUser" class="form-horizontal simpleSearch" method="POST" action="<@spring.url '/search/search'/>" >
+            <div class="form-group">
+                <label for="name">Meno:</label>
+                <input type="text" name="name" class="form-control" id="name" placeholder="Meno"
+                       value="${name!""}">
+            </div>
+            <div class="form-group">
+                <label for="surname">Priezvisko:</label>
+                <input type="text" name="surname" class="form-control" id="surname" placeholder="Priezvisko"
+                       value="${surname!""}">
+            </div>
+            <div class="form-group">
+                <label for="specialization">Specializacia:</label>
+                <input type="text" name="specialization" class="form-control" id="specialization" placeholder="Specializacia"
+                       value="${specialization!""}">
+            </div>
+            <div class="form-group">
+
+                <input type="hidden" name="town" class="form-control" id="town" placeholder="Mesto"
+                       value="${town!""}">
+            </div>
+            <input type="submit" value="Hľadaj" class="btn btn-default">
+
+        </form>
+
+</div>
 </#macro>

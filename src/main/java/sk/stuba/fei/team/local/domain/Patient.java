@@ -31,6 +31,7 @@ public class Patient implements Serializable, UserDetails, CredentialsContainer 
     private String prefix_title;
     private String suffix_title;
     private Insurance insurance;
+    private List<PatientOrder> orders;
 
     public Patient() {
         password = "";
@@ -105,18 +106,26 @@ public class Patient implements Serializable, UserDetails, CredentialsContainer 
         this.authorities = authorities;
     }
 
-    @ElementCollection(fetch = FetchType.LAZY)
+    @ElementCollection(fetch = FetchType.EAGER)
     @Column(name = "authority")
     @CollectionTable(
             name = "authorities",
             joinColumns = @JoinColumn(name = "username")
     )
     public Set<String> getStringAuthorities() {
+        if (authorities==null){return new HashSet<String>();
+        }
         return authorities.stream().map(GrantedAuthority::getAuthority).collect(Collectors.toSet());
     }
 
     public void setStringAuthorities(Set<String> authorities) {
-        this.authorities = authorities.stream().map(SimpleGrantedAuthority::new).collect(Collectors.toSet());
+        try
+        {
+            this.authorities = authorities.stream().map(SimpleGrantedAuthority::new).collect(Collectors.toSet());
+        }catch (Exception e){
+            this.authorities=null;
+        }
+
     }
 
     @Column(columnDefinition = "BOOLEAN NOT NULL DEFAULT TRUE")
@@ -216,11 +225,6 @@ public class Patient implements Serializable, UserDetails, CredentialsContainer 
         this.insurance = insurance;
     }
 
-    @Override
-    public void eraseCredentials() {
-        password = null;
-    }
-
     private static class AuthorityComparator implements Comparator<GrantedAuthority>, Serializable {
         private static final long serialVersionUID = SpringSecurityCoreVersion.SERIAL_VERSION_UID;
 
@@ -237,5 +241,19 @@ public class Patient implements Serializable, UserDetails, CredentialsContainer 
 
             return g1.getAuthority().compareTo(g2.getAuthority());
         }
+    }
+
+    @Override
+    public void eraseCredentials() {
+        password = null;
+    }
+
+    @OneToMany(cascade = CascadeType.ALL, mappedBy = "patient")
+    public List<PatientOrder> getOrders() {
+        return orders;
+    }
+
+    public void setOrders(List<PatientOrder> orders) {
+        this.orders = orders;
     }
 }

@@ -4,6 +4,9 @@ import org.springframework.data.jpa.repository.Query;
 import org.springframework.data.repository.CrudRepository;
 import org.springframework.data.repository.query.Param;
 import sk.stuba.fei.team.local.domain.Patient;
+import org.springframework.data.repository.CrudRepository;
+import sk.stuba.fei.team.local.domain.Patient;
+import sk.stuba.fei.team.local.domain.PatientOrder;
 
 import java.util.List;
 

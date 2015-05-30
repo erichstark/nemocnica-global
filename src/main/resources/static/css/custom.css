@@ -5,6 +5,7 @@ html {
 
 body {
     margin-bottom: 60px;
+    background: none repeat scroll 0 0 #F4FFFB;
 }
 
 .footer {
@@ -17,8 +18,71 @@ body {
 
 body > .container {
     padding: 60px 15px 0;
+    background: none repeat scroll 0 0 white;
 }
 
+header {
+    background-image: url("/img/banner/doctors.jpg");
+    background-size: 100% auto;
+    height: 250px;
+    left: -15px;
+    position: relative;
+    width: 103%;
+    margin-bottom: 20px;
+}
+
+.banner-text {
+    border-radius: 0;
+    bottom: 0;
+    opacity: 0.68;
+    position: absolute;
+    width: 415px;
+}
+
+.left-aside {
+    float: left;
+    width: 30%;
+}
+
+.right-content {
+    float: right;
+    padding-left: 20px;
+    width: 70%;
+    margin-bottom: 20px;
+}
+
+.right-content h1 {
+    margin-top: 0;
+}
+
+.simpleSearch {
+    margin-left: auto;
+    margin-right: auto;
+    margin-top: 0;
+    padding-left: 20px;
+    padding-top: 20px;
+    width: 50%;
+}
+
+.simpleSearch input[type="text"] {
+    float: right;
+    width: 300px;
+}
+
+.simpleSearch input[type="submit"] {
+    float: right;
+}
+
+#login-button {
+    position: absolute;
+    right: 35px;
+    top: 35px;
+}
+
+.row {
+    margin-left: 0;
+    margin-right: 0;
+}
 .footer > .container {
     padding-right: 15px;
     padding-left: 15px;
@@ -152,4 +216,144 @@ body > .container {
 .placeholder img {
     display: inline-block;
     border-radius: 50%;
+}
+
+
+.fade{
+    display: none;
+    position: fixed;
+    top: 0%;
+    left: 0%;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(0, 0, 0, 0.35);
+    z-index:1001;
+    -moz-opacity: 0.8;
+    opacity: 0.6;
+
+}
+
+.white_content {
+    background-color: white;
+    display: none;
+    left: 30%;
+    overflow: auto;
+    padding: 16px;
+    position: fixed;
+    top: 10%;
+    width: 550px;
+    z-index: 1002;
+}
+
+
+.head{
+    background: none repeat scroll 0 0 #F4FFFB;
+    margin-bottom: 20px;
+    padding: 25px;
+    margin-left: -15px;
+    margin-right: -15px;
+}
+/* ---------------------------------------- doktor search -----------------------------*/
+
+.item {
+    background: none repeat scroll 0 0 #f0fafa;
+
+    margin-bottom: 15px;
+    padding: 10px;
+}
+
+.item-avatar img {
+
+    border-radius: 5px;
+}
+
+.item-info > ul {
+    list-style: outside none none;
+}
+
+.item-info ul li span {
+    font-weight: bold;
+}
+
+.item ul {
+    list-style: outside none none;
+    padding-left: 0;
+}
+
+.item h3 {
+    margin-top: 0;
+}
+
+/* ---------------------------------------- doktor detail -----------------------------*/
+
+.detail-doktor {
+
+}
+
+.detail-doktor h3 {
+    margin-top: 0;
+}
+
+.detail-doktor ul {
+    list-style: outside none none;
+    padding: 0;
+}
+
+.detail-doktor ul li {
+    padding: 0;
+}
+
+/*-------------------------------------- doktor detail table --------------------------------*/
+.not-free {
+    background: none repeat scroll 0 0 pink;
+    border: 1px solid white;
+    border-radius: 5px;
+    display: block;
+    font-size: 12px;
+    padding: 5px;
+    text-align: center;
+}
+
+.list-days td {
+    padding: 10px;
+}
+
+.list-days thead {
+    border-bottom: 2px solid #2c3e50;
+}
+
+.list-days th {
+    padding-bottom: 5px;
+    padding-left: 10px;
+}
+
+.time {
+    background: none repeat scroll 0 0 lightgreen;
+    border: 1px solid white;
+    border-radius: 5px;
+    cursor: pointer;
+    font-size: 12px;
+    padding: 5px;
+    text-align: center;
+}
+.objednavka {
+    background: none repeat scroll 0 0 lightgreen;
+    border: 1px solid white;
+    border-radius: 5px;
+    padding: 10px;
+    text-align: center;
+}
+
+
+.popup .control-buttons-tab {
+    float: right;
+}
+
+.popup label {
+    width: 160px ;
+    vertical-align: top;
+}
+
+.popup textarea {
+    width: 300px;
 }

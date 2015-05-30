@@ -5,6 +5,7 @@ import sk.stuba.fei.team.local.domain.Employee;
 import java.util.List;
 
 public interface EmployeeService {
+    Employee findByUsername(String username);
 
     Employee findOne(Long id);
 
@@ -15,6 +16,8 @@ public interface EmployeeService {
     boolean exists(Long id);
 
     void save(Employee employee);
+
+    List<Employee> findDoctors(String name,String surname ,String specialization, String town);
 
     void delete(Long id);
 
