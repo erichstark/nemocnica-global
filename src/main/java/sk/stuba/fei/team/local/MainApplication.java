@@ -137,12 +137,14 @@ public class MainApplication extends WebMvcConfigurerAdapter {
                                final HttpServletResponse response, final Object handler,
                                final ModelAndView modelAndView) throws Exception {
             Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
-            Object principal = authentication.getPrincipal();
-            if (principal instanceof UserDetails) {
-                CustomUser userDetails = (CustomUser) principal;
-                if (modelAndView != null) {
-                    modelAndView.getModelMap().
-                            addAttribute("user", userDetails);
+            if(authentication != null) {
+                Object principal = authentication.getPrincipal();
+                if (principal instanceof UserDetails) {
+                    CustomUser userDetails = (CustomUser) principal;
+                    if (modelAndView != null) {
+                        modelAndView.getModelMap().
+                                addAttribute("user", userDetails);
+                    }
                 }
             }
         }

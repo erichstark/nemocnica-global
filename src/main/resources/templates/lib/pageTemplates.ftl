@@ -27,7 +27,7 @@
     <nav class="navbar navbar-default navbar-fixed-top">
         <div class="container">
             <div class="navbar-header">
-                <a class="navbar-brand" href="<@spring.url '/'/>">WeCare</a>
+                <a class="navbar-brand" href="<@spring.url '/'/>"><@spring.message "ProjectName"/></a>
             </div>
             <div class="navbar-header pull-right">
                 <ul class="nav navbar-nav navbar-right">
