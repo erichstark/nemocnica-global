@@ -31,6 +31,7 @@ public class Patient implements Serializable, UserDetails, CredentialsContainer 
     private String prefix_title;
     private String suffix_title;
     private Insurance insurance;
+    private List<PatientOrder> orders;
 
     public Patient() {
         password = "";
@@ -112,11 +113,19 @@ public class Patient implements Serializable, UserDetails, CredentialsContainer 
             joinColumns = @JoinColumn(name = "username")
     )
     public Set<String> getStringAuthorities() {
+        if (authorities==null){return new HashSet<String>();
+        }
         return authorities.stream().map(GrantedAuthority::getAuthority).collect(Collectors.toSet());
     }
 
     public void setStringAuthorities(Set<String> authorities) {
-        this.authorities = authorities.stream().map(SimpleGrantedAuthority::new).collect(Collectors.toSet());
+        try
+        {
+            this.authorities = authorities.stream().map(SimpleGrantedAuthority::new).collect(Collectors.toSet());
+        }catch (Exception e){
+            this.authorities=null;
+        }
+
     }
 
     @Column(columnDefinition = "BOOLEAN NOT NULL DEFAULT TRUE")
@@ -237,5 +246,14 @@ public class Patient implements Serializable, UserDetails, CredentialsContainer 
 
             return g1.getAuthority().compareTo(g2.getAuthority());
         }
+    }
+
+    @OneToMany(cascade = CascadeType.ALL, mappedBy = "patient")
+    public List<PatientOrder> getOrders() {
+        return orders;
+    }
+
+    public void setOrders(List<PatientOrder> orders) {
+        this.orders = orders;
     }
 }

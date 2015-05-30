@@ -43,7 +43,6 @@ public class AdminOfficeController {
         model.put("office", new Office());
         model.put("facilities", facilityService.findAll());
         model.put("insurances", insuranceService.findAll());
-
         return "admin/office/add";
     }
 

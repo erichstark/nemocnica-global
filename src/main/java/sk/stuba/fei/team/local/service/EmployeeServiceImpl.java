@@ -44,4 +44,10 @@ public class EmployeeServiceImpl implements EmployeeService {
     public void save(Employee employee) {
         employeeRepository.save(employee);
     }
+
+    @Override
+    public List<Employee> findDoctors(String name,String surname ,String specialization, String town) {
+
+        return employeeRepository.findByFirstNameContainingIgnoreCaseAndLastNameContainingIgnoreCaseAndSpecializationsContainingIgnoreCase(name, surname, specialization);
+    }
 }

@@ -14,7 +14,9 @@ public class Employee implements Serializable {
     private String prefix_title;
     private String suffix_title;
     private Set<Office> offices;
-    private List<String> specializations;
+    private String specializations;
+    private Set<Hours> hours;
+
 
     @Id
     public Long getId() {
@@ -77,13 +79,21 @@ public class Employee implements Serializable {
         this.offices = offices;
     }
 
-    @ElementCollection
-    public List<String> getSpecializations() {
+    @Column
+    public String getSpecializations() {
         return specializations;
     }
 
-    public void setSpecializations(List<String> specializations) {
+    public void setSpecializations(String specializations) {
         this.specializations = specializations;
     }
 
+    @OneToMany(cascade = CascadeType.ALL, mappedBy = "employee")
+    public Set<Hours> getHours() {
+        return hours;
+    }
+
+    public void setHours(Set<Hours> hours) {
+        this.hours = hours;
+    }
 }

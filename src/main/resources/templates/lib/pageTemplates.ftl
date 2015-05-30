@@ -54,6 +54,9 @@
                 <ul class="nav navbar-nav">
                     <ul class="nav navbar-nav">
                         <li><a href="<@spring.url '/admin'/>">Administrácia</a></li>
+                        <li><a href="<@spring.url '/office'/>">Vyhladavanie ambulancii</a></li>
+                        <li><a href="<@spring.url '/search'/>">Vyhladavanie lekarov</a></li>
+                        <li><a href="<@spring.url '/order'/>">Moje Objednavky</a></li>
                     </ul>
                 </ul>
             </div>
