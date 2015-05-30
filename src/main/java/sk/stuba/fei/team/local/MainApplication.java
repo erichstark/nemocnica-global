@@ -2,6 +2,7 @@ package sk.stuba.fei.team.local;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.SpringApplication;
+import org.springframework.boot.autoconfigure.EnableAutoConfiguration;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.boot.autoconfigure.security.SecurityProperties;
 import org.springframework.context.ConfigurableApplicationContext;
@@ -38,6 +39,7 @@ import java.util.List;
 import java.util.Locale;
 import java.util.logging.Logger;
 
+@EnableAutoConfiguration
 @SpringBootApplication
 public class MainApplication extends WebMvcConfigurerAdapter {
 
