@@ -1,28 +1,28 @@
-<#-- @ftlvariable name="offices" type="sk.stuba.fei.team.local.domain.Office[]" -->
+<#-- @ftlvariable name="specializations" type="sk.stuba.fei.team.local.domain.Specialization[]" -->
 <#import "../../lib/pageTemplates.ftl" as pt>
 <#import "/spring.ftl" as spring>
 <@pt.dashboardPage>
-<h1 class="page-header">Administracia ambulancií</h1>
+<h1 class="page-header">Administracia špecializácií</h1>
 
 <div class="row">
     <div class="col-md-12">
-        <a class="btn btn-info btn-sm" href="<@spring.url '/admin/office/add'/>" role="button">Vytvoriť
-            ambulanciu</a>
+        <a class="btn btn-info btn-sm" href="<@spring.url '/admin/specialization/add'/>" role="button">Vytvoriť
+            špecializáciu</a>
     </div>
 </div>
 
-<h2 class="sub-header">Ambulancie</h2>
+<h2 class="sub-header">Zoznam špecializácií</h2>
 
 <div class="row">
     <div class="col-md-12">
-        <form class="form-inline" method="POST" action="<@spring.url '/admin/office/search'/>">
+        <form class="form-inline" method="POST" action="<@spring.url '/admin/specialization/search'/>">
             <div class="form-group">
                 <label for="text">Vyhľadanie:</label>
                 <input type="text" name="text" class="form-control" id="text" placeholder="Hľadaný text"
                        value="${search!""}">
             </div>
             <input type="submit" value="Hľadaj" class="btn btn-default">
-            <a class="btn btn-default" href="<@spring.url '/admin/office/clear'/>">Zruš</a>
+            <a class="btn btn-default" href="<@spring.url '/admin/specialization/clear'/>">Zruš</a>
         </form>
     </div>
 </div>
@@ -33,21 +33,19 @@
         <tr>
             <th style="width: 60px;">#</th>
             <th style="width: 60px;">ID</th>
-            <th>Názov ambulancie</th>
-            <th>Názov zariadenia</th>
-            <th>Adresa zariadenia</th>
+            <th>Názov špecializácie</th>
             <th style="width: 60px;">Akcia</th>
         </tr>
         </thead>
         <tbody>
-            <#list offices as office>
+            <#list specializations as specialization>
             <tr>
-                <td>${office_index + 1}</td>
-                <td>${office.id}</td>
-                <td><a href="<@spring.url '/admin/office/edit/' + office.id />">${office.name}</a></td>
-                <td>${office.facility.name}</td>
-                <td>${office.facility.city+', '+office.facility.streetAndNumber}</td>
-                <td><a href="<@spring.url '/admin/office/delete/' + office.id />"
+                <td>${specialization_index + 1}</td>
+                <td>${specialization.id}</td>
+                <td>
+                    <a href="<@spring.url '/admin/specialization/edit/' + specialization.id />">${specialization.name}</a>
+                </td>
+                <td><a href="<@spring.url '/admin/specialization/delete/' + specialization.id />"
                        onclick="return confirm('Naozaj?');">Zmazať</a></td>
             </tr>
             </#list>

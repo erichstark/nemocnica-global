@@ -46,7 +46,7 @@ public class AdminFacilityController {
     }
 
     @RequestMapping(value = "/save", method = RequestMethod.POST)
-    public String save(@ModelAttribute("facility") Facility facility, Map<String, Object> model) {
+    public String save(@ModelAttribute("facility") Facility facility) {
 
         facilityService.save(facility);
 
@@ -54,14 +54,14 @@ public class AdminFacilityController {
     }
 
     @RequestMapping(value = "/delete/{id}")
-    public String delete(@PathVariable Long id, Map<String, Object> model) {
+    public String delete(@PathVariable Long id) {
 
         facilityService.delete(id);
 
         return "redirect:/admin/facility";
     }
 
-    @RequestMapping(value = "/search", method = RequestMethod.POST, params = {"text"})
+    @RequestMapping(value = "/search", method = RequestMethod.POST)
     public String search(@RequestParam("text") String text, Map<String, Object> model) {
 
         Iterable<Facility> facilities = facilityService.findByName(text);

@@ -13,7 +13,7 @@ import java.util.List;
 public class EmployeeServiceImpl implements EmployeeService {
 
     @Autowired
-    EmployeeRepository employeeRepository;
+    private EmployeeRepository employeeRepository;
 
     @Override
     public Employee findOne(Long id) {
@@ -21,8 +21,8 @@ public class EmployeeServiceImpl implements EmployeeService {
     }
 
     @Override
-    public List<Employee> findByLastName(String lastName) {
-        return employeeRepository.findByLastNameContainingIgnoreCase(lastName);
+    public List<Employee> findByFirstnameOrLastname(String text) {
+        return employeeRepository.findByFirstnameOrSerunameCustomQuery(text);
     }
 
     @Override

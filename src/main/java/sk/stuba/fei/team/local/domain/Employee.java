@@ -17,7 +17,6 @@ public class Employee implements Serializable {
     private String specializations;
     private Set<Hours> hours;
 
-
     @Id
     public Long getId() {
         return Id;

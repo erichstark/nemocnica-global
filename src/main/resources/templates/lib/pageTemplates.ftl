@@ -11,10 +11,12 @@
     <link type="text/css" href="<@spring.url '/css/bootstrap.min.css'/>" rel="stylesheet"/>
     <link type="text/css" href="<@spring.url '/css/custom.css'/>" rel="stylesheet"/>
     <script src="<@spring.url '/js/jquery-2.1.4.min.js'/>"></script>
+    <script src="<@spring.url '/js/custom.js'/>"></script>
     <title>${pageTitle}</title>
 </head>
 <body>
     <#nested>
+<script src="<@spring.url '/js/jquery-2.1.4.min.js'/>"></script>
 <script src="<@spring.url '/js/bootstrap.min.js'/>"></script>
 </body>
 </html>
@@ -31,7 +33,7 @@
                 <ul class="nav navbar-nav navbar-right">
                     <li class="dropdown">
                         <a href="#" class="dropdown-toggle" data-toggle="dropdown" aria-expanded="false"><i
-                                class="glyphicon glyphicon-user"></i> John Smith <b class="caret"></b></a>
+                                class="glyphicon glyphicon-user"></i> <#if user??>${user.getUsername()}</#if> </a>
                         <ul class="dropdown-menu">
                             <li>
                                 <a href="#"><i class="glyphicon glyphicon-user"></i> Profile</a>
@@ -52,8 +54,9 @@
             </div>
             <div id="navbar" class="navbar-collapse collapse">
                 <ul class="nav navbar-nav">
-                    <ul class="nav navbar-nav">
+                    <#if user.stringAuthorities?seq_contains("ADMIN")>
                         <li><a href="<@spring.url '/admin'/>">Administrácia</a></li>
+                    </#if>
                         <li><a href="<@spring.url '/office'/>">Vyhladavanie ambulancii</a></li>
                         <li><a href="<@spring.url '/search'/>">Vyhladavanie lekarov</a></li>
                         <li><a href="<@spring.url '/order'/>">Moje Objednavky</a></li>
@@ -91,7 +94,7 @@
                 <ul class="nav navbar-nav navbar-right">
                     <li class="dropdown">
                         <a href="#" class="dropdown-toggle" data-toggle="dropdown" aria-expanded="false"><i
-                                class="glyphicon glyphicon-user"></i> John Smith <b class="caret"></b></a>
+                                class="glyphicon glyphicon-user"></i> <#if user??>${user.getUsername()}</#if> </a>
                         <ul class="dropdown-menu">
                             <li>
                                 <a href="#"><i class="glyphicon glyphicon-user"></i> Profile</a>
@@ -121,6 +124,9 @@
                     <li><a href="<@spring.url '/admin/facility'/>">Zariadenia</a></li>
                     <li><a href="<@spring.url '/admin/office'/>">Ambulancie</a></li>
                     <li><a href="<@spring.url '/admin/insurance'/>">Poistovne</a></li>
+                    <li><a href="<@spring.url '/admin/specialization'/>">Špecializácie</a></li>
+                    <li><a href="<@spring.url '/admin/patient'/>">Pacienti</a></li>
+                    <li><a href="<@spring.url '/admin/employee'/>">Zamestnanci</a></li>
                 </ul>
             </div>
             <div class="col-sm-9 col-sm-offset-3 col-md-10 col-md-offset-2 main">
