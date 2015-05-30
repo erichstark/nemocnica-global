@@ -132,10 +132,10 @@
         Poznamky
     </div>
 </div>
-    <#list orders as o>
-    ${o.intervalStart}
+    <#--<#list orders as o>-->
+    <#--${o.intervalStart}-->
 
-    </#list>
+    <#--</#list>-->
 <script>
     function showReservations(id) {
         $("#" + id).toggle();

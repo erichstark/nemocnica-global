@@ -6,7 +6,6 @@ import org.springframework.web.bind.annotation.*;
 import sk.stuba.fei.team.local.domain.Facility;
 import sk.stuba.fei.team.local.domain.Insurance;
 import sk.stuba.fei.team.local.domain.Office;
-import sk.stuba.fei.team.local.formEntity.FormOffice;
 import sk.stuba.fei.team.local.service.FacilityService;
 import sk.stuba.fei.team.local.service.InsuranceService;
 import sk.stuba.fei.team.local.service.OfficeService;

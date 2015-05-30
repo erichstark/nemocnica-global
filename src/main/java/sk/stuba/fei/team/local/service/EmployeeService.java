@@ -17,8 +17,6 @@ public interface EmployeeService {
 
     void save(Employee employee);
 
-    void delete(Long id);
-    
     List<Employee> findDoctors(String name,String surname ,String specialization, String town);
 
     void delete(Long id);

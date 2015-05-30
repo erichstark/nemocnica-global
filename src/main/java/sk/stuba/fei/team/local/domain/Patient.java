@@ -106,74 +106,6 @@ public class Patient implements Serializable, UserDetails, CredentialsContainer 
         this.authorities = authorities;
     }
 
-    @ElementCollection(fetch = FetchType.LAZY)
-    @Column(name = "authority")
-    @CollectionTable(
-            name = "authorities",
-            joinColumns = @JoinColumn(name = "username")
-    )
-    public Set<String> getStringAuthorities() {
-        return authorities.stream().map(GrantedAuthority::getAuthority).collect(Collectors.toSet());
-    }
-
-    public void setStringAuthorities(Set<String> authorities) {
-        this.authorities = authorities.stream().map(SimpleGrantedAuthority::new).collect(Collectors.toSet());
-    }
-
-    @Column(columnDefinition = "BOOLEAN NOT NULL DEFAULT TRUE")
-    public boolean isAccountNonExpired() {
-        return accountNonExpired;
-    }
-
-    public void setAccountNonExpired(boolean accountNonExpired) {
-        this.accountNonExpired = accountNonExpired;
-    }
-
-    @Column(columnDefinition = "BOOLEAN NOT NULL DEFAULT TRUE")
-    public boolean isAccountNonLocked() {
-        return accountNonLocked;
-    }
-
-    public void setAccountNonLocked(boolean accountNonLocked) {
-        this.accountNonLocked = accountNonLocked;
-    }
-
-    @Column(columnDefinition = "BOOLEAN NOT NULL DEFAULT TRUE")
-    public boolean isCredentialsNonExpired() {
-        return credentialsNonExpired;
-    }
-
-    public void setCredentialsNonExpired(boolean credentialsNonExpired) {
-        this.credentialsNonExpired = credentialsNonExpired;
-    }
-
-    @Column(columnDefinition = "BOOLEAN NOT NULL DEFAULT TRUE")
-    public boolean isEnabled() {
-        return enabled;
-    }
-
-    public void setEnabled(boolean enabled) {
-        this.enabled = enabled;
-    }
-
-    @Column
-    public String getPassword() {
-        return password;
-    }
-
-    public void setPassword(String password) {
-        this.password = password;
-    }
-
-    @Transient
-    public Set<GrantedAuthority> getAuthorities() {
-        return authorities;
-    }
-
-    public void setAuthorities(Set<GrantedAuthority> authorities) {
-        this.authorities = authorities;
-    }
-
     @ElementCollection(fetch = FetchType.EAGER)
     @Column(name = "authority")
     @CollectionTable(
@@ -293,11 +225,6 @@ public class Patient implements Serializable, UserDetails, CredentialsContainer 
         this.insurance = insurance;
     }
 
-    @Override
-    public void eraseCredentials() {
-        password = null;
-    }
-
     private static class AuthorityComparator implements Comparator<GrantedAuthority>, Serializable {
         private static final long serialVersionUID = SpringSecurityCoreVersion.SERIAL_VERSION_UID;
 
@@ -319,24 +246,6 @@ public class Patient implements Serializable, UserDetails, CredentialsContainer 
     @Override
     public void eraseCredentials() {
         password = null;
-    }
-
-    private static class AuthorityComparator implements Comparator<GrantedAuthority>, Serializable {
-        private static final long serialVersionUID = SpringSecurityCoreVersion.SERIAL_VERSION_UID;
-
-        public int compare(GrantedAuthority g1, GrantedAuthority g2) {
-            // Neither should ever be null as each entry is checked before adding it to the set.
-            // If the authority is null, it is a custom authority and should precede others.
-            if (g2.getAuthority() == null) {
-                return -1;
-            }
-
-            if (g1.getAuthority() == null) {
-                return 1;
-            }
-
-            return g1.getAuthority().compareTo(g2.getAuthority());
-        }
     }
 
     @OneToMany(cascade = CascadeType.ALL, mappedBy = "patient")

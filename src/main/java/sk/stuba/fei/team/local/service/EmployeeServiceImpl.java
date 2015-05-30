@@ -6,6 +6,7 @@ import org.springframework.transaction.annotation.Transactional;
 import sk.stuba.fei.team.local.domain.Employee;
 import sk.stuba.fei.team.local.repository.EmployeeRepository;
 
+
 import java.util.List;
 
 @Component("employeeService")
@@ -49,5 +50,10 @@ public class EmployeeServiceImpl implements EmployeeService {
     public List<Employee> findDoctors(String name,String surname ,String specialization, String town) {
 
         return employeeRepository.findByFirstNameContainingIgnoreCaseAndLastNameContainingIgnoreCaseAndSpecializationsContainingIgnoreCase(name, surname, specialization);
+    }
+
+    @Override
+    public Employee findByUsername(String firstName){
+        return employeeRepository.findByFirstName(firstName);
     }
 }
