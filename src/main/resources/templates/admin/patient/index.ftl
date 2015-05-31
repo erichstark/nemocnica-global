@@ -34,10 +34,7 @@
         <tr>
             <th style="width: 60px;">#</th>
             <th>Prihlasovacie meno (ID)</th>
-            <th>Titul pred</th>
-            <th>Meno</th>
-            <th>Priezvisko</th>
-            <th>Titul za</th>
+            <th>Meno pacienta</th>
             <th>Email</th>
             <th>Telefón</th>
             <th>Autorita</th>
@@ -50,10 +47,11 @@
             <tr>
                 <td>${patient_index + 1}</td>
                 <td><a href="<@spring.url '/admin/patient/edit/' + patient.username />">${patient.username}</a></td>
-                <td>${patient.prefix_title}</td>
-                <td>${patient.firstName}</td>
-                <td>${patient.surname}</td>
-                <td>${patient.suffix_title}</td>
+                <td>
+                ${patient.prefix_title + ' ' + patient.firstName + ' ' + patient.surname}
+                    <#if patient.suffix_title?length gt 0>${', ' + patient.suffix_title}</#if>
+
+                </td>
                 <td>${patient.email}</td>
                 <td>${patient.phone}</td>
                 <#if patient.getStringAuthorities()?seq_contains("USER")>

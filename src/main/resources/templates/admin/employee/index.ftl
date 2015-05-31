@@ -34,10 +34,7 @@
         <tr>
             <th style="width: 60px;">#</th>
             <th>ID</th>
-            <th>Titul pred</th>
-            <th>Meno</th>
-            <th>Priezvisko</th>
-            <th>Titul za</th>
+            <th>Meno zamestnanca</th>
             <th style="width: 60px;">Akcia</th>
         </tr>
         </thead>
@@ -46,10 +43,12 @@
             <tr>
                 <td>${employee_index + 1}</td>
                 <td>${employee.id}</td>
-                <td>${employee.prefix_title}</td>
-                <td><a href="<@spring.url '/admin/employee/edit/' + employee.id />">${employee.firstName}</a></td>
-                <td>${employee.lastName}</td>
-                <td>${employee.suffix_title}</td>
+                <td>
+                    <a href="<@spring.url '/admin/employee/edit/' + employee.id />">
+                    ${employee.prefix_title + ' ' + employee.firstName + ' ' + employee.lastName}
+                        <#if employee.suffix_title?length gt 0>${', ' + employee.suffix_title}</#if>
+                    </a>
+                </td>
                 <td><a href="<@spring.url '/admin/employee/delete/' + employee.id />"
                        onclick="return confirm('Naozaj?');">Zmazať</a></td>
             </tr>

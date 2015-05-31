@@ -10,7 +10,9 @@ import sk.stuba.fei.team.local.service.OfficeService;
 import sk.stuba.fei.team.local.service.SpecializationService;
 
 
+import java.util.Iterator;
 import java.util.Map;
+import java.util.logging.Logger;
 
 /**
  * Created by pallo on 5/9/15.
@@ -18,6 +20,8 @@ import java.util.Map;
 @Controller
 @RequestMapping("/admin/employee")
 public class AdminEmployeeController {
+
+    public static final Logger LOGGER = Logger.getLogger(AdminEmployeeController.class.getName());
 
     @Autowired
     private EmployeeService employeeService;
@@ -53,6 +57,17 @@ public class AdminEmployeeController {
         model.put("offices", officeService.findAll());
 
         return "admin/employee/edit";
+    }
+
+    @RequestMapping(value = "/edit", method = RequestMethod.POST)
+    public String edit(@ModelAttribute("employee") Employee employee) {
+
+        Employee temp = employeeService.findOne(employee.getId());
+        employee.setOffices(temp.getOffices());
+        employee.setSpecializations(temp.getSpecializations());
+        employeeService.save(employee);
+
+        return "redirect:/admin/employee";
     }
 
     @RequestMapping(value = "/save", method = RequestMethod.POST)
@@ -109,7 +124,9 @@ public class AdminEmployeeController {
     public String officeDelete(@PathVariable("id_employee") Long id_employee, @PathVariable("id_office") Long id_office) {
 
         Employee employee = employeeService.findOne(id_employee);
-        for (Office o : employee.getOffices()) {
+
+        for (Iterator<Office> it = employee.getOffices().iterator(); it.hasNext(); ) {
+            Office o = it.next();
             if (o.getId() == id_office) {
                 employee.getOffices().remove(o);
             }

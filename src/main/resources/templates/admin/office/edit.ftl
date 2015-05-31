@@ -16,7 +16,7 @@
 
 <div class="table-responsive">
 
-    <form name="office" action="<@spring.url '/admin/office/save'/>" method="post">
+    <form name="office" action="<@spring.url '/admin/office/edit'/>" method="post">
         <div class="form-group">
             <label for="office-id">ID</label>
             <input type="text" name="id" class="form-control" id="office-id" placeholder="ID"
