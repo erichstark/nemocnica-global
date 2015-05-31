@@ -1,6 +1,5 @@
 package sk.stuba.fei.team.local.security;
 
-import org.springframework.security.core.userdetails.User;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.security.core.userdetails.UsernameNotFoundException;
@@ -21,21 +20,21 @@ public class CustomUserDetailService implements UserDetailsService {
         if (patientService == null) {
             throw new UsernameNotFoundException("Failed to autowire employeeService.");
         }
-        Patient p = patientService.findByUsername(username);
-        if (p == null) {
+        Patient z = patientService.findByUsername(username);
+        if (z == null) {
             throw new UsernameNotFoundException("User with username " + username + " not found.");
         }
-        if (p.getAuthorities() == null || p.getAuthorities().isEmpty()) {
+        if (z.getAuthorities() == null || z.getAuthorities().isEmpty()) {
             throw new UsernameNotFoundException("User has no granted authorities.");
         }
-        return new User(
-                p.getUsername(),
-                p.getPassword(),
-                p.isEnabled(),
-                p.isAccountNonExpired(),
-                p.isCredentialsNonExpired(),
-                p.isAccountNonLocked(),
-                p.getAuthorities()
+        return new CustomUser(
+                z.getUsername(),
+                z.getPassword(),
+                z.isEnabled(),
+                z.isAccountNonExpired(),
+                z.isCredentialsNonExpired(),
+                z.isAccountNonLocked(),
+                z.getAuthorities()
         );
     }
 }

@@ -1,3 +1,4 @@
+<#-- @ftlvariable name="insurance" type="sk.stuba.fei.team.local.domain.Insurance" -->
 <#import "../../lib/pageTemplates.ftl" as pt>
 <#import "/spring.ftl" as spring>
 <@pt.dashboardPage>

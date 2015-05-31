@@ -1,9 +1,10 @@
 <#import "lib/pageTemplates.ftl" as g>
 <#import "/spring.ftl" as spring>
 <#assign pageTitle in g><@spring.message "SignIn"/></#assign>
-<@g.genericPage>
-<div class="container">
-    <div id="login-panel" class="panel panel-default">
+<@g.menuFooterPage>
+    <@g.headerBanner/>
+<div class="">
+    <div id="login-panel" class="panel panel-default" style="margin-top: 50px;">
         <div class="panel-heading"><h3 class="panel-title"><strong><@spring.message "SignIn"/></strong></h3></div>
         <div class="panel-body">
             <div class="text-danger">
@@ -13,6 +14,9 @@
                 <#if RequestParameters.logout??>
                 <@spring.message "SignedOut"/>
             </#if>
+            </div>
+            <div>
+               <a href="<@spring.url '/'/>">Späť na hlavnú stránku</a>
             </div>
             <form role="form" action="<@spring.url '/login'/>" method="POST">
                 <div class="form-group">
@@ -25,7 +29,9 @@
                 </div>
                 <button type="submit" class="btn btn-sm btn-default"><@spring.message "SignIn"/></button>
             </form>
+            <hr>
+            <div>Ak nie ste zaregistrovaný <a href="<@spring.url '/registration'/> " >kliknite sem</a> . </div>
         </div>
     </div>
 </div>
-</@g.genericPage>
+</@g.menuFooterPage>

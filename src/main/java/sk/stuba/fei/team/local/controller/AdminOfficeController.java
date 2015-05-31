@@ -6,7 +6,6 @@ import org.springframework.web.bind.annotation.*;
 import sk.stuba.fei.team.local.domain.Office;
 import sk.stuba.fei.team.local.domain.Insurance;
 import sk.stuba.fei.team.local.domain.Facility;
-import sk.stuba.fei.team.local.formEntity.FormOffice;
 import sk.stuba.fei.team.local.service.OfficeService;
 import sk.stuba.fei.team.local.service.InsuranceService;
 import sk.stuba.fei.team.local.service.FacilityService;
@@ -43,7 +42,6 @@ public class AdminOfficeController {
         model.put("office", new Office());
         model.put("facilities", facilityService.findAll());
         model.put("insurances", insuranceService.findAll());
-
         return "admin/office/add";
     }
 
@@ -61,34 +59,40 @@ public class AdminOfficeController {
         return "admin/office/edit";
     }
 
+    @RequestMapping(value = "/edit", method = RequestMethod.POST)
+    public String edit(@ModelAttribute("office") Office office, @RequestParam Long id_facility) {
+
+        Office temp = officeService.findOne(office.getId());
+        office.setInsurances(temp.getInsurances());
+
+        Facility facility = facilityService.findOne(id_facility);
+        office.setFacility(facility);
+
+        officeService.save(office);
+
+        return "redirect:/admin/office";
+    }
+
     @RequestMapping(value = "/save", method = RequestMethod.POST)
-    public String save(@ModelAttribute("office") FormOffice office, Map<String, Object> model) {
+    public String save(@ModelAttribute("office") Office office, @RequestParam Long id_facility) {
 
-        Office newAmb = new Office();
-        if (officeService.exists(office.getId())) {
-            newAmb = officeService.findOne(office.getId());
-        } else {
-            newAmb.setId(office.getId());
-        }
-        newAmb.setName(office.getName());
+        Facility facility = facilityService.findOne(id_facility);
+        office.setFacility(facility);
 
-        Facility facility = facilityService.findOne(office.getId_facility());
-        newAmb.setFacility(facility);
-
-        officeService.save(newAmb);
+        officeService.save(office);
 
         return "redirect:/admin/office";
     }
 
     @RequestMapping(value = "/delete/{id}")
-    public String delete(@PathVariable Long id, Map<String, Object> model) {
+    public String delete(@PathVariable Long id) {
 
         officeService.delete(id);
 
         return "redirect:/admin/office";
     }
 
-    @RequestMapping(value = "/search", method = RequestMethod.POST, params = {"text"})
+    @RequestMapping(value = "/search", method = RequestMethod.POST)
     public String search(@RequestParam("text") String text, Map<String, Object> model) {
 
         Iterable<Office> offices;
@@ -112,7 +116,7 @@ public class AdminOfficeController {
         return "admin/office/index";
     }
 
-    @RequestMapping(value = "/insurance/add", method = RequestMethod.POST, params = {"id_insurance", "id_office"})
+    @RequestMapping(value = "/insurance/add", method = RequestMethod.POST)
     public String insuranceAdd(@RequestParam("id_insurance") Long id_insurance, @RequestParam("id_office") Long id_office) {
 
         Office office = officeService.findOne(id_office);

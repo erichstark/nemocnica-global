@@ -59,7 +59,7 @@ public class PBKDF2WithHmacSHA1 implements PasswordEncoder {
      * @param password the password to hash
      * @return a salted PBKDF2 hash of the password
      */
-    public static String createHash(String password)
+    private static String createHash(String password)
             throws NoSuchAlgorithmException, InvalidKeySpecException {
         return createHash(password.toCharArray());
     }
@@ -70,7 +70,7 @@ public class PBKDF2WithHmacSHA1 implements PasswordEncoder {
      * @param password the password to hash
      * @return a salted PBKDF2 hash of the password
      */
-    public static String createHash(char[] password)
+    private static String createHash(char[] password)
             throws NoSuchAlgorithmException, InvalidKeySpecException {
         // Generate a random salt
         SecureRandom random = new SecureRandom();
@@ -90,7 +90,7 @@ public class PBKDF2WithHmacSHA1 implements PasswordEncoder {
      * @param correctHash the hash of the valid password
      * @return true if the password is correct, false if not
      */
-    public static boolean validatePassword(String password, String correctHash)
+    private static boolean validatePassword(String password, String correctHash)
             throws NoSuchAlgorithmException, InvalidKeySpecException {
         return validatePassword(password.toCharArray(), correctHash);
     }
@@ -102,7 +102,7 @@ public class PBKDF2WithHmacSHA1 implements PasswordEncoder {
      * @param correctHash the hash of the valid password
      * @return true if the password is correct, false if not
      */
-    public static boolean validatePassword(char[] password, String correctHash)
+    private static boolean validatePassword(char[] password, String correctHash)
             throws NoSuchAlgorithmException, InvalidKeySpecException {
         // Decode the hash into its parameters
         String[] params = correctHash.split(":");

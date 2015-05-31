@@ -1,11 +1,14 @@
+<#-- @ftlvariable name="insurances" type="sk.stuba.fei.team.local.domain.Insurance[]" -->
+<#-- @ftlvariable name="office.insurances" type="sk.stuba.fei.team.local.domain.Insurance[]" -->
+<#-- @ftlvariable name="office" type="sk.stuba.fei.team.local.domain.Office[]" -->
 <#import "../../lib/pageTemplates.ftl" as pt>
 <#import "/spring.ftl" as spring>
 <@pt.dashboardPage>
-<h1 class="page-header">Pridanie novej offices</h1>
+<h1 class="page-header">Editácia ambulancie</h1>
 
 <div class="row">
     <div class="col-md-12">
-        <a class="btn btn-info btn-sm" href="<@spring.url '/admin/office'/>" role="button">Back</a>
+        <a class="btn btn-info btn-sm" href="<@spring.url '/admin/office'/>" role="button">Naspäť</a>
     </div>
 </div>
 
@@ -13,7 +16,7 @@
 
 <div class="table-responsive">
 
-    <form name="office" action="<@spring.url '/admin/office/save'/>" method="post">
+    <form name="office" action="<@spring.url '/admin/office/edit'/>" method="post">
         <div class="form-group">
             <label for="office-id">ID</label>
             <input type="text" name="id" class="form-control" id="office-id" placeholder="ID"
@@ -25,7 +28,7 @@
                    value="${office.name!""}">
         </div>
         <div class="form-group">
-            <label for="office-facility">Facility</label>
+            <label for="office-facility">Zariadenie</label>
             <select name="id_facility" class="form-control" id="office-facility">
                 <#list facilities as facility>
                     <#if facility.id == office.facility.id>
@@ -48,15 +51,14 @@
 
 <div class="row">
 
-    <h2>Insurances offices</h2>
+    <h2>Poisťovne ambulancie</h2>
     <hr>
 
     <div class="col-md-12">
         <form class="form-inline" method="POST" action="<@spring.url '/admin/office/insurance/add'/>">
             <div class="form-group">
-                <label for="text">Pridanie insurances:</label>
+                <label for="text">Pridanie poisťovne:</label>
                 <select name="id_insurance" class="form-control" id="office-facility">
-                    <option value="-1">---</option>
                     <#list insurances as insurance>
                         <option value="${insurance.id}">${insurance.name}</option>
                     </#list>
@@ -73,7 +75,7 @@
             <tr>
                 <th style="width: 60px;">#</th>
                 <th style="width: 60px;">ID</th>
-                <th>Názov insurances</th>
+                <th>Názov poisťovne</th>
                 <th style="width: 60px;">Akcia</th>
             </tr>
             </thead>

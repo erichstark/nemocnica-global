@@ -10,20 +10,28 @@ import org.springframework.core.annotation.Order;
 import org.springframework.security.config.annotation.authentication.builders.AuthenticationManagerBuilder;
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
 import org.springframework.security.config.annotation.web.configuration.WebSecurityConfigurerAdapter;
+import org.springframework.security.core.Authentication;
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.authority.SimpleGrantedAuthority;
+import org.springframework.security.core.context.SecurityContextHolder;
+import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.web.servlet.LocaleResolver;
+import org.springframework.web.servlet.ModelAndView;
 import org.springframework.web.servlet.config.annotation.InterceptorRegistry;
 import org.springframework.web.servlet.config.annotation.ViewControllerRegistry;
 import org.springframework.web.servlet.config.annotation.WebMvcConfigurerAdapter;
+import org.springframework.web.servlet.handler.HandlerInterceptorAdapter;
 import org.springframework.web.servlet.i18n.LocaleChangeInterceptor;
 import org.springframework.web.servlet.i18n.SessionLocaleResolver;
 import sk.stuba.fei.team.local.domain.Patient;
+import sk.stuba.fei.team.local.security.CustomUser;
 import sk.stuba.fei.team.local.security.CustomUserDetailService;
 import sk.stuba.fei.team.local.security.PBKDF2WithHmacSHA1;
 import sk.stuba.fei.team.local.service.PatientService;
 
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
 import javax.sql.DataSource;
 import java.util.ArrayList;
 import java.util.List;
@@ -71,9 +79,15 @@ public class MainApplication extends WebMvcConfigurerAdapter {
         return lci;
     }
 
+    @Bean
+    HandlerInterceptorAdapter userDetailsInterceptor() {
+        return new UserDetailsInterceptor();
+    }
+
     @Override
     public void addInterceptors(InterceptorRegistry registry) {
         registry.addInterceptor(localeChangeInterceptor());
+        registry.addInterceptor(userDetailsInterceptor());
     }
 
     @Override
@@ -102,18 +116,37 @@ public class MainApplication extends WebMvcConfigurerAdapter {
             http.csrf().disable()
                     .authorizeRequests()
                     .antMatchers("/admin/**", "/manage").hasAuthority("ADMIN")
-                    .antMatchers("/css/**", "/js/**", "/fonts/**", "/img/**", "/fav/**").permitAll()
+                    .antMatchers("/search/**","/","/registration", "/registration/save", "/css/**", "/js/**", "/fonts/**", "/img/**", "/fav/**").permitAll()
                     .anyRequest().authenticated()
                     .and()
                     .formLogin().loginPage("/login").failureUrl("/login?error").permitAll()
-                    .and()
-                    .logout().permitAll();
+		            .and()
+		            .logout().permitAll();
         }
 
         @Override
         public void configure(AuthenticationManagerBuilder auth) throws Exception {
             auth.userDetailsService(new CustomUserDetailService(patientService)).passwordEncoder(new PBKDF2WithHmacSHA1());
             auth.jdbcAuthentication().dataSource(dataSource);
+        }
+    }
+
+    private class UserDetailsInterceptor extends HandlerInterceptorAdapter {
+        @Override
+        public void postHandle(final HttpServletRequest request,
+                               final HttpServletResponse response, final Object handler,
+                               final ModelAndView modelAndView) throws Exception {
+            Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
+            if(authentication != null) {
+                Object principal = authentication.getPrincipal();
+                if (principal instanceof UserDetails) {
+                    CustomUser userDetails = (CustomUser) principal;
+                    if (modelAndView != null) {
+                        modelAndView.getModelMap().
+                                addAttribute("user", userDetails);
+                    }
+                }
+            }
         }
     }
 }

@@ -11,10 +11,12 @@
     <link type="text/css" href="<@spring.url '/css/bootstrap.min.css'/>" rel="stylesheet"/>
     <link type="text/css" href="<@spring.url '/css/custom.css'/>" rel="stylesheet"/>
     <script src="<@spring.url '/js/jquery-2.1.4.min.js'/>"></script>
+    <script src="<@spring.url '/js/custom.js'/>"></script>
     <title>${pageTitle}</title>
 </head>
 <body>
     <#nested>
+<script src="<@spring.url '/js/jquery-2.1.4.min.js'/>"></script>
 <script src="<@spring.url '/js/bootstrap.min.js'/>"></script>
 </body>
 </html>
@@ -30,41 +32,60 @@
             <div class="navbar-header pull-right">
                 <ul class="nav navbar-nav navbar-right">
                     <li class="dropdown">
-                        <a href="#" class="dropdown-toggle" data-toggle="dropdown" aria-expanded="false"><i
-                                class="glyphicon glyphicon-user"></i> John Smith <b class="caret"></b></a>
+                        <#if user??>
+                        <a href="#" class="dropdown-toggle" data-toggle="dropdown" aria-expanded="false"> <i
+                                class="glyphicon glyphicon-user"></i>${user.getUsername()}</a>
                         <ul class="dropdown-menu">
                             <li>
-                                <a href="#"><i class="glyphicon glyphicon-user"></i> Profile</a>
+                                <a href="<@spring.url '/order'/>">Moje Objednavky</a>
                             </li>
-                            <li>
-                                <a href="#"><i class="glyphicon glyphicon-envelope"></i> Inbox</a>
-                            </li>
-                            <li>
-                                <a href="#"><i class="glyphicon glyphicon-cog"></i> Settings</a>
-                            </li>
+
                             <li class="divider"></li>
                             <li>
                                 <a href="<@spring.url '/logout'/>"><i class="glyphicon glyphicon-log-out"></i> <@spring.message "SignOut" /></a>
                             </li>
                         </ul>
+                        <#else>
+                            <a class="btn btn-primary" id="" href="<@spring.url '/login'/>" >Prihlásenie</a>
+                        </#if>
                     </li>
                 </ul>
             </div>
             <div id="navbar" class="navbar-collapse collapse">
                 <ul class="nav navbar-nav">
-                    <ul class="nav navbar-nav">
+                    <#if user??>
+                    <#if user.stringAuthorities?seq_contains("ADMIN")>
                         <li><a href="<@spring.url '/admin'/>">Administrácia</a></li>
+                    </#if>
                     </ul>
+                    </#if>
+
                 </ul>
             </div>
         </div>
     </nav>
-    <div class="container">
+    <div class="container main-content">
         <#nested>
     </div>
     <footer class="footer">
         <div class="container">
-            <p class="text-muted">Place sticky footer content here.</p>
+         <div class="left-aside">
+          <p>Tímovy projekt WeCare 2014-2015</p>
+           <p>Fakulta elektrotechniky a informatiky, Slovenská technická univerzita , Bratislava</p>
+         </div>
+          <div class="footer-nav">
+            <ul class="list-unstyled">
+                <li><a>Vyhľadávanie</a></li>
+                <li><a>Prihlásenie</a></li>
+                <li><a>Registrácia</a></li>
+                <li><a>Návod</a></li>
+            </ul>
+          </div>
+          <div style="float:left;width:200px;padding-left:50px;">
+             <span style="text-decoration: underline;display:block">Kontakt</span>
+
+              Email: mail@mail.com
+          </div>
         </div>
     </footer>
     </@genericPage>
@@ -88,7 +109,7 @@
                 <ul class="nav navbar-nav navbar-right">
                     <li class="dropdown">
                         <a href="#" class="dropdown-toggle" data-toggle="dropdown" aria-expanded="false"><i
-                                class="glyphicon glyphicon-user"></i> John Smith <b class="caret"></b></a>
+                                class="glyphicon glyphicon-user"></i> <#if user??>${user.getUsername()}</#if> </a>
                         <ul class="dropdown-menu">
                             <li>
                                 <a href="#"><i class="glyphicon glyphicon-user"></i> Profile</a>
@@ -118,6 +139,9 @@
                     <li><a href="<@spring.url '/admin/facility'/>">Zariadenia</a></li>
                     <li><a href="<@spring.url '/admin/office'/>">Ambulancie</a></li>
                     <li><a href="<@spring.url '/admin/insurance'/>">Poistovne</a></li>
+                    <li><a href="<@spring.url '/admin/specialization'/>">Špecializácie</a></li>
+                    <li><a href="<@spring.url '/admin/patient'/>">Pacienti</a></li>
+                    <li><a href="<@spring.url '/admin/employee'/>">Zamestnanci</a></li>
                 </ul>
             </div>
             <div class="col-sm-9 col-sm-offset-3 col-md-10 col-md-offset-2 main">
@@ -126,4 +150,44 @@
         </div>
     </div>
     </@genericPage>
+</#macro>
+
+<#macro simpleSearch>
+
+<div class="row">
+
+
+        <form name="searchUser" class="form-horizontal simpleSearch" method="POST" action="<@spring.url '/search/search'/>" >
+            <div class="form-group">
+                <label for="name">Meno:</label>
+                <input type="text" name="name" class="form-control" id="name" placeholder="Meno"
+                       value="${name!""}">
+            </div>
+            <div class="form-group">
+                <label for="surname">Priezvisko:</label>
+                <input type="text" name="surname" class="form-control" id="surname" placeholder="Priezvisko"
+                       value="${surname!""}">
+            </div>
+            <div class="form-group">
+                <label for="specialization">Špecializácia:</label>
+                <input type="text" name="specialization" class="form-control" id="specialization" placeholder="Specializacia"
+                       value="${specialization!""}">
+            </div>
+            <div class="form-group">
+
+                <input type="hidden" name="town" class="form-control" id="town" placeholder="Mesto"
+                       value="${town!""}">
+            </div>
+            <input type="submit" value="Hľadaj" class="btn btn-primary">
+
+        </form>
+
+</div>
+</#macro>
+
+<#macro headerBanner>
+<header>
+    <div class="banner-text alert alert-dismissible alert-success "> Objednajte sa z pohodlia domova rýchlo a jednoducho</div>
+
+</header>
 </#macro>
