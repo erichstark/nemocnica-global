@@ -59,6 +59,20 @@ public class AdminOfficeController {
         return "admin/office/edit";
     }
 
+    @RequestMapping(value = "/edit", method = RequestMethod.POST)
+    public String edit(@ModelAttribute("office") Office office, @RequestParam Long id_facility) {
+
+        Office temp = officeService.findOne(office.getId());
+        office.setInsurances(temp.getInsurances());
+
+        Facility facility = facilityService.findOne(id_facility);
+        office.setFacility(facility);
+
+        officeService.save(office);
+
+        return "redirect:/admin/office";
+    }
+
     @RequestMapping(value = "/save", method = RequestMethod.POST)
     public String save(@ModelAttribute("office") Office office, @RequestParam Long id_facility) {
 

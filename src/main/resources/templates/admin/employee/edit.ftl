@@ -15,7 +15,7 @@
 <br>
 
 <div class="table-responsive">
-    <form name="patient" action="<@spring.url '/admin/employee/save'/>" method="post">
+    <form name="patient" action="<@spring.url '/admin/employee/edit'/>" method="post">
         <div class="form-group" style="display: none;">
             <label for="employee-id">ID</label>
             <input type="text" name="id" class="form-control" id="employee-id" placeholder="ID"

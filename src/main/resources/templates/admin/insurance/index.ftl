@@ -33,7 +33,7 @@
         <tr>
             <th style="width: 60px;">#</th>
             <th style="width: 60px;">ID</th>
-            <th>Názov insurances</th>
+            <th>Názov poisťovne</th>
             <th style="width: 60px;">Akcia</th>
         </tr>
         </thead>
