@@ -2,7 +2,13 @@
 <#import "../../lib/pageTemplates.ftl" as pt>
 <#import "/spring.ftl" as spring>
 <@pt.dashboardPage>
-<h1 class="page-header">Pridanie novej poisťovne</h1>
+<h1 class="page-header">
+    <#if insurance.id??>
+        Editácia poisťovne
+    <#else>
+        Pridanie novej poisťovne
+    </#if>
+</h1>
 
 <div class="row">
     <div class="col-md-12">
@@ -14,7 +20,11 @@
 
 <div class="table-responsive">
     <form name="insurance" action="<@spring.url '/admin/insurance/save'/>" method="post">
+        <#if insurance.id??>
+        <div class="form-group" style="display: none;">
+        <#else>
         <div class="form-group">
+        </#if>
             <label for="insurance-id">ID</label>
             <input type="text" name="id" class="form-control" id="insurance-id" placeholder="ID"
                    value="${insurance.id!""}">

@@ -134,12 +134,14 @@ public class AdminOfficeController {
     public String insuranceDelete(@PathVariable("id_office") Long id_office, @PathVariable("id_insurance") Long id_insurance) {
 
         Office office = officeService.findOne(id_office);
+        Insurance removeIns = null;
         for (Insurance p : office.getInsurances()) {
             if (p.getId() == id_insurance) {
-                office.getInsurances().remove(p);
+                removeIns = p;
             }
         }
 
+        office.getInsurances().remove(removeIns);
         officeService.save(office);
 
         return "redirect:/admin/office/edit/" + id_office;

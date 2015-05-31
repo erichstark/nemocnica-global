@@ -124,14 +124,14 @@ public class AdminEmployeeController {
     public String officeDelete(@PathVariable("id_employee") Long id_employee, @PathVariable("id_office") Long id_office) {
 
         Employee employee = employeeService.findOne(id_employee);
-
-        for (Iterator<Office> it = employee.getOffices().iterator(); it.hasNext(); ) {
-            Office o = it.next();
+        Office removeOff = null;
+        for (Office o : employee.getOffices()) {
             if (o.getId() == id_office) {
-                employee.getOffices().remove(o);
+                removeOff = o;
             }
         }
 
+        employee.getOffices().remove(removeOff);
         employeeService.save(employee);
 
         return "redirect:/admin/employee/edit/" + id_employee;
