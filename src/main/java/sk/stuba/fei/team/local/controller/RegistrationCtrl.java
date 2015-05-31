@@ -28,6 +28,12 @@ public class RegistrationCtrl {
 		return "registration";
 	}
 
+	// TODO check if email exist in DB
+
+	// TODO insurance to string
+
+	// TODO type of user from registration form
+
 	@RequestMapping(value = "/registration/save", method = RequestMethod.POST)
 	public String save(@ModelAttribute("patient") Patient patient, Map<String, Object> model) {
 
