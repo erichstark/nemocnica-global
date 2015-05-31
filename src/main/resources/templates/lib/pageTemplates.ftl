@@ -44,7 +44,10 @@
                             <li>
                                 <a href="<@spring.url '/logout'/>"><i class="glyphicon glyphicon-log-out"></i> <@spring.message "SignOut" /></a>
                             </li>
-                        </ul></#if>
+                        </ul>
+                        <#else>
+                            <a class="btn btn-primary" id="" href="<@spring.url '/login'/>" >Prihlásenie</a>
+                        </#if>
                     </li>
                 </ul>
             </div>
@@ -61,12 +64,28 @@
             </div>
         </div>
     </nav>
-    <div class="container">
+    <div class="container main-content">
         <#nested>
     </div>
     <footer class="footer">
         <div class="container">
-            <p class="text-muted">Place sticky footer content here.</p>
+         <div class="left-aside">
+          <p>Tímovy projekt WeCare 2014-2015</p>
+           <p>Fakulta elektrotechniky a informatiky, Slovenská technická univerzita , Bratislava</p>
+         </div>
+          <div class="footer-nav">
+            <ul class="list-unstyled">
+                <li><a>Vyhľadávanie</a></li>
+                <li><a>Prihlásenie</a></li>
+                <li><a>Registrácia</a></li>
+                <li><a>Návod</a></li>
+            </ul>
+          </div>
+          <div style="float:left;width:200px;padding-left:50px;">
+             <span style="text-decoration: underline;display:block">Kontakt</span>
+
+              Email: mail@mail.com
+          </div>
         </div>
     </footer>
     </@genericPage>
@@ -150,7 +169,7 @@
                        value="${surname!""}">
             </div>
             <div class="form-group">
-                <label for="specialization">Specializacia:</label>
+                <label for="specialization">Špecializácia:</label>
                 <input type="text" name="specialization" class="form-control" id="specialization" placeholder="Specializacia"
                        value="${specialization!""}">
             </div>
@@ -159,9 +178,16 @@
                 <input type="hidden" name="town" class="form-control" id="town" placeholder="Mesto"
                        value="${town!""}">
             </div>
-            <input type="submit" value="Hľadaj" class="btn btn-default">
+            <input type="submit" value="Hľadaj" class="btn btn-primary">
 
         </form>
 
 </div>
+</#macro>
+
+<#macro headerBanner>
+<header>
+    <div class="banner-text alert alert-dismissible alert-success "> Objednajte sa z pohodlia domova rýchlo a jednoducho</div>
+
+</header>
 </#macro>

@@ -9,15 +9,20 @@ body {
 }
 
 .footer {
-    position: absolute;
-    bottom: 0;
+    position: relative;
+    bottom:0;
     width: 100%;
-    height: 60px;
-    background-color: #f5f5f5;
+
+}
+
+
+
+.left-aside p {
+    color: #c0c2c5;
 }
 
 body > .container {
-    padding: 60px 15px 0;
+    padding:60px 15px 40px;
     background: none repeat scroll 0 0 white;
 }
 
@@ -43,6 +48,10 @@ header {
     float: left;
     width: 30%;
 }
+.right-aside{
+    float: right;
+    width: 30%;
+}
 
 .right-content {
     float: right;
@@ -51,6 +60,12 @@ header {
     margin-bottom: 20px;
 }
 
+.left-content {
+    float: left;
+    width: 70%;
+    margin-bottom: 20px;
+    padding-right: 20px;
+}
 .right-content h1 {
     margin-top: 0;
 }
@@ -62,6 +77,25 @@ header {
     padding-left: 20px;
     padding-top: 20px;
     width: 50%;
+}
+
+.fullSearch{
+    margin-left: auto;
+    margin-right: auto;
+    margin-top: 0;
+    padding-left: 20px;
+    padding-top: 20px;
+    width: 50%;
+}
+
+.fullSearch label {
+    float: left;
+    text-align: right;
+}
+
+.fullSearch input[type="text"] {
+    float: right;
+    width: 70%;
 }
 
 .simpleSearch input[type="text"] {
@@ -84,8 +118,18 @@ header {
     margin-right: 0;
 }
 .footer > .container {
+    padding-top:20px;
     padding-right: 15px;
     padding-left: 15px;
+}
+
+.footer-nav {
+    float: left;
+    width: 150px;
+    padding-left: 50px;
+    padding-right: 50px;
+    border-left: 1px solid #aeaec0;
+    border-right: 1px solid #aeaec0;
 }
 
 .footer > .container > p {
@@ -245,6 +289,17 @@ header {
     z-index: 1002;
 }
 
+.white_content_login {
+
+    display: none;
+    left: 30%;
+    overflow: auto;
+
+    position: fixed;
+    top: 10%;
+
+    z-index: 1002;
+}
 
 .head{
     background: none repeat scroll 0 0 #F4FFFB;
@@ -256,10 +311,11 @@ header {
 /* ---------------------------------------- doktor search -----------------------------*/
 
 .item {
-    background: none repeat scroll 0 0 #f0fafa;
-
+    background: #f0fafa none repeat scroll 0 0;
+    float: left;
     margin-bottom: 15px;
     padding: 10px;
+    width: 100%;
 }
 
 .item-avatar img {
@@ -356,4 +412,9 @@ header {
 
 .popup textarea {
     width: 300px;
+}
+
+.floating-buttons {
+    display: block;
+    text-align: right;
 }

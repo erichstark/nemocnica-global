@@ -2,9 +2,10 @@
 <#import "lib/pageTemplates.ftl" as g>
 <#import "/spring.ftl" as spring>
 <#assign pageTitle in g><@spring.message "Registration"/></#assign>
-<@g.genericPage>
-<div class="container">
-	<div id="registration-panel" class="panel panel-default">
+<@g.menuFooterPage>
+	<@g.headerBanner/>
+<div class="">
+	<div id="registration-panel" class="panel panel-default" style="margin-top:50px">
 		<div class="panel-heading"><h3 class="panel-title"><strong>Registrácia</strong></h3></div>
 		<div class="panel-body">
 			<form role="form" action="<@spring.url '/registration/save'/>" method="post">
@@ -73,4 +74,4 @@
 		</div>
 	</div>
 </div>
-</@g.genericPage>
+</@g.menuFooterPage>

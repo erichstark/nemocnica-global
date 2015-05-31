@@ -106,7 +106,7 @@ public class Patient implements Serializable, UserDetails, CredentialsContainer 
         this.authorities = authorities;
     }
 
-    @ElementCollection(fetch = FetchType.EAGER)
+    @ElementCollection(fetch = FetchType.LAZY)
     @Column(name = "authority")
     @CollectionTable(
             name = "authorities",
@@ -248,7 +248,7 @@ public class Patient implements Serializable, UserDetails, CredentialsContainer 
         password = null;
     }
 
-    @OneToMany(cascade = CascadeType.ALL, mappedBy = "patient")
+    @OneToMany(cascade = CascadeType.PERSIST, mappedBy = "patient")
     public List<PatientOrder> getOrders() {
         return orders;
     }

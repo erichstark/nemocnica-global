@@ -33,6 +33,6 @@ public class RegistrationCtrl {
 
 		patientService.save(patient);
 
-		return "redirect:/login";
+		return "redirect:/";
 	}
 }

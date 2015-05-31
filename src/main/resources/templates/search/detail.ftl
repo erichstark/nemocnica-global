@@ -48,9 +48,30 @@
                     <td style="width:60px;font-weight: bold;">${d.day}</td>
                     <td>${d.date}</td>
                     <#if d.hour??>
+                        <#assign hodinaFrom=d.hour.reservationFrom/60 />
+                        <#assign minutaFrom= d.hour.reservationFrom % 60 />
+                        <#if minutaFrom = 30>
+                            <#assign  casFrom = hodinaFrom?string['0'] + ":30" />
+                        <#else>
+                            <#assign  casFrom = hodinaFrom?string['0'] +":00 " />
+                        </#if>
+
+                        <#assign hodinaTo=d.hour.reservationTo/60 />
+                        <#assign minutaTo= d.hour.reservationTo % 60 />
+                        <#if minutaTo = 30>
+                            <#assign  casTo = hodinaTo?string['0'] + ":30" />
+                        <#else>
+                            <#assign  casTo = hodinaTo?string['0'] +":00 " />
+                        </#if>
                         <td>
-                            <div class="time" onclick="showReservations(${d_index})">${d.hour.reservationFrom}
-                                - ${d.hour.reservationTo}</div>
+                            <#--<#if user??>-->
+                            <#--<div class="time" onclick="showReservations(${d_index})">-->
+                            <#--<#else>-->
+                            <div class="time" onclick="showLoginMessage()">
+                            <#--</#if>-->
+                            ${casFrom}
+                                - ${casTo}</div>
+
                         </td>
                     <#else>
                         <td><span class="not-free">Pre doobedie už nie sú bohužial voľné termíny. </span></td>
@@ -74,8 +95,23 @@
                                         <select width="150px" name="intervalStart" class="" id="order-interval">
                                             <#list d.intervalList as interval>
                                                 <#if interval.free == 1>
-                                                    <option value="${interval.s}">${interval.s/60}
-                                                        - ${interval.e/60}</option>
+                                                    <#assign hodinaIntervalFrom=interval.s/60 />
+                                                    <#assign minutaIntervalFrom= interval.s % 60 />
+                                                    <#if minutaIntervalFrom = 30>
+                                                        <#assign  casIntervalFrom = hodinaIntervalFrom?string['0'] + ":30" />
+                                                    <#else>
+                                                        <#assign  casIntervalFrom = hodinaIntervalFrom?string['0'] +":00 " />
+                                                    </#if>
+
+                                                    <#assign hodinaIntervalTo=interval.e/60 />
+                                                    <#assign minutaIntervalTo= interval.e % 60 />
+                                                    <#if minutaIntervalTo = 30>
+                                                        <#assign  casIntervalTo = hodinaIntervalTo?string['0'] + ":30" />
+                                                    <#else>
+                                                        <#assign  casIntervalTo = hodinaIntervalTo?string['0'] +":00 " />
+                                                    </#if>
+                                                    <option value="${interval.s}">${casIntervalFrom}
+                                                        - ${casIntervalTo}</option>
                                                 </#if>
                                             </#list>
                                         </select>
@@ -111,6 +147,12 @@
 
                                 <input type="hidden" value="${office.id}" name="office_id">
 
+                                <#--<#if user??>-->
+                                    <#--<input type="hidden" value="${user.getUsername()}" name="userName">-->
+                                <#--<#else>-->
+                                    <#--<input type="hidden" value="" name="userName">-->
+                                <#--</#if>-->
+
                                 <div class="form-group">
                                     <div class="control-buttons-tab ">
                                         <input type="submit" value="Ulož" class="btn btn-success">
@@ -132,13 +174,46 @@
         Poznamky
     </div>
 </div>
-    <#--<#list orders as o>-->
-    <#--${o.intervalStart}-->
+<div  id="login-message" class="popup white_content_login">
+    <div id="login-panel" class="panel panel-default">
+        <div class="panel-heading"><h3 class="panel-title"><strong><@spring.message "SignIn"/></strong></h3></div>
+        <div class="panel-body">
+            <div class="text-danger">
+                <#if RequestParameters.error??>
+                    <@spring.message "InvalidCredentials"/>
+                </#if>
+                <#if RequestParameters.logout??>
+                <@spring.message "SignedOut"/>
+            </#if>
+            </div>
+            <div>
+                <a href="<@spring.url '/'/>">Späť na hlavnú stránku</a>
+            </div>
+            <form role="form" action="<@spring.url '/login'/>" method="POST">
+                <div class="form-group">
+                    <label for="username"><@spring.message "Username"/></label>
+                    <input type="text" class="form-control" id="username" name="username" required autofocus>
+                </div>
+                <div class="form-group">
+                    <label for="password"><@spring.message "Password"/></label>
+                    <input type="password" class="form-control" id="password" name="password">
+                </div>
+                <button type="submit" class="btn btn-sm btn-default"><@spring.message "SignIn"/></button>
+                <button type="button" class="btn btn-sm btn-warning" onclick="showLoginMessage()">Zrusit</button>
+            </form>
+            <hr>
+            <div>Ak nie ste zaregistrovaný <a href="<@spring.url '/registration'/> " >kliknite sem</a> . </div>
+        </div>
+    </div>
 
-    <#--</#list>-->
+</div>
 <script>
     function showReservations(id) {
         $("#" + id).toggle();
+        $(".fade").toggle();
+    }
+    function showLoginMessage(){
+        $("#login-message").toggle();
         $(".fade").toggle();
     }
 </script>

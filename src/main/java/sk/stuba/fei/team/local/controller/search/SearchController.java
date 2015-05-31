@@ -43,7 +43,7 @@ public class SearchController {
     @RequestMapping("")
     public String index(Map<String, Object> model) {
 
-        model.put("pageTitle", "Vyhladavanie doktorov");
+        model.put("pageTitle", "Vyhľadávanie lekárov");
         model.put("employees", employeeService.findAll());
 
         return "search/index";
@@ -99,9 +99,10 @@ public class SearchController {
         for(int i=0; i<=83; i++){
             Calendar c= Calendar.getInstance();
 
-            c.set(Calendar.DAY_OF_WEEK, c.getFirstDayOfWeek()+1);
+            c.set(Calendar.DAY_OF_WEEK, c.getFirstDayOfWeek() + 1);
 
-            SimpleDateFormat dt = new SimpleDateFormat("yyyy-MM-dd");
+            //SimpleDateFormat dt = new SimpleDateFormat("yyyy-MM-dd");
+            SimpleDateFormat dt = new SimpleDateFormat("d.M.yyyy");
             c.add(Calendar.DATE, i);
             String today =dt.format(c.getTime());
 
@@ -119,16 +120,16 @@ public class SearchController {
 
             for (Hours it : hodiny) {
                 String d1=dayList.get(i).getDate();
-                String d2=it.getDate().toString();
 
-
+                SimpleDateFormat dt = new SimpleDateFormat("d.M.yyyy");
+                String d2 =    dt.format(it.getDate());
 
                 if(d2.equals( d1 )){
 
 
                     dayList.get(i).setText("je v DB");
                     dayList.get(i).setHour(it);
-                    dayList.get(i).setIntervalList(calculateInterval(d2,office ,it.getReservationFrom(),it.getReservationTo()));
+                    dayList.get(i).setIntervalList(calculateInterval(it.getDate().toString(),office ,it.getReservationFrom(),it.getReservationTo()));
 
                 }
             }
@@ -163,7 +164,7 @@ public class SearchController {
 
 // spravit vyhladavanie tak ze specializacia bude jeden dlhyy string
 
-        model.put("pageTitle", "Zamestnanci");
+        model.put("pageTitle", "Vyhľadávanie lekárov");
         model.put("name", search.getName());
         model.put("surname", search.getSurname());
         model.put("specialization", search.getSpecialization());
@@ -182,7 +183,7 @@ public class SearchController {
         List<Day> dayList= fillListOfDays(id,officeid);
 
 
-        model.put("pageTitle", "Zamestnanec");
+        model.put("pageTitle", "Vyhľadávanie lekárov");
         model.put("days",dayList);
         model.put("order", new PatientOrder());
         model.put("office",office);
@@ -194,7 +195,7 @@ public class SearchController {
 
     @RequestMapping(value = "/clear")
     public String clear(Map<String, Object> model) {
-        model.put("pageTitle", "Zamestnanec");
+        model.put("pageTitle", "Vyhľadávanie lekárov");
         model.put("employees", employeeService.findAll());
 
         return "search/index";
@@ -207,10 +208,10 @@ public class SearchController {
 
         PatientOrder newOrd = new PatientOrder();
 
-        Patient p= patientService.findByUsername("admin");
+        Patient p= patientService.findByUsername(order.getUserName());
 
         String d = order.getDate();
-        DateFormat format = new SimpleDateFormat("yyyy-MM-dd");
+        DateFormat format = new SimpleDateFormat("dd.MM.yyyy");
         Date date = format.parse(d);
 
         newOrd.setPatient(p);
@@ -224,7 +225,7 @@ public class SearchController {
 
         orderService.save(newOrd);
 
-        model.put("pageTitle", "Zamestnanec");
+        model.put("pageTitle", "Vyhľadávanie lekárov");
         return "/search/neworder";
     }
 }

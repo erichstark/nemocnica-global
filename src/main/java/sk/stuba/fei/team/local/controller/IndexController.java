@@ -11,7 +11,7 @@ public class IndexController {
     @RequestMapping("/")
     public String index(Map<String, Object> model) {
 
-        model.put("pageTitle", "Hello Title");
+        model.put("pageTitle", "WeCare - online objednávanie");
 
         return "index";
     }

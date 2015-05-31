@@ -1,13 +1,7 @@
 <#import "lib/pageTemplates.ftl" as pt>
 <#import "/spring.ftl" as spring>
 <@pt.menuFooterPage>
-<header>
-    <div class="banner-text alert alert-dismissible alert-success "> Objednajte sa z pohodlia domova rýchlo a jednoducho</div>
-    <#if user??>
-    <#else>
-    <a class="btn btn-primary" id="login-button" href="<@spring.url '/login'/>" >Prihlásenie</a>
-    </#if>
-</header>
+<@pt.headerBanner/>
 <div class="content">
     <aside class="left-aside">
         <div class="panel panel-info">
@@ -16,7 +10,7 @@
             </div>
             <div class="panel-body">
                 <ul>
-                    <li>Pre vytvorenie objednávky musíte byť zaregistrovaný</li>
+                    <li>Pre vytvorenie objednávky musíte byť zaregistrovaný <a href="<@spring.url '/registration'/>">(Zaregistrovať sa)</a> </li>
                     <li>Vyhľadajte si svojho lekára</li>
                     <li>V kalendári si zvoľte časť dňa </li>
                     <li>Vo formulári si zvoľte čas objednávky</li>

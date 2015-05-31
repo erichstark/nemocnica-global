@@ -14,6 +14,7 @@ public class FormOrder {
     private String date;
     private int intervalStart;
     private String note;
+    private String userName;
 
 //    public Patient getPatient() {
 //        return patient;
@@ -54,5 +55,13 @@ public class FormOrder {
 
     public void setNote(String note) {
         this.note = note;
+    }
+
+    public String getUserName() {
+        return userName;
+    }
+
+    public void setUserName(String userName) {
+        this.userName = userName;
     }
 }
