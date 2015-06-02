@@ -20,6 +20,7 @@ public class Office implements Serializable {
 
 
     @Id
+    @GeneratedValue
     public Long getId() {
         return id;
     }
