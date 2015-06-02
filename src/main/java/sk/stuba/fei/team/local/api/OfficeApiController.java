@@ -17,19 +17,27 @@ public class OfficeApiController {
     @Autowired
     private OfficeService officeService;
 
-    @RequestMapping("/hello")
-    public String hello() {
-        return "Hello\n";
-    }
-
-    @RequestMapping(value = "/{fid}/saveOffice", method = RequestMethod.POST)
-    public String save(@RequestBody Office office, @PathVariable Long fid) {
+    @RequestMapping(value = "/facility/{fid}/office", method = RequestMethod.POST)
+    public Long saveOffice(@RequestBody Office office, @PathVariable Long fid) {
 
         Facility facility = facilityService.findOne(fid);
         office.setFacility(facility);
 
         officeService.save(office);
 
-        return "som divny";
+        return office.getId();
+    }
+
+    @RequestMapping(value = "/facility/{fid}/office", method = RequestMethod.GET)
+    public Iterable<Office> facilityOffices(@PathVariable Long fid) {
+        Facility facility = facilityService.findOne(fid);
+
+        return facility.getOffices();
+    }
+
+    @RequestMapping(value = "/office", method = RequestMethod.GET)
+    public Iterable<Office> officesAll() {
+        return
+                officeService.findAll();
     }
 }
