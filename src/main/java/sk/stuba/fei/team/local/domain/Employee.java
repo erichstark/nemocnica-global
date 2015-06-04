@@ -2,7 +2,6 @@ package sk.stuba.fei.team.local.domain;
 
 import javax.persistence.*;
 import java.io.Serializable;
-import java.util.List;
 import java.util.Set;
 
 @Entity
@@ -18,6 +17,7 @@ public class Employee implements Serializable {
     private Set<Hours> hours;
 
     @Id
+    @GeneratedValue
     public Long getId() {
         return Id;
     }

@@ -15,6 +15,7 @@ public class Facility implements Serializable {
     private String zip;
 
     @Id
+    @GeneratedValue
     public Long getId() {
         return id;
     }
