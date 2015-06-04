@@ -5,7 +5,6 @@ import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
-import sk.stuba.fei.team.local.domain.Insurance;
 import sk.stuba.fei.team.local.domain.Patient;
 import sk.stuba.fei.team.local.service.PatientService;
 
@@ -16,7 +15,7 @@ import java.util.Map;
  */
 
 @Controller
-public class RegistrationCtrl {
+public class RegistrationController {
 
 	@Autowired
 	PatientService patientService;
