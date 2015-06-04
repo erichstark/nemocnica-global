@@ -1,4 +1,4 @@
-<#-- @ftlvariable name="specialization" type="sk.stuba.fei.team.local.domain.Specialization" -->
+<#-- @ftlvariable name="specialization" type="sk.stuba.fei.team.global.domain.Specialization" -->
 <#import "../../lib/pageTemplates.ftl" as pt>
 <#import "/spring.ftl" as spring>
 <@pt.dashboardPage>

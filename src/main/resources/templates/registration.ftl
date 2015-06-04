@@ -1,4 +1,4 @@
-<#-- @ftlvariable name="patient" type="sk.stuba.fei.team.local.domain.Patient" -->
+<#-- @ftlvariable name="patient" type="sk.stuba.fei.team.global.domain.Patient" -->
 <#import "lib/pageTemplates.ftl" as g>
 <#import "/spring.ftl" as spring>
 <#assign pageTitle in g><@spring.message "Registration"/></#assign>

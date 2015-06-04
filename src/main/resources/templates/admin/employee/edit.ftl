@@ -1,6 +1,6 @@
-<#-- @ftlvariable name="specializations" type="sk.stuba.fei.team.local.domain.Specialization[]" -->
-<#-- @ftlvariable name="offices" type="sk.stuba.fei.team.local.domain.Office[]" -->
-<#-- @ftlvariable name="employee" type="sk.stuba.fei.team.local.domain.Employee" -->
+<#-- @ftlvariable name="specializations" type="sk.stuba.fei.team.global.domain.Specialization[]" -->
+<#-- @ftlvariable name="offices" type="sk.stuba.fei.team.global.domain.Office[]" -->
+<#-- @ftlvariable name="employee" type="sk.stuba.fei.team.global.domain.Employee" -->
 <#import "../../lib/pageTemplates.ftl" as pt>
 <#import "/spring.ftl" as spring>
 <@pt.dashboardPage>

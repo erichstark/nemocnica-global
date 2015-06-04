@@ -12,11 +12,11 @@
 
                 <ul>
                     <li class="col-md-12">
-                        <div class="col-md-4"><span style="font-weight: bold">Špecializácia :</span></div>
-                        <div class="col-md-8">${employee.specializations}</div>
+                        <div class="col-md-4"><strong>Špecializácia :</strong></div>
+                        <div class="col-md-8">${employee.specializations!"--"}</div>
                     </li>
                     <li class="col-md-12">
-                        <div class="col-md-4"><span style="font-weight: bold">Ambulancia :</span></div>
+                        <div class="col-md-4"><strong>Ambulancia :</strong></div>
                         <div class="col-md-8">${office.name}</div>
                     </li>
                 </ul>
@@ -24,7 +24,7 @@
             </div>
             <div class="col-md-4">
                 <div class="col-md-4">
-                    <span style="font-weight: bold">Adresa : </span></div>
+                    <strong>Adresa : </strong></div>
                 <div class="col-md-8">
                 ${office.facility.name}<br> ${office.facility.streetAndNumber},<br>${office.facility.city}
                 </div>
