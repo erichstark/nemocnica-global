@@ -115,12 +115,12 @@ public class MainApplication extends WebMvcConfigurerAdapter {
             http.csrf().disable()
                     .authorizeRequests()
                     .antMatchers("/admin/**", "/manage").hasAuthority("ADMIN")
-                    .antMatchers("/","/registration/**", "/search/**").permitAll()
+                    .antMatchers("/", "/registration", "/registration/save", "/search/**").permitAll()
                     .anyRequest().authenticated()
                     .and()
                     .formLogin().loginPage("/login").failureUrl("/login?error").permitAll()
-		            .and()
-		            .logout().permitAll();
+                    .and()
+                    .logout().permitAll();
         }
 
         @Override
