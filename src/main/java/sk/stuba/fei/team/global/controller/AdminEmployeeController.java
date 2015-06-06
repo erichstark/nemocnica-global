@@ -5,6 +5,7 @@ import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.*;
 import sk.stuba.fei.team.global.domain.Employee;
 import sk.stuba.fei.team.global.domain.Office;
+import sk.stuba.fei.team.global.domain.Specialization;
 import sk.stuba.fei.team.global.service.EmployeeService;
 import sk.stuba.fei.team.global.service.OfficeService;
 import sk.stuba.fei.team.global.service.SpecializationService;
@@ -137,22 +138,30 @@ public class AdminEmployeeController {
     }
 
     @RequestMapping(value = "/specialization/add", method = RequestMethod.POST)
-    public String specializationAdd(@RequestParam("id_employee") Long id_employee, @RequestParam("specialization") String specialization) {
+    public String specializationAdd(@RequestParam("id_employee") Long id_employee, @RequestParam("id_specialization") Long id_specialization) {
 
         Employee employee = employeeService.findOne(id_employee);
-       // employee.getSpecializations().add(specialization);
+        Specialization sp = specializationService.findOne(id_specialization);
+
+        employee.getSpecializations().add(sp);
+        sp.getEmployees().add(employee);
 
         employeeService.save(employee);
 
         return "redirect:/admin/employee/edit/" + id_employee;
     }
 
-    @RequestMapping(value = "{id_employee}/specialization/{specialization}/delete")
-    public String specializationDelete(@PathVariable("id_employee") Long id_employee, @PathVariable("specialization") int specialization) {
+    @RequestMapping(value = "{id_employee}/specialization/{id_specialization}/delete")
+    public String specializationDelete(@PathVariable("id_employee") Long id_employee, @PathVariable("id_specialization") Long id_specialization) {
 
         Employee employee = employeeService.findOne(id_employee);
-       // employee.getSpecializations().remove(specialization);
-
+        Specialization rs = null;
+        for (Specialization s : employee.getSpecializations()) {
+            if (s.getId() == id_specialization) {
+                rs = s;
+            }
+        }
+        employee.getSpecializations().remove(rs);
         employeeService.save(employee);
 
         return "redirect:/admin/employee/edit/" + id_employee;

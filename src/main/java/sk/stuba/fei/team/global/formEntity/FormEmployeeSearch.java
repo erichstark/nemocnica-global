@@ -8,16 +8,6 @@ public class FormEmployeeSearch extends  GenericSearchForm {
 
     private String name;
     private String surname;
-    private String specialization;
-    private String town;
-
-    public String getTown() {
-        return town;
-    }
-
-    public void setTown(String town) {
-        this.town = town;
-    }
 
     public String getName() {
         return name;
@@ -33,14 +23,6 @@ public class FormEmployeeSearch extends  GenericSearchForm {
 
     public void setSurname(String surname) {
         this.surname = surname;
-    }
-
-    public String getSpecialization() {
-        return specialization;
-    }
-
-    public void setSpecialization(String specialization) {
-        this.specialization = specialization;
     }
 
 }

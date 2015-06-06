@@ -47,9 +47,9 @@ public class EmployeeServiceImpl implements EmployeeService {
     }
 
     @Override
-    public List<Employee> findDoctors(String name,String surname ,String specialization, String town) {
+    public List<Employee> findDoctors(String name,String surname) {
 
-        return employeeRepository.findByFirstNameContainingIgnoreCaseAndLastNameContainingIgnoreCaseAndSpecializationsContainingIgnoreCase(name, surname, specialization);
+        return employeeRepository.findByFirstNameContainingIgnoreCaseAndLastNameContainingIgnoreCase(name, surname);
     }
 
     @Override

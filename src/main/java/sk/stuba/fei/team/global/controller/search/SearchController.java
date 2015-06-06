@@ -88,7 +88,6 @@ public class SearchController {
         Employee emp  = employeeService.findOne(id);
         Office office = officeService.findOne(officeid);
         Iterable<Hours> hodiny;
-        //hodiny= hoursService.findByEmployeeId(id);
         hodiny= hoursService.findByEmployeeIdAndOfficeId(id,officeid);
 
 
@@ -151,10 +150,10 @@ public class SearchController {
 
         Iterable<Employee> zoznam;
         zoznam = employeeService.findAll();
-        if (search.getName() == "" && search.getSurname() == "" && search.getSpecialization() == "" && search.getTown() == "" ){
+        if (search.getName() == "" && search.getSurname() == ""){
             zoznam = employeeService.findAll();
         } else {
-            zoznam = employeeService.findDoctors(search.getName(),search.getSurname(),search.getSpecialization(),search.getTown());
+            zoznam = employeeService.findDoctors(search.getName(),search.getSurname());
 
         }
 
@@ -165,8 +164,6 @@ public class SearchController {
         model.put("pageTitle", "Vyhľadávanie lekárov");
         model.put("name", search.getName());
         model.put("surname", search.getSurname());
-        model.put("specialization", search.getSpecialization());
-        model.put("town", search.getTown());
         model.put("employees", zoznam);
 
         return "search/index";

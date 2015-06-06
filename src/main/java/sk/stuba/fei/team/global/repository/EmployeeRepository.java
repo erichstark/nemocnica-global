@@ -14,7 +14,7 @@ public interface EmployeeRepository extends CrudRepository<Employee, Long> {
 
     List<Employee> findByLastNameContainingIgnoreCase(String lastName);
 
-    List<Employee> findByFirstNameContainingIgnoreCaseAndLastNameContainingIgnoreCaseAndSpecializationsContainingIgnoreCase(String name,String surname ,String specialization);
+    List<Employee> findByFirstNameContainingIgnoreCaseAndLastNameContainingIgnoreCase(String name,String surname);
 
     Employee findByFirstName(String firstName);
 

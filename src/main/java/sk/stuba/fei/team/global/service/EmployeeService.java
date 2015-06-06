@@ -17,7 +17,7 @@ public interface EmployeeService {
 
     void save(Employee employee);
 
-    List<Employee> findDoctors(String name,String surname ,String specialization, String town);
+    List<Employee> findDoctors(String name,String surname);
 
     void delete(Long id);
 

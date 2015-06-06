@@ -69,7 +69,11 @@
         <form class="form-inline" method="POST" action="<@spring.url '/admin/employee/specialization/add'/>">
             <div class="form-group">
                 <label for="employee-office">Specializácia:</label>
-                <input type="text" class="form-control" name="specialization" value="">
+                <select name="id_specialization" class="form-control" id="employee-office">
+                    <#list specializations as specialization>
+                        <option value="${specialization.id}">${specialization.name}</option>
+                    </#list>
+                </select>
                 <input type="hidden" name="id_employee" value="${employee.id}">
             </div>
             <input type="submit" value="Pridaj" class="btn btn-success">
@@ -92,7 +96,7 @@
                         <td>${specialization_index + 1}</td>
                         <td>${specialization}</td>
                         <td>
-                            <a href="<@spring.url '/admin/employee/'+employee.id+'/specialization/'+specialization_index+'/delete' />"
+                            <a href="<@spring.url '/admin/employee/'+employee.id+'/specialization/'+specialization.id+'/delete' />"
                                onclick="return confirm('Naozaj?');">Zmazať</a></td>
                     </tr>
                     </#list>
