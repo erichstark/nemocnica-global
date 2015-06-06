@@ -12,6 +12,8 @@ public class Employee implements Serializable {
     private String lastName;
     private String prefix_title;
     private String suffix_title;
+    private String phone;
+    private String email;
     private Set<Office> offices;
     private String specializations;
     private Set<Hours> hours;
@@ -21,7 +23,6 @@ public class Employee implements Serializable {
     public Long getId() {
         return Id;
     }
-
     public void setId(Long id) {
         Id = id;
     }
@@ -30,7 +31,6 @@ public class Employee implements Serializable {
     public String getFirstName() {
         return firstName;
     }
-
     public void setFirstName(String firstName) {
         this.firstName = firstName;
     }
@@ -39,7 +39,6 @@ public class Employee implements Serializable {
     public String getLastName() {
         return lastName;
     }
-
     public void setLastName(String lastName) {
         this.lastName = lastName;
     }
@@ -48,7 +47,6 @@ public class Employee implements Serializable {
     public String getSuffix_title() {
         return suffix_title;
     }
-
     public void setSuffix_title(String suffix_title) {
         this.suffix_title = suffix_title;
     }
@@ -57,10 +55,26 @@ public class Employee implements Serializable {
     public String getPrefix_title() {
         return prefix_title;
     }
-
     public void setPrefix_title(String prefix_title) {
         this.prefix_title = prefix_title;
     }
+
+    @Column
+    public String getPhone() {
+        return phone;
+    }
+    public void setPhone(String phone) {
+        this.phone = phone;
+    }
+
+    @Column
+    public String getEmail() {
+        return email;
+    }
+    public void setEmail(String email) {
+        this.email = email;
+    }
+
 
     @ManyToMany(cascade = CascadeType.ALL)
     @JoinTable(

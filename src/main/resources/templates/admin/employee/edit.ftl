@@ -16,16 +16,11 @@
 
 <div class="table-responsive">
     <form name="patient" action="<@spring.url '/admin/employee/edit'/>" method="post">
-        <div class="form-group" style="display: none;">
-            <label for="employee-id">ID</label>
-            <input type="text" name="id" class="form-control" id="employee-id" placeholder="ID"
-                   value="${employee.id!""}">
-        </div>
-
+        <input type="hidden" name="id" id="employee-id" value="${employee.id}">
         <div class="form-group">
-            <label for="employee-prefix_title">Titul pred</label>
+            <label for="employee-prefix_title">Titul pred menom</label>
             <input type="text" name="prefix_title" class="form-control" id="employee-prefix_title"
-                   placeholder="Titul pred"
+                   placeholder="Titul pred menom"
                    value="${employee.prefix_title!""}">
         </div>
         <div class="form-group">
@@ -39,10 +34,20 @@
                    value="${employee.lastName!""}">
         </div>
         <div class="form-group">
-            <label for="employee-suffix_title">Titul za</label>
+            <label for="employee-suffix_title">Titul za menom</label>
             <input type="text" name="suffix_title" class="form-control" id="employee-suffix_title"
-                   placeholder="Titul za"
+                   placeholder="Titul za menom"
                    value="${employee.suffix_title!""}">
+        </div>
+        <div class="form-group">
+            <label for="employee-phone">Telefón</label>
+            <input type="text" name="phone" class="form-control" id="employee-phone" placeholder="Telefón"
+                   value="${employee.phone!""}">
+        </div>
+        <div class="form-group">
+            <label for="employee-email">E-mail</label>
+            <input type="text" name="email" class="form-control" id="employee-email" placeholder="E-mail"
+                   value="${employee.phone!""}">
         </div>
 
         <div class="form-group">

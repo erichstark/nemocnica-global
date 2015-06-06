@@ -35,6 +35,8 @@
             <th style="width: 60px;">#</th>
             <th>ID</th>
             <th>Meno zamestnanca</th>
+            <th>Telefón</th>
+            <th>E-mail</th>
             <th style="width: 60px;">Akcia</th>
         </tr>
         </thead>
@@ -49,6 +51,8 @@
                         <#if employee.suffix_title?length gt 0>${', ' + employee.suffix_title}</#if>
                     </a>
                 </td>
+                <td>${employee.phone!""}</td>
+                <td>${employee.email!""}</td>
                 <td><a href="<@spring.url '/admin/employee/delete/' + employee.id />"
                        onclick="return confirm('Naozaj?');">Zmazať</a></td>
             </tr>
