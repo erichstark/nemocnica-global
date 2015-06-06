@@ -15,7 +15,7 @@ public class Employee implements Serializable {
     private String phone;
     private String email;
     private Set<Office> offices;
-    private String specializations;
+    private Set<Specialization> specializations;
     private Set<Hours> hours;
 
     @Id
@@ -87,17 +87,22 @@ public class Employee implements Serializable {
     public Set<Office> getOffices() {
         return offices;
     }
-
     public void setOffices(Set<Office> offices) {
         this.offices = offices;
     }
 
-    @Column
-    public String getSpecializations() {
+    @ManyToMany(cascade = CascadeType.ALL)
+    @JoinTable(
+            name = "employee_specialization",
+            joinColumns =
+            @JoinColumn(name = "employee", referencedColumnName = "id"),
+            inverseJoinColumns =
+            @JoinColumn(name = "specialization", referencedColumnName = "id")
+    )
+    public Set<Specialization> getSpecializations() {
         return specializations;
     }
-
-    public void setSpecializations(String specializations) {
+    public void setSpecializations(Set<Specialization> specializations) {
         this.specializations = specializations;
     }
 
@@ -105,7 +110,6 @@ public class Employee implements Serializable {
     public Set<Hours> getHours() {
         return hours;
     }
-
     public void setHours(Set<Hours> hours) {
         this.hours = hours;
     }
