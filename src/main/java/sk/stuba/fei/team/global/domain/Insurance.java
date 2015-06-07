@@ -13,7 +13,14 @@ public class Insurance implements Serializable {
     private Set<Office> offices;
     private Set<Patient> patients;
 
+    public Insurance() {}
+
+    public Insurance(String name) {
+        this.name = name;
+    }
+
     @Id
+    @GeneratedValue
     public Long getId() {
         return id;
     }

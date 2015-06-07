@@ -28,7 +28,7 @@ public class AdminSpecializationController {
     }
 
     @RequestMapping(value = "/update/{id}", method = RequestMethod.POST)
-    public String edit(@RequestParam("name") String name, @PathVariable Long id, Map<String, Object> model) {
+    public String edit(@RequestParam("name") String name, @PathVariable Long id) {
 
         Specialization sp = specializationService.findOne(id);
         sp.setName(name);
@@ -38,7 +38,7 @@ public class AdminSpecializationController {
     }
 
     @RequestMapping(value = "/save", method = RequestMethod.POST)
-    public String save(@RequestParam("name") String name, Map<String, Object> model) {
+    public String save(@RequestParam("name") String name) {
 
         Specialization sp = new Specialization(name);
         specializationService.save(sp);
@@ -47,7 +47,7 @@ public class AdminSpecializationController {
     }
 
     @RequestMapping(value = "/delete/{id}")
-    public String delete(@PathVariable Long id, Map<String, Object> model) {
+    public String delete(@PathVariable Long id) {
 
         specializationService.delete(id);
 

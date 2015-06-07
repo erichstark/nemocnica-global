@@ -27,28 +27,21 @@ public class AdminInsuranceController {
         return "admin/insurance/index";
     }
 
-    @RequestMapping(value = "/add")
-    public String add(Map<String, Object> model) {
+    @RequestMapping(value = "/update/{id}", method = RequestMethod.POST)
+    public String edit(@PathVariable Long id, @RequestParam("name") String name) {
 
-        model.put("pageTitle", "Admin Insurances");
-        model.put("insurance", new Insurance());
+        Insurance in = insuranceService.findOne(id);
+        in.setName(name);
+        insuranceService.save(in);
 
-        return "admin/insurance/add";
-    }
-
-    @RequestMapping(value = "/edit/{id}")
-    public String edit(@PathVariable Long id, Map<String, Object> model) {
-
-        model.put("pageTitle", "Admin Insurances");
-        model.put("insurance", insuranceService.findOne(id));
-
-        return "admin/insurance/add";
+        return "redirect:/admin/insurance";
     }
 
     @RequestMapping(value = "/save", method = RequestMethod.POST)
-    public String save(@ModelAttribute("insurance") Insurance insurance) {
+    public String save(@RequestParam("name") String name) {
 
-        insuranceService.save(insurance);
+        Insurance in = new Insurance(name);
+        insuranceService.save(in);
 
         return "redirect:/admin/insurance";
     }

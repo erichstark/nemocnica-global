@@ -60,10 +60,4 @@
     </div>
 </div>
 
-<script>
-    $(document).ready(function(){
-        $('.td-spec-name').
-    });
-</script>
-
 </@pt.dashboardPage>
