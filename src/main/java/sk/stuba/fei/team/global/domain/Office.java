@@ -15,7 +15,7 @@ public class Office implements Serializable {
     private Set<Employee> employees;
     private Set<Insurance> insurances;
     private Set<Specialization> specializations;
-    private Set<Hours> hours;
+    private Set<OpeningHours> hours;
     private Set<PatientOrder> orders;
 
 
@@ -92,11 +92,11 @@ public class Office implements Serializable {
 
 
     @OneToMany(cascade = CascadeType.ALL, mappedBy = "office")
-    public Set<Hours> getHours() {
+    public Set<OpeningHours> getHours() {
         return hours;
     }
 
-    public void setHours(Set<Hours> hours) {
+    public void setHours(Set<OpeningHours> hours) {
         this.hours = hours;
     }
 

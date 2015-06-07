@@ -29,7 +29,7 @@ public class SearchController {
     private OfficeService officeService;
 
     @Autowired
-    private HoursService hoursService;
+    private OpeningHoursService openingHoursService;
 
     @Autowired
     private PatientOrderService orderService;
@@ -87,8 +87,8 @@ public class SearchController {
 
         Employee emp  = employeeService.findOne(id);
         Office office = officeService.findOne(officeid);
-        Iterable<Hours> hodiny;
-        hodiny= hoursService.findByEmployeeIdAndOfficeId(id,officeid);
+        Iterable<OpeningHours> hodiny;
+        hodiny= openingHoursService.findByEmployeeIdAndOfficeId(id,officeid);
 
 
         List<Day> dayList= new ArrayList<>();
@@ -115,7 +115,7 @@ public class SearchController {
 
         for (int i=0; i<=83; i++){
 
-            for (Hours it : hodiny) {
+            for (OpeningHours it : hodiny) {
                 String d1=dayList.get(i).getDate();
 
                 SimpleDateFormat dt = new SimpleDateFormat("d.M.yyyy");

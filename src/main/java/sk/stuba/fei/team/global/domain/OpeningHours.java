@@ -13,13 +13,12 @@ import java.util.Date;
 
 @Entity
 @XmlRootElement
-public class Hours implements Serializable {
+public class OpeningHours implements Serializable {
     private Long Id;
     private Date date;
     private Long reservationFrom;
     private Long reservationTo;
     private Office office;
-    private Employee employee;
     private int free;
 
     @Id
@@ -79,13 +78,4 @@ public class Hours implements Serializable {
         this.free = free;
     }
 
-    @ManyToOne
-    @JoinColumn(name = "employee", nullable = false)
-    public Employee getEmployee() {
-        return employee;
-    }
-
-    public void setEmployee(Employee employee) {
-        this.employee = employee;
-    }
 }

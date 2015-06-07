@@ -20,7 +20,7 @@ public class EmployeeController {
     private EmployeeService employeeService;
 
     @Autowired
-    private HoursService hoursService;
+    private OpeningHoursService openingHoursService;
 
     @RequestMapping("")
     public String index(Map<String, Object> model) {

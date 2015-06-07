@@ -1,6 +1,6 @@
 package sk.stuba.fei.team.global.calendar;
 
-import sk.stuba.fei.team.global.domain.Hours;
+import sk.stuba.fei.team.global.domain.OpeningHours;
 
 import java.util.List;
 
@@ -8,7 +8,7 @@ import java.util.List;
  * Created by jakubrehak on 07/05/15.
  */
 public class Day {
-    private Hours hour;
+    private OpeningHours hour;
     private String date;
     private String day;
     private String text;
@@ -53,11 +53,11 @@ public class Day {
         this.text = text;
     }
 
-    public Hours getHour() {
+    public OpeningHours getHour() {
         return hour;
     }
 
-    public void setHour(Hours hour) {
+    public void setHour(OpeningHours hour) {
         this.hour = hour;
     }
 

@@ -16,7 +16,6 @@ public class Employee implements Serializable {
     private String email;
     private Set<Office> offices;
     private Set<Specialization> specializations;
-    private Set<Hours> hours;
 
     @Id
     @GeneratedValue
@@ -104,13 +103,5 @@ public class Employee implements Serializable {
     }
     public void setSpecializations(Set<Specialization> specializations) {
         this.specializations = specializations;
-    }
-
-    @OneToMany(cascade = CascadeType.ALL, mappedBy = "employee")
-    public Set<Hours> getHours() {
-        return hours;
-    }
-    public void setHours(Set<Hours> hours) {
-        this.hours = hours;
     }
 }
