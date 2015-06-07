@@ -16,13 +16,6 @@
 
 <div class="table-responsive">
     <form name="patient" action="<@spring.url '/admin/patient/save'/>" method="post">
-        <!--
-        <div class="form-group">
-            <label for="patient-username">Prihlasovacie meno (ID)</label>
-            <input type="hidden" name="username" class="form-control" id="patient-username" placeholder="Prihlasovacie meno"
-                   value="${patient.username!""}">
-        </div>
-        -->
         <input type="hidden" name="username" class="form-control" id="patient-username" placeholder="Prihlasovacie meno"
                value="${patient.username!""}">
 
@@ -133,14 +126,15 @@
         </div>
 
         <div class="form-group">
-            <label for="pationt-insurance">Poisťovňa</label>
-            <select name="id_insurance" class="form-control" id="pationt-insurance">
+            <label for="patient-insurance">Poisťovňa</label>
+            <select name="id_insurance" class="form-control" id="patient-insurance">
+                <#if patient.insurance??>
+                    <option value="${patient.insurance.id}" selected="selected">${patient.insurance.name}</option>
+                <#else>
+                    <option value="null" selected></option>
+                </#if>
                 <#list insurances as insurance>
-                    <#if insurance.id == patient.insurance.id>
-                        <option value="${insurance.id}" selected="selected">${patient.insurance.name}</option>
-                    <#else>
-                        <option value="${insurance.id}">${insurance.name}</option>
-                    </#if>
+                    <option value="${insurance.id}">${insurance.name}</option>
                 </#list>
             </select>
         </div>

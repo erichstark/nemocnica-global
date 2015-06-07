@@ -35,11 +35,12 @@
             <th style="width: 60px;">#</th>
             <th>Prihlasovacie meno (ID)</th>
             <th>Meno pacienta</th>
+            <th>Poistovňa</th>
             <th>Email</th>
             <th>Telefón</th>
             <th>Autorita</th>
             <th>Aktivovaný účet</th>
-            <th style="width: 60px;">Akcia</th>
+            <th></th>
         </tr>
         </thead>
         <tbody>
@@ -52,6 +53,7 @@
                     <#if patient.suffix_title?length gt 0>${', ' + patient.suffix_title}</#if>
 
                 </td>
+                <td><#if patient.insurance??>${patient.insurance.name}<#else></#if></td>
                 <td>${patient.email}</td>
                 <td>${patient.phone}</td>
                 <#if patient.getStringAuthorities()?seq_contains("USER")>
@@ -66,8 +68,8 @@
                         <input type="checkbox" disabled>
                     </#if>
                 </td>
-                <td><a href="<@spring.url '/admin/patient/delete/' + patient.username />"
-                       onclick="return confirm('Naozaj?');">Zmazať</a></td>
+                <td><a class="btn btn-danger" href="<@spring.url '/admin/patient/delete/' + patient.username />"
+                       onclick="return confirm('Naozaj?');">Vymazať</a></td>
             </tr>
             </#list>
         </tbody>

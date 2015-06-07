@@ -6,6 +6,7 @@ import org.springframework.security.core.authority.SimpleGrantedAuthority;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.*;
+import sk.stuba.fei.team.global.domain.Insurance;
 import sk.stuba.fei.team.global.domain.Patient;
 import sk.stuba.fei.team.global.security.PBKDF2WithHmacSHA1;
 import sk.stuba.fei.team.global.service.InsuranceService;
@@ -48,8 +49,11 @@ public class AdminPatientController {
     public String edit(@PathVariable String username, Map<String, Object> model) {
 
         model.put("pageTitle", "Admin Patients");
-        model.put("patient", patientService.findByUsername(username));
-        model.put("insurances", insuranceService.findAll());
+        Patient p = patientService.findByUsername(username);
+        ArrayList<Insurance> ins = (ArrayList) insuranceService.findAll();
+        if(ins.contains(p.getInsurance())) ins.remove(p.getInsurance());
+        model.put("patient", p);
+        model.put("insurances", ins);
 
         return "admin/patient/edit";
     }
