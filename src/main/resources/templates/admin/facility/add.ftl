@@ -21,14 +21,8 @@
 <div class="table-responsive">
     <form name="facility" action="<@spring.url '/admin/facility/save'/>" method="post">
         <#if facility.id??>
-        <div class="form-group" style="display: none;">
-        <#else>
-        <div class="form-group">
+            <input type="hidden" name="id" id="facility-id" value="${facility.id}">
         </#if>
-            <label for="facility-id">ID</label>
-            <input type="text" name="id" class="form-control" id="facility-id" placeholder="ID"
-                   value="${facility.id!""}">
-        </div>
         <div class="form-group">
             <label for="facility-name">Názov</label>
             <input type="text" name="name" class="form-control" id="facility-name" placeholder="Názov"
@@ -45,7 +39,7 @@
                    value="${facility.zip!""}">
         </div>
         <div class="form-group">
-            <label for="facility-city">City</label>
+            <label for="facility-city">Mesto</label>
             <input type="text" name="city" class="form-control" id="facility-city" placeholder="City"
                    value="${facility.city!""}">
         </div>
