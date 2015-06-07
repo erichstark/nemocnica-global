@@ -1,9 +1,6 @@
 package sk.stuba.fei.team.global.domain;
 
-import javax.persistence.Column;
-import javax.persistence.Entity;
-import javax.persistence.Id;
-import javax.persistence.ManyToMany;
+import javax.persistence.*;
 import java.io.Serializable;
 import java.util.Set;
 
@@ -15,7 +12,14 @@ public class Specialization implements Serializable {
     private Set<Office> offices;
     private Set<Employee> employees;
 
+    public Specialization() {}
+
+    public Specialization(String name) {
+        this.name = name;
+    }
+
     @Id
+    @GeneratedValue
     public Long getId() {
         return id;
     }

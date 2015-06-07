@@ -18,7 +18,7 @@ public class AdminSpecializationController {
     @Autowired
     private SpecializationService specializationService;
 
-    @RequestMapping("")
+    @RequestMapping(method = RequestMethod.GET)
     public String index(Map<String, Object> model) {
 
         model.put("pageTitle", "Admin Specializations");
@@ -27,28 +27,21 @@ public class AdminSpecializationController {
         return "admin/specialization/index";
     }
 
-    @RequestMapping(value = "/add")
-    public String add(Map<String, Object> model) {
+    @RequestMapping(value = "/update/{id}", method = RequestMethod.POST)
+    public String edit(@RequestParam("name") String name, @PathVariable Long id, Map<String, Object> model) {
 
-        model.put("pageTitle", "Admin Specializations");
-        model.put("specialization", new Specialization());
+        Specialization sp = specializationService.findOne(id);
+        sp.setName(name);
+        specializationService.save(sp);
 
-        return "admin/specialization/add";
-    }
-
-    @RequestMapping(value = "/edit/{id}")
-    public String edit(@PathVariable Long id, Map<String, Object> model) {
-
-        model.put("pageTitle", "Admin Specializations");
-        model.put("specialization", specializationService.findOne(id));
-
-        return "admin/specialization/add";
+        return "redirect:/admin/specialization";
     }
 
     @RequestMapping(value = "/save", method = RequestMethod.POST)
-    public String save(@ModelAttribute("specialization") Specialization specialization, Map<String, Object> model) {
+    public String save(@RequestParam("name") String name, Map<String, Object> model) {
 
-        specializationService.save(specialization);
+        Specialization sp = new Specialization(name);
+        specializationService.save(sp);
 
         return "redirect:/admin/specialization";
     }

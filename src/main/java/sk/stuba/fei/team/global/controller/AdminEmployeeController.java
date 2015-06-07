@@ -55,6 +55,7 @@ public class AdminEmployeeController {
         model.put("pageTitle", "Admin Zamestnanec");
         model.put("employee", employee);
         model.put("offices", officeService.findAll());
+        model.put("specializations", specializationService.findAll());
 
         return "admin/employee/edit";
     }

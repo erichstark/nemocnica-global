@@ -6,15 +6,6 @@
 
 <div class="row">
     <div class="col-md-12">
-        <a class="btn btn-info btn-sm" href="<@spring.url '/admin/specialization/add'/>" role="button">Vytvoriť
-            špecializáciu</a>
-    </div>
-</div>
-
-<h2 class="sub-header">Zoznam špecializácií</h2>
-
-<div class="row">
-    <div class="col-md-12">
         <form class="form-inline" method="POST" action="<@spring.url '/admin/specialization/search'/>">
             <div class="form-group">
                 <label for="text">Vyhľadanie:</label>
@@ -33,23 +24,46 @@
         <tr>
             <th style="width: 60px;">#</th>
             <th style="width: 60px;">ID</th>
-            <th>Názov špecializácie</th>
-            <th style="width: 60px;">Akcia</th>
+            <th>Názov</th>
+            <th></th>
         </tr>
         </thead>
         <tbody>
             <#list specializations as specialization>
-            <tr>
-                <td>${specialization_index + 1}</td>
-                <td>${specialization.id}</td>
-                <td>
-                    <a href="<@spring.url '/admin/specialization/edit/' + specialization.id />">${specialization.name}</a>
-                </td>
-                <td><a href="<@spring.url '/admin/specialization/delete/' + specialization.id />"
-                       onclick="return confirm('Naozaj?');">Zmazať</a></td>
-            </tr>
+            <form name="specialization" action="<@spring.url '/admin/specialization/update/' + specialization.id />" method="post">
+                <tr>
+                    <td>${specialization_index + 1}</td>
+                    <td>${specialization.id}</td>
+                    <td><input type="text" name="name" class="form-control" id="specialization-name" value="${specialization.name!""}"></td>
+                    <td>
+                        <input type="submit" value="Ulož zmenu" class="btn btn-success">
+                        <a class="btn btn-danger" href="<@spring.url '/admin/specialization/delete/' + specialization.id />"
+                           onclick="return confirm('Naozaj?');">Zmazať</a>
+                    </td>
+                </tr>
+            </form>
             </#list>
         </tbody>
     </table>
 </div>
+
+<div class="row">
+    <div class="col-md-9">
+        <form name="specialization-add" action="<@spring.url '/admin/specialization/save'/>" method="post" class="row">
+            <div class="form-group col-md-4">
+                <input type="text" name="name" class="form-control" id="specialization-name" placeholder="Názov">
+            </div>
+            <div class="form-group col-md-2">
+                <input type="submit" value="Pridaj" class="btn btn-success">
+            </div>
+        </form>
+    </div>
+</div>
+
+<script>
+    $(document).ready(function(){
+        $('.td-spec-name').
+    });
+</script>
+
 </@pt.dashboardPage>
