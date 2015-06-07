@@ -31,7 +31,8 @@ public class Patient implements Serializable, UserDetails, CredentialsContainer 
     private String prefix_title;
     private String suffix_title;
     private Insurance insurance;
-    private List<PatientOrder> orders;
+    private List<Order> orders;
+    private Date updated;
 
     public Patient() {
         password = "";
@@ -249,11 +250,31 @@ public class Patient implements Serializable, UserDetails, CredentialsContainer 
     }
 
     @OneToMany(cascade = CascadeType.PERSIST, mappedBy = "patient")
-    public List<PatientOrder> getOrders() {
+    public List<Order> getOrders() {
         return orders;
     }
 
-    public void setOrders(List<PatientOrder> orders) {
+    public void setOrders(List<Order> orders) {
         this.orders = orders;
+    }
+
+    @Temporal(TemporalType.TIMESTAMP)
+    @Column(name = "updated", nullable = false)
+    public Date getUpdated() {
+        return updated;
+    }
+
+    public void setUpdated(Date updated) {
+        this.updated = updated;
+    }
+
+    @PrePersist
+    protected void onCreate() {
+        updated = new Date();
+    }
+
+    @PreUpdate
+    protected void onUpdate() {
+        updated = new Date();
     }
 }

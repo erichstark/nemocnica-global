@@ -10,6 +10,4 @@ import java.util.List;
 public interface OpeningHoursService {
 
     List<OpeningHours> findByOfficeId(Long id);
-    List<OpeningHours> findByEmployeeId(Long id);
-    List<OpeningHours> findByEmployeeIdAndOfficeId(Long id, Long officeid);
 }

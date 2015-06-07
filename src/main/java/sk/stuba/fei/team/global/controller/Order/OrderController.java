@@ -1,12 +1,12 @@
-package sk.stuba.fei.team.global.controller.PatientOrder;
+package sk.stuba.fei.team.global.controller.Order;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import sk.stuba.fei.team.global.domain.Patient;
-import sk.stuba.fei.team.global.domain.PatientOrder;
-import sk.stuba.fei.team.global.service.PatientOrderService;
+import sk.stuba.fei.team.global.domain.Order;
+import sk.stuba.fei.team.global.service.OrderService;
 import sk.stuba.fei.team.global.service.PatientService;
 
 import java.text.ParseException;
@@ -20,19 +20,19 @@ import java.util.Map;
  */
 @Controller
 @RequestMapping("/order")
-public class PatientOrderController {
+public class OrderController {
 
     @Autowired
     private PatientService patientService;
 
     @Autowired
-    private PatientOrderService orderService;
+    private OrderService orderService;
 
     @RequestMapping("")
     public String index(Map<String, Object> model) {
 
         Patient patient= patientService.findByUsername("admin");
-        Iterable<PatientOrder> orders= orderService.findByPatient(patient);
+        Iterable<Order> orders= orderService.findByPatient(patient);
         model.put("pageTitle", "moje objednavky");
         model.put("orders", orders);
         model.put("patient",patient);
@@ -43,7 +43,7 @@ public class PatientOrderController {
     @RequestMapping("/delete/{order_id}")
     public String delete(@PathVariable Long order_id , Map<String, Object> model) {
 
-      PatientOrder order= orderService.findById(order_id);
+      Order order= orderService.findById(order_id);
 
       Date d=order.getDate();
 

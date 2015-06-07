@@ -11,7 +11,7 @@ import java.util.Date;
 @Entity
 @XmlRootElement
 
-public class PatientOrder implements Serializable {
+public class Order implements Serializable {
 
     private Long id;
     private Patient patient;
@@ -19,6 +19,7 @@ public class PatientOrder implements Serializable {
     private Date date;
     private int intervalStart;
     private String note;
+    private Date updated;
 
 
     @Id
@@ -77,5 +78,25 @@ public class PatientOrder implements Serializable {
 
     public void setNote(String note) {
         this.note = note;
+    }
+
+    @Temporal(TemporalType.TIMESTAMP)
+    @Column(name = "updated", nullable = false)
+    public Date getUpdated() {
+        return updated;
+    }
+
+    public void setUpdated(Date updated) {
+        this.updated = updated;
+    }
+
+    @PrePersist
+    protected void onCreate() {
+        updated = new Date();
+    }
+
+    @PreUpdate
+    protected void onUpdate() {
+        updated = new Date();
     }
 }

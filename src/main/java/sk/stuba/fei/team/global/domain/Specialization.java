@@ -2,6 +2,7 @@ package sk.stuba.fei.team.global.domain;
 
 import javax.persistence.*;
 import java.io.Serializable;
+import java.util.Date;
 import java.util.Set;
 
 @Entity
@@ -11,6 +12,7 @@ public class Specialization implements Serializable {
     private String name;
     private Set<Office> offices;
     private Set<Employee> employees;
+    private Date updated;
 
     public Specialization() {}
 
@@ -50,5 +52,25 @@ public class Specialization implements Serializable {
     }
     public void setEmployees(Set<Employee> employees) {
         this.employees = employees;
+    }
+
+    @Temporal(TemporalType.TIMESTAMP)
+    @Column(name = "updated", nullable = false)
+    public java.util.Date getUpdated() {
+        return updated;
+    }
+
+    public void setUpdated(java.util.Date updated) {
+        this.updated = updated;
+    }
+
+    @PrePersist
+    protected void onCreate() {
+        updated = new java.util.Date();
+    }
+
+    @PreUpdate
+    protected void onUpdate() {
+        updated = new java.util.Date();
     }
 }

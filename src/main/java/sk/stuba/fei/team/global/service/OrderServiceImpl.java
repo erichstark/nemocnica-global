@@ -6,8 +6,8 @@ import org.springframework.stereotype.Component;
 import org.springframework.transaction.annotation.Transactional;
 import sk.stuba.fei.team.global.domain.Office;
 import sk.stuba.fei.team.global.domain.Patient;
-import sk.stuba.fei.team.global.domain.PatientOrder;
-import sk.stuba.fei.team.global.repository.PatientOrderRepository;
+import sk.stuba.fei.team.global.domain.Order;
+import sk.stuba.fei.team.global.repository.OrderRepository;
 
 import java.util.Date;
 import java.util.List;
@@ -17,18 +17,18 @@ import java.util.List;
  */
 @Component("patientOrderService")
 @Transactional
-public class PatientOrderServiceImpl implements PatientOrderService {
+public class OrderServiceImpl implements OrderService {
 
     @Autowired
-    private PatientOrderRepository orderRepository;
+    private OrderRepository orderRepository;
 
     @Override
-    public void save(PatientOrder order) {
+    public void save(Order order) {
         orderRepository.save(order);
     }
 
     @Override
-    public List<PatientOrder> findByDateAndOffice(Date date,Office office){
+    public List<Order> findByDateAndOffice(Date date,Office office){
         return orderRepository.findByDateAndOffice(date,office);
     }
 
@@ -37,16 +37,16 @@ public class PatientOrderServiceImpl implements PatientOrderService {
         orderRepository.delete(id);
     }
     @Override
-    public  Iterable<PatientOrder> findAll(){
+    public  Iterable<Order> findAll(){
 
         return orderRepository.findAll();
     }
 
     @Override
-    public Iterable<PatientOrder> findByPatient( Patient patient){
+    public Iterable<Order> findByPatient( Patient patient){
         return orderRepository.findByPatient(patient);
     }
 
     @Override
-    public PatientOrder findById(Long id){ return orderRepository.findOne(id);}
+    public Order findById(Long id){ return orderRepository.findOne(id);}
 }

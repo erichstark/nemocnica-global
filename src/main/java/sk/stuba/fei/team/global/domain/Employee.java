@@ -2,6 +2,7 @@ package sk.stuba.fei.team.global.domain;
 
 import javax.persistence.*;
 import java.io.Serializable;
+import java.util.Date;
 import java.util.Set;
 
 @Entity
@@ -16,6 +17,7 @@ public class Employee implements Serializable {
     private String email;
     private Set<Office> offices;
     private Set<Specialization> specializations;
+    private Date updated;
 
     @Id
     @GeneratedValue
@@ -74,7 +76,6 @@ public class Employee implements Serializable {
         this.email = email;
     }
 
-
     @ManyToMany(cascade = CascadeType.ALL)
     @JoinTable(
             name = "employee_office",
@@ -103,5 +104,25 @@ public class Employee implements Serializable {
     }
     public void setSpecializations(Set<Specialization> specializations) {
         this.specializations = specializations;
+    }
+
+    @Temporal(TemporalType.TIMESTAMP)
+    @Column(name = "updated", nullable = false)
+    public java.util.Date getUpdated() {
+        return updated;
+    }
+
+    public void setUpdated(java.util.Date updated) {
+        this.updated = updated;
+    }
+
+    @PrePersist
+    protected void onCreate() {
+        updated = new java.util.Date();
+    }
+
+    @PreUpdate
+    protected void onUpdate() {
+        updated = new java.util.Date();
     }
 }

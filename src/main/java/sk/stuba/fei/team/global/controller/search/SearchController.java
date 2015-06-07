@@ -21,7 +21,7 @@ import java.util.*;
 @Controller
 @RequestMapping("/search")
 public class SearchController {
-    List<PatientOrder> objednavky;
+    List<Order> objednavky;
     @Autowired
     private EmployeeService employeeService;
 
@@ -32,7 +32,7 @@ public class SearchController {
     private OpeningHoursService openingHoursService;
 
     @Autowired
-    private PatientOrderService orderService;
+    private OrderService orderService;
 
     @Autowired
     private PatientService patientService;
@@ -70,7 +70,7 @@ public class SearchController {
 
             Interval in=new Interval(interval, s.intValue()+j*interval);
             in.setFree(1);
-            for (PatientOrder temp : objednavky) {
+            for (Order temp : objednavky) {
 
                 if(temp.getIntervalStart() == s.intValue()+j*interval){
                     in.setFree(0);
@@ -85,10 +85,9 @@ public class SearchController {
     }
     public List<Day> fillListOfDays(Long id,Long officeid){
 
-        Employee emp  = employeeService.findOne(id);
         Office office = officeService.findOne(officeid);
         Iterable<OpeningHours> hodiny;
-        hodiny= openingHoursService.findByEmployeeIdAndOfficeId(id,officeid);
+        hodiny= openingHoursService.findByOfficeId(officeid);
 
 
         List<Day> dayList= new ArrayList<>();
@@ -180,7 +179,7 @@ public class SearchController {
 
         model.put("pageTitle", "Vyhľadávanie lekárov");
         model.put("days",dayList);
-        model.put("order", new PatientOrder());
+        model.put("order", new Order());
         model.put("office",office);
         model.put("employee", emp);
         model.put("orders",objednavky);
@@ -201,7 +200,7 @@ public class SearchController {
     @RequestMapping(value = "/save", method = RequestMethod.POST)
     public String save(@ModelAttribute("order") FormOrder order, Map<String, Object> model) throws ParseException {
 
-        PatientOrder newOrd = new PatientOrder();
+        Order newOrd = new Order();
 
         Patient p= patientService.findByUsername(order.getUserName());
 
