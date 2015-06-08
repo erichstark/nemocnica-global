@@ -31,7 +31,7 @@ public class Patient implements Serializable, UserDetails, CredentialsContainer 
     private String prefix_title;
     private String suffix_title;
     private Insurance insurance;
-    private List<Order> orders;
+    private List<Appointment> appointments;
     private Date updated;
 
     public Patient() {
@@ -110,7 +110,7 @@ public class Patient implements Serializable, UserDetails, CredentialsContainer 
     @ElementCollection(fetch = FetchType.LAZY)
     @Column(name = "authority")
     @CollectionTable(
-            name = "authorities",
+            name = "patient_authorities",
             joinColumns = @JoinColumn(name = "username")
     )
     public Set<String> getStringAuthorities() {
@@ -232,12 +232,12 @@ public class Patient implements Serializable, UserDetails, CredentialsContainer 
     }
 
     @OneToMany(cascade = CascadeType.PERSIST, mappedBy = "patient")
-    public List<Order> getOrders() {
-        return orders;
+    public List<Appointment> getAppointments() {
+        return appointments;
     }
 
-    public void setOrders(List<Order> orders) {
-        this.orders = orders;
+    public void setAppointments(List<Appointment> appointments) {
+        this.appointments = appointments;
     }
 
     @Temporal(TemporalType.TIMESTAMP)

@@ -21,7 +21,7 @@ import java.util.*;
 @Controller
 @RequestMapping("/search")
 public class SearchController {
-    List<Order> objednavky;
+    List<Appointment> objednavky;
     @Autowired
     private EmployeeService employeeService;
 
@@ -70,7 +70,7 @@ public class SearchController {
 
             Interval in=new Interval(interval, s.intValue()+j*interval);
             in.setFree(1);
-            for (Order temp : objednavky) {
+            for (Appointment temp : objednavky) {
 
                 if(temp.getIntervalStart() == s.intValue()+j*interval){
                     in.setFree(0);
@@ -179,7 +179,7 @@ public class SearchController {
 
         model.put("pageTitle", "Vyhľadávanie lekárov");
         model.put("days",dayList);
-        model.put("order", new Order());
+        model.put("order", new Appointment());
         model.put("office",office);
         model.put("employee", emp);
         model.put("orders",objednavky);
@@ -200,7 +200,7 @@ public class SearchController {
     @RequestMapping(value = "/save", method = RequestMethod.POST)
     public String save(@ModelAttribute("order") FormOrder order, Map<String, Object> model) throws ParseException {
 
-        Order newOrd = new Order();
+        Appointment newOrd = new Appointment();
 
         Patient p= patientService.findByUsername(order.getUserName());
 

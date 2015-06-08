@@ -4,8 +4,8 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
+import sk.stuba.fei.team.global.domain.Appointment;
 import sk.stuba.fei.team.global.domain.Patient;
-import sk.stuba.fei.team.global.domain.Order;
 import sk.stuba.fei.team.global.service.OrderService;
 import sk.stuba.fei.team.global.service.PatientService;
 
@@ -32,7 +32,7 @@ public class OrderController {
     public String index(Map<String, Object> model) {
 
         Patient patient= patientService.findByUsername("admin");
-        Iterable<Order> orders= orderService.findByPatient(patient);
+        Iterable<Appointment> orders= orderService.findByPatient(patient);
         model.put("pageTitle", "moje objednavky");
         model.put("orders", orders);
         model.put("patient",patient);
@@ -43,9 +43,9 @@ public class OrderController {
     @RequestMapping("/delete/{order_id}")
     public String delete(@PathVariable Long order_id , Map<String, Object> model) {
 
-      Order order= orderService.findById(order_id);
+      Appointment appointment = orderService.findById(order_id);
 
-      Date d=order.getDate();
+      Date d= appointment.getDate();
 
         Calendar cal = Calendar.getInstance();
 
@@ -68,7 +68,7 @@ public class OrderController {
 
         if(cal.getTime().before(c.getTime())){
             orderService.delete(order_id);
-            return "redirect:/order";
+            return "redirect:/appointment";
 
 
         }
@@ -78,6 +78,6 @@ public class OrderController {
         model.put("chcemzrusit", c.getTime().toString());
         model.put("den",cal.getTime().toString());
         model.put("pageTitle","fff");
-        return "order/test";
+        return "appointment/test";
     }
 }

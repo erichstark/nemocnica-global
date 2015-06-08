@@ -6,7 +6,7 @@ import org.springframework.stereotype.Component;
 import org.springframework.transaction.annotation.Transactional;
 import sk.stuba.fei.team.global.domain.Office;
 import sk.stuba.fei.team.global.domain.Patient;
-import sk.stuba.fei.team.global.domain.Order;
+import sk.stuba.fei.team.global.domain.Appointment;
 import sk.stuba.fei.team.global.repository.OrderRepository;
 
 import java.util.Date;
@@ -23,12 +23,12 @@ public class OrderServiceImpl implements OrderService {
     private OrderRepository orderRepository;
 
     @Override
-    public void save(Order order) {
-        orderRepository.save(order);
+    public void save(Appointment appointment) {
+        orderRepository.save(appointment);
     }
 
     @Override
-    public List<Order> findByDateAndOffice(Date date,Office office){
+    public List<Appointment> findByDateAndOffice(Date date,Office office){
         return orderRepository.findByDateAndOffice(date,office);
     }
 
@@ -37,16 +37,16 @@ public class OrderServiceImpl implements OrderService {
         orderRepository.delete(id);
     }
     @Override
-    public  Iterable<Order> findAll(){
+    public  Iterable<Appointment> findAll(){
 
         return orderRepository.findAll();
     }
 
     @Override
-    public Iterable<Order> findByPatient( Patient patient){
+    public Iterable<Appointment> findByPatient( Patient patient){
         return orderRepository.findByPatient(patient);
     }
 
     @Override
-    public Order findById(Long id){ return orderRepository.findOne(id);}
+    public Appointment findById(Long id){ return orderRepository.findOne(id);}
 }

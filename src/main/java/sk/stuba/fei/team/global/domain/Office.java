@@ -16,7 +16,7 @@ public class Office implements Serializable {
     private Set<Insurance> insurances;
     private Set<Specialization> specializations;
     private Set<OpeningHours> hours;
-    private Set<Order> orders;
+    private Set<Appointment> appointments;
     private Boolean enabled;
 
     @Id
@@ -101,12 +101,12 @@ public class Office implements Serializable {
     }
 
     @OneToMany(cascade = CascadeType.ALL, mappedBy = "office")
-    public Set<Order> getOrders() {
-        return orders;
+    public Set<Appointment> getAppointments() {
+        return appointments;
     }
 
-    public void setOrders(Set<Order> orders) {
-        this.orders = orders;
+    public void setAppointments(Set<Appointment> appointments) {
+        this.appointments = appointments;
     }
 
     @Column(nullable = false)

@@ -16,12 +16,12 @@
             </tr>
             </thead>
             <tbody>
-                <#list orders as order>
+                <#list appointments as appointment>
                 <tr>
-                    <td>${order.date?string["d.M.yyyy"]}</td>
-                    <td>${order.office.name}</td>
-                    <#assign hodina=order.intervalStart/60 />
-                    <#assign minuta= order.intervalStart % 60 />
+                    <td>${appointment.date?string["d.M.yyyy"]}</td>
+                    <td>${appointment.office.name}</td>
+                    <#assign hodina=appointment.intervalStart/60 />
+                    <#assign minuta= appointment.intervalStart % 60 />
                     <#if minuta = 30>
                         <#assign  cas = hodina?string['0'] + ":30" />
                     <#else>
@@ -30,7 +30,7 @@
 
 
                     <td>${cas}</td>
-                    <td><a href="<@spring.url '/order/delete/'+order.id />">Zrušiť objednávku</a></td>
+                    <td><a href="<@spring.url '/appointment/delete/'+appointment.id />">Zrušiť objednávku</a></td>
                 </tr>
                 </#list>
             </tbody>

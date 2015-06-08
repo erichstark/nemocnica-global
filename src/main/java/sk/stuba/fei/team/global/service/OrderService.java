@@ -1,8 +1,8 @@
 package sk.stuba.fei.team.global.service;
 
+import sk.stuba.fei.team.global.domain.Appointment;
 import sk.stuba.fei.team.global.domain.Office;
 import sk.stuba.fei.team.global.domain.Patient;
-import sk.stuba.fei.team.global.domain.Order;
 
 import java.util.Date;
 import java.util.List;
@@ -12,16 +12,16 @@ import java.util.List;
  */
 public interface OrderService {
 
-    void save(Order order);
+    void save(Appointment appointment);
 
-    List<Order> findByDateAndOffice(Date date,Office office);
+    List<Appointment> findByDateAndOffice(Date date,Office office);
 
-    Iterable<Order> findAll();
+    Iterable<Appointment> findAll();
 
-    Iterable<Order> findByPatient( Patient patient);
+    Iterable<Appointment> findByPatient( Patient patient);
 
     void delete(Long id);
 
-    Order findById(Long id);
+    Appointment findById(Long id);
 
 }

@@ -88,11 +88,11 @@
                                 ,${office.facility.city}</p>
                             <hr>
 
-                            <form class="create-order" name="order" action="<@spring.url '/search/save'/>" method="post">
+                            <form class="create-appointment" name="appointment" action="<@spring.url '/search/save'/>" method="post">
                                 <div class="form-group">
                                     <span style="color:red;">* Prosím zvoľte si čas objednávky</span>
                                     <div class="objednavka col-md-12">Vytvorenie objednávky na dátum ${d.date} , čas
-                                        <select width="150px" name="intervalStart" class="" id="order-interval">
+                                        <select width="150px" name="intervalStart" class="" id="appointment-interval">
                                             <#list d.intervalList as interval>
                                                 <#if interval.free == 1>
                                                     <#assign hodinaIntervalFrom=interval.s/60 />
@@ -138,8 +138,8 @@
 
                                 </div>
                                 <div class="form-group">
-                                    <label for="order-note">Poznámka :</label>
-                                    <textarea name="note" id="order-note"></textarea>
+                                    <label for="appointment-note">Poznámka :</label>
+                                    <textarea name="note" id="appointment-note"></textarea>
 
                                 </div>
 

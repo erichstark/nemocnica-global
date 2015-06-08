@@ -102,7 +102,7 @@
 
             <ul>
                 <#if user??>
-                <li><a href="<@spring.url '/order'/>">Moje objednávky</a> </li>
+                <li><a href="<@spring.url '/appointment'/>">Moje objednávky</a> </li>
                 </#if>
                 <li><a href="<@spring.url '/tutorial'/>">Návod</a> </li>
                 <li><a href="<@spring.url '/login'/>">Prihlásenie</a> </li>

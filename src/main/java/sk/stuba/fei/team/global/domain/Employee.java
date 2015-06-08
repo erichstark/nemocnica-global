@@ -29,7 +29,7 @@ public class Employee implements Serializable, UserDetails, CredentialsContainer
     private String prefix_title;
     private String suffix_title;
     private Set<Office> offices;
-    private List<String> specializations;
+    private List<Specialization> specializations;
 
     public Employee() {
         password = "";
@@ -103,7 +103,7 @@ public class Employee implements Serializable, UserDetails, CredentialsContainer
     @ElementCollection(fetch = FetchType.LAZY)
     @Column(name = "authority")
     @CollectionTable(
-            name = "authorities",
+            name = "employee_authorities",
             joinColumns = @JoinColumn(name = "username")
     )
     public Set<String> getStringAuthorities() {
@@ -203,12 +203,19 @@ public class Employee implements Serializable, UserDetails, CredentialsContainer
         this.offices = offices;
     }
 
-    @ElementCollection
-    public List<String> getSpecializations() {
+    @ManyToMany(cascade = CascadeType.ALL)
+    @JoinTable(
+            name = "employee_specialization",
+            joinColumns =
+            @JoinColumn(name = "employee", referencedColumnName = "username"),
+            inverseJoinColumns =
+            @JoinColumn(name = "specialization", referencedColumnName = "id")
+    )
+    public List<Specialization> getSpecializations() {
         return specializations;
     }
 
-    public void setSpecializations(List<String> specializations) {
+    public void setSpecializations(List<Specialization> specializations) {
         this.specializations = specializations;
     }
 
