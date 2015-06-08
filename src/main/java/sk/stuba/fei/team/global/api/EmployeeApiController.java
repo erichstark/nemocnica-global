@@ -22,9 +22,9 @@ public class EmployeeApiController {
     @RequestMapping(value = "/{username}", method = RequestMethod.GET)
     public Employee findByUsername(@PathVariable String username) {
         Employee emp = employeeService.findOne(username);
-
-        emp.setOffices(Collections.emptySet());
-
+        if(emp != null) {
+            emp.setOffices(Collections.emptySet());
+        }
         return emp;
     }
 
