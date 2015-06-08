@@ -33,7 +33,7 @@
         <thead>
         <tr>
             <th style="width: 60px;">#</th>
-            <th>ID</th>
+            <th>Username</th>
             <th>Meno zamestnanca</th>
             <th>Telefón</th>
             <th>E-mail</th>
@@ -44,16 +44,16 @@
             <#list employees as employee>
             <tr>
                 <td>${employee_index + 1}</td>
-                <td>${employee.id}</td>
+                <td>${employee.username}</td>
                 <td>
-                    <a href="<@spring.url '/admin/employee/edit/' + employee.id />">
+                    <a href="<@spring.url '/admin/employee/edit/' + employee.username />">
                     ${employee.prefix_title + ' ' + employee.firstName + ' ' + employee.lastName}
                         <#if employee.suffix_title?length gt 0>${', ' + employee.suffix_title}</#if>
                     </a>
                 </td>
                 <td>${employee.phone!""}</td>
                 <td>${employee.email!""}</td>
-                <td><a href="<@spring.url '/admin/employee/delete/' + employee.id />"
+                <td><a href="<@spring.url '/admin/employee/delete/' + employee.username />"
                        onclick="return confirm('Naozaj?');">Zmazať</a></td>
             </tr>
             </#list>

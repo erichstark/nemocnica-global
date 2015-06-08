@@ -29,7 +29,8 @@ public class Employee implements Serializable, UserDetails, CredentialsContainer
     private String prefix_title;
     private String suffix_title;
     private Set<Office> offices;
-    private List<Specialization> specializations;
+    private Set<Specialization> specializations;
+    private Date updated;
 
     public Employee() {
         password = "";
@@ -41,8 +42,8 @@ public class Employee implements Serializable, UserDetails, CredentialsContainer
         enabled = true;
         firstName = "";
         lastName = "";
-        offices = new HashSet<>();
-        specializations = new ArrayList<>();
+        offices = Collections.emptySet();
+        specializations = Collections.emptySet();
     }
 
     public Employee(String username, String password, Collection<? extends GrantedAuthority> authorities) {
@@ -55,8 +56,8 @@ public class Employee implements Serializable, UserDetails, CredentialsContainer
         enabled = true;
         firstName = username;
         lastName = "";
-        offices = new HashSet<>();
-        specializations = new ArrayList<>();
+        offices = Collections.emptySet();
+        specializations = Collections.emptySet();
     }
 
     private static SortedSet<GrantedAuthority> sortAuthorities(Collection<? extends GrantedAuthority> authorities) {
@@ -211,11 +212,11 @@ public class Employee implements Serializable, UserDetails, CredentialsContainer
             inverseJoinColumns =
             @JoinColumn(name = "specialization", referencedColumnName = "id")
     )
-    public List<Specialization> getSpecializations() {
+    public Set<Specialization> getSpecializations() {
         return specializations;
     }
 
-    public void setSpecializations(List<Specialization> specializations) {
+    public void setSpecializations(Set<Specialization> specializations) {
         this.specializations = specializations;
     }
 
@@ -240,5 +241,25 @@ public class Employee implements Serializable, UserDetails, CredentialsContainer
 
             return g1.getAuthority().compareTo(g2.getAuthority());
         }
+    }
+
+    @Temporal(TemporalType.TIMESTAMP)
+    @Column(name = "updated", nullable = false)
+    public java.util.Date getUpdated() {
+        return updated;
+    }
+
+    public void setUpdated(java.util.Date updated) {
+        this.updated = updated;
+    }
+
+    @PrePersist
+    protected void onCreate() {
+        updated = new java.util.Date();
+    }
+
+    @PreUpdate
+    protected void onUpdate() {
+        updated = new java.util.Date();
     }
 }

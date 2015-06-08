@@ -1,17 +1,22 @@
-package sk.stuba.fei.team.global.controller;
+package sk.stuba.fei.team.global.controller.admin;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.core.GrantedAuthority;
+import org.springframework.security.core.authority.SimpleGrantedAuthority;
+import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.*;
 import sk.stuba.fei.team.global.domain.Employee;
 import sk.stuba.fei.team.global.domain.Office;
 import sk.stuba.fei.team.global.domain.Specialization;
+import sk.stuba.fei.team.global.security.PBKDF2WithHmacSHA1;
 import sk.stuba.fei.team.global.service.EmployeeService;
 import sk.stuba.fei.team.global.service.OfficeService;
 import sk.stuba.fei.team.global.service.SpecializationService;
 
-
+import java.util.HashSet;
 import java.util.Map;
+import java.util.Set;
 import java.util.logging.Logger;
 
 /**
@@ -48,10 +53,10 @@ public class AdminEmployeeController {
         return "admin/employee/add";
     }
 
-    @RequestMapping(value = "/edit/{id}")
-    public String edit(@PathVariable Long id, Map<String, Object> model) {
+    @RequestMapping(value = "/edit/{username}")
+    public String edit(@PathVariable String username, Map<String, Object> model) {
 
-        Employee employee = employeeService.findOne(id);
+        Employee employee = employeeService.findOne(username);
         model.put("pageTitle", "Admin Zamestnanec");
         model.put("employee", employee);
         model.put("offices", officeService.findAll());
@@ -63,9 +68,9 @@ public class AdminEmployeeController {
     @RequestMapping(value = "/edit", method = RequestMethod.POST)
     public String edit(@ModelAttribute("employee") Employee employee) {
 
-        Employee temp = employeeService.findOne(employee.getId());
-        employee.setOffices(temp.getOffices());
-        employee.setSpecializations(temp.getSpecializations());
+        Employee temp = employeeService.findOne(employee.getUsername());
+//        employee.setOffices(temp.getOffices());
+//        employee.setSpecializations(temp.getSpecializations());
         employeeService.save(employee);
 
         return "redirect:/admin/employee";
@@ -73,16 +78,19 @@ public class AdminEmployeeController {
 
     @RequestMapping(value = "/save", method = RequestMethod.POST)
     public String save(@ModelAttribute("employee") Employee employee) {
-
+        PasswordEncoder encoder = new PBKDF2WithHmacSHA1();
+        Set<GrantedAuthority> authorities = new HashSet<>();
+        authorities.add(new SimpleGrantedAuthority("USER"));
+        employee.setPassword(encoder.encode(employee.getPassword()));
+        employee.setAuthorities(authorities);
         employeeService.save(employee);
-
         return "redirect:/admin/employee";
     }
 
-    @RequestMapping(value = "/delete/{id}")
-    public String delete(@PathVariable Long id) {
+    @RequestMapping(value = "/delete/{username}")
+    public String delete(@PathVariable String username) {
 
-        employeeService.delete(id);
+        employeeService.delete(username);
 
         return "redirect:/admin/employee";
     }
@@ -108,7 +116,7 @@ public class AdminEmployeeController {
     }
 
     @RequestMapping(value = "/office/add", method = RequestMethod.POST)
-    public String officeAdd(@RequestParam("id_employee") Long id_employee, @RequestParam("id_office") Long id_office) {
+    public String officeAdd(@RequestParam("id_employee") String id_employee, @RequestParam("id_office") Long id_office) {
 
         Office office = officeService.findOne(id_office);
         Employee employee = employeeService.findOne(id_employee);
@@ -122,7 +130,7 @@ public class AdminEmployeeController {
     }
 
     @RequestMapping(value = "{id_employee}/office/{id_office}/delete")
-    public String officeDelete(@PathVariable("id_employee") Long id_employee, @PathVariable("id_office") Long id_office) {
+    public String officeDelete(@PathVariable("id_employee") String id_employee, @PathVariable("id_office") Long id_office) {
 
         Employee employee = employeeService.findOne(id_employee);
         Office removeOff = null;
@@ -139,7 +147,7 @@ public class AdminEmployeeController {
     }
 
     @RequestMapping(value = "/specialization/add", method = RequestMethod.POST)
-    public String specializationAdd(@RequestParam("id_employee") Long id_employee, @RequestParam("id_specialization") Long id_specialization) {
+    public String specializationAdd(@RequestParam("id_employee") String id_employee, @RequestParam("id_specialization") Long id_specialization) {
 
         Employee employee = employeeService.findOne(id_employee);
         Specialization sp = specializationService.findOne(id_specialization);
@@ -153,7 +161,7 @@ public class AdminEmployeeController {
     }
 
     @RequestMapping(value = "{id_employee}/specialization/{id_specialization}/delete")
-    public String specializationDelete(@PathVariable("id_employee") Long id_employee, @PathVariable("id_specialization") Long id_specialization) {
+    public String specializationDelete(@PathVariable("id_employee") String id_employee, @PathVariable("id_specialization") Long id_specialization) {
 
         Employee employee = employeeService.findOne(id_employee);
         Specialization rs = null;

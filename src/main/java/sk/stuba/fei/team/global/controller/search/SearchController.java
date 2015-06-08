@@ -83,7 +83,7 @@ public class SearchController {
 
         return intervals;
     }
-    public List<Day> fillListOfDays(Long id,Long officeid){
+    public List<Day> fillListOfDays(String id,Long officeid){
 
         Office office = officeService.findOne(officeid);
         Iterable<OpeningHours> hodiny;
@@ -169,7 +169,7 @@ public class SearchController {
     }
 
     @RequestMapping(value = "/detail/{id}/{officeid}")
-    public String detail(@PathVariable Long id, @PathVariable Long officeid , Map<String, Object> model) {
+    public String detail(@PathVariable String id, @PathVariable Long officeid , Map<String, Object> model) {
 
         Employee emp  = employeeService.findOne(id);
         Office office = officeService.findOne(officeid);

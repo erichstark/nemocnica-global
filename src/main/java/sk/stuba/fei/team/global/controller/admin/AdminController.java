@@ -1,4 +1,4 @@
-package sk.stuba.fei.team.global.controller;
+package sk.stuba.fei.team.global.controller.admin;
 
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;

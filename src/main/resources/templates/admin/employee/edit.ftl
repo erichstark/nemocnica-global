@@ -16,7 +16,7 @@
 
 <div class="table-responsive">
     <form name="patient" action="<@spring.url '/admin/employee/edit'/>" method="post">
-        <input type="hidden" name="id" id="employee-id" value="${employee.id}">
+        <input type="hidden" name="username" id="employee-username" value="${employee.username}">
         <div class="form-group">
             <label for="employee-prefix_title">Titul pred menom</label>
             <input type="text" name="prefix_title" class="form-control" id="employee-prefix_title"
@@ -74,7 +74,7 @@
                         <option value="${specialization.id}">${specialization.name}</option>
                     </#list>
                 </select>
-                <input type="hidden" name="id_employee" value="${employee.id}">
+                <input type="hidden" name="id_employee" value="${employee.username}">
             </div>
             <input type="submit" value="Pridaj" class="btn btn-success">
         </form>
@@ -96,7 +96,7 @@
                         <td>${specialization_index + 1}</td>
                         <td>${specialization}</td>
                         <td>
-                            <a href="<@spring.url '/admin/employee/'+employee.id+'/specialization/'+specialization.id+'/delete' />"
+                            <a href="<@spring.url '/admin/employee/'+employee.username+'/specialization/'+specialization.id+'/delete' />"
                                onclick="return confirm('Naozaj?');">Zmazať</a></td>
                     </tr>
                     </#list>
@@ -119,7 +119,7 @@
                         <option value="${office.id}">${office.name}</option>
                     </#list>
                 </select>
-                <input type="hidden" name="id_employee" value="${employee.id}">
+                <input type="hidden" name="id_employee" value="${employee.username}">
             </div>
             <input type="submit" value="Pridaj" class="btn btn-success">
         </form>
@@ -143,7 +143,7 @@
                         <td>${office.id}</td>
                         <td>${office.name}</td>
                         <td>
-                            <a href="<@spring.url '/admin/employee/'+employee.id+'/office/'+office.id+'/delete' />"
+                            <a href="<@spring.url '/admin/employee/'+employee.username+'/office/'+office.id+'/delete' />"
                                onclick="return confirm('Naozaj?');">Zmazať</a></td>
                     </tr>
                     </#list>

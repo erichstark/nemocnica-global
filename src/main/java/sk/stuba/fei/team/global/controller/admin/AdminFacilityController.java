@@ -1,4 +1,4 @@
-package sk.stuba.fei.team.global.controller;
+package sk.stuba.fei.team.global.controller.admin;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;

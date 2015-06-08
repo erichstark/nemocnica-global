@@ -39,6 +39,15 @@
             <label for="employee-email">E-mail</label>
             <input type="text" name="email" class="form-control" id="employee-email" placeholder="E-mail">
         </div>
+        <div class="form-group">
+            <label for="employee-username">Meno používateľa*</label>
+            <input type="text" name="username" class="form-control" id="employee-username" placeholder="Username" required>
+        </div>
+        <div class="form-group">
+            <label for="employee-password">Heslo*</label>
+            <input type="text" name="password" class="form-control" id="employee-password" placeholder="Heslo" required>
+        </div>
+
 
         <div class="form-group">
             <div>

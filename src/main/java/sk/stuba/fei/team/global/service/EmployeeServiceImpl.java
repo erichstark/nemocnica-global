@@ -6,8 +6,9 @@ import org.springframework.transaction.annotation.Transactional;
 import sk.stuba.fei.team.global.domain.Employee;
 import sk.stuba.fei.team.global.repository.EmployeeRepository;
 
-
+import java.util.Date;
 import java.util.List;
+import java.util.Set;
 
 @Component("employeeService")
 @Transactional
@@ -17,8 +18,8 @@ public class EmployeeServiceImpl implements EmployeeService {
     private EmployeeRepository employeeRepository;
 
     @Override
-    public Employee findOne(Long id) {
-        return employeeRepository.findOne(id);
+    public Employee findOne(String username) {
+        return employeeRepository.findOne(username);
     }
 
     @Override
@@ -27,18 +28,23 @@ public class EmployeeServiceImpl implements EmployeeService {
     }
 
     @Override
+    public List<Employee> findSelectedByTimestamp(Date timestamp, Set<String> usernames) {
+        return employeeRepository.findByUpdatedGreaterThanAndUsernameIn(timestamp, usernames);
+    }
+
+    @Override
     public Iterable<Employee> findAll() {
         return employeeRepository.findAll();
     }
 
     @Override
-    public boolean exists(Long id) {
-        return employeeRepository.exists(id);
+    public boolean exists(String username) {
+        return employeeRepository.exists(username);
     }
 
     @Override
-    public void delete(Long id) {
-        employeeRepository.delete(id);
+    public void delete(String username) {
+        employeeRepository.delete(username);
     }
 
     @Override
@@ -52,8 +58,4 @@ public class EmployeeServiceImpl implements EmployeeService {
         return employeeRepository.findByFirstNameContainingIgnoreCaseAndLastNameContainingIgnoreCase(name, surname);
     }
 
-    @Override
-    public Employee findByUsername(String firstName){
-        return employeeRepository.findByFirstName(firstName);
-    }
 }
