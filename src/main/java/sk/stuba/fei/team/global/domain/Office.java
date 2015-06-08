@@ -17,7 +17,7 @@ public class Office implements Serializable {
     private Set<Specialization> specializations;
     private Set<OpeningHours> hours;
     private Set<Order> orders;
-
+    private Boolean enabled;
 
     @Id
     @GeneratedValue
@@ -107,5 +107,14 @@ public class Office implements Serializable {
 
     public void setOrders(Set<Order> orders) {
         this.orders = orders;
+    }
+
+    @Column(nullable = false)
+    public Boolean getEnabled() {
+        return enabled;
+    }
+
+    public void setEnabled(Boolean enabled) {
+        this.enabled = enabled;
     }
 }

@@ -114,17 +114,17 @@ public class Patient implements Serializable, UserDetails, CredentialsContainer 
             joinColumns = @JoinColumn(name = "username")
     )
     public Set<String> getStringAuthorities() {
-        if (authorities==null){return new HashSet<String>();
+        if (authorities == null) {
+            return new HashSet<String>();
         }
         return authorities.stream().map(GrantedAuthority::getAuthority).collect(Collectors.toSet());
     }
 
     public void setStringAuthorities(Set<String> authorities) {
-        try
-        {
+        try {
             this.authorities = authorities.stream().map(SimpleGrantedAuthority::new).collect(Collectors.toSet());
-        }catch (Exception e){
-            this.authorities=null;
+        } catch (Exception e) {
+            this.authorities = null;
         }
 
     }
@@ -226,24 +226,6 @@ public class Patient implements Serializable, UserDetails, CredentialsContainer 
         this.insurance = insurance;
     }
 
-    private static class AuthorityComparator implements Comparator<GrantedAuthority>, Serializable {
-        private static final long serialVersionUID = SpringSecurityCoreVersion.SERIAL_VERSION_UID;
-
-        public int compare(GrantedAuthority g1, GrantedAuthority g2) {
-            // Neither should ever be null as each entry is checked before adding it to the set.
-            // If the authority is null, it is a custom authority and should precede others.
-            if (g2.getAuthority() == null) {
-                return -1;
-            }
-
-            if (g1.getAuthority() == null) {
-                return 1;
-            }
-
-            return g1.getAuthority().compareTo(g2.getAuthority());
-        }
-    }
-
     @Override
     public void eraseCredentials() {
         password = null;
@@ -276,5 +258,23 @@ public class Patient implements Serializable, UserDetails, CredentialsContainer 
     @PreUpdate
     protected void onUpdate() {
         updated = new Date();
+    }
+
+    private static class AuthorityComparator implements Comparator<GrantedAuthority>, Serializable {
+        private static final long serialVersionUID = SpringSecurityCoreVersion.SERIAL_VERSION_UID;
+
+        public int compare(GrantedAuthority g1, GrantedAuthority g2) {
+            // Neither should ever be null as each entry is checked before adding it to the set.
+            // If the authority is null, it is a custom authority and should precede others.
+            if (g2.getAuthority() == null) {
+                return -1;
+            }
+
+            if (g1.getAuthority() == null) {
+                return 1;
+            }
+
+            return g1.getAuthority().compareTo(g2.getAuthority());
+        }
     }
 }

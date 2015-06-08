@@ -5,12 +5,8 @@ import javax.xml.bind.annotation.XmlRootElement;
 import java.io.Serializable;
 import java.util.Date;
 
-/**
- * Created by jakubrehak on 10/05/15.
- */
 @Entity
 @XmlRootElement
-
 public class Order implements Serializable {
 
     private Long id;
@@ -21,9 +17,8 @@ public class Order implements Serializable {
     private String note;
     private Date updated;
 
-
     @Id
-    @GeneratedValue(strategy=GenerationType.AUTO)
+    @GeneratedValue(strategy = GenerationType.AUTO)
     public Long getId() {
         return id;
     }

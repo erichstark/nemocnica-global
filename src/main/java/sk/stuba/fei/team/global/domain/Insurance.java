@@ -14,8 +14,10 @@ public class Insurance implements Serializable {
     private Set<Office> offices;
     private Set<Patient> patients;
     private Date updated;
+    private Boolean enabled;
 
-    public Insurance() {}
+    public Insurance() {
+    }
 
     public Insurance(String name) {
         this.name = name;
@@ -66,6 +68,15 @@ public class Insurance implements Serializable {
 
     public void setUpdated(Date updated) {
         this.updated = updated;
+    }
+
+    @Column(nullable = false)
+    public Boolean getEnabled() {
+        return enabled;
+    }
+
+    public void setEnabled(Boolean enabled) {
+        this.enabled = enabled;
     }
 
     @PrePersist

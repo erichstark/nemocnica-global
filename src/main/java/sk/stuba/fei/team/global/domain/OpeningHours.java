@@ -7,10 +7,6 @@ import javax.xml.bind.annotation.XmlRootElement;
 import java.io.Serializable;
 import java.util.Date;
 
-/**
- * Created by jakubrehak on 07/05/15.
- */
-
 @Entity
 @XmlRootElement
 public class OpeningHours implements Serializable {
@@ -32,7 +28,7 @@ public class OpeningHours implements Serializable {
     }
 
     @Column
-    @Type(type="date")
+    @Type(type = "date")
     public Date getDate() {
         return date;
     }
