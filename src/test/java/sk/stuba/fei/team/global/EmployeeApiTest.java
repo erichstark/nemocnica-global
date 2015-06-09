@@ -16,10 +16,12 @@ import org.springframework.test.web.servlet.setup.MockMvcBuilders;
 import org.springframework.util.Base64Utils;
 import org.springframework.web.context.WebApplicationContext;
 import sk.stuba.fei.team.global.api.EmployeeApi;
+import sk.stuba.fei.team.global.api.UpdateWrapper;
 import sk.stuba.fei.team.global.domain.Employee;
 import sk.stuba.fei.team.global.repository.EmployeeRepository;
 import sk.stuba.fei.team.global.service.EmployeeService;
 
+import java.text.SimpleDateFormat;
 import java.util.HashSet;
 import java.util.Set;
 import java.util.logging.Logger;
@@ -53,12 +55,16 @@ public class EmployeeApiTest {
 
     private MockMvc mvc;
 
+    private String accessToken;
+
     @Before
-    public void setUp() {
+    public void setUp() throws Exception {
         MockitoAnnotations.initMocks(this);
         mvc = MockMvcBuilders.webAppContextSetup(context)
                 .addFilter(springSecurityFilterChain)
                 .build();
+
+        accessToken = getAccessToken("user", "user123");
 
         employeeRepository.deleteAll();
 
@@ -113,7 +119,6 @@ public class EmployeeApiTest {
 
     @Test
     public void findAuthorized() throws Exception {
-        String accessToken = getAccessToken("user", "user123");
 
         mvc.perform(get("/ws/employee/ferko")
                 .header("Authorization", "Bearer " + accessToken))
@@ -124,14 +129,15 @@ public class EmployeeApiTest {
 
     @Test
     public void updateExpectEmpty() throws Exception {
-        String accessToken = getAccessToken("user", "user123");
 
         Set<String> usernames = new HashSet<String>();
         usernames.add("ferko");
 
-        mvc.perform(post("/ws/employee/update?timestamp=2026-01-01:00:00:00")
+        UpdateWrapper<String> uw = new UpdateWrapper<String>(usernames, new SimpleDateFormat("yyyy-MM-dd").parse("2026-01-01"));
+
+        mvc.perform(post("/ws/employee/update")
                 .contentType(TestUtil.APPLICATION_JSON_UTF8)
-                .content(TestUtil.convertObjectToJsonBytes(usernames))
+                .content(TestUtil.convertObjectToJsonBytes(uw))
                 .header("Authorization", "Bearer " + accessToken))
                 .andExpect(status().isOk())
                 .andExpect(content().string("[]"));
@@ -139,15 +145,16 @@ public class EmployeeApiTest {
 
     @Test
     public void updateExpectTwoReturned() throws Exception {
-        String accessToken = getAccessToken("user", "user123");
 
         Set<String> usernames = new HashSet<String>();
         usernames.add("ferko");
         usernames.add("misko");
 
-        mvc.perform(post("/ws/employee/update?timestamp=2000-01-01:00:00:00")
+        UpdateWrapper<String> uw = new UpdateWrapper<String>(usernames, new SimpleDateFormat("yyyy-MM-dd").parse("2000-01-01"));
+
+        mvc.perform(post("/ws/employee/update")
                 .contentType(TestUtil.APPLICATION_JSON_UTF8)
-                .content(TestUtil.convertObjectToJsonBytes(usernames))
+                .content(TestUtil.convertObjectToJsonBytes(uw))
                 .header("Authorization", "Bearer " + accessToken))
                 .andExpect(status().isOk())
                 .andExpect(jsonPath("$[0].username", is("ferko")))
@@ -156,7 +163,6 @@ public class EmployeeApiTest {
 
     @Test
     public void postOneHappyPath() throws Exception {
-        String accessToken = getAccessToken("user", "user123");
 
         Employee petko = new Employee();
         petko.setFirstName("Peto");

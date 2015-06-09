@@ -6,11 +6,9 @@ import sk.stuba.fei.team.global.domain.Employee;
 import sk.stuba.fei.team.global.service.EmployeeService;
 
 import java.text.ParseException;
-import java.text.SimpleDateFormat;
 import java.util.Collections;
-import java.util.Date;
+import java.util.HashSet;
 import java.util.List;
-import java.util.Set;
 
 @RestController
 @RequestMapping("/ws/employee")
@@ -29,10 +27,8 @@ public class EmployeeApi {
     }
 
     @RequestMapping(value = "/update", method = RequestMethod.POST)
-    public List<Employee> update(@RequestParam String timestamp, @RequestBody Set<String> usernames) throws ParseException {
-        SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd:hh:mm:ss");
-        Date dateObj = sdf.parse(timestamp);
-        return employeeService.findSelectedByTimestamp(dateObj, usernames);
+    public List<Employee> update(@RequestBody UpdateWrapper<String> wrapper) throws ParseException {
+        return employeeService.findSelectedByTimestamp(wrapper.getTimestamp(), new HashSet<String>(wrapper.getIds()));
     }
 
     @RequestMapping(method = RequestMethod.POST)
