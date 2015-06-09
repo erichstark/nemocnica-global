@@ -2,6 +2,7 @@ package sk.stuba.fei.team.global.service;
 
 import sk.stuba.fei.team.global.domain.Insurance;
 
+import java.util.Date;
 import java.util.List;
 
 /**
@@ -12,6 +13,8 @@ public interface InsuranceService {
     Insurance findOne(Long id);
 
     List<Insurance> findByName(String name);
+
+    List<Insurance> findByTimestamp(Date timestamp);
 
     Iterable<Insurance> findAll();
 
