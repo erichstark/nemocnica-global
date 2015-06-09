@@ -14,7 +14,7 @@ import java.util.Set;
 
 @RestController
 @RequestMapping("/ws/employee")
-public class EmployeeApiController {
+public class EmployeeApi {
 
     @Autowired
     EmployeeService employeeService;

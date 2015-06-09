@@ -1,2 +1,2 @@
-drop schema global cascade;
-create schema global;
+drop schema public cascade;
+create schema public;
