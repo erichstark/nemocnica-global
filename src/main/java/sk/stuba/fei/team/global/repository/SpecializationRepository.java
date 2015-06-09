@@ -3,6 +3,7 @@ package sk.stuba.fei.team.global.repository;
 import org.springframework.data.repository.CrudRepository;
 import sk.stuba.fei.team.global.domain.Specialization;
 
+import java.util.Date;
 import java.util.List;
 
 /**
@@ -11,4 +12,6 @@ import java.util.List;
 public interface SpecializationRepository extends CrudRepository<Specialization, Long> {
 
     List<Specialization> findByNameContainingIgnoreCase(String name);
+
+    List<Specialization> findByUpdatedGreaterThan(Date timestamp);
 }
