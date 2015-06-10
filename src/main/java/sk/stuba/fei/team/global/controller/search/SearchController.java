@@ -56,13 +56,16 @@ public class SearchController {
         int j=0;
 
         String d = date;
-        DateFormat format = new SimpleDateFormat("yyyy-MM-dd");
+
+        DateFormat format = new SimpleDateFormat("d.M.yyyy");
         Date da = null;
         try {
             da = format.parse(d);
         } catch (ParseException e1) {
+
             e1.printStackTrace();
         }
+
         objednavky= orderService.findByDateAndOffice(da, office);
 
 
@@ -83,7 +86,7 @@ public class SearchController {
 
         return intervals;
     }
-    public List<Day> fillListOfDays(String id,Long officeid){
+    public List<Day> fillListOfDays(Long officeid){
 
         Office office = officeService.findOne(officeid);
         Iterable<OpeningHours> hodiny;
@@ -97,7 +100,7 @@ public class SearchController {
 
             c.set(Calendar.DAY_OF_WEEK, c.getFirstDayOfWeek() + 1);
 
-            //SimpleDateFormat dt = new SimpleDateFormat("yyyy-MM-dd");
+
             SimpleDateFormat dt = new SimpleDateFormat("d.M.yyyy");
             c.add(Calendar.DATE, i);
             String today =dt.format(c.getTime());
@@ -113,19 +116,21 @@ public class SearchController {
         }
 
         for (int i=0; i<=83; i++){
+            String d1=dayList.get(i).getDay();
+            System.out.print(d1 +" porovnava sa s \n ");
+
+
 
             for (OpeningHours it : hodiny) {
-                String d1=dayList.get(i).getDate();
 
-                SimpleDateFormat dt = new SimpleDateFormat("d.M.yyyy");
-                String d2 =    dt.format(it.getDate());
-
+                String d2 = it.getDate();
+                System.out.print(it +" \n ");
                 if(d2.equals( d1 )){
 
 
                     dayList.get(i).setText("je v DB");
                     dayList.get(i).setHour(it);
-                    dayList.get(i).setIntervalList(calculateInterval(it.getDate().toString(),office ,it.getReservationFrom(),it.getReservationTo()));
+                    dayList.get(i).setIntervalList(calculateInterval(dayList.get(i).getDate(),office ,it.getReservationFrom(),it.getReservationTo()));
 
                 }
             }
@@ -135,26 +140,19 @@ public class SearchController {
     }
 
 
-//    @ModelAttribute("searchUser")
-//    public FormEmployeeSearch getAmbulancieSearchForm() {
-//        FormEmployeeSearch ambulancieSearchForm = new FormEmployeeSearch();
-//        ambulancieSearchForm.setSortField("lastName");
-//        ambulancieSearchForm.setSortOrder("DESC");
-//        return ambulancieSearchForm;
-//    }
 
     @RequestMapping(value = "/search", method = RequestMethod.POST)
     public String search( @ModelAttribute("searchUser") FormEmployeeSearch search, Map<String, Object> model ) {
 
 
-        Iterable<Employee> zoznam;
-        zoznam = employeeService.findAll();
-        if (search.getName() == "" && search.getSurname() == ""){
-            zoznam = employeeService.findAll();
-        } else {
-            zoznam = employeeService.findDoctors(search.getName(),search.getSurname());
-
-        }
+        Iterable<Office> zoznam;
+        zoznam = officeService.findAll();
+//        if (search.getName() == "" && search.getSurname() == ""){
+//            zoznam = employeeService.findAll();
+//        } else {
+//            zoznam = employeeService.findDoctors(search.getName(),search.getSurname());
+//
+//        }
 
 
 
@@ -163,18 +161,19 @@ public class SearchController {
         model.put("pageTitle", "Vyhľadávanie lekárov");
         model.put("name", search.getName());
         model.put("surname", search.getSurname());
-        model.put("employees", zoznam);
+        model.put("offices", zoznam);
 
         return "search/index";
     }
 
-    @RequestMapping(value = "/detail/{id}/{officeid}")
-    public String detail(@PathVariable String id, @PathVariable Long officeid , Map<String, Object> model) {
+    @RequestMapping(value = "/detail/{username}/{officeid}")
+    public String detail(@PathVariable String username, @PathVariable Long officeid , Map<String, Object> model) {
 
-        Employee emp  = employeeService.findOne(id);
+        Employee emp  = employeeService.findOne(username);
         Office office = officeService.findOne(officeid);
 
-        List<Day> dayList= fillListOfDays(id,officeid);
+
+        List<Day> dayList= fillListOfDays(officeid);
 
 
         model.put("pageTitle", "Vyhľadávanie lekárov");

@@ -38,7 +38,8 @@
 <hr>
 <div class="row left-content">
 
-         <#list employees as employee>
+         <#list offices as office>
+             <#list office.employees as employee>
          <div class="item ">
              <div class="item-avatar  col-md-3"><img src="/img/profile/avatar.png" width="100px"></div>
              <div class="item-info  col-md-9">
@@ -46,21 +47,23 @@
                 <ul>
                     <li class="col-md-12">
                         <div class="col-md-3">Špecializácia : </div>
-                        <div class="col-md-9">${employee.specializations}</div>
+                        <#list office.specializations as spec>
+                            <div class="col-md-9">${spec.name}
+                        </#list>
                     </li>
                     <li class="col-md-12">
                         <div class="col-md-3">Ambulancie : </div>
                         <div class="col-md-9">
                             <ul>
-                                <#list employee.offices as of>
+
                                     <li>
-                                        <a href="<@spring.url '/search/detail/' + employee.id +"/"+ of.id />">
-                                            <div style="display:block;font-weight: bold;">${of.name}</div>
-                                            ${of.facility.city},  ${of.facility.streetAndNumber},  ${of.facility.name}
+                                        <a href="<@spring.url '/search/detail/'+employee.username+"/"+office.id />">
+                                            <div style="display:block;font-weight: bold;">${office.name}</div>
+                                            ${office.facility.city},  ${office.facility.streetAndNumber},  ${office.facility.name}
 
                                         </a>
                                     </li>
-                                </#list>
+
                             </ul>
                         </div>
                     </li>
@@ -70,6 +73,7 @@
              </div>
 
          </div>
+             </#list>
             </#list>
 </div>
 <div class="right-aside">

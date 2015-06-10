@@ -13,28 +13,20 @@ import org.springframework.security.config.annotation.web.builders.WebSecurity;
 import org.springframework.security.config.annotation.web.configuration.EnableWebSecurity;
 import org.springframework.security.config.annotation.web.configuration.WebSecurityConfigurerAdapter;
 import org.springframework.security.config.annotation.web.servlet.configuration.EnableWebMvcSecurity;
-import org.springframework.security.core.Authentication;
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.authority.SimpleGrantedAuthority;
-import org.springframework.security.core.context.SecurityContextHolder;
-import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.web.servlet.LocaleResolver;
-import org.springframework.web.servlet.ModelAndView;
 import org.springframework.web.servlet.config.annotation.InterceptorRegistry;
 import org.springframework.web.servlet.config.annotation.ViewControllerRegistry;
 import org.springframework.web.servlet.config.annotation.WebMvcConfigurerAdapter;
-import org.springframework.web.servlet.handler.HandlerInterceptorAdapter;
 import org.springframework.web.servlet.i18n.LocaleChangeInterceptor;
 import org.springframework.web.servlet.i18n.SessionLocaleResolver;
 import sk.stuba.fei.team.global.domain.Patient;
-import sk.stuba.fei.team.global.security.CustomUser;
 import sk.stuba.fei.team.global.security.CustomUserDetailService;
 import sk.stuba.fei.team.global.security.PBKDF2WithHmacSHA1;
 import sk.stuba.fei.team.global.service.PatientService;
 
-import javax.servlet.http.HttpServletRequest;
-import javax.servlet.http.HttpServletResponse;
 import javax.sql.DataSource;
 import java.util.ArrayList;
 import java.util.List;
@@ -45,6 +37,10 @@ import java.util.logging.Logger;
 public class MainApplication extends WebMvcConfigurerAdapter {
 
     public static final Logger LOGGER = Logger.getLogger(MainApplication.class.getName());
+
+    @SuppressWarnings("SpringJavaAutowiringInspection")
+    @Autowired
+    CustomInterceptor customInterceptor;
 
     public static void main(String[] args) {
         ConfigurableApplicationContext context = SpringApplication.run(MainApplication.class, args);
@@ -82,15 +78,10 @@ public class MainApplication extends WebMvcConfigurerAdapter {
         return lci;
     }
 
-    @Bean
-    HandlerInterceptorAdapter userDetailsInterceptor() {
-        return new UserDetailsInterceptor();
-    }
-
     @Override
     public void addInterceptors(InterceptorRegistry registry) {
         registry.addInterceptor(localeChangeInterceptor());
-        registry.addInterceptor(userDetailsInterceptor());
+        registry.addInterceptor(customInterceptor);
     }
 
     @Override
@@ -138,25 +129,6 @@ public class MainApplication extends WebMvcConfigurerAdapter {
         @Bean
         public AuthenticationManager authenticationManagerBean() throws Exception {
             return super.authenticationManagerBean();
-        }
-    }
-
-    private class UserDetailsInterceptor extends HandlerInterceptorAdapter {
-        @Override
-        public void postHandle(final HttpServletRequest request,
-                               final HttpServletResponse response, final Object handler,
-                               final ModelAndView modelAndView) throws Exception {
-            Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
-            if(authentication != null) {
-                Object principal = authentication.getPrincipal();
-                if (principal instanceof UserDetails) {
-                    CustomUser userDetails = (CustomUser) principal;
-                    if (modelAndView != null) {
-                        modelAndView.getModelMap().
-                                addAttribute("user", userDetails);
-                    }
-                }
-            }
         }
     }
 }

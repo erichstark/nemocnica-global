@@ -1,5 +1,7 @@
 package sk.stuba.fei.team.global.api;
 
+import com.fasterxml.jackson.core.JsonProcessingException;
+import com.fasterxml.jackson.databind.ObjectMapper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 import sk.stuba.fei.team.global.domain.Employee;
@@ -20,7 +22,7 @@ public class EmployeeApi {
     @RequestMapping(value = "/{username}", method = RequestMethod.GET)
     public Employee findByUsername(@PathVariable String username) {
         Employee emp = employeeService.findOne(username);
-        if(emp != null) {
+        if (emp != null) {
             emp.setOffices(Collections.emptySet());
         }
         return emp;
@@ -32,9 +34,8 @@ public class EmployeeApi {
     }
 
     @RequestMapping(method = RequestMethod.POST)
-    public String save(@RequestBody Employee emp) {
+    public String save(@RequestBody Employee emp) throws JsonProcessingException {
         employeeService.save(emp);
-
-        return emp.getUsername();
+        return new ObjectMapper().writeValueAsString(emp.getUsername());
     }
 }

@@ -13,7 +13,9 @@
                 <ul>
                     <li class="col-md-12">
                         <div class="col-md-4"><strong>Špecializácia :</strong></div>
-                        <div class="col-md-8">${employee.specializations!"--"}</div>
+                            <#list office.specializations as spec>
+                                <div class="col-md-8">${spec.name!"--"}</div>
+                            </#list>
                     </li>
                     <li class="col-md-12">
                         <div class="col-md-4"><strong>Ambulancia :</strong></div>
@@ -64,11 +66,11 @@
                             <#assign  casTo = hodinaTo?string['0'] +":00 " />
                         </#if>
                         <td>
-                            <#--<#if user??>-->
-                            <#--<div class="time" onclick="showReservations(${d_index})">-->
-                            <#--<#else>-->
+                            <#if user??>
+                            <div class="time" onclick="showReservations(${d_index})">
+                            <#else>
                             <div class="time" onclick="showLoginMessage()">
-                            <#--</#if>-->
+                            </#if>
                             ${casFrom}
                                 - ${casTo}</div>
 
@@ -119,7 +121,7 @@
                                 </div>
                                 <div class="form-group">
                                     <label >Meno :</label>
-                                    <span> Pacient Pacientovic</span>
+                                    <span></span>
 
                                 </div>
                                 <div class="form-group">
@@ -147,11 +149,9 @@
 
                                 <input type="hidden" value="${office.id}" name="office_id">
 
-                                <#--<#if user??>-->
-                                    <#--<input type="hidden" value="${user.getUsername()}" name="userName">-->
-                                <#--<#else>-->
-                                    <#--<input type="hidden" value="" name="userName">-->
-                                <#--</#if>-->
+
+                                <input type="hidden" value="" name="userName">
+
 
                                 <div class="form-group">
                                     <div class="control-buttons-tab ">
