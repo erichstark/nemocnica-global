@@ -150,7 +150,7 @@
                                 <input type="hidden" value="${office.id}" name="office_id">
 
 
-                                <#--<input type="hidden" value="${user.getUsername()}" name="userName">-->
+                                <input type="hidden" value="" name="userName">
 
 
                                 <div class="form-group">
