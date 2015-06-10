@@ -78,8 +78,6 @@ public class MainApplication extends WebMvcConfigurerAdapter {
         return lci;
     }
 
-    @Bean
-
     @Override
     public void addInterceptors(InterceptorRegistry registry) {
         registry.addInterceptor(localeChangeInterceptor());
