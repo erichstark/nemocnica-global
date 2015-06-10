@@ -9,7 +9,7 @@ import sk.stuba.fei.team.global.service.SpecializationService;
 
 @RestController
 @RequestMapping("/ws/specialization")
-public class SpecializationApiController {
+public class SpecializationApi {
 
     @Autowired
     SpecializationService specializationService;

@@ -9,7 +9,7 @@ import sk.stuba.fei.team.global.service.OfficeService;
 
 @RestController
 @RequestMapping("/ws/facility")
-public class FacilityApiController {
+public class FacilityApi {
 
     @Autowired
     private FacilityService facilityService;

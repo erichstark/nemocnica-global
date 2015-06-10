@@ -35,15 +35,15 @@ public class Employee implements Serializable, UserDetails, CredentialsContainer
     public Employee() {
         password = "";
         username = "";
-        authorities = new HashSet<>();
+        authorities = new HashSet<GrantedAuthority>();
         accountNonExpired = true;
         accountNonLocked = true;
         credentialsNonExpired = true;
         enabled = true;
         firstName = "";
         lastName = "";
-        offices = Collections.emptySet();
-        specializations = Collections.emptySet();
+        offices = new HashSet<Office>();
+        specializations = new HashSet<Specialization>();
     }
 
     public Employee(String username, String password, Collection<? extends GrantedAuthority> authorities) {
@@ -56,8 +56,8 @@ public class Employee implements Serializable, UserDetails, CredentialsContainer
         enabled = true;
         firstName = username;
         lastName = "";
-        offices = Collections.emptySet();
-        specializations = Collections.emptySet();
+        offices = new HashSet<Office>();
+        specializations = new HashSet<Specialization>();
     }
 
     private static SortedSet<GrantedAuthority> sortAuthorities(Collection<? extends GrantedAuthority> authorities) {

@@ -6,6 +6,7 @@ import org.springframework.transaction.annotation.Transactional;
 import sk.stuba.fei.team.global.domain.Insurance;
 import sk.stuba.fei.team.global.repository.InsuranceRepository;
 
+import java.util.Date;
 import java.util.List;
 
 /**
@@ -21,6 +22,11 @@ public class InsuranceServiceImpl implements InsuranceService {
     @Override
     public Insurance findOne(Long id) {
         return insuranceRepository.findOne(id);
+    }
+
+    @Override
+    public List<Insurance> findByTimestamp(Date timestamp) {
+        return insuranceRepository.findByUpdatedGreaterThan(timestamp);
     }
 
     @Override
