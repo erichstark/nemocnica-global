@@ -1,9 +1,19 @@
 package sk.stuba.fei.team.global.api.domain;
 
+import sk.stuba.fei.team.global.domain.Specialization;
+
 public class SpecializationWrapper {
     private Long id;
     private String name;
     private Boolean enabled;
+
+    public SpecializationWrapper() {}
+
+    public SpecializationWrapper(Specialization specialization) {
+        this.id = specialization.getId();
+        this.name = specialization.getName();
+        this.enabled = specialization.getEnabled();
+    }
 
     public Long getId() {
         return id;
