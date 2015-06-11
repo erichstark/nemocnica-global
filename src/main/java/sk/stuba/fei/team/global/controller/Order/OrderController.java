@@ -6,7 +6,7 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import sk.stuba.fei.team.global.domain.Appointment;
 import sk.stuba.fei.team.global.domain.Patient;
-import sk.stuba.fei.team.global.service.AppointmentService;
+import sk.stuba.fei.team.global.service.OrderService;
 import sk.stuba.fei.team.global.service.PatientService;
 
 import java.text.ParseException;
@@ -19,20 +19,20 @@ import java.util.Map;
  * Created by jakubrehak on 11/05/15.
  */
 @Controller
-@RequestMapping("/order")
+@RequestMapping("/appointment")
 public class OrderController {
 
     @Autowired
     private PatientService patientService;
 
     @Autowired
-    private AppointmentService appointmentService;
+    private OrderService orderService;
 
-    @RequestMapping("")
-    public String index(Map<String, Object> model) {
+    @RequestMapping("{username}")
+    public String index(@PathVariable String username,Map<String, Object> model) {
 
-        Patient patient= patientService.findByUsername("admin");
-        Iterable<Appointment> orders= appointmentService.findByPatient(patient);
+        Patient patient= patientService.findByUsername(username);
+        Iterable<Appointment> orders= orderService.findByPatient(patient);
         model.put("pageTitle", "moje objednavky");
         model.put("orders", orders);
         model.put("patient",patient);
@@ -40,11 +40,15 @@ public class OrderController {
         return "order/index";
     }
 
-    @RequestMapping("/delete/{order_id}")
-    public String delete(@PathVariable Long order_id , Map<String, Object> model) {
+    @RequestMapping("/delete/{username}/{order_id}")
+    public String delete(@PathVariable String username,@PathVariable Long order_id , Map<String, Object> model) {
 
-      Appointment appointment = appointmentService.findById(order_id);
+      Appointment appointment = orderService.findById(order_id);
+        Patient patient= patientService.findByUsername(username);
+        Iterable<Appointment> orders= orderService.findByPatient(patient);
 
+        model.put("orders", orders);
+        model.put("patient",patient);
       Date d= appointment.getDate();
 
         Calendar cal = Calendar.getInstance();
@@ -67,8 +71,9 @@ public class OrderController {
         }
 
         if(cal.getTime().before(c.getTime())){
-            appointmentService.delete(order_id);
-            return "redirect:/appointment";
+            orderService.delete(order_id);
+            model.put("message","ok");
+            return "/appointment/"+username;
 
 
         }
@@ -78,6 +83,7 @@ public class OrderController {
         model.put("chcemzrusit", c.getTime().toString());
         model.put("den",cal.getTime().toString());
         model.put("pageTitle","fff");
-        return "appointment/test";
+        model.put("message","fail");
+        return "/appointment/"+username;
     }
 }

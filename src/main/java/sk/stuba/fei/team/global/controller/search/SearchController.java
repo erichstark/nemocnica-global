@@ -32,7 +32,7 @@ public class SearchController {
     private OpeningHoursService openingHoursService;
 
     @Autowired
-    private AppointmentService appointmentService;
+    private OrderService orderService;
 
     @Autowired
     private PatientService patientService;
@@ -66,7 +66,7 @@ public class SearchController {
             e1.printStackTrace();
         }
 
-        objednavky= appointmentService.findByDateAndOffice(da, office);
+        objednavky= orderService.findByDateAndOffice(da, office);
 
 
         for(int i=s.intValue(); i<e.intValue(); i+=interval){
@@ -130,8 +130,8 @@ public class SearchController {
 
                     dayList.get(i).setText("je v DB");
                     dayList.get(i).setHour(it);
-                    dayList.get(i).setIntervalList(calculateInterval(dayList.get(i).getDate(),office ,it.getReservationFrom(),it.getReservationTo()));
-
+                    dayList.get(i).setIntervalList(calculateInterval(dayList.get(i).getDate(), office, it.getReservationFrom(), it.getReservationTo()));
+                    dayList.get(i).setIntervalListMorning(calculateInterval(dayList.get(i).getDate(),office ,it.getReservationMorningFrom(),it.getReservationMorningTo()));
                 }
             }
 
@@ -216,9 +216,9 @@ public class SearchController {
         newOrd.setOffice(office);
 
 
-        appointmentService.save(newOrd);
-
+        orderService.save(newOrd);
+        model.put("message","nova");
         model.put("pageTitle", "Vyhľadávanie lekárov");
-        return "/search/neworder";
+        return "/appointment/"+order.getUserName();
     }
 }

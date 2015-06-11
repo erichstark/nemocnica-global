@@ -264,16 +264,16 @@ header {
 
 
 .fade{
+    background-color: rgba(0, 0, 0, 0.01);
     display: none;
-    position: fixed;
-    top: 0%;
-    left: 0%;
-    width: 100%;
     height: 100%;
-    background-color: rgba(0, 0, 0, 0.35);
-    z-index:1001;
-    -moz-opacity: 0.8;
-    opacity: 0.6;
+    left: 0;
+    opacity: 1;
+    position: fixed;
+    top: 0;
+    transition: background-color 0s ease 0s;
+    width: 100%;
+    z-index: 1001;
 
 }
 
