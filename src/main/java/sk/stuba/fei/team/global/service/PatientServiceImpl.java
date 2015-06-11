@@ -59,6 +59,6 @@ public class PatientServiceImpl implements PatientService {
 
     @Override
     public List<Patient> findBySurNameOrEmail(String searchTerm) {
-        return patientRepository.findBySurnameContainingOrEmailContainingAllIgnoreCase(searchTerm);
+        return patientRepository.findBySurnameContainingOrEmailContainingAllIgnoreCase(searchTerm, searchTerm);
     }
 }

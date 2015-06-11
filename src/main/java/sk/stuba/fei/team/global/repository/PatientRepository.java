@@ -16,7 +16,7 @@ public interface PatientRepository extends CrudRepository<Patient, String> {
     @Query("select p from Patient p where p.username like %:text% or p.firstName like %:text% or p.surname like %:text%")
     List<Patient> findByUsernameOrFirstnameOrSerunameCustomQuery(@Param("text") String text);
 
-    List<Patient> findByUpdatedGreaterThanAndUsernameIn(Date timestamp,Collection<String> usernames);
+    List<Patient> findByUpdatedGreaterThanAndUsernameIn(Date timestamp, Collection<String> usernames);
 
-    List<Patient> findBySurnameContainingOrEmailContainingAllIgnoreCase(String searchTerm);
+    List<Patient> findBySurnameContainingOrEmailContainingAllIgnoreCase(String surname, String email);
 }

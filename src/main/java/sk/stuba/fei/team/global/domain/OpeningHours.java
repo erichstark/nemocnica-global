@@ -1,11 +1,8 @@
 package sk.stuba.fei.team.global.domain;
 
-import org.hibernate.annotations.Type;
-
 import javax.persistence.*;
 import javax.xml.bind.annotation.XmlRootElement;
 import java.io.Serializable;
-import java.util.Date;
 
 @Entity
 @XmlRootElement
@@ -22,7 +19,6 @@ public class OpeningHours implements Serializable {
     public Long getId() {
         return Id;
     }
-
 
     public void setId(Long id) {
         Id = id;
