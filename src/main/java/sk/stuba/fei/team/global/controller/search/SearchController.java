@@ -32,7 +32,7 @@ public class SearchController {
     private OpeningHoursService openingHoursService;
 
     @Autowired
-    private OrderService orderService;
+    private AppointmentService appointmentService;
 
     @Autowired
     private PatientService patientService;
@@ -66,7 +66,7 @@ public class SearchController {
             e1.printStackTrace();
         }
 
-        objednavky= orderService.findByDateAndOffice(da, office);
+        objednavky= appointmentService.findByDateAndOffice(da, office);
 
 
         for(int i=s.intValue(); i<e.intValue(); i+=interval){
@@ -216,7 +216,7 @@ public class SearchController {
         newOrd.setOffice(office);
 
 
-        orderService.save(newOrd);
+        appointmentService.save(newOrd);
         model.put("message","nova");
         model.put("pageTitle", "Vyhľadávanie lekárov");
         return "/appointment/"+order.getUserName();
