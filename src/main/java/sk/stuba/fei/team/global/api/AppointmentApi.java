@@ -22,6 +22,7 @@ public class AppointmentApi {
     @Autowired
     OfficeService officeService;
 
+    //TODO dorobit
 //    @RequestMapping(value = "/update", method = RequestMethod.POST)
 //    public List<AppointmentWrapper> update(@RequestBody UpdateWrapper<Long> wrapper) {
 //

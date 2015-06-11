@@ -1,20 +1,14 @@
 package sk.stuba.fei.team.global.api.domain;
 
-import org.springframework.security.core.GrantedAuthority;
 import sk.stuba.fei.team.global.domain.Patient;
+import sk.stuba.fei.team.global.service.InsuranceService;
+import sk.stuba.fei.team.global.service.PatientService;
 
 import java.util.HashSet;
 import java.util.Set;
-import java.util.stream.Collectors;
 
 public class PatientWrapper {
-    private String password;
     private String username;
-    private Set<String> authorities;
-    private boolean accountNonExpired;
-    private boolean accountNonLocked;
-    private boolean credentialsNonExpired;
-    private boolean enabled;
     private String firstName;
     private String surname;
     private String phone;
@@ -27,14 +21,6 @@ public class PatientWrapper {
     }
 
     public PatientWrapper(Patient patient) {
-        password = patient.getPassword();
-        username = patient.getUsername();
-        authorities = new HashSet<>(patient.getAuthorities().size());
-        authorities.addAll(patient.getAuthorities().stream().map(GrantedAuthority::getAuthority).collect(Collectors.toList()));
-        accountNonExpired = patient.isAccountNonExpired();
-        accountNonLocked = patient.isAccountNonLocked();
-        credentialsNonExpired = patient.isCredentialsNonExpired();
-        enabled = patient.isEnabled();
         firstName = patient.getFirstName();
         surname = patient.getSurname();
         phone = patient.getPhone();
@@ -44,12 +30,23 @@ public class PatientWrapper {
         insurance = patient.getInsurance().getId();
     }
 
-    public String getPassword() {
-        return password;
-    }
-
-    public void setPassword(String password) {
-        this.password = password;
+    public Patient build(PatientService patientService, InsuranceService insuranceService) {
+        Patient p = new Patient();
+        p.setFirstName(firstName);
+        p.setSurname(surname);
+        p.setPhone(phone);
+        p.setEmail(email);
+        p.setPrefix_title(prefix_title);
+        p.setSuffix_title(suffix_title);
+        p.setInsurance(insuranceService.findOne(insurance));
+        Set<String> auths = new HashSet<>(1);
+        auths.add("USER");
+        p.setStringAuthorities(auths);
+        Patient pold = patientService.findOne(username);
+        if (pold != null) {
+           p.getAppointments().addAll(pold.getAppointments());
+        }
+        return p;
     }
 
     public String getUsername() {
@@ -58,46 +55,6 @@ public class PatientWrapper {
 
     public void setUsername(String username) {
         this.username = username;
-    }
-
-    public Set<String> getAuthorities() {
-        return authorities;
-    }
-
-    public void setAuthorities(Set<String> authorities) {
-        this.authorities = authorities;
-    }
-
-    public boolean isAccountNonExpired() {
-        return accountNonExpired;
-    }
-
-    public void setAccountNonExpired(boolean accountNonExpired) {
-        this.accountNonExpired = accountNonExpired;
-    }
-
-    public boolean isAccountNonLocked() {
-        return accountNonLocked;
-    }
-
-    public void setAccountNonLocked(boolean accountNonLocked) {
-        this.accountNonLocked = accountNonLocked;
-    }
-
-    public boolean isCredentialsNonExpired() {
-        return credentialsNonExpired;
-    }
-
-    public void setCredentialsNonExpired(boolean credentialsNonExpired) {
-        this.credentialsNonExpired = credentialsNonExpired;
-    }
-
-    public boolean isEnabled() {
-        return enabled;
-    }
-
-    public void setEnabled(boolean enabled) {
-        this.enabled = enabled;
     }
 
     public String getFirstName() {

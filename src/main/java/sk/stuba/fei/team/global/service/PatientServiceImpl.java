@@ -6,7 +6,9 @@ import org.springframework.transaction.annotation.Transactional;
 import sk.stuba.fei.team.global.domain.Patient;
 import sk.stuba.fei.team.global.repository.PatientRepository;
 
+import java.util.Date;
 import java.util.List;
+import java.util.Set;
 
 @Component("patientService")
 @Transactional
@@ -48,5 +50,15 @@ public class PatientServiceImpl implements PatientService {
     @Override
     public List<Patient> findPatientByUsernameOrFirstOrSurname(String text) {
         return patientRepository.findByUsernameOrFirstnameOrSerunameCustomQuery(text);
+    }
+
+    @Override
+    public List<Patient> findSelectedByTimestamp(Date timestamp, Set<String> usernames) {
+        return patientRepository.findByUpdatedGreaterThanAndUsernameIn(timestamp, usernames);
+    }
+
+    @Override
+    public List<Patient> findBySurNameOrEmail(String searchTerm) {
+        return patientRepository.findBySurnameContainingOrEmailContainingAllIgnoreCase(searchTerm);
     }
 }
