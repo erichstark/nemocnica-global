@@ -13,9 +13,9 @@
                 <ul>
                     <li class="col-md-12">
                         <div class="col-md-4"><strong>Špecializácia :</strong></div>
-                            <#list office.specializations as spec>
-                                <div class="col-md-8">${spec.name!"--"}</div>
-                            </#list>
+                        <#list office.specializations as spec>
+                            <div class="col-md-8">${spec.name!"--"}</div>
+                        </#list>
                     </li>
                     <li class="col-md-12">
                         <div class="col-md-4"><strong>Ambulancia :</strong></div>
@@ -43,6 +43,7 @@
                 <th>Deň</th>
                 <th>Dátum</th>
                 <th>Termíny pre doobedie</th>
+                <th>Termíny pre poobedie</th>
             </tr>
             </thead>
             <#list days as d>
@@ -65,20 +66,49 @@
                         <#else>
                             <#assign  casTo = hodinaTo?string['0'] +":00 " />
                         </#if>
+
+                        <#--Morning-->
+                        <#assign hodinaMorningFrom=d.hour.reservationMorningFrom/60 />
+                        <#assign minutaMorningFrom= d.hour.reservationMorningFrom % 60 />
+                        <#if minutaMorningFrom = 30>
+                            <#assign  casMorningFrom = hodinaMorningFrom?keep_before(",") + ":30" />
+                        <#else>
+                            <#assign  casMorningFrom = hodinaMorningFrom?keep_before(",") +":00 " />
+                        </#if>
+
+                        <#assign hodinaMorningTo=d.hour.reservationMorningTo/60 />
+                        <#assign minutaMorningTo= d.hour.reservationMorningTo % 60 />
+                        <#if minutaMorningTo = 30>
+                            <#assign  casMorningTo = hodinaMorningTo?keep_before(",") + ":30" />
+                        <#else>
+                            <#assign  casMorningTo = hodinaMorningTo?keep_before(",") +":00 " />
+                        </#if>
+
                         <td>
                             <#if user??>
-                            <div class="time" onclick="showReservations(${d_index})">
+                            <div class="time" onclick="showReservations('morning',${d_index})">
                             <#else>
                             <div class="time" onclick="showLoginMessage()">
                             </#if>
-                            ${casFrom}
-                                - ${casTo}</div>
+                        ${casMorningFrom}
+                            - ${casMorningTo}</div>
+
+                        </td>
+                        <td>
+                            <#if user??>
+                            <div class="time" onclick="showReservations('after',${d_index})">
+                            <#else>
+                            <div class="time" onclick="showLoginMessage()">
+                            </#if>
+                        ${casFrom}
+                            - ${casTo}</div>
+
 
                         </td>
                     <#else>
                         <td><span class="not-free">Pre doobedie už nie sú bohužial voľné termíny. </span></td>
                     </#if>
-
+                    <div class="fade"></div>
 
                     <#if d.intervalList??>
                         <div id="${d_index}" class="popup white_content">
@@ -90,9 +120,11 @@
                                 ,${office.facility.city}</p>
                             <hr>
 
-                            <form class="create-appointment" name="appointment" action="<@spring.url '/search/save'/>" method="post">
+                            <form class="create-appointment" name="appointment" action="<@spring.url '/search/save'/>"
+                                  method="post">
                                 <div class="form-group">
                                     <span style="color:red;">* Prosím zvoľte si čas objednávky</span>
+
                                     <div class="objednavka col-md-12">Vytvorenie objednávky na dátum ${d.date} , čas
                                         <select width="150px" name="intervalStart" class="" id="appointment-interval">
                                             <#list d.intervalList as interval>
@@ -100,17 +132,17 @@
                                                     <#assign hodinaIntervalFrom=interval.s/60 />
                                                     <#assign minutaIntervalFrom= interval.s % 60 />
                                                     <#if minutaIntervalFrom = 30>
-                                                        <#assign  casIntervalFrom = hodinaIntervalFrom?string['0'] + ":30" />
+                                                        <#assign  casIntervalFrom = hodinaIntervalFrom?keep_before(",") + ":30" />
                                                     <#else>
-                                                        <#assign  casIntervalFrom = hodinaIntervalFrom?string['0'] +":00 " />
+                                                        <#assign  casIntervalFrom = hodinaIntervalFrom?keep_before(",") +":00 " />
                                                     </#if>
 
                                                     <#assign hodinaIntervalTo=interval.e/60 />
                                                     <#assign minutaIntervalTo= interval.e % 60 />
                                                     <#if minutaIntervalTo = 30>
-                                                        <#assign  casIntervalTo = hodinaIntervalTo?string['0'] + ":30" />
+                                                        <#assign  casIntervalTo = hodinaIntervalTo?keep_before(",") + ":30" />
                                                     <#else>
-                                                        <#assign  casIntervalTo = hodinaIntervalTo?string['0'] +":00 " />
+                                                        <#assign  casIntervalTo = hodinaIntervalTo?keep_before(",") +":00 " />
                                                     </#if>
                                                     <option value="${interval.s}">${casIntervalFrom}
                                                         - ${casIntervalTo}</option>
@@ -119,52 +151,146 @@
                                         </select>
                                     </div>
                                 </div>
-                                <div class="form-group">
-                                    <label >Meno :</label>
-                                    <span></span>
 
-                                </div>
-                                <div class="form-group">
-                                    <label >Dátum narodenia :</label>
-                                    <span> 10.4.1990 </span>
+                                <#if user??>
+                                    <div class="form-group">
+                                        <label>Meno :</label>
+                                        <span>${user.firstName} ${user.surname}</span>
 
-                                </div>
-                                <div class="form-group">
-                                    <label >Email :</label>
-                                    <span> mail@gmail.com</span>
+                                    </div>
 
-                                </div>
-                                <div class="form-group">
-                                    <label >Poistovňa :</label>
-                                    <span> VZP</span>
+                                    <div class="form-group">
+                                        <label>Email :</label>
+                                        <span> ${user.email}</span>
 
-                                </div>
-                                <div class="form-group">
-                                    <label for="appointment-note">Poznámka :</label>
-                                    <textarea name="note" id="appointment-note"></textarea>
+                                    </div>
+                                    <div class="form-group">
+                                        <label>Poistovňa :</label>
+                                        <span> ${user.insurance.name}</span>
 
-                                </div>
+                                    </div>
+                                    <div class="form-group">
+                                        <label for="appointment-note">Poznámka :</label>
+                                        <textarea name="note" id="appointment-note"></textarea>
 
-                                <input type="hidden" value="${d.date}" name="date">
+                                    </div>
 
-                                <input type="hidden" value="${office.id}" name="office_id">
+                                    <input type="hidden" value="${d.date}" name="date">
+
+                                    <input type="hidden" value="${office.id}" name="office_id">
 
 
-                                <input type="hidden" value="" name="userName">
-
+                                    <input type="hidden" value="${user.username}" name="userName">
+                                </#if>
 
                                 <div class="form-group">
                                     <div class="control-buttons-tab ">
                                         <input type="submit" value="Ulož" class="btn btn-success">
-                                        <button type="button" class="btn btn-warning" onclick="showReservations(${d_index})">Zrusit</button>
+                                        <button type="button" class="btn btn-warning"
+                                                onclick="showReservations(${d_index})">Zrušiť
+                                        </button>
                                     </div>
                                 </div>
 
                             </form>
                         </div>
 
-                        <div class="fade"></div>
+
                     </#if>
+
+                    <#--Formular pre ranne objednavky-->
+
+                    <#if d.intervalList??>
+                        <div id="${'morning'+d_index}" class="popup white_content">
+
+
+                            <h3> ${employee.firstName} ${employee.lastName}</h3>
+
+                            <p> ${office.facility.name},${office.facility.streetAndNumber}
+                                ,${office.facility.city}</p>
+                            <hr>
+
+                            <form class="create-appointment" name="appointment" action="<@spring.url '/search/save'/>"
+                                  method="post">
+                                <div class="form-group">
+                                    <span style="color:red;">* Prosím zvoľte si čas objednávky</span>
+
+                                    <div class="objednavka col-md-12">Vytvorenie objednávky na dátum ${d.date} , čas
+                                        <select width="150px" name="intervalStart" class="" id="appointment-interval">
+                                            <#list d.intervalListMorning as interval>
+                                                <#if interval.free == 1>
+                                                    <#assign hodinaIntervalFrom=interval.s/60 />
+                                                    <#assign minutaIntervalFrom= interval.s % 60 />
+                                                    <#if minutaIntervalFrom == 30>
+                                                        <#assign  casIntervalFrom = hodinaIntervalFrom?keep_before(",") +":30 "  />
+                                                    <#else>
+                                                        <#assign  casIntervalFrom = hodinaIntervalFrom?keep_before(",") + ":00 "  />
+                                                    </#if>
+
+                                                    <#assign hodinaIntervalTo=interval.e/60 />
+                                                    <#assign minutaIntervalTo= interval.e % 60 />
+                                                    <#if minutaIntervalTo = 30>
+                                                        <#assign  casIntervalTo = hodinaIntervalTo?keep_before(",") + ":30" />
+                                                    <#else>
+                                                        <#assign  casIntervalTo = hodinaIntervalTo?keep_before(",") +":00 " />
+                                                    </#if>
+                                                    <#--<option value="${interval.s}">${casIntervalFrom}-->
+                                                        <#--- ${casIntervalTo}</option>-->
+                                                    <option value="${interval.s}">${casIntervalFrom}
+                                                        - ${casIntervalTo}</option>
+                                                </#if>
+                                            </#list>
+                                        </select>
+                                    </div>
+                                </div>
+
+                                <#if user??>
+                                    <div class="form-group">
+                                        <label>Meno :</label>
+                                        <span>${user.firstName} ${user.surname}</span>
+
+                                    </div>
+
+                                    <div class="form-group">
+                                        <label>Email :</label>
+                                        <span> ${user.email}</span>
+
+                                    </div>
+                                    <div class="form-group">
+                                        <label>Poistovňa :</label>
+                                        <span> ${user.insurance.name}</span>
+
+                                    </div>
+                                    <div class="form-group">
+                                        <label for="appointment-note">Poznámka :</label>
+                                        <textarea name="note" id="appointment-note"></textarea>
+
+                                    </div>
+
+                                    <input type="hidden" value="${d.date}" name="date">
+
+                                    <input type="hidden" value="${office.id}" name="office_id">
+
+
+                                    <input type="hidden" value="${user.username}" name="userName">
+                                </#if>
+
+                                <div class="form-group">
+                                    <div class="control-buttons-tab ">
+                                        <input type="submit" value="Ulož" class="btn btn-success">
+                                        <button type="button" class="btn btn-warning"
+                                                onclick="showReservations('morning',${d_index})">Zrušiť
+                                        </button>
+                                    </div>
+                                </div>
+
+                            </form>
+                        </div>
+
+
+                    </#if>
+
+
 
                 </tr>
             </#list>
@@ -174,7 +300,7 @@
         Poznamky
     </div>
 </div>
-<div  id="login-message" class="popup white_content_login">
+<div id="login-message" class="popup white_content_login">
     <div id="login-panel" class="panel panel-default">
         <div class="panel-heading"><h3 class="panel-title"><strong><@spring.message "SignIn"/></strong></h3></div>
         <div class="panel-body">
@@ -202,17 +328,25 @@
                 <button type="button" class="btn btn-sm btn-warning" onclick="showLoginMessage()">Zrusit</button>
             </form>
             <hr>
-            <div>Ak nie ste zaregistrovaný <a href="<@spring.url '/registration'/> " >kliknite sem</a> . </div>
+            <div>Ak nie ste zaregistrovaný <a href="<@spring.url '/registration'/> ">kliknite sem</a> .</div>
         </div>
     </div>
 
 </div>
 <script>
-    function showReservations(id) {
-        $("#" + id).toggle();
+    function showReservations(part,id) {
+
+        if(part == 'morning'){
+
+            $("#morning" + id).toggle();
+        }else{
+
+            $(id).toggle();
+        }
+
         $(".fade").toggle();
     }
-    function showLoginMessage(){
+    function showLoginMessage() {
         $("#login-message").toggle();
         $(".fade").toggle();
     }

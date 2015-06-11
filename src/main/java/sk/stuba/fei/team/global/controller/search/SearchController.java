@@ -130,8 +130,8 @@ public class SearchController {
 
                     dayList.get(i).setText("je v DB");
                     dayList.get(i).setHour(it);
-                    dayList.get(i).setIntervalList(calculateInterval(dayList.get(i).getDate(),office ,it.getReservationFrom(),it.getReservationTo()));
-
+                    dayList.get(i).setIntervalList(calculateInterval(dayList.get(i).getDate(), office, it.getReservationFrom(), it.getReservationTo()));
+                    dayList.get(i).setIntervalListMorning(calculateInterval(dayList.get(i).getDate(),office ,it.getReservationMorningFrom(),it.getReservationMorningTo()));
                 }
             }
 
@@ -217,8 +217,8 @@ public class SearchController {
 
 
         orderService.save(newOrd);
-
+        model.put("message","nova");
         model.put("pageTitle", "Vyhľadávanie lekárov");
-        return "/search/neworder";
+        return "/appointment/"+order.getUserName();
     }
 }

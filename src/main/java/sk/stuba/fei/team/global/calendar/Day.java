@@ -13,6 +13,7 @@ public class Day {
     private String day;
     private String text;
     private List<Interval> intervalList;
+    private List<Interval> intervalListMorning;
 
 
     public String getDay() {
@@ -75,5 +76,17 @@ public class Day {
 
     public void setIntervalList(List<Interval> intervalList) {
         this.intervalList = intervalList;
+    }
+
+    public void setDay(String day) {
+        this.day = day;
+    }
+
+    public List<Interval> getIntervalListMorning() {
+        return intervalListMorning;
+    }
+
+    public void setIntervalListMorning(List<Interval> intervalListMorning) {
+        this.intervalListMorning = intervalListMorning;
     }
 }
