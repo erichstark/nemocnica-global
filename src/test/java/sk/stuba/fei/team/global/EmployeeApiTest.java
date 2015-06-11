@@ -79,6 +79,8 @@ public class EmployeeApiTest {
         misko.setLastName("Misovic");
         misko.setUsername("misko");
         employeeRepository.save(misko);
+
+
     }
 
     @Test
@@ -174,7 +176,7 @@ public class EmployeeApiTest {
                 .content(TestUtil.convertObjectToJsonBytes(petko))
                 .header("Authorization", "Bearer " + accessToken))
                 .andExpect(status().isOk())
-                .andExpect(content().string("petko"));
+                .andExpect(content().string("\"petko\""));
     }
 
 }

@@ -6,6 +6,7 @@ import org.springframework.transaction.annotation.Transactional;
 import sk.stuba.fei.team.global.domain.Specialization;
 import sk.stuba.fei.team.global.repository.SpecializationRepository;
 
+import java.util.Date;
 import java.util.List;
 
 /**
@@ -26,6 +27,11 @@ public class SpecializationServiceImpl implements SpecializationService {
     @Override
     public List<Specialization> findByName(String name) {
         return specializationRepository.findByNameContainingIgnoreCase(name);
+    }
+
+    @Override
+    public List<Specialization> findByTimestamp(Date timestamp) {
+        return specializationRepository.findByUpdatedGreaterThan(timestamp);
     }
 
     @Override
