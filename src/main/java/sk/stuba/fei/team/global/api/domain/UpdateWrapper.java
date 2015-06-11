@@ -1,4 +1,4 @@
-package sk.stuba.fei.team.global.api;
+package sk.stuba.fei.team.global.api.domain;
 
 import java.util.Collection;
 import java.util.Date;

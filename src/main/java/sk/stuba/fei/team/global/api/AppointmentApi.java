@@ -24,7 +24,7 @@ public class AppointmentApi {
 
 //    @RequestMapping(value = "/update", method = RequestMethod.POST)
 //    public List<AppointmentWrapper> update(@RequestBody UpdateWrapper<Long> wrapper) {
-//        
+//
 //    }
 
     @RequestMapping(method = RequestMethod.POST)

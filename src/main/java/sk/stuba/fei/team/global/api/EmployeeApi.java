@@ -5,6 +5,7 @@ import com.fasterxml.jackson.databind.ObjectMapper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 import sk.stuba.fei.team.global.api.domain.EmployeeWrapper;
+import sk.stuba.fei.team.global.api.domain.UpdateWrapper;
 import sk.stuba.fei.team.global.domain.Employee;
 import sk.stuba.fei.team.global.service.EmployeeService;
 import sk.stuba.fei.team.global.service.SpecializationService;
@@ -43,7 +44,7 @@ public class EmployeeApi {
 
     @RequestMapping(method = RequestMethod.POST)
     public String save(@RequestBody EmployeeWrapper ew) throws JsonProcessingException {
-        Employee e = ew.build(specializationService,employeeService);
+        Employee e = ew.build(specializationService, employeeService);
         employeeService.save(e);
         return new ObjectMapper().writeValueAsString(e.getUsername());
     }

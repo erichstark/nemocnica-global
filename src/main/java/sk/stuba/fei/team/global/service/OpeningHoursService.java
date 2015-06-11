@@ -10,4 +10,6 @@ import java.util.List;
 public interface OpeningHoursService {
 
     List<OpeningHours> findByOfficeId(Long id);
+
+    void save(OpeningHours openingHours);
 }

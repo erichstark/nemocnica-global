@@ -25,4 +25,9 @@ public class OpeningHoursServiceImpl implements OpeningHoursService {
 
         return openingHoursRepository.findByOfficeId(id);
     }
+
+    @Override
+    public void save(OpeningHours openingHours) {
+        openingHoursRepository.save(openingHours);
+    }
 }

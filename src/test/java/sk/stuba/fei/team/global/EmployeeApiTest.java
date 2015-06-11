@@ -17,7 +17,7 @@ import org.springframework.test.web.servlet.setup.MockMvcBuilders;
 import org.springframework.util.Base64Utils;
 import org.springframework.web.context.WebApplicationContext;
 import sk.stuba.fei.team.global.api.EmployeeApi;
-import sk.stuba.fei.team.global.api.UpdateWrapper;
+import sk.stuba.fei.team.global.api.domain.UpdateWrapper;
 import sk.stuba.fei.team.global.domain.Employee;
 import sk.stuba.fei.team.global.repository.EmployeeRepository;
 

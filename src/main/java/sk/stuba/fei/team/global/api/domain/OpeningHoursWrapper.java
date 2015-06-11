@@ -1,6 +1,7 @@
 package sk.stuba.fei.team.global.api.domain;
 
 import sk.stuba.fei.team.global.domain.OpeningHours;
+import sk.stuba.fei.team.global.service.OfficeService;
 
 public class OpeningHoursWrapper {
     private Long id;
@@ -23,6 +24,18 @@ public class OpeningHoursWrapper {
         reservationFrom = openingHours.getReservationFrom();
         reservationTo = openingHours.getReservationTo();
         office = openingHours.getOffice().getId();
+    }
+
+    public OpeningHours build(OfficeService officeService) {
+        OpeningHours oh = new OpeningHours();
+        oh.setId(id);
+        oh.setDate(date);
+        oh.setOffice(officeService.findOne(office));
+        oh.setReservationFrom(reservationFrom);
+        oh.setReservationTo(reservationTo);
+        oh.setReservationMorningFrom(reservationMorningFrom);
+        oh.setReservationMorningTo(reservationMorningTo);
+        return oh;
     }
 
     public Long getId() {
