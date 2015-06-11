@@ -1,6 +1,7 @@
 package sk.stuba.fei.team.global.api.domain;
 
 import sk.stuba.fei.team.global.domain.Facility;
+import sk.stuba.fei.team.global.service.FacilityService;
 
 public class FacilityWrapper {
     private Long id;
@@ -20,6 +21,19 @@ public class FacilityWrapper {
         city = facility.getCity();
         zip = facility.getZip();
         enabled = facility.getEnabled();
+    }
+
+    public Facility build(FacilityService facilityService) {
+        Facility f = new Facility();
+        f.setId(id);
+        f.setName(name);
+        f.setStreetAndNumber(streetAndNumber);
+        f.setCity(city);
+        f.setZip(zip);
+        f.setEnabled(enabled);
+        Facility oldFacility = facilityService.findOne(id);
+        if (oldFacility != null) f.getOffices().addAll(oldFacility.getOffices());
+        return f;
     }
 
     public Long getId() {

@@ -10,7 +10,7 @@ import java.util.List;
 /**
  * Created by jakubrehak on 10/05/15.
  */
-public interface OrderService {
+public interface AppointmentService {
 
     void save(Appointment appointment);
 

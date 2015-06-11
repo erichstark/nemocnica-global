@@ -7,7 +7,7 @@ import org.springframework.transaction.annotation.Transactional;
 import sk.stuba.fei.team.global.domain.Office;
 import sk.stuba.fei.team.global.domain.Patient;
 import sk.stuba.fei.team.global.domain.Appointment;
-import sk.stuba.fei.team.global.repository.OrderRepository;
+import sk.stuba.fei.team.global.repository.AppointmentRepository;
 
 import java.util.Date;
 import java.util.List;
@@ -17,36 +17,36 @@ import java.util.List;
  */
 @Component("patientOrderService")
 @Transactional
-public class OrderServiceImpl implements OrderService {
+public class AppointmentServiceImpl implements AppointmentService {
 
     @Autowired
-    private OrderRepository orderRepository;
+    private AppointmentRepository appointmentRepository;
 
     @Override
     public void save(Appointment appointment) {
-        orderRepository.save(appointment);
+        appointmentRepository.save(appointment);
     }
 
     @Override
     public List<Appointment> findByDateAndOffice(Date date,Office office){
-        return orderRepository.findByDateAndOffice(date,office);
+        return appointmentRepository.findByDateAndOffice(date,office);
     }
 
     @Override
     public void delete(Long id){
-        orderRepository.delete(id);
+        appointmentRepository.delete(id);
     }
     @Override
     public  Iterable<Appointment> findAll(){
 
-        return orderRepository.findAll();
+        return appointmentRepository.findAll();
     }
 
     @Override
     public Iterable<Appointment> findByPatient( Patient patient){
-        return orderRepository.findByPatient(patient);
+        return appointmentRepository.findByPatient(patient);
     }
 
     @Override
-    public Appointment findById(Long id){ return orderRepository.findOne(id);}
+    public Appointment findById(Long id){ return appointmentRepository.findOne(id);}
 }

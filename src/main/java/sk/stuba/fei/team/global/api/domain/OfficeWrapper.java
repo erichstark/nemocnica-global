@@ -4,6 +4,7 @@ import sk.stuba.fei.team.global.domain.Employee;
 import sk.stuba.fei.team.global.domain.Insurance;
 import sk.stuba.fei.team.global.domain.Office;
 import sk.stuba.fei.team.global.domain.Specialization;
+import sk.stuba.fei.team.global.service.*;
 
 import java.util.HashSet;
 import java.util.Set;
@@ -33,6 +34,23 @@ public class OfficeWrapper {
         specializations = new HashSet<>(office.getSpecializations().size());
         specializations.addAll(office.getSpecializations().stream().map(Specialization::getId).collect(Collectors.toList()));
         enabled = office.getEnabled();
+    }
+
+    public Office build(OfficeService officeService, FacilityService facilityService, EmployeeService employeeService, InsuranceService insuranceService, SpecializationService specializationService) {
+        Office office = new Office();
+        office.setId(id);
+        office.setName(name);
+        office.setFacility(facilityService.findOne(facility));
+        office.getEmployees().addAll(employees.stream().map(employeeService::findOne).collect(Collectors.toSet()));
+        office.getInsurances().addAll(insurances.stream().map(insuranceService::findOne).collect(Collectors.toSet()));
+        office.getSpecializations().addAll(specializations.stream().map(specializationService::findOne).collect(Collectors.toSet()));
+        Office oldOffice = officeService.findOne(id);
+        if (oldOffice != null) {
+            office.getHours().addAll(oldOffice.getHours());
+            office.getAppointments().addAll(oldOffice.getAppointments());
+        }
+        office.setEnabled(enabled);
+        return office;
     }
 
     public Long getId() {

@@ -6,7 +6,7 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import sk.stuba.fei.team.global.domain.Appointment;
 import sk.stuba.fei.team.global.domain.Patient;
-import sk.stuba.fei.team.global.service.OrderService;
+import sk.stuba.fei.team.global.service.AppointmentService;
 import sk.stuba.fei.team.global.service.PatientService;
 
 import java.text.ParseException;
@@ -26,13 +26,13 @@ public class OrderController {
     private PatientService patientService;
 
     @Autowired
-    private OrderService orderService;
+    private AppointmentService appointmentService;
 
     @RequestMapping("")
     public String index(Map<String, Object> model) {
 
         Patient patient= patientService.findByUsername("admin");
-        Iterable<Appointment> orders= orderService.findByPatient(patient);
+        Iterable<Appointment> orders= appointmentService.findByPatient(patient);
         model.put("pageTitle", "moje objednavky");
         model.put("orders", orders);
         model.put("patient",patient);
@@ -43,7 +43,7 @@ public class OrderController {
     @RequestMapping("/delete/{order_id}")
     public String delete(@PathVariable Long order_id , Map<String, Object> model) {
 
-      Appointment appointment = orderService.findById(order_id);
+      Appointment appointment = appointmentService.findById(order_id);
 
       Date d= appointment.getDate();
 
@@ -67,7 +67,7 @@ public class OrderController {
         }
 
         if(cal.getTime().before(c.getTime())){
-            orderService.delete(order_id);
+            appointmentService.delete(order_id);
             return "redirect:/appointment";
 
 

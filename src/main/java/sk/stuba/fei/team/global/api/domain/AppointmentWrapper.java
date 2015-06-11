@@ -1,6 +1,8 @@
 package sk.stuba.fei.team.global.api.domain;
 
 import sk.stuba.fei.team.global.domain.Appointment;
+import sk.stuba.fei.team.global.service.OfficeService;
+import sk.stuba.fei.team.global.service.PatientService;
 
 import java.util.Date;
 
@@ -23,6 +25,17 @@ public class AppointmentWrapper {
         date = appointment.getDate();
         intervalStart = appointment.getIntervalStart();
         note = appointment.getNote();
+    }
+
+    public Appointment build(PatientService patientService, OfficeService officeService) {
+        Appointment appointment = new Appointment();
+        appointment.setId(id);
+        appointment.setPatient(patientService.findOne(patient));
+        appointment.setOffice(officeService.findOne(office));
+        appointment.setDate(date);
+        appointment.setIntervalStart(intervalStart);
+        appointment.setNote(note);
+        return appointment;
     }
 
     public Long getId() {

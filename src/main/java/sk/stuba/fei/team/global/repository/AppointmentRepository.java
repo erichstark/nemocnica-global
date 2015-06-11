@@ -13,7 +13,7 @@ import java.util.List;
 /**
  * Created by jakubrehak on 10/05/15.
  */
-public interface OrderRepository extends CrudRepository<Appointment, Long> {
+public interface AppointmentRepository extends CrudRepository<Appointment, Long> {
 
     List<Appointment> findByDateAndOffice(@Temporal(TemporalType.DATE)Date date ,Office office);
     Iterable<Appointment> findByPatient( Patient patient);

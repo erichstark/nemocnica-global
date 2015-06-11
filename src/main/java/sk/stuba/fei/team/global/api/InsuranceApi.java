@@ -5,10 +5,13 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RestController;
+import sk.stuba.fei.team.global.api.domain.InsuranceWrapper;
 import sk.stuba.fei.team.global.domain.Insurance;
 import sk.stuba.fei.team.global.service.InsuranceService;
 
+import java.util.ArrayList;
 import java.util.Date;
+import java.util.List;
 
 @RestController
 @RequestMapping("/ws/insurance")
@@ -18,7 +21,10 @@ public class InsuranceApi {
     private InsuranceService insuranceService;
 
     @RequestMapping(value = "/update", method = RequestMethod.POST)
-    public Iterable<Insurance> update(@RequestBody Date timestamp) {
-        return insuranceService.findByTimestamp(timestamp);
+    public List<InsuranceWrapper> update(@RequestBody Date timestamp) {
+        List<Insurance> ins = insuranceService.findByTimestamp(timestamp);
+        List<InsuranceWrapper> iw = new ArrayList<>(ins.size());
+        ins.forEach(elt -> iw.add(new InsuranceWrapper(elt)));
+        return iw;
     }
 }

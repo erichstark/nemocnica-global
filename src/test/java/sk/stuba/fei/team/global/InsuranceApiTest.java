@@ -1,7 +1,6 @@
 package sk.stuba.fei.team.global;
 
 import org.junit.Before;
-import org.junit.Ignore;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.mockito.InjectMocks;
@@ -18,12 +17,9 @@ import org.springframework.util.Base64Utils;
 import org.springframework.web.context.WebApplicationContext;
 import sk.stuba.fei.team.global.api.InsuranceApi;
 import sk.stuba.fei.team.global.domain.Insurance;
-import sk.stuba.fei.team.global.domain.Patient;
 import sk.stuba.fei.team.global.repository.InsuranceRepository;
-import sk.stuba.fei.team.global.repository.PatientRepository;
 
 import java.text.SimpleDateFormat;
-import java.util.HashSet;
 import java.util.logging.Logger;
 
 import static org.hamcrest.Matchers.*;
@@ -33,7 +29,6 @@ import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.
 @RunWith(SpringJUnit4ClassRunner.class)
 @WebAppConfiguration
 @SpringApplicationConfiguration(classes = MainApplication.class)
-@Ignore
 public class InsuranceApiTest {
 
     public static final Logger LOGGER = Logger.getLogger(EmployeeApiTest.class.getName());
@@ -46,9 +41,6 @@ public class InsuranceApiTest {
 
     @Autowired
     private InsuranceRepository insuranceRepository;
-
-    @Autowired
-    private PatientRepository patientRepository;
 
     @InjectMocks
     InsuranceApi controller;
@@ -101,29 +93,14 @@ public class InsuranceApiTest {
         Insurance dovera = new Insurance();
         dovera.setName("Dovera");
         dovera.setEnabled(true);
-        dovera.setPatients(new HashSet<>());
+        insuranceRepository.save(dovera);
 
         Insurance vzp = new Insurance("Vseobecna zdravotna poistovna");
         vzp.setEnabled(true);
         insuranceRepository.save(vzp);
-
-        Patient p = patientRepository.findByUsername("user");
-        p.setInsurance(dovera);
-        Patient p2 = patientRepository.findByUsername("admin");
-        p2.setInsurance(dovera);
-
-
-        insuranceRepository.save(dovera);
-//        Set<Patient> ps = new HashSet<>();
-//        ps.add(p);
-//        ps.add(p2);
-        dovera.getPatients().add(p);
-        patientRepository.save(p);
-        patientRepository.save(p2);
     }
 
     @Test
-    @Ignore
     public void getExpectEmpty() throws Exception {
         mvc.perform(post(PATH+"/update")
                 .contentType(TestUtil.APPLICATION_JSON_UTF8)
