@@ -18,7 +18,7 @@ public class AdminFacilityController {
     @Autowired
     private FacilityService facilityService;
 
-    @RequestMapping("")
+    @RequestMapping(method = RequestMethod.GET)
     public String index(Map<String, Object> model) {
 
         model.put("pageTitle", "Admin Ambulancia");
@@ -45,18 +45,10 @@ public class AdminFacilityController {
         return "admin/facility/add";
     }
 
-    @RequestMapping(value = "/save", method = RequestMethod.POST)
+    @RequestMapping(method = RequestMethod.POST)
     public String save(@ModelAttribute("facility") Facility facility) {
 
         facilityService.save(facility);
-
-        return "redirect:/admin/facility";
-    }
-
-    @RequestMapping(value = "/delete/{id}")
-    public String delete(@PathVariable Long id) {
-
-        facilityService.delete(id);
 
         return "redirect:/admin/facility";
     }

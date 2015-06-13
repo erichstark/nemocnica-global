@@ -42,9 +42,4 @@ public class FacilityServiceImpl implements FacilityService {
     public void save(Facility facility) {
         facilityRepository.save(facility);
     }
-
-    @Override
-    public void delete(Long id) {
-        facilityRepository.delete(id);
-    }
 }

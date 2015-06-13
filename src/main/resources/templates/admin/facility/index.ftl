@@ -31,25 +31,19 @@
     <table class="table table-striped">
         <thead>
         <tr>
-            <th style="width: 60px;">#</th>
             <th style="width: 60px;">ID</th>
             <th>Názov zariadenia</th>
             <th>Adresa</th>
             <th>Stav</th>
-            <th></th>
         </tr>
         </thead>
         <tbody>
             <#list facilities as facility>
             <tr>
-                <td>${facility_index + 1}</td>
                 <td>${facility.id}</td>
                 <td><a href="<@spring.url '/admin/facility/edit/' + facility.id />">${facility.name}</a></td>
                 <td>${facility.streetAndNumber+', '+facility.zip+' '+facility.city}</td>
                 <td><@spring.message "Enabled"+facility.enabled?c /></td>
-                <td><a href="<@spring.url '/admin/facility/delete/' + facility.id />"
-                       onclick="return confirm('!! Zmaz ak si si isty ze toto facility nema ziadnu ambulanciu !!');">Zmazať</a>
-                </td>
             </tr>
             </#list>
         </tbody>
