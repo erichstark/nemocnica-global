@@ -65,7 +65,7 @@
         </div>
     </nav>
     <div class="container main-content">
-        <#if message>
+        <#if message??>
             <div class="panel panel-success">
                 <div class="panel-body">
                     ${message}

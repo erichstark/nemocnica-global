@@ -6,6 +6,7 @@ import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.context.ConfigurableApplicationContext;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
+import org.springframework.mail.javamail.JavaMailSenderImpl;
 import org.springframework.security.authentication.AuthenticationManager;
 import org.springframework.security.config.annotation.authentication.builders.AuthenticationManagerBuilder;
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
@@ -130,6 +131,17 @@ public class MainApplication extends WebMvcConfigurerAdapter {
         @Bean
         public AuthenticationManager authenticationManagerBean() throws Exception {
             return super.authenticationManagerBean();
+        }
+
+        @Bean
+        public JavaMailSenderImpl mailSender() {
+            JavaMailSenderImpl javaMailSender = new JavaMailSenderImpl();
+
+            javaMailSender.setProtocol("SMTP");
+            javaMailSender.setHost("127.0.0.1");
+            javaMailSender.setPort(25);
+
+            return javaMailSender;
         }
     }
 }
