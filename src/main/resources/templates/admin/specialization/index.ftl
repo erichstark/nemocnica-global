@@ -48,8 +48,6 @@
                     </td>
                     <td>
                         <input type="submit" value="Zmeň názov" class="btn btn-success">
-                        <a class="btn btn-danger" href="<@spring.url '/admin/specialization/' + specialization.id + '/delete' />"
-                           onclick="return confirm('Naozaj?');">Zmazať</a>
                     </td>
                     <td>
                         <div class="checkbox">
