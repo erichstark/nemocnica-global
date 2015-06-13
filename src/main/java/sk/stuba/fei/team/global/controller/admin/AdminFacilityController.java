@@ -27,32 +27,6 @@ public class AdminFacilityController {
         return "admin/facility/index";
     }
 
-    @RequestMapping(value = "/add")
-    public String add(Map<String, Object> model) {
-
-        model.put("pageTitle", "Admin Facilities");
-        model.put("facility", new Facility());
-
-        return "admin/facility/add";
-    }
-
-    @RequestMapping(value = "/edit/{id}")
-    public String edit(@PathVariable Long id, Map<String, Object> model) {
-
-        model.put("pageTitle", "Admin Facilities");
-        model.put("facility", facilityService.findOne(id));
-
-        return "admin/facility/add";
-    }
-
-    @RequestMapping(method = RequestMethod.POST)
-    public String save(@ModelAttribute("facility") Facility facility) {
-
-        facilityService.save(facility);
-
-        return "redirect:/admin/facility";
-    }
-
     @RequestMapping(value = "/search", method = RequestMethod.POST)
     public String search(@RequestParam("text") String text, Map<String, Object> model) {
 

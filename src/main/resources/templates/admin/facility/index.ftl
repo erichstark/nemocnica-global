@@ -2,16 +2,7 @@
 <#import "../../lib/pageTemplates.ftl" as pt>
 <#import "/spring.ftl" as spring>
 <@pt.dashboardPage>
-<h1 class="page-header">Administracia zariadení</h1>
-
-<div class="row">
-    <div class="col-md-12">
-        <a class="btn btn-info btn-sm" href="<@spring.url '/admin/facility/add'/>" role="button">Vytvoriť
-            zariadenie</a>
-    </div>
-</div>
-
-<h2 class="sub-header">Zariadenia</h2>
+<h1 class="page-header">Prehľad zdravotníckych zariadení</h1>
 
 <div class="row">
     <div class="col-md-12">
@@ -41,7 +32,7 @@
             <#list facilities as facility>
             <tr>
                 <td>${facility.id}</td>
-                <td><a href="<@spring.url '/admin/facility/edit/' + facility.id />">${facility.name}</a></td>
+                <td>${facility.name}</td>
                 <td>${facility.streetAndNumber+', '+facility.zip+' '+facility.city}</td>
                 <td><@spring.message "Enabled"+facility.enabled?c /></td>
             </tr>
