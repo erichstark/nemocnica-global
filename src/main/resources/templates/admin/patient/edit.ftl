@@ -55,7 +55,7 @@
             <input type="text" name="phone" class="form-control" id="patient-phone" placeholder="Telefón"
                    value="${patient.phone!""}">
         </div>
-        <table>
+        <table class="form-group">
             <tr>
                 <td style="width: 300px;">
                     <label class="radio-inline"><input type="radio" name="enabled" value="true"
@@ -109,21 +109,6 @@
                 </td>
             </tr>
         </table>
-
-        <br><br>
-
-        <div class="form-group">
-            <label for="patient-autority">Autorita</label>
-            <select name="autority" class="form-control" id="patient-autority">
-                <#if patient.getStringAuthorities()?seq_contains("USER")>
-                    <option value="USER" selected="selected">USER</option>
-                    <option value="ADMIN">ADMIN</option>
-                <#else>
-                    <option value="USER">USER</option>
-                    <option value="ADMIN" selected="selected">ADMIN</option>
-                </#if>
-            </select>
-        </div>
 
         <div class="form-group">
             <label for="patient-insurance">Poisťovňa</label>

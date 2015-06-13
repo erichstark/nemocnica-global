@@ -20,7 +20,7 @@ public class Office implements Serializable {
     private Boolean enabled;
 
     @Id
-    @GeneratedValue
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     public Long getId() {
         return id;
     }

@@ -2,7 +2,7 @@
 <#import "../../lib/pageTemplates.ftl" as pt>
 <#import "/spring.ftl" as spring>
 <@pt.dashboardPage>
-<h1 class="page-header">Administracia pacientov</h1>
+<h1 class="page-header">Administrácia pacientov</h1>
 
 <div class="row">
     <div class="col-md-12">
@@ -19,7 +19,7 @@
             <div class="form-group">
                 <label for="text">Vyhľadanie:</label>
                 <input type="text" name="text" class="form-control" id="text"
-                       placeholder="Zadaj prihlasovacie meno, meno alebo prizevisko"
+                       placeholder="Zadaj prihlasovacie meno, meno alebo priezvisko"
                        value="${search!""}" style="width: 400px;">
             </div>
             <input type="submit" value="Hľadaj" class="btn btn-default">
@@ -32,7 +32,6 @@
     <table class="table table-striped">
         <thead>
         <tr>
-            <th style="width: 60px;">#</th>
             <th>Prihlasovacie meno (ID)</th>
             <th>Meno pacienta</th>
             <th>Poistovňa</th>
@@ -46,12 +45,9 @@
         <tbody>
             <#list patients as patient>
             <tr>
-                <td>${patient_index + 1}</td>
                 <td><a href="<@spring.url '/admin/patient/edit/' + patient.username />">${patient.username}</a></td>
                 <td>
-                ${patient.prefix_title + ' ' + patient.firstName + ' ' + patient.surname}
-                    <#if patient.suffix_title?length gt 0>${', ' + patient.suffix_title}</#if>
-
+                    ${patient.prefix_title!"" + ' ' + patient.firstName + ' ' + patient.surname + ', ' + patient.suffix_title!""}
                 </td>
                 <td><#if patient.insurance??>${patient.insurance.name}<#else></#if></td>
                 <td>${patient.email}</td>

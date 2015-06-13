@@ -48,9 +48,4 @@ public class InsuranceServiceImpl implements InsuranceService {
     public void save(Insurance insurance) {
         insuranceRepository.save(insurance);
     }
-
-    @Override
-    public void delete(Long id) {
-        insuranceRepository.delete(id);
-    }
 }
