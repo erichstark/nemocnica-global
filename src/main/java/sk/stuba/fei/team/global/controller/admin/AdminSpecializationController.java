@@ -27,8 +27,8 @@ public class AdminSpecializationController {
         return "admin/specialization/index";
     }
 
-    @RequestMapping(value = "/update/{id}", method = RequestMethod.POST)
-    public String edit(@RequestParam("name") String name, @PathVariable Long id) {
+    @RequestMapping(value = "/{id}", method = RequestMethod.POST)
+    public String edit(@RequestParam String name, @PathVariable Long id) {
 
         Specialization sp = specializationService.findOne(id);
         sp.setName(name);
@@ -37,7 +37,15 @@ public class AdminSpecializationController {
         return "redirect:/admin/specialization";
     }
 
-    @RequestMapping(value = "/save", method = RequestMethod.POST)
+    @RequestMapping(value = "/{id}/enabled", method = RequestMethod.POST)
+    public @ResponseBody boolean changeEnabled(@RequestParam Boolean enabled, @PathVariable Long id) {
+        Specialization s = specializationService.findOne(id);
+        s.setEnabled(enabled);
+        specializationService.save(s);
+        return true;
+    }
+
+    @RequestMapping(method = RequestMethod.POST)
     public String save(@RequestParam("name") String name) {
 
         Specialization sp = new Specialization(name);
@@ -47,7 +55,7 @@ public class AdminSpecializationController {
         return "redirect:/admin/specialization";
     }
 
-    @RequestMapping(value = "/delete/{id}")
+    @RequestMapping(value = "/{id}/delete")
     public String delete(@PathVariable Long id) {
 
         specializationService.delete(id);

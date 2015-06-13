@@ -17,7 +17,7 @@
         </form>
     </div>
     <div class="col-md-7">
-        <form name="specialization-add" action="<@spring.url '/admin/specialization/save'/>" method="post" class="row">
+        <form name="specialization-add" action="<@spring.url '/admin/specialization'/>" method="post" class="row">
             <div class="form-group col-md-8">
                 <input type="text" name="name" class="form-control" id="specialization-name" placeholder="Názov">
             </div>
@@ -40,7 +40,7 @@
         </thead>
         <tbody>
             <#list specializations as specialization>
-            <form name="specialization" action="<@spring.url '/admin/specialization/update/' + specialization.id />" method="post">
+            <form name="specialization" action="<@spring.url '/admin/specialization/' + specialization.id />" method="post">
                 <tr>
                     <td>${specialization.id}</td>
                     <td>
@@ -48,11 +48,13 @@
                     </td>
                     <td>
                         <input type="submit" value="Zmeň názov" class="btn btn-success">
-                        <a class="btn btn-danger" href="<@spring.url '/admin/specialization/delete/' + specialization.id />"
+                        <a class="btn btn-danger" href="<@spring.url '/admin/specialization/' + specialization.id + '/delete' />"
                            onclick="return confirm('Naozaj?');">Zmazať</a>
                     </td>
                     <td>
-                        <input type="checkbox" name="enabled" class="check-enabled" ${specialization.enabled?string("checked","")}>
+                        <div class="checkbox">
+                            <label><input type="checkbox" name="specialization-enabled" id="${specialization.id}" onchange="changeEnabled(this);" ${specialization.enabled?string("checked","")}></label>
+                        </div>
                     </td>
                 </tr>
             </form>
