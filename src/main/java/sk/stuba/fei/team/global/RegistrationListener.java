@@ -2,16 +2,13 @@ package sk.stuba.fei.team.global;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.ApplicationListener;
-import org.springframework.mail.MailParseException;
+import org.springframework.mail.SimpleMailMessage;
 import org.springframework.mail.javamail.JavaMailSender;
-import org.springframework.mail.javamail.MimeMessageHelper;
 import org.springframework.stereotype.Component;
 import sk.stuba.fei.team.global.domain.Patient;
 import sk.stuba.fei.team.global.service.OnRegistrationCompleteEvent;
 import sk.stuba.fei.team.global.service.PatientService;
 
-import javax.mail.MessagingException;
-import javax.mail.internet.MimeMessage;
 import java.util.UUID;
 
 @Component
@@ -36,17 +33,11 @@ public class RegistrationListener implements ApplicationListener<OnRegistrationC
         String confirmationUrl = event.getAppUrl() + "/registration/confirm?token=" + token;
         String message = "Registrácia úspešná";
 
-        MimeMessage mimeMessage = mailSender.createMimeMessage();
-        try {
-            MimeMessageHelper helper = new MimeMessageHelper(mimeMessage, true);
-            helper.setFrom("timovyprojekt.nemocnica@gmail.com");
-            helper.setTo(recipientAddress);
-            helper.setSubject(subject);
-            helper.setText(message + " rn" + "http://localhost:8180" + confirmationUrl);
-            mailSender.send(mimeMessage);
-        } catch (MessagingException e) {
-            throw new MailParseException(e);
-        }
+        SimpleMailMessage mailMessage = new SimpleMailMessage();
+        mailMessage.setTo(recipientAddress);
+        mailMessage.setSubject(subject);
+        mailMessage.setText(message + " rn" + "http://localhost:8180" + confirmationUrl);
+        mailSender.send(mailMessage);
     }
 }
 
