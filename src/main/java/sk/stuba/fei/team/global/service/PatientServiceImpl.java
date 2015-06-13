@@ -4,7 +4,9 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 import org.springframework.transaction.annotation.Transactional;
 import sk.stuba.fei.team.global.domain.Patient;
+import sk.stuba.fei.team.global.domain.VerificationToken;
 import sk.stuba.fei.team.global.repository.PatientRepository;
+import sk.stuba.fei.team.global.repository.VerificationTokenRepository;
 
 import java.util.Date;
 import java.util.List;
@@ -17,6 +19,9 @@ public class PatientServiceImpl implements PatientService {
     @Autowired
     PatientRepository patientRepository;
 
+    @Autowired
+    private VerificationTokenRepository tokenRepository;
+
     @Override
     public Patient findByUsername(String username) {
         return patientRepository.findByUsername(username);
@@ -25,6 +30,11 @@ public class PatientServiceImpl implements PatientService {
     @Override
     public void save(Patient patient) {
         patientRepository.save(patient);
+    }
+
+    @Override
+    public Patient saveAndReturn(Patient patient) {
+        return patientRepository.save(patient);
     }
 
     @Override
@@ -45,6 +55,17 @@ public class PatientServiceImpl implements PatientService {
     @Override
     public void delete(String username) {
         patientRepository.delete(username);
+    }
+
+    @Override
+    public VerificationToken getVerificationToken(String VerificationToken) {
+        return tokenRepository.findByToken(VerificationToken);
+    }
+
+    @Override
+    public void createVerificationToken(Patient patient, String token) {
+        VerificationToken myToken = new VerificationToken(token, patient);
+        tokenRepository.save(myToken);
     }
 
     @Override

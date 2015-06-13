@@ -5,6 +5,13 @@
 <@g.menuFooterPage>
 	<@g.headerBanner/>
 <div class="">
+	<#if spring.status.error>
+        <ul>
+			<#list spring.status.errors.globalErrors as error>
+                <li>${error.defaultMessage}</li>
+			</#list>
+        </ul>
+	</#if>
 	<div id="registration-panel" class="panel panel-default" style="margin-top:50px">
 		<div class="panel-heading"><h3 class="panel-title"><strong>Registrácia</strong></h3></div>
 		<div class="panel-body">
@@ -48,7 +55,11 @@
 				<div class="row">
 					<div class="form-group col-md-6">
 						<label for="insurance"><@spring.message "Insurance"/></label>
-						<input type="text" class="form-control" id="insurance" name="insurance">
+                        <select name="insurance" class="form-control" id="insurance">
+							<#list insurances as insurance>
+                                <option value="${insurance.id}">${insurance.name}</option>
+							</#list>
+                        </select>
 					</div>
 				</div>
 				<div class="row">

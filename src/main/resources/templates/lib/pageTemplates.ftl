@@ -65,12 +65,19 @@
         </div>
     </nav>
     <div class="container main-content">
+        <#if message>
+            <div class="panel panel-success">
+                <div class="panel-body">
+                    ${message}
+                </div>
+            </div>
+        </#if>
         <#nested>
     </div>
     <footer class="footer">
         <div class="container">
          <div class="left-aside">
-          <p>Tímovy projekt WeCare 2014-2015</p>
+          <p>Tímovy projekt tímu WeCare 2014-2015</p>
            <p>Fakulta elektrotechniky a informatiky, Slovenská technická univerzita , Bratislava</p>
          </div>
           <div class="footer-nav">

@@ -54,6 +54,7 @@ public class MainApplication extends WebMvcConfigurerAdapter {
             List<GrantedAuthority> authorities = new ArrayList<>();
             authorities.add(new SimpleGrantedAuthority("USER"));
             Patient userDetails = new Patient("user", encoder.encode("user123"), "user@fei.stuba.sk", authorities);
+            userDetails.setEnabled(true);
             patientService.save(userDetails);
         }
 //        if (patientService.findByUsername("admin") == null) {

@@ -41,7 +41,7 @@ public class Patient implements Serializable, UserDetails, CredentialsContainer 
         accountNonExpired = true;
         accountNonLocked = true;
         credentialsNonExpired = true;
-        enabled = true;
+        enabled = false;
         firstName = "";
         surname = "";
         prefix_title = "";
@@ -57,7 +57,7 @@ public class Patient implements Serializable, UserDetails, CredentialsContainer 
         accountNonExpired = true;
         accountNonLocked = true;
         credentialsNonExpired = true;
-        enabled = true;
+        enabled = false;
         firstName = "";
         surname = "";
         prefix_title = "";
@@ -73,7 +73,7 @@ public class Patient implements Serializable, UserDetails, CredentialsContainer 
         accountNonExpired = true;
         accountNonLocked = true;
         credentialsNonExpired = true;
-        enabled = true;
+        enabled = false;
         firstName = "";
         surname = "";
         prefix_title = "";
