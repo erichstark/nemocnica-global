@@ -41,6 +41,7 @@ public class AdminSpecializationController {
     public String save(@RequestParam("name") String name) {
 
         Specialization sp = new Specialization(name);
+        sp.setEnabled(true);
         specializationService.save(sp);
 
         return "redirect:/admin/specialization";

@@ -56,12 +56,12 @@ public class MainApplication extends WebMvcConfigurerAdapter {
             Patient userDetails = new Patient("user", encoder.encode("user123"), "user@fei.stuba.sk", authorities);
             patientService.save(userDetails);
         }
-        if (patientService.findByUsername("admin") == null) {
-            List<GrantedAuthority> authorities = new ArrayList<>();
-            authorities.add(new SimpleGrantedAuthority("ADMIN"));
-            Patient userDetails = new Patient("admin", encoder.encode("admin123"), "admin@fei.stuba.sk", authorities);
-            patientService.save(userDetails);
-        }
+//        if (patientService.findByUsername("admin") == null) {
+//            List<GrantedAuthority> authorities = new ArrayList<>();
+//            authorities.add(new SimpleGrantedAuthority("ADMIN"));
+//            Patient userDetails = new Patient("admin", encoder.encode("admin123"), "admin@fei.stuba.sk", authorities);
+//            patientService.save(userDetails);
+//        }
     }
 
     @Bean

@@ -35,7 +35,8 @@
             <th style="width: 60px;">ID</th>
             <th>Názov zariadenia</th>
             <th>Adresa</th>
-            <th style="width: 60px;">Akcia</th>
+            <th>Stav</th>
+            <th></th>
         </tr>
         </thead>
         <tbody>
@@ -45,6 +46,7 @@
                 <td>${facility.id}</td>
                 <td><a href="<@spring.url '/admin/facility/edit/' + facility.id />">${facility.name}</a></td>
                 <td>${facility.streetAndNumber+', '+facility.zip+' '+facility.city}</td>
+                <td><@spring.message "Enabled"+facility.enabled?c /></td>
                 <td><a href="<@spring.url '/admin/facility/delete/' + facility.id />"
                        onclick="return confirm('!! Zmaz ak si si isty ze toto facility nema ziadnu ambulanciu !!');">Zmazať</a>
                 </td>
