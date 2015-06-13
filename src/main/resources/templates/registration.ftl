@@ -5,12 +5,14 @@
 <@g.menuFooterPage>
 	<@g.headerBanner/>
 <div class="">
-	<#if spring.status.error>
+	<#if spring.status??>
+		<#if spring.status.error??>
         <ul>
 			<#list spring.status.errors.globalErrors as error>
                 <li>${error.defaultMessage}</li>
 			</#list>
         </ul>
+		</#if>
 	</#if>
 	<div id="registration-panel" class="panel panel-default" style="margin-top:50px">
 		<div class="panel-heading"><h3 class="panel-title"><strong>Registrácia</strong></h3></div>

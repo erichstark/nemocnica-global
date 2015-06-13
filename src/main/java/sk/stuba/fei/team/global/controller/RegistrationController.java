@@ -21,6 +21,7 @@ import javax.validation.Valid;
 import java.util.Calendar;
 import java.util.Locale;
 import java.util.Map;
+import java.util.logging.Logger;
 
 @Controller
 public class RegistrationController {
@@ -29,6 +30,8 @@ public class RegistrationController {
 	PatientService patientService;
 	@Autowired
 	InsuranceService insuranceService;
+
+	public static final Logger LOGGER = Logger.getLogger(RegistrationController.class.getName());
 
 	@RequestMapping("/registration")
 	public String index(Map<String, Object> model) {
@@ -39,8 +42,6 @@ public class RegistrationController {
 	}
 
 	// TODO check if email exist in DB
-
-	// TODO type of user from registration form
 
 //	@RequestMapping(value = "/registration/save", method = RequestMethod.POST)
 //	public String save(@ModelAttribute("patient") Patient patient, Map<String, Object> model) {
@@ -57,6 +58,9 @@ public class RegistrationController {
 	public String registerUserAccount(@ModelAttribute("patient") @Valid Patient patient,
 											BindingResult result, WebRequest request, Model model) {
 		if (result.hasErrors()) {
+			model.addAttribute("patient", new Patient());
+			model.addAttribute("insurances", insuranceService.findAllEnabled());
+			model.addAttribute("pageTitle", "Registrácia");
 			return "registration";
 		}
 
@@ -64,9 +68,13 @@ public class RegistrationController {
 		try {
 			String appUrl = request.getContextPath();
 			eventPublisher.publishEvent(new OnRegistrationCompleteEvent
-					(registered, request.getLocale(), appUrl));
+					(registered, new Locale("sk_SK"), appUrl));
 		} catch (Exception me) {
 			result.addError(new ObjectError("unexpectederror",me.getMessage()));
+			LOGGER.info(me.getMessage());
+			model.addAttribute("patient", new Patient());
+			model.addAttribute("insurances", insuranceService.findAllEnabled());
+			model.addAttribute("pageTitle", "Registrácia");
 			return "registration";
 		}
 		model.addAttribute("message","Úspešne zaregistrovaný, aktivujte si svoje konto aktivačným kódom doručeným na e-mail.");
