@@ -1,5 +1,5 @@
-<#-- @ftlvariable name="offices" type="sk.stuba.fei.team.local.domain.Office[]" -->
-<#-- @ftlvariable name="employee" type="sk.stuba.fei.team.local.domain.Employee" -->
+<#-- @ftlvariable name="offices" type="sk.stuba.fei.team.global.domain.Office[]" -->
+<#-- @ftlvariable name="employee" type="sk.stuba.fei.team.global.domain.Employee" -->
 <#import "../../lib/pageTemplates.ftl" as pt>
 <#import "/spring.ftl" as spring>
 <@pt.dashboardPage>
@@ -16,32 +16,38 @@
 <div class="table-responsive">
     <form name="patient" action="<@spring.url '/admin/employee/save'/>" method="post">
         <div class="form-group">
-            <label for="employee-id">ID</label>
-            <input type="text" name="id" class="form-control" id="employee-id" placeholder="ID"
-                   value="${employee.id!""}">
+            <label for="employee-prefix_title">Titul pred menom</label>
+            <input type="text" name="prefix_title" class="form-control" id="employee-prefix_title" placeholder="Titul pred menom">
         </div>
         <div class="form-group">
-            <label for="employee-prefix_title">Titul pred</label>
-            <input type="text" name="prefix_title" class="form-control" id="employee-prefix_title"
-                   placeholder="Titul pred"
-                   value="${employee.prefix_title!""}">
+            <label for="employee-firstName">Meno*</label>
+            <input type="text" name="firstName" class="form-control" id="employee-firstName" placeholder="Meno" required>
         </div>
         <div class="form-group">
-            <label for="employee-firstName">Meno</label>
-            <input type="text" name="firstName" class="form-control" id="employee-firstName" placeholder="Meno"
-                   value="${employee.firstName!""}">
+            <label for="employee-surname">Priezvisko*</label>
+            <input type="text" name="lastName" class="form-control" id="employee-surname" placeholder="Priezvisko" required>
         </div>
         <div class="form-group">
-            <label for="employee-surname">Priezvisko</label>
-            <input type="text" name="lastName" class="form-control" id="employee-surname" placeholder="Priezvisko"
-                   value="${employee.lastName!""}">
+            <label for="employee-suffix_title">Titul za menom</label>
+            <input type="text" name="suffix_title" class="form-control" id="employee-suffix_title" placeholder="Titul za menom">
         </div>
         <div class="form-group">
-            <label for="employee-suffix_title">Titul za</label>
-            <input type="text" name="suffix_title" class="form-control" id="employee-suffix_title"
-                   placeholder="Titul za"
-                   value="${employee.suffix_title!""}">
+            <label for="employee-phone">Telefón</label>
+            <input type="text" name="phone" class="form-control" id="employee-phone" placeholder="Telefón">
         </div>
+        <div class="form-group">
+            <label for="employee-email">E-mail</label>
+            <input type="text" name="email" class="form-control" id="employee-email" placeholder="E-mail">
+        </div>
+        <div class="form-group">
+            <label for="employee-username">Meno používateľa*</label>
+            <input type="text" name="username" class="form-control" id="employee-username" placeholder="Username" required>
+        </div>
+        <div class="form-group">
+            <label for="employee-password">Heslo*</label>
+            <input type="text" name="password" class="form-control" id="employee-password" placeholder="Heslo" required>
+        </div>
+
 
         <div class="form-group">
             <div>

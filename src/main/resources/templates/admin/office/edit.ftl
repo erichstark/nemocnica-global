@@ -1,6 +1,6 @@
-<#-- @ftlvariable name="insurances" type="sk.stuba.fei.team.local.domain.Insurance[]" -->
-<#-- @ftlvariable name="office.insurances" type="sk.stuba.fei.team.local.domain.Insurance[]" -->
-<#-- @ftlvariable name="office" type="sk.stuba.fei.team.local.domain.Office[]" -->
+<#-- @ftlvariable name="insurances" type="sk.stuba.fei.team.global.domain.Insurance[]" -->
+<#-- @ftlvariable name="office.insurances" type="sk.stuba.fei.team.global.domain.Insurance[]" -->
+<#-- @ftlvariable name="office" type="sk.stuba.fei.team.global.domain.Office[]" -->
 <#import "../../lib/pageTemplates.ftl" as pt>
 <#import "/spring.ftl" as spring>
 <@pt.dashboardPage>
@@ -17,7 +17,7 @@
 <div class="table-responsive">
 
     <form name="office" action="<@spring.url '/admin/office/edit'/>" method="post">
-        <div class="form-group">
+        <div class="form-group" style="display: none">
             <label for="office-id">ID</label>
             <input type="text" name="id" class="form-control" id="office-id" placeholder="ID"
                    value="${office.id}">

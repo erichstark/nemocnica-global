@@ -1,5 +1,5 @@
-<#-- @ftlvariable name="insurances" type="sk.stuba.fei.team.local.domain.Insurance[]" -->
-<#-- @ftlvariable name="patient" type="sk.stuba.fei.team.local.domain.Patient" -->
+<#-- @ftlvariable name="insurances" type="sk.stuba.fei.team.global.domain.Insurance[]" -->
+<#-- @ftlvariable name="patient" type="sk.stuba.fei.team.global.domain.Patient" -->
 <#import "../../lib/pageTemplates.ftl" as pt>
 <#import "/spring.ftl" as spring>
 
@@ -16,13 +16,6 @@
 
 <div class="table-responsive">
     <form name="patient" action="<@spring.url '/admin/patient/save'/>" method="post">
-        <!--
-        <div class="form-group">
-            <label for="patient-username">Prihlasovacie meno (ID)</label>
-            <input type="hidden" name="username" class="form-control" id="patient-username" placeholder="Prihlasovacie meno"
-                   value="${patient.username!""}">
-        </div>
-        -->
         <input type="hidden" name="username" class="form-control" id="patient-username" placeholder="Prihlasovacie meno"
                value="${patient.username!""}">
 
@@ -62,7 +55,7 @@
             <input type="text" name="phone" class="form-control" id="patient-phone" placeholder="Telefón"
                    value="${patient.phone!""}">
         </div>
-        <table>
+        <table class="form-group">
             <tr>
                 <td style="width: 300px;">
                     <label class="radio-inline"><input type="radio" name="enabled" value="true"
@@ -117,30 +110,16 @@
             </tr>
         </table>
 
-        <br><br>
-
         <div class="form-group">
-            <label for="patient-autority">Autorita</label>
-            <select name="autority" class="form-control" id="patient-autority">
-                <#if patient.getStringAuthorities()?seq_contains("USER")>
-                    <option value="USER" selected="selected">USER</option>
-                    <option value="ADMIN">ADMIN</option>
+            <label for="patient-insurance">Poisťovňa</label>
+            <select name="id_insurance" class="form-control" id="patient-insurance">
+                <#if patient.insurance??>
+                    <option value="${patient.insurance.id}" selected="selected">${patient.insurance.name}</option>
                 <#else>
-                    <option value="USER">USER</option>
-                    <option value="ADMIN" selected="selected">ADMIN</option>
+                    <option value="null" selected></option>
                 </#if>
-            </select>
-        </div>
-
-        <div class="form-group">
-            <label for="pationt-insurance">Poisťovňa</label>
-            <select name="id_insurance" class="form-control" id="pationt-insurance">
                 <#list insurances as insurance>
-                    <#if insurance.id == patient.insurance.id>
-                        <option value="${insurance.id}" selected="selected">${patient.insurance.name}</option>
-                    <#else>
-                        <option value="${insurance.id}">${insurance.name}</option>
-                    </#if>
+                    <option value="${insurance.id}">${insurance.name}</option>
                 </#list>
             </select>
         </div>

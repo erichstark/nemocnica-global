@@ -1,6 +1,6 @@
-<#-- @ftlvariable name="specializations" type="sk.stuba.fei.team.local.domain.Specialization[]" -->
-<#-- @ftlvariable name="offices" type="sk.stuba.fei.team.local.domain.Office[]" -->
-<#-- @ftlvariable name="employee" type="sk.stuba.fei.team.local.domain.Employee" -->
+<#-- @ftlvariable name="specializations" type="sk.stuba.fei.team.global.domain.Specialization[]" -->
+<#-- @ftlvariable name="offices" type="sk.stuba.fei.team.global.domain.Office[]" -->
+<#-- @ftlvariable name="employee" type="sk.stuba.fei.team.global.domain.Employee" -->
 <#import "../../lib/pageTemplates.ftl" as pt>
 <#import "/spring.ftl" as spring>
 <@pt.dashboardPage>
@@ -16,16 +16,11 @@
 
 <div class="table-responsive">
     <form name="patient" action="<@spring.url '/admin/employee/edit'/>" method="post">
-        <div class="form-group" style="display: none;">
-            <label for="employee-id">ID</label>
-            <input type="text" name="id" class="form-control" id="employee-id" placeholder="ID"
-                   value="${employee.id!""}">
-        </div>
-
+        <input type="hidden" name="username" id="employee-username" value="${employee.username}">
         <div class="form-group">
-            <label for="employee-prefix_title">Titul pred</label>
+            <label for="employee-prefix_title">Titul pred menom</label>
             <input type="text" name="prefix_title" class="form-control" id="employee-prefix_title"
-                   placeholder="Titul pred"
+                   placeholder="Titul pred menom"
                    value="${employee.prefix_title!""}">
         </div>
         <div class="form-group">
@@ -39,10 +34,20 @@
                    value="${employee.lastName!""}">
         </div>
         <div class="form-group">
-            <label for="employee-suffix_title">Titul za</label>
+            <label for="employee-suffix_title">Titul za menom</label>
             <input type="text" name="suffix_title" class="form-control" id="employee-suffix_title"
-                   placeholder="Titul za"
+                   placeholder="Titul za menom"
                    value="${employee.suffix_title!""}">
+        </div>
+        <div class="form-group">
+            <label for="employee-phone">Telefón</label>
+            <input type="text" name="phone" class="form-control" id="employee-phone" placeholder="Telefón"
+                   value="${employee.phone!""}">
+        </div>
+        <div class="form-group">
+            <label for="employee-email">E-mail</label>
+            <input type="text" name="email" class="form-control" id="employee-email" placeholder="E-mail"
+                   value="${employee.phone!""}">
         </div>
 
         <div class="form-group">
@@ -64,8 +69,12 @@
         <form class="form-inline" method="POST" action="<@spring.url '/admin/employee/specialization/add'/>">
             <div class="form-group">
                 <label for="employee-office">Specializácia:</label>
-                <input type="text" class="form-control" name="specialization" value="">
-                <input type="hidden" name="id_employee" value="${employee.id}">
+                <select name="id_specialization" class="form-control" id="employee-office">
+                    <#list specializations as specialization>
+                        <option value="${specialization.id}">${specialization.name}</option>
+                    </#list>
+                </select>
+                <input type="hidden" name="id_employee" value="${employee.username}">
             </div>
             <input type="submit" value="Pridaj" class="btn btn-success">
         </form>
@@ -87,7 +96,7 @@
                         <td>${specialization_index + 1}</td>
                         <td>${specialization}</td>
                         <td>
-                            <a href="<@spring.url '/admin/employee/'+employee.id+'/specialization/'+specialization_index+'/delete' />"
+                            <a href="<@spring.url '/admin/employee/'+employee.username+'/specialization/'+specialization.id+'/delete' />"
                                onclick="return confirm('Naozaj?');">Zmazať</a></td>
                     </tr>
                     </#list>
@@ -110,7 +119,7 @@
                         <option value="${office.id}">${office.name}</option>
                     </#list>
                 </select>
-                <input type="hidden" name="id_employee" value="${employee.id}">
+                <input type="hidden" name="id_employee" value="${employee.username}">
             </div>
             <input type="submit" value="Pridaj" class="btn btn-success">
         </form>
@@ -134,7 +143,7 @@
                         <td>${office.id}</td>
                         <td>${office.name}</td>
                         <td>
-                            <a href="<@spring.url '/admin/employee/'+employee.id+'/office/'+office.id+'/delete' />"
+                            <a href="<@spring.url '/admin/employee/'+employee.username+'/office/'+office.id+'/delete' />"
                                onclick="return confirm('Naozaj?');">Zmazať</a></td>
                     </tr>
                     </#list>

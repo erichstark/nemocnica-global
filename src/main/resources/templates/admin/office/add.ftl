@@ -1,4 +1,4 @@
-<#-- @ftlvariable name="facilities" type="sk.stuba.fei.team.local.domain.Facility[]" -->
+<#-- @ftlvariable name="facilities" type="sk.stuba.fei.team.global.domain.Facility[]" -->
 <#import "../../lib/pageTemplates.ftl" as pt>
 <#import "/spring.ftl" as spring>
 <@pt.dashboardPage>
@@ -20,11 +20,6 @@
     <div class="table-responsive">
 
         <form name="office" action="<@spring.url '/admin/office/save'/>" method="post">
-            <div class="form-group">
-                <label for="office-id">ID</label>
-                <input type="text" name="id" class="form-control" id="office-id" placeholder="ID"
-                       value="${office.id!""}">
-            </div>
             <div class="form-group">
                 <label for="office-name">Názov</label>
                 <input type="text" name="name" class="form-control" id="office-name" placeholder="Názov"

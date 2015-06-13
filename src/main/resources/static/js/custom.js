@@ -20,3 +20,16 @@ $(function() {
 		}
 	});
 });
+
+function changeEnabled(item) {
+	var what = $(item).attr('name').split('-')[0];
+	var id = $(item).attr('id');
+	var enabled = $(item).attr('checked') ? false : true;
+
+	$.ajax({
+		type: "POST",
+		url: "/admin/"+what+"/"+id+"/enabled",
+		data: {enabled: enabled},
+		dataType: "json"
+	});
+}

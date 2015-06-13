@@ -37,7 +37,7 @@
                                 class="glyphicon glyphicon-user"></i>${user.getUsername()}</a>
                         <ul class="dropdown-menu">
                             <li>
-                                <a href="<@spring.url '/order'/>">Moje Objednavky</a>
+                                <a href="<@spring.url '/appointment/${user.username}'/>">Moje Objednavky</a>
                             </li>
 
                             <li class="divider"></li>

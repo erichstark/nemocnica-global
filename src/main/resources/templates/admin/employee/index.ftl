@@ -1,4 +1,4 @@
-<#-- @ftlvariable name="employees" type="sk.stuba.fei.team.local.domain.Employee[]" -->
+<#-- @ftlvariable name="employees" type="sk.stuba.fei.team.global.domain.Employee[]" -->
 <#import "../../lib/pageTemplates.ftl" as pt>
 <#import "/spring.ftl" as spring>
 <@pt.dashboardPage>
@@ -33,8 +33,10 @@
         <thead>
         <tr>
             <th style="width: 60px;">#</th>
-            <th>ID</th>
+            <th>Username</th>
             <th>Meno zamestnanca</th>
+            <th>Telefón</th>
+            <th>E-mail</th>
             <th style="width: 60px;">Akcia</th>
         </tr>
         </thead>
@@ -42,14 +44,16 @@
             <#list employees as employee>
             <tr>
                 <td>${employee_index + 1}</td>
-                <td>${employee.id}</td>
+                <td>${employee.username}</td>
                 <td>
-                    <a href="<@spring.url '/admin/employee/edit/' + employee.id />">
+                    <a href="<@spring.url '/admin/employee/edit/' + employee.username />">
                     ${employee.prefix_title + ' ' + employee.firstName + ' ' + employee.lastName}
                         <#if employee.suffix_title?length gt 0>${', ' + employee.suffix_title}</#if>
                     </a>
                 </td>
-                <td><a href="<@spring.url '/admin/employee/delete/' + employee.id />"
+                <td>${employee.phone!""}</td>
+                <td>${employee.email!""}</td>
+                <td><a href="<@spring.url '/admin/employee/delete/' + employee.username />"
                        onclick="return confirm('Naozaj?');">Zmazať</a></td>
             </tr>
             </#list>
