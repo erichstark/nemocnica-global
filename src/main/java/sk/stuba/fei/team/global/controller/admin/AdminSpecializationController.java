@@ -55,14 +55,6 @@ public class AdminSpecializationController {
         return "redirect:/admin/specialization";
     }
 
-    @RequestMapping(value = "/{id}/delete")
-    public String delete(@PathVariable Long id) {
-
-        specializationService.delete(id);
-
-        return "redirect:/admin/specialization";
-    }
-
     @RequestMapping(value = "/search", method = RequestMethod.POST)
     public String search(@RequestParam("text") String text, Map<String, Object> model) {
 

@@ -18,7 +18,7 @@ public class AdminInsuranceController {
     @Autowired
     private InsuranceService insuranceService;
 
-    @RequestMapping("")
+    @RequestMapping(method = RequestMethod.GET)
     public String index(Map<String, Object> model) {
 
         model.put("pageTitle", "Admin Insurances");
@@ -27,7 +27,7 @@ public class AdminInsuranceController {
         return "admin/insurance/index";
     }
 
-    @RequestMapping(value = "/update/{id}", method = RequestMethod.POST)
+    @RequestMapping(value = "/{id}", method = RequestMethod.POST)
     public String edit(@PathVariable Long id, @RequestParam("name") String name) {
 
         Insurance in = insuranceService.findOne(id);
@@ -37,19 +37,20 @@ public class AdminInsuranceController {
         return "redirect:/admin/insurance";
     }
 
-    @RequestMapping(value = "/save", method = RequestMethod.POST)
+    @RequestMapping(value = "/{id}/enabled", method = RequestMethod.POST)
+    public @ResponseBody boolean changeEnabled(@RequestParam Boolean enabled, @PathVariable Long id) {
+        Insurance i = insuranceService.findOne(id);
+        i.setEnabled(enabled);
+        insuranceService.save(i);
+        return true;
+    }
+
+    @RequestMapping(method = RequestMethod.POST)
     public String save(@RequestParam("name") String name) {
 
         Insurance in = new Insurance(name);
+        in.setEnabled(true);
         insuranceService.save(in);
-
-        return "redirect:/admin/insurance";
-    }
-
-    @RequestMapping(value = "/delete/{id}")
-    public String delete(@PathVariable Long id) {
-
-        insuranceService.delete(id);
 
         return "redirect:/admin/insurance";
     }
