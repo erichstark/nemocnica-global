@@ -59,7 +59,6 @@ public class RegistrationController {
 			eventPublisher.publishEvent(new OnRegistrationCompleteEvent
 					(registered, new Locale("sk_SK"), appUrl));
 		} catch (Exception me) {
-			LOGGER.info(me.getMessage());
             redirectAttributes.addFlashAttribute("errors", result.getAllErrors());
             return "redirect:/registration";
         }
@@ -74,19 +73,21 @@ public class RegistrationController {
 
 		VerificationToken verificationToken = patientService.getVerificationToken(token);
 		if (verificationToken == null) {
-			redirectAttributes.addFlashAttribute("message", "Zlý verifikačný token");
+			redirectAttributes.addFlashAttribute("error", "Zlý verifikačný token");
 			return "redirect:/";
 		}
 
-		Patient patient = verificationToken.getPatient();
 		Calendar cal = Calendar.getInstance();
 		if ((verificationToken.getExpiryDate().getTime() - cal.getTime().getTime()) <= 0) {
-			redirectAttributes.addFlashAttribute("message", "Verifikačný token expiroval");
+			redirectAttributes.addFlashAttribute("error", "Verifikačný token expiroval");
 			return "redirect:/";
 		}
 
-		patient.setEnabled(true);
+        Patient patient = patientService.findByUsername(verificationToken.getPatient().getUsername());
+        patient.setEnabled(true);
+
 		patientService.save(patient);
+
         redirectAttributes.addFlashAttribute("message", "Úspešne aktivované");
 		return "redirect:/login";
 	}

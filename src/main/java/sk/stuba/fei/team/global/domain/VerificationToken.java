@@ -7,31 +7,32 @@ import java.util.Date;
 
 @Entity
 public class VerificationToken {
+
     private static final int EXPIRATION = 60 * 24;
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
+    @Column
     private String token;
 
     @OneToOne(targetEntity = Patient.class, fetch = FetchType.LAZY)
     @JoinColumn(nullable = false, name = "username")
     private Patient patient;
 
+    @Column
     private Date expiryDate;
-
-    private boolean verified;
 
     public VerificationToken() {
         super();
     }
+
     public VerificationToken(String token, Patient patient) {
         super();
         this.token = token;
         this.patient = patient;
         this.expiryDate = calculateExpiryDate(EXPIRATION);
-        this.verified = false;
     }
 
     private Date calculateExpiryDate(int expiryTimeInMinutes) {
@@ -72,13 +73,6 @@ public class VerificationToken {
 
     public void setExpiryDate(Date expiryDate) {
         this.expiryDate = expiryDate;
-    }
 
-    public boolean isVerified() {
-        return verified;
-    }
 
-    public void setVerified(boolean verified) {
-        this.verified = verified;
-    }
-}
+}   }

@@ -3,15 +3,17 @@
 <#import "/spring.ftl" as spring>
 <#assign pageTitle in g><@spring.message "Registration"/></#assign>
 <@g.menuFooterPage>
-	<@g.headerBanner/>
-<div class="">
-	<#if errors??>
-        <ul>
-			<#list errors as error>
-                <li>${error.defaultMessage}</li>
-			</#list>
-        </ul>
-	</#if>
+    <@g.headerBanner/>
+<div class="container">
+    <div class="alert alert-danger">
+        <#if errors??>
+            <ul>
+                <#list errors as error>
+                    <li>${error.defaultMessage}</li>
+                </#list>
+            </ul>
+        </#if>
+    </div>
     <div id="registration-panel" class="panel panel-default" style="margin-top:50px">
         <div class="panel-heading"><h3 class="panel-title"><strong>Registrácia</strong></h3></div>
         <div class="panel-body">
@@ -56,9 +58,9 @@
                     <div class="form-group col-md-6">
                         <label for="insurance"><@spring.message "Insurance"/></label>
                         <select name="insurance" class="form-control" id="insurance">
-							<#list insurances as insurance>
+                            <#list insurances as insurance>
                                 <option value="${insurance.id}">${insurance.name}</option>
-							</#list>
+                            </#list>
                         </select>
                     </div>
                 </div>

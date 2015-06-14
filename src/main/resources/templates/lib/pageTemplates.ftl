@@ -66,11 +66,10 @@
     </nav>
     <div class="container main-content">
         <#if message??>
-            <div class="panel panel-success">
-                <div class="panel-body">
-                    ${message}
-                </div>
-            </div>
+            <div class="alert alert-success" role="alert">${message}</div>
+        </#if>
+        <#if error??>
+            <div class="alert alert-danger" role="alert">${error}</div>
         </#if>
         <#nested>
     </div>
@@ -83,15 +82,14 @@
           <div class="footer-nav">
             <ul class="list-unstyled">
                 <li><a>Vyhľadávanie</a></li>
-                <li><a>Prihlásenie</a></li>
-                <li><a>Registrácia</a></li>
+                <li><a href="<@spring.url '/login'/>">Prihlásenie</a></li>
+                <li><a href="<@spring.url '/registration'/>">Registrácia</a></li>
                 <li><a>Návod</a></li>
             </ul>
           </div>
           <div style="float:left;width:200px;padding-left:50px;">
              <span style="text-decoration: underline;display:block">Kontakt</span>
-
-              Email: mail@mail.com
+              Email: timovyprojekt.nemocnica@gmail.com
           </div>
         </div>
     </footer>
