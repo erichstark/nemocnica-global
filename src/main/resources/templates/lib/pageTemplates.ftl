@@ -103,7 +103,7 @@
             <div class="navbar-header">
                 <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#navbar"
                         aria-expanded="false" aria-controls="navbar">
-                    <span class="sr-only">Toggle navigation</span>
+                    <span class="sr-only">Navigácia</span>
                     <span class="icon-bar"></span>
                     <span class="icon-bar"></span>
                     <span class="icon-bar"></span>
@@ -117,13 +117,10 @@
                                 class="glyphicon glyphicon-user"></i> <#if user??>${user.getUsername()}</#if> </a>
                         <ul class="dropdown-menu">
                             <li>
-                                <a href="#"><i class="glyphicon glyphicon-user"></i> Profile</a>
+                                <a href="#"><i class="glyphicon glyphicon-user"></i> Profil</a>
                             </li>
                             <li>
-                                <a href="#"><i class="glyphicon glyphicon-envelope"></i> Inbox</a>
-                            </li>
-                            <li>
-                                <a href="#"><i class="glyphicon glyphicon-cog"></i> Settings</a>
+                                <a href="#"><i class="glyphicon glyphicon-cog"></i> Moje nastavenia</a>
                             </li>
                             <li class="divider"></li>
                             <li>
@@ -143,7 +140,7 @@
                     <li><a href="<@spring.url '/admin'/>">Prehľad</a></li>
                     <li><a href="<@spring.url '/admin/facility'/>">Zariadenia</a></li>
                     <li><a href="<@spring.url '/admin/office'/>">Ambulancie</a></li>
-                    <li><a href="<@spring.url '/admin/insurance'/>">Poistovne</a></li>
+                    <li><a href="<@spring.url '/admin/insurance'/>">Poisťovne</a></li>
                     <li><a href="<@spring.url '/admin/specialization'/>">Špecializácie</a></li>
                     <li><a href="<@spring.url '/admin/patient'/>">Pacienti</a></li>
                     <li><a href="<@spring.url '/admin/employee'/>">Zamestnanci</a></li>
