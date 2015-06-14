@@ -5,7 +5,6 @@ import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.SpringSecurityCoreVersion;
 import org.springframework.security.core.authority.SimpleGrantedAuthority;
 import org.springframework.security.core.userdetails.UserDetails;
-import org.springframework.util.Assert;
 
 import javax.persistence.*;
 import javax.xml.bind.annotation.XmlRootElement;
@@ -17,9 +16,10 @@ import java.util.stream.Collectors;
 @XmlRootElement
 public class Patient implements Serializable, UserDetails, CredentialsContainer {
 
+    private static final long serialVersionUID = 324553128966091993L;
     private String password;
     private String username;
-    private Set<GrantedAuthority> authorities;
+    private List<GrantedAuthority> authorities;
     private boolean accountNonExpired;
     private boolean accountNonLocked;
     private boolean credentialsNonExpired;
@@ -37,9 +37,7 @@ public class Patient implements Serializable, UserDetails, CredentialsContainer 
     public Patient() {
         password = "";
         username = "";
-        List<GrantedAuthority> authorities = new ArrayList<>();
-        authorities.add(new SimpleGrantedAuthority("USER"));
-        this.authorities = Collections.unmodifiableSet(sortAuthorities(authorities));
+        authorities = new ArrayList<>();
         accountNonExpired = true;
         accountNonLocked = true;
         credentialsNonExpired = true;
@@ -50,30 +48,13 @@ public class Patient implements Serializable, UserDetails, CredentialsContainer 
         suffix_title = "";
         phone = "";
         email = "";
-        this.appointments = new ArrayList<Appointment>();
+        appointments = new ArrayList<Appointment>();
     }
 
-    public Patient(Collection<? extends GrantedAuthority> authorities) {
-        password = "";
-        username = "";
-        this.authorities = Collections.unmodifiableSet(sortAuthorities(authorities));
-        accountNonExpired = true;
-        accountNonLocked = true;
-        credentialsNonExpired = true;
-        enabled = false;
-        firstName = "";
-        surname = "";
-        prefix_title = "";
-        suffix_title = "";
-        phone = "";
-        email = "";
-        this.appointments = new ArrayList<Appointment>();
-    }
-
-    public Patient(String username, String password, String email, Collection<? extends GrantedAuthority> authorities) {
+    public Patient(String username, String password, String email, List<GrantedAuthority> authorities) {
         this.password = password;
         this.username = username;
-        this.authorities = Collections.unmodifiableSet(sortAuthorities(authorities));
+        this.authorities = authorities;
         accountNonExpired = true;
         accountNonLocked = true;
         credentialsNonExpired = true;
@@ -84,21 +65,7 @@ public class Patient implements Serializable, UserDetails, CredentialsContainer 
         suffix_title = "";
         phone = "";
         this.email = email;
-        this.appointments = new ArrayList<Appointment>();
-    }
-
-    private static SortedSet<GrantedAuthority> sortAuthorities(Collection<? extends GrantedAuthority> authorities) {
-        Assert.notNull(authorities, "Cannot pass a null GrantedAuthority collection");
-        // Ensure array iteration order is predictable (as per UserDetails.getAuthorities() contract and SEC-717)
-        SortedSet<GrantedAuthority> sortedAuthorities =
-                new TreeSet<>(new AuthorityComparator());
-
-        for (GrantedAuthority grantedAuthority : authorities) {
-            Assert.notNull(grantedAuthority, "GrantedAuthority list cannot contain any null elements");
-            sortedAuthorities.add(grantedAuthority);
-        }
-
-        return sortedAuthorities;
+        appointments = new ArrayList<Appointment>();
     }
 
     @Id
@@ -120,34 +87,26 @@ public class Patient implements Serializable, UserDetails, CredentialsContainer 
     }
 
     @Transient
-    public Set<GrantedAuthority> getAuthorities() {
+    public List<GrantedAuthority> getAuthorities() {
         return authorities;
     }
 
-    public void setAuthorities(Set<GrantedAuthority> authorities) {
+    public void setAuthorities(List<GrantedAuthority> authorities) {
         this.authorities = authorities;
     }
 
-    @ElementCollection(fetch = FetchType.LAZY)
+    @ElementCollection
     @Column(name = "authority")
     @CollectionTable(
             name = "patient_authorities",
             joinColumns = @JoinColumn(name = "username")
     )
-    public Set<String> getStringAuthorities() {
-        if (authorities == null) {
-            return new HashSet<String>();
-        }
-        return authorities.stream().map(GrantedAuthority::getAuthority).collect(Collectors.toSet());
+    public List<String> getStringAuthorities() {
+        return authorities.stream().map(GrantedAuthority::getAuthority).collect(Collectors.toList());
     }
 
-    public void setStringAuthorities(Set<String> authorities) {
-        try {
-            this.authorities = authorities.stream().map(SimpleGrantedAuthority::new).collect(Collectors.toSet());
-        } catch (Exception e) {
-            this.authorities = null;
-        }
-
+    public void setStringAuthorities(List<String> authorities) {
+        this.authorities = authorities.stream().map(SimpleGrantedAuthority::new).collect(Collectors.toList());
     }
 
     @Column(columnDefinition = "BOOLEAN NOT NULL DEFAULT TRUE")
@@ -253,6 +212,7 @@ public class Patient implements Serializable, UserDetails, CredentialsContainer 
     }
 
     @OneToMany(cascade = CascadeType.PERSIST, mappedBy = "patient")
+    @Transient
     public List<Appointment> getAppointments() {
         return appointments;
     }

@@ -22,7 +22,7 @@ public interface PatientService {
 
     void delete(String username);
 
-    void createVerificationToken(Patient patient, String token);
+    void saveVerificationToken(VerificationToken token);
 
     VerificationToken getVerificationToken(String VerificationToken);
 

@@ -4,8 +4,8 @@ import sk.stuba.fei.team.global.domain.Patient;
 import sk.stuba.fei.team.global.service.InsuranceService;
 import sk.stuba.fei.team.global.service.PatientService;
 
-import java.util.HashSet;
-import java.util.Set;
+import java.util.ArrayList;
+import java.util.List;
 
 public class PatientWrapper {
     private String username;
@@ -39,7 +39,7 @@ public class PatientWrapper {
         p.setPrefix_title(prefix_title);
         p.setSuffix_title(suffix_title);
         p.setInsurance(insuranceService.findOne(insurance));
-        Set<String> auths = new HashSet<>(1);
+        List<String> auths = new ArrayList<>(1);
         auths.add("USER");
         p.setStringAuthorities(auths);
         Patient pold = patientService.findOne(username);

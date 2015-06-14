@@ -38,11 +38,10 @@ public class AdminPatientController {
     @RequestMapping(value = "/add")
     public String add(Map<String, Object> model) {
 
-        List<GrantedAuthority> authorities = new ArrayList<>();
-        authorities.add(new SimpleGrantedAuthority("USER"));
-
+        Patient p = new Patient();
+        p.getAuthorities().add(new SimpleGrantedAuthority("USER"));
         model.put("pageTitle", "Admin Patients");
-        model.put("patient", new Patient(authorities));
+        model.put("patient", p);
         model.put("insurances", insuranceService.findAll());
 
         return "admin/patient/add";
@@ -62,15 +61,21 @@ public class AdminPatientController {
     }
 
     @RequestMapping(value = "/save", method = RequestMethod.POST)
-    public String saveAdd(@ModelAttribute("patient") Patient patient, @RequestParam Long id_insurance) {
+    public String saveAdd(@ModelAttribute("patient") Patient patient, @RequestParam(required = false) Long id_insurance) {
         Patient old = patientService.findByUsername(patient.getUsername());
         if (id_insurance != null)
             patient.setInsurance(insuranceService.findOne(id_insurance));
         else
             patient.setInsurance(null);
-        patient.setAuthorities(old.getAuthorities());
-        patient.setAppointments(old.getAppointments());
-        patientService.save(patient);
+        if(old !=null) {
+            patient.getAuthorities().addAll(old.getAuthorities());
+//            patient.getAppointments().addAll(old.getAppointments());
+        }
+//            if (patient.getStringAuthorities().size()==0) patient.getStringAuthorities().add("USER");
+        List<GrantedAuthority> list = new ArrayList<GrantedAuthority>();
+            list.addAll(patient.getAuthorities());
+            patient.setAuthorities(list);
+            patientService.save(patient);
 
         return "redirect:/admin/patient";
     }

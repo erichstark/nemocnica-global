@@ -6,6 +6,7 @@ import org.springframework.mail.SimpleMailMessage;
 import org.springframework.mail.javamail.JavaMailSender;
 import org.springframework.stereotype.Component;
 import sk.stuba.fei.team.global.domain.Patient;
+import sk.stuba.fei.team.global.domain.VerificationToken;
 import sk.stuba.fei.team.global.service.OnRegistrationCompleteEvent;
 import sk.stuba.fei.team.global.service.PatientService;
 
@@ -26,7 +27,9 @@ public class RegistrationListener implements ApplicationListener<OnRegistrationC
     private void confirmRegistration(OnRegistrationCompleteEvent event) {
         Patient patient = event.getPatient();
         String token = UUID.randomUUID().toString();
-        patientService.createVerificationToken(patient, token);
+        VerificationToken vtoken = new VerificationToken(token, patient.getUsername());
+        patientService.saveVerificationToken(vtoken);
+        patientService.save(patient);
 
         String recipientAddress = patient.getEmail();
         String subject = "EasyCare - potvrdenie registrácie";

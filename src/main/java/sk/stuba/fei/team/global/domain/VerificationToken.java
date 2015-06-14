@@ -16,9 +16,8 @@ public class VerificationToken {
     @Column
     private String token;
 
-    @OneToOne(targetEntity = Patient.class, fetch = FetchType.LAZY)
-    @PrimaryKeyJoinColumn
-    private Patient patient;
+    @Column(unique = true)
+    private String username;
 
     @Column
     private Date expiryDate;
@@ -27,10 +26,10 @@ public class VerificationToken {
         super();
     }
 
-    public VerificationToken(String token, Patient patient) {
+    public VerificationToken(String token, String username) {
         super();
         this.token = token;
-        this.patient = patient;
+        this.username = username;
         this.expiryDate = calculateExpiryDate(EXPIRATION);
     }
 
@@ -58,12 +57,12 @@ public class VerificationToken {
         this.token = token;
     }
 
-    public Patient getPatient() {
-        return patient;
+    public String getUsername() {
+        return username;
     }
 
-    public void setPatient(Patient patient) {
-        this.patient = patient;
+    public void setUsername(String username) {
+        this.username = username;
     }
 
     public Date getExpiryDate() {

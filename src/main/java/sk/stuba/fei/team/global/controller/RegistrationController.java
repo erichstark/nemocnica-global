@@ -2,7 +2,9 @@ package sk.stuba.fei.team.global.controller;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.ApplicationEventPublisher;
+import org.springframework.security.core.authority.SimpleGrantedAuthority;
 import org.springframework.stereotype.Controller;
+import org.springframework.transaction.annotation.Transactional;
 import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -53,7 +55,6 @@ public class RegistrationController {
 			return "redirect:/registration";
 		}
 
-		patientService.save(patient);
 		try {
 			String appUrl = request.getContextPath();
 			eventPublisher.publishEvent(new OnRegistrationCompleteEvent
@@ -67,6 +68,7 @@ public class RegistrationController {
     }
 
     @RequestMapping(value = "/registration/confirm", method = RequestMethod.GET)
+	@Transactional
     public String confirmRegistration
 			(WebRequest request, RedirectAttributes redirectAttributes, @RequestParam("token") String token) {
 //		Locale locale = request.getLocale();
@@ -83,8 +85,10 @@ public class RegistrationController {
 			return "redirect:/";
 		}
 
-        Patient patient = verificationToken.getPatient();
-        patient.setEnabled(true);
+		VerificationToken vtoken = patientService.getVerificationToken(token);
+        Patient patient = patientService.findByUsername(vtoken.getUsername());
+		patient.setEnabled(true);
+		patient.getAuthorities().add(new SimpleGrantedAuthority("USER"));
 		patientService.save(patient);
 
         redirectAttributes.addFlashAttribute("message", "Úspešne aktivované");

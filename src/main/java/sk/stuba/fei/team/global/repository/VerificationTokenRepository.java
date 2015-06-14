@@ -1,12 +1,9 @@
 package sk.stuba.fei.team.global.repository;
 
-import org.springframework.data.repository.CrudRepository;
-import sk.stuba.fei.team.global.domain.Patient;
+import org.springframework.data.jpa.repository.JpaRepository;
 import sk.stuba.fei.team.global.domain.VerificationToken;
 
-public interface VerificationTokenRepository extends CrudRepository<VerificationToken, Long> {
+public interface VerificationTokenRepository extends JpaRepository<VerificationToken, Long> {
 
     VerificationToken findByToken(String token);
-
-    VerificationToken findByPatient(Patient patient);
 }
