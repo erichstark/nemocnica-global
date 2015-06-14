@@ -6,7 +6,7 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import sk.stuba.fei.team.global.domain.Appointment;
 import sk.stuba.fei.team.global.domain.Patient;
-import sk.stuba.fei.team.global.service.OrderService;
+import sk.stuba.fei.team.global.service.AppointmentService;
 import sk.stuba.fei.team.global.service.PatientService;
 
 import java.text.ParseException;
@@ -26,7 +26,7 @@ public class OrderController {
     private PatientService patientService;
 
     @Autowired
-    private OrderService orderService;
+    private AppointmentService orderService;
 
     @RequestMapping("{username}")
     public String index(@PathVariable String username,Map<String, Object> model) {

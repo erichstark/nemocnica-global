@@ -32,10 +32,13 @@ public class SearchController {
     private OpeningHoursService openingHoursService;
 
     @Autowired
-    private OrderService orderService;
+    private AppointmentService orderService;
 
     @Autowired
     private PatientService patientService;
+
+    @Autowired
+    private SpecializationService specializationService;
 
 
     @RequestMapping("")
@@ -145,23 +148,25 @@ public class SearchController {
     public String search( @ModelAttribute("searchUser") FormEmployeeSearch search, Map<String, Object> model ) {
 
 
+
+
         Iterable<Office> zoznam;
-        zoznam = officeService.findAll();
-//        if (search.getName() == "" && search.getSurname() == ""){
-//            zoznam = employeeService.findAll();
-//        } else {
-//            zoznam = employeeService.findDoctors(search.getName(),search.getSurname());
-//
-//        }
+        List<Employee> e= employeeService.findDoctors(search.getName(), search.getSurname());
 
-
-
-// spravit vyhladavanie tak ze specializacia bude jeden dlhyy string
+        List<Specialization> s=new ArrayList<>();
+        if(search.getSpecialization()== null){
+         s = (List<Specialization>) specializationService.findAll();
+        }else {
+          s = specializationService.findByName(search.getSpecialization());
+        }
+        zoznam = officeService.findByEmployeesInAndSpecializationsIn(e,s);
 
         model.put("pageTitle", "Vyhľadávanie lekárov");
         model.put("name", search.getName());
         model.put("surname", search.getSurname());
         model.put("offices", zoznam);
+        model.put("emps", e);
+        model.put("specs", s);
 
         return "search/index";
     }
