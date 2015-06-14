@@ -31,8 +31,10 @@ public class FacilityWrapper {
         f.setCity(city);
         f.setZip(zip);
         f.setEnabled(enabled);
-        Facility oldFacility = facilityService.findOne(id);
-        if (oldFacility != null) f.getOffices().addAll(oldFacility.getOffices());
+        if (id != null) {
+            Facility oldFacility = facilityService.findOne(id);
+            if (oldFacility != null) f.getOffices().addAll(oldFacility.getOffices());
+        }
         return f;
     }
 
