@@ -50,6 +50,22 @@ public class Patient implements Serializable, UserDetails, CredentialsContainer 
         email = "";
     }
 
+    public Patient(Collection<? extends GrantedAuthority> authorities) {
+        password = "";
+        username = "";
+        this.authorities = Collections.unmodifiableSet(sortAuthorities(authorities));
+        accountNonExpired = true;
+        accountNonLocked = true;
+        credentialsNonExpired = true;
+        enabled = true;
+        firstName = "";
+        surname = "";
+        prefix_title = "";
+        suffix_title = "";
+        phone = "";
+        email = "";
+    }
+
     public Patient(String username, String password, String email, Collection<? extends GrantedAuthority> authorities) {
         this.password = password;
         this.username = username;

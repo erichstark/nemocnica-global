@@ -20,7 +20,7 @@ import java.util.Map;
  */
 @Controller
 @RequestMapping("/appointment")
-public class OrderController {
+public class AppointmentController {
 
     @Autowired
     private PatientService patientService;

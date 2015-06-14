@@ -21,6 +21,4 @@ public interface InsuranceService {
     boolean exists(Long id);
 
     void save(Insurance insurance);
-
-    void delete(Long id);
 }

@@ -3,16 +3,16 @@ package sk.stuba.fei.team.global.controller.admin;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.authority.SimpleGrantedAuthority;
-import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.*;
 import sk.stuba.fei.team.global.domain.Insurance;
 import sk.stuba.fei.team.global.domain.Patient;
-import sk.stuba.fei.team.global.security.PBKDF2WithHmacSHA1;
 import sk.stuba.fei.team.global.service.InsuranceService;
 import sk.stuba.fei.team.global.service.PatientService;
 
-import java.util.*;
+import java.util.ArrayList;
+import java.util.List;
+import java.util.Map;
 
 /**
  * Created by pallo on 5/7/15.
@@ -26,7 +26,7 @@ public class AdminPatientController {
     @Autowired
     private InsuranceService insuranceService;
 
-    @RequestMapping("")
+    @RequestMapping(method = RequestMethod.GET)
     public String index(Map<String, Object> model) {
 
         model.put("pageTitle", "Admin Patients");
@@ -38,8 +38,11 @@ public class AdminPatientController {
     @RequestMapping(value = "/add")
     public String add(Map<String, Object> model) {
 
+        List<GrantedAuthority> authorities = new ArrayList<>();
+        authorities.add(new SimpleGrantedAuthority("USER"));
+
         model.put("pageTitle", "Admin Patients");
-        model.put("patient", new Patient());
+        model.put("patient", new Patient(authorities));
         model.put("insurances", insuranceService.findAll());
 
         return "admin/patient/add";
@@ -59,14 +62,14 @@ public class AdminPatientController {
     }
 
     @RequestMapping(value = "/save", method = RequestMethod.POST)
-    public String saveAdd(@ModelAttribute("patient") Patient patient, @RequestParam String autority, @RequestParam Long id_insurance) {
-
-        PasswordEncoder encoder = new PBKDF2WithHmacSHA1();
-        Set<GrantedAuthority> authorities = new HashSet<>();
-        authorities.add(new SimpleGrantedAuthority(autority));
-        patient.setPassword(encoder.encode(patient.getPassword()));
-        patient.setAuthorities(authorities);
-        patient.setInsurance(insuranceService.findOne(id_insurance));
+    public String saveAdd(@ModelAttribute("patient") Patient patient, @RequestParam Long id_insurance) {
+        Patient old = patientService.findByUsername(patient.getUsername());
+        if (id_insurance != null)
+            patient.setInsurance(insuranceService.findOne(id_insurance));
+        else
+            patient.setInsurance(null);
+        patient.setAuthorities(old.getAuthorities());
+        patient.setAppointments(old.getAppointments());
         patientService.save(patient);
 
         return "redirect:/admin/patient";

@@ -48,9 +48,4 @@ public class SpecializationServiceImpl implements SpecializationService {
     public void save(Specialization specialization) {
         specializationRepository.save(specialization);
     }
-
-    @Override
-    public void delete(Long id) {
-        specializationRepository.delete(id);
-    }
 }

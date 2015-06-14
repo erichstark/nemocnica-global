@@ -1,6 +1,7 @@
 package sk.stuba.fei.team.global;
 
 import org.junit.Before;
+import org.junit.Ignore;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.mockito.InjectMocks;
@@ -29,6 +30,7 @@ import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.
 @RunWith(SpringJUnit4ClassRunner.class)
 @WebAppConfiguration
 @SpringApplicationConfiguration(classes = MainApplication.class)
+@Ignore
 public class InsuranceApiTest {
 
     public static final Logger LOGGER = Logger.getLogger(EmployeeApiTest.class.getName());

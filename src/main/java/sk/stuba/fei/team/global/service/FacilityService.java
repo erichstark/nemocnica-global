@@ -18,6 +18,4 @@ public interface FacilityService {
     boolean exists(Long id);
 
     void save(Facility facility);
-
-    void delete(Long id);
 }
