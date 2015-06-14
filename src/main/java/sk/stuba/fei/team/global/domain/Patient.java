@@ -33,6 +33,7 @@ public class Patient implements Serializable, UserDetails, CredentialsContainer 
     private Insurance insurance;
     private List<Appointment> appointments;
     private Date updated;
+    private VerificationToken verificationToken;
 
     public Patient() {
         password = "";
@@ -266,6 +267,15 @@ public class Patient implements Serializable, UserDetails, CredentialsContainer 
 
     public void setUpdated(Date updated) {
         this.updated = updated;
+    }
+
+    @OneToOne(mappedBy = "patient", cascade = CascadeType.PERSIST)
+    public VerificationToken getVerificationToken() {
+        return verificationToken;
+    }
+
+    public void setVerificationToken(VerificationToken verificationToken) {
+        this.verificationToken = verificationToken;
     }
 
     @PrePersist

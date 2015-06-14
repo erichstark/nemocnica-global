@@ -5,15 +5,15 @@
 <@g.menuFooterPage>
     <@g.headerBanner/>
 <div class="container">
-    <div class="alert alert-danger">
-        <#if errors??>
+    <#if errors??>
+        <div class="alert alert-danger">
             <ul>
                 <#list errors as error>
                     <li>${error.defaultMessage}</li>
                 </#list>
             </ul>
-        </#if>
-    </div>
+        </div>
+    </#if>
     <div id="registration-panel" class="panel panel-default" style="margin-top:50px">
         <div class="panel-heading"><h3 class="panel-title"><strong>Registrácia</strong></h3></div>
         <div class="panel-body">
