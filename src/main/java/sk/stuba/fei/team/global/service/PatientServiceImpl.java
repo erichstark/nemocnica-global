@@ -65,7 +65,6 @@ public class PatientServiceImpl implements PatientService {
     @Override
     public void createVerificationToken(Patient patient, String token) {
         VerificationToken myToken = new VerificationToken(token, patient);
-        patient.setVerificationToken(myToken);
         tokenRepository.save(myToken);
     }
 

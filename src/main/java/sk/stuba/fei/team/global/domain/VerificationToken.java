@@ -17,7 +17,7 @@ public class VerificationToken {
     private String token;
 
     @OneToOne(targetEntity = Patient.class, fetch = FetchType.LAZY)
-    @JoinColumn(nullable = false, name = "username")
+    @PrimaryKeyJoinColumn
     private Patient patient;
 
     @Column
