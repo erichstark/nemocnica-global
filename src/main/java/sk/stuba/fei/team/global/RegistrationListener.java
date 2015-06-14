@@ -29,14 +29,14 @@ public class RegistrationListener implements ApplicationListener<OnRegistrationC
         patientService.createVerificationToken(patient, token);
 
         String recipientAddress = patient.getEmail();
-        String subject = "Registration Confirmation";
+        String subject = "EasyCare - potvrdenie registrácie";
         String confirmationUrl = event.getAppUrl() + "/registration/confirm?token=" + token;
-        String message = "Registrácia úspešná";
+        String message = "Registrácia úspešná, pre pokračovanie použite odkaz - ";
 
         SimpleMailMessage mailMessage = new SimpleMailMessage();
         mailMessage.setTo(recipientAddress);
         mailMessage.setSubject(subject);
-        mailMessage.setText(message + " rn" + "http://localhost:8180" + confirmationUrl);
+        mailMessage.setText(message + "http://localhost:8180" + confirmationUrl);
         mailSender.send(mailMessage);
     }
 }

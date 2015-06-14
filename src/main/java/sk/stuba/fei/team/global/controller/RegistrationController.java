@@ -3,14 +3,13 @@ package sk.stuba.fei.team.global.controller;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.ApplicationEventPublisher;
 import org.springframework.stereotype.Controller;
-import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
-import org.springframework.validation.ObjectError;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.context.request.WebRequest;
+import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 import sk.stuba.fei.team.global.domain.Patient;
 import sk.stuba.fei.team.global.domain.VerificationToken;
 import sk.stuba.fei.team.global.service.InsuranceService;
@@ -43,25 +42,15 @@ public class RegistrationController {
 
 	// TODO check if email exist in DB
 
-//	@RequestMapping(value = "/registration/save", method = RequestMethod.POST)
-//	public String save(@ModelAttribute("patient") Patient patient, Map<String, Object> model) {
-//
-//		patientService.save(patient);
-//
-//		return "redirect:/";
-//	}
-
 	@Autowired
 	ApplicationEventPublisher eventPublisher;
 
 	@RequestMapping(value = "/registration/save", method = RequestMethod.POST)
 	public String registerUserAccount(@ModelAttribute("patient") @Valid Patient patient,
-											BindingResult result, WebRequest request, Model model) {
+                                      BindingResult result, WebRequest request, RedirectAttributes redirectAttributes) {
 		if (result.hasErrors()) {
-			model.addAttribute("patient", new Patient());
-			model.addAttribute("insurances", insuranceService.findAllEnabled());
-			model.addAttribute("pageTitle", "Registrácia");
-			return "registration";
+            redirectAttributes.addFlashAttribute("errors",result.getAllErrors());
+			return "redirect:/registration";
 		}
 
 		Patient registered = patientService.saveAndReturn(patient);
@@ -70,37 +59,35 @@ public class RegistrationController {
 			eventPublisher.publishEvent(new OnRegistrationCompleteEvent
 					(registered, new Locale("sk_SK"), appUrl));
 		} catch (Exception me) {
-			result.addError(new ObjectError("unexpectederror",me.getMessage()));
 			LOGGER.info(me.getMessage());
-			model.addAttribute("patient", new Patient());
-			model.addAttribute("insurances", insuranceService.findAllEnabled());
-			model.addAttribute("pageTitle", "Registrácia");
-			return "registration";
-		}
-		model.addAttribute("message","Úspešne zaregistrovaný, aktivujte si svoje konto aktivačným kódom doručeným na e-mail.");
+            redirectAttributes.addFlashAttribute("errors", result.getAllErrors());
+            return "redirect:/registration";
+        }
+        redirectAttributes.addFlashAttribute("message", "Úspešne zaregistrovaný, aktivujte si svoje konto aktivačným kódom doručeným na e-mail.");
 		return "redirect:/";
-	}
+    }
 
-	@RequestMapping(value = "/registration/confirm", method = RequestMethod.GET)
-	public String confirmRegistration
-			(WebRequest request, Model model, @RequestParam("token") String token) {
-		Locale locale = request.getLocale();
+    @RequestMapping(value = "/registration/confirm", method = RequestMethod.GET)
+    public String confirmRegistration
+			(WebRequest request, RedirectAttributes redirectAttributes, @RequestParam("token") String token) {
+//		Locale locale = request.getLocale();
 
 		VerificationToken verificationToken = patientService.getVerificationToken(token);
 		if (verificationToken == null) {
-			model.addAttribute("message", "Zlý verifikačný token");
+			redirectAttributes.addFlashAttribute("message", "Zlý verifikačný token");
 			return "redirect:/";
 		}
 
 		Patient patient = verificationToken.getPatient();
 		Calendar cal = Calendar.getInstance();
 		if ((verificationToken.getExpiryDate().getTime() - cal.getTime().getTime()) <= 0) {
-			model.addAttribute("message", "Verifikačný token expiroval");
+			redirectAttributes.addFlashAttribute("message", "Verifikačný token expiroval");
 			return "redirect:/";
 		}
 
 		patient.setEnabled(true);
 		patientService.save(patient);
+        redirectAttributes.addFlashAttribute("message", "Úspešne aktivované");
 		return "redirect:/login";
 	}
 }

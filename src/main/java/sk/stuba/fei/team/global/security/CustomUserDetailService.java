@@ -18,7 +18,7 @@ public class CustomUserDetailService implements UserDetailsService {
     @Override
     public UserDetails loadUserByUsername(String username) throws UsernameNotFoundException {
         if (patientService == null) {
-            throw new UsernameNotFoundException("Failed to autowire employeeService.");
+            throw new UsernameNotFoundException("Failed to autowire patientService.");
         }
         Patient z = patientService.findByUsername(username);
         if (z == null) {

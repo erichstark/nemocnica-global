@@ -37,7 +37,9 @@ public class Patient implements Serializable, UserDetails, CredentialsContainer 
     public Patient() {
         password = "";
         username = "";
-        authorities = new HashSet<>();
+        List<GrantedAuthority> authorities = new ArrayList<>();
+        authorities.add(new SimpleGrantedAuthority("USER"));
+        this.authorities = Collections.unmodifiableSet(sortAuthorities(authorities));
         accountNonExpired = true;
         accountNonLocked = true;
         credentialsNonExpired = true;
