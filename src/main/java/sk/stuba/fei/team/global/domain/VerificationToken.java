@@ -7,7 +7,6 @@ import java.util.Date;
 
 @Entity
 public class VerificationToken {
-
     private static final int EXPIRATION = 60 * 24;
 
     @Id
@@ -73,6 +72,5 @@ public class VerificationToken {
 
     public void setExpiryDate(Date expiryDate) {
         this.expiryDate = expiryDate;
-
-
-}   }
+    }
+}

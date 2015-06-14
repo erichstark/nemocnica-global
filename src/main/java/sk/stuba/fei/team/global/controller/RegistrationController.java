@@ -53,11 +53,11 @@ public class RegistrationController {
 			return "redirect:/registration";
 		}
 
-		Patient registered = patientService.saveAndReturn(patient);
+		patientService.save(patient);
 		try {
 			String appUrl = request.getContextPath();
 			eventPublisher.publishEvent(new OnRegistrationCompleteEvent
-					(registered, new Locale("sk_SK"), appUrl));
+					(patient, new Locale("sk_SK"), appUrl));
 		} catch (Exception me) {
             redirectAttributes.addFlashAttribute("errors", result.getAllErrors());
             return "redirect:/registration";
@@ -83,9 +83,8 @@ public class RegistrationController {
 			return "redirect:/";
 		}
 
-        Patient patient = patientService.findByUsername(verificationToken.getPatient().getUsername());
+        Patient patient = verificationToken.getPatient();
         patient.setEnabled(true);
-
 		patientService.save(patient);
 
         redirectAttributes.addFlashAttribute("message", "Úspešne aktivované");
