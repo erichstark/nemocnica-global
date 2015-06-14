@@ -50,6 +50,7 @@ public class Patient implements Serializable, UserDetails, CredentialsContainer 
         suffix_title = "";
         phone = "";
         email = "";
+        this.appointments = new ArrayList<Appointment>();
     }
 
     public Patient(Collection<? extends GrantedAuthority> authorities) {
@@ -66,6 +67,7 @@ public class Patient implements Serializable, UserDetails, CredentialsContainer 
         suffix_title = "";
         phone = "";
         email = "";
+        this.appointments = new ArrayList<Appointment>();
     }
 
     public Patient(String username, String password, String email, Collection<? extends GrantedAuthority> authorities) {
@@ -82,6 +84,7 @@ public class Patient implements Serializable, UserDetails, CredentialsContainer 
         suffix_title = "";
         phone = "";
         this.email = email;
+        this.appointments = new ArrayList<Appointment>();
     }
 
     private static SortedSet<GrantedAuthority> sortAuthorities(Collection<? extends GrantedAuthority> authorities) {
