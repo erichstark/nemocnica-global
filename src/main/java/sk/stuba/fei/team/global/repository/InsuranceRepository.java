@@ -14,4 +14,6 @@ public interface InsuranceRepository extends CrudRepository<Insurance, Long> {
     List<Insurance> findByNameContainingIgnoreCase(String name);
 
     List<Insurance> findByUpdatedGreaterThan(Date timestamp);
+
+    List<Insurance> findByEnabledTrue();
 }

@@ -1,7 +1,6 @@
 package sk.stuba.fei.team.global.controller.admin;
 
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.authority.SimpleGrantedAuthority;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.*;
@@ -11,7 +10,6 @@ import sk.stuba.fei.team.global.service.InsuranceService;
 import sk.stuba.fei.team.global.service.PatientService;
 
 import java.util.ArrayList;
-import java.util.List;
 import java.util.Map;
 
 /**
@@ -38,11 +36,10 @@ public class AdminPatientController {
     @RequestMapping(value = "/add")
     public String add(Map<String, Object> model) {
 
-        List<GrantedAuthority> authorities = new ArrayList<>();
-        authorities.add(new SimpleGrantedAuthority("USER"));
-
+        Patient p = new Patient();
+        p.getAuthorities().add(new SimpleGrantedAuthority("USER"));
         model.put("pageTitle", "Admin Patients");
-        model.put("patient", new Patient(authorities));
+        model.put("patient", p);
         model.put("insurances", insuranceService.findAll());
 
         return "admin/patient/add";
@@ -62,14 +59,18 @@ public class AdminPatientController {
     }
 
     @RequestMapping(value = "/save", method = RequestMethod.POST)
-    public String saveAdd(@ModelAttribute("patient") Patient patient, @RequestParam Long id_insurance) {
-        Patient old = patientService.findByUsername(patient.getUsername());
+    public String save(@ModelAttribute("patient") Patient patient, @RequestParam(required = false) Long id_insurance) {
+        Patient old = patientService.findOne(patient.getUsername());
+
         if (id_insurance != null)
             patient.setInsurance(insuranceService.findOne(id_insurance));
         else
             patient.setInsurance(null);
-        patient.setAuthorities(old.getAuthorities());
-        patient.setAppointments(old.getAppointments());
+        if(old !=null) {
+            patient.getAuthorities().addAll(old.getAuthorities());
+            patient.getAppointments().addAll(old.getAppointments());
+        }
+
         patientService.save(patient);
 
         return "redirect:/admin/patient";

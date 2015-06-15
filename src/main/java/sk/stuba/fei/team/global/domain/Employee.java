@@ -1,28 +1,20 @@
 package sk.stuba.fei.team.global.domain;
 
-import org.springframework.security.core.CredentialsContainer;
-import org.springframework.security.core.GrantedAuthority;
-import org.springframework.security.core.SpringSecurityCoreVersion;
-import org.springframework.security.core.authority.SimpleGrantedAuthority;
-import org.springframework.security.core.userdetails.UserDetails;
-import org.springframework.util.Assert;
+import org.hibernate.annotations.UpdateTimestamp;
 
 import javax.persistence.*;
 import javax.xml.bind.annotation.XmlRootElement;
 import java.io.Serializable;
-import java.util.*;
-import java.util.stream.Collectors;
+import java.util.Date;
+import java.util.HashSet;
+import java.util.Set;
 
 @Entity
 @XmlRootElement
-public class Employee implements Serializable, UserDetails, CredentialsContainer {
+public class Employee implements Serializable {
 
     private String password;
     private String username;
-    private Set<GrantedAuthority> authorities;
-    private boolean accountNonExpired;
-    private boolean accountNonLocked;
-    private boolean credentialsNonExpired;
     private boolean enabled;
     private String firstName;
     private String lastName;
@@ -35,43 +27,11 @@ public class Employee implements Serializable, UserDetails, CredentialsContainer
     public Employee() {
         password = "";
         username = "";
-        authorities = new HashSet<GrantedAuthority>();
-        accountNonExpired = true;
-        accountNonLocked = true;
-        credentialsNonExpired = true;
         enabled = true;
         firstName = "";
         lastName = "";
         offices = new HashSet<Office>();
         specializations = new HashSet<Specialization>();
-    }
-
-    public Employee(String username, String password, Collection<? extends GrantedAuthority> authorities) {
-        this.password = password;
-        this.username = username;
-        this.authorities = Collections.unmodifiableSet(sortAuthorities(authorities));
-        accountNonExpired = true;
-        accountNonLocked = true;
-        credentialsNonExpired = true;
-        enabled = true;
-        firstName = username;
-        lastName = "";
-        offices = new HashSet<Office>();
-        specializations = new HashSet<Specialization>();
-    }
-
-    private static SortedSet<GrantedAuthority> sortAuthorities(Collection<? extends GrantedAuthority> authorities) {
-        Assert.notNull(authorities, "Cannot pass a null GrantedAuthority collection");
-        // Ensure array iteration order is predictable (as per UserDetails.getAuthorities() contract and SEC-717)
-        SortedSet<GrantedAuthority> sortedAuthorities =
-                new TreeSet<>(new AuthorityComparator());
-
-        for (GrantedAuthority grantedAuthority : authorities) {
-            Assert.notNull(grantedAuthority, "GrantedAuthority list cannot contain any null elements");
-            sortedAuthorities.add(grantedAuthority);
-        }
-
-        return sortedAuthorities;
     }
 
     @Column
@@ -90,57 +50,6 @@ public class Employee implements Serializable, UserDetails, CredentialsContainer
 
     public void setUsername(String username) {
         this.username = username;
-    }
-
-    @Transient
-    public Set<GrantedAuthority> getAuthorities() {
-        return authorities;
-    }
-
-    public void setAuthorities(Set<GrantedAuthority> authorities) {
-        this.authorities = authorities;
-    }
-
-    @ElementCollection(fetch = FetchType.LAZY)
-    @Column(name = "authority")
-    @CollectionTable(
-            name = "employee_authorities",
-            joinColumns = @JoinColumn(name = "username")
-    )
-    public Set<String> getStringAuthorities() {
-        return authorities.stream().map(GrantedAuthority::getAuthority).collect(Collectors.toSet());
-    }
-
-    public void setStringAuthorities(Set<String> authorities) {
-        this.authorities = authorities.stream().map(SimpleGrantedAuthority::new).collect(Collectors.toSet());
-    }
-
-
-    @Column(columnDefinition = "BOOLEAN NOT NULL DEFAULT TRUE")
-    public boolean isAccountNonExpired() {
-        return accountNonExpired;
-    }
-
-    public void setAccountNonExpired(boolean accountNonExpired) {
-        this.accountNonExpired = accountNonExpired;
-    }
-
-    @Column(columnDefinition = "BOOLEAN NOT NULL DEFAULT TRUE")
-    public boolean isAccountNonLocked() {
-        return accountNonLocked;
-    }
-
-    public void setAccountNonLocked(boolean accountNonLocked) {
-        this.accountNonLocked = accountNonLocked;
-    }
-
-    @Column(columnDefinition = "BOOLEAN NOT NULL DEFAULT TRUE")
-    public boolean isCredentialsNonExpired() {
-        return credentialsNonExpired;
-    }
-
-    public void setCredentialsNonExpired(boolean credentialsNonExpired) {
-        this.credentialsNonExpired = credentialsNonExpired;
     }
 
     @Column(columnDefinition = "BOOLEAN NOT NULL DEFAULT TRUE")
@@ -220,46 +129,13 @@ public class Employee implements Serializable, UserDetails, CredentialsContainer
         this.specializations = specializations;
     }
 
-    @Override
-    public void eraseCredentials() {
-        password = null;
-    }
-
-    private static class AuthorityComparator implements Comparator<GrantedAuthority>, Serializable {
-        private static final long serialVersionUID = SpringSecurityCoreVersion.SERIAL_VERSION_UID;
-
-        public int compare(GrantedAuthority g1, GrantedAuthority g2) {
-            // Neither should ever be null as each entry is checked before adding it to the set.
-            // If the authority is null, it is a custom authority and should precede others.
-            if (g2.getAuthority() == null) {
-                return -1;
-            }
-
-            if (g1.getAuthority() == null) {
-                return 1;
-            }
-
-            return g1.getAuthority().compareTo(g2.getAuthority());
-        }
-    }
-
     @Temporal(TemporalType.TIMESTAMP)
-    @Column(name = "updated", nullable = false)
+    @UpdateTimestamp
     public java.util.Date getUpdated() {
         return updated;
     }
 
     public void setUpdated(java.util.Date updated) {
         this.updated = updated;
-    }
-
-    @PrePersist
-    protected void onCreate() {
-        updated = new java.util.Date();
-    }
-
-    @PreUpdate
-    protected void onUpdate() {
-        updated = new java.util.Date();
     }
 }

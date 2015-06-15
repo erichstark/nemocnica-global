@@ -1,5 +1,7 @@
 package sk.stuba.fei.team.global.domain;
 
+import org.hibernate.annotations.UpdateTimestamp;
+
 import javax.persistence.*;
 import javax.xml.bind.annotation.XmlRootElement;
 import java.io.Serializable;
@@ -25,7 +27,6 @@ public class Specialization implements Serializable {
     }
 
     @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
     public Long getId() {
         return id;
     }
@@ -63,23 +64,13 @@ public class Specialization implements Serializable {
     }
 
     @Temporal(TemporalType.TIMESTAMP)
-    @Column(name = "updated", nullable = false)
+    @UpdateTimestamp
     public java.util.Date getUpdated() {
         return updated;
     }
 
     public void setUpdated(java.util.Date updated) {
         this.updated = updated;
-    }
-
-    @PrePersist
-    protected void onCreate() {
-        updated = new java.util.Date();
-    }
-
-    @PreUpdate
-    protected void onUpdate() {
-        updated = new java.util.Date();
     }
 
     @Column(nullable = false)

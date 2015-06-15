@@ -48,4 +48,9 @@ public class InsuranceServiceImpl implements InsuranceService {
     public void save(Insurance insurance) {
         insuranceRepository.save(insurance);
     }
+
+    @Override
+    public Iterable<Insurance> findAllEnabled() {
+        return insuranceRepository.findByEnabledTrue();
+    }
 }

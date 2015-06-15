@@ -48,20 +48,7 @@ public class MainApplication extends WebMvcConfigurerAdapter {
     }
 
     private static void initializeUsers(ConfigurableApplicationContext context) {
-        PatientService patientService = context.getBean(PatientService.class);
-        PasswordEncoder encoder = new PBKDF2WithHmacSHA1();
-//        if (patientService.findByUsername("user") == null) {
-//            List<GrantedAuthority> authorities = new ArrayList<>();
-//            authorities.add(new SimpleGrantedAuthority("USER"));
-//            Patient userDetails = new Patient("user", encoder.encode("user123"), "user@fei.stuba.sk", authorities);
-//            patientService.save(userDetails);
-//        }
-//        if (patientService.findByUsername("admin") == null) {
-//            List<GrantedAuthority> authorities = new ArrayList<>();
-//            authorities.add(new SimpleGrantedAuthority("ADMIN"));
-//            Patient userDetails = new Patient("admin", encoder.encode("admin123"), "admin@fei.stuba.sk", authorities);
-//            patientService.save(userDetails);
-//        }
+  
     }
 
     @Bean

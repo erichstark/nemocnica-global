@@ -18,6 +18,8 @@ public interface InsuranceService {
 
     Iterable<Insurance> findAll();
 
+    Iterable<Insurance> findAllEnabled();
+
     boolean exists(Long id);
 
     void save(Insurance insurance);
