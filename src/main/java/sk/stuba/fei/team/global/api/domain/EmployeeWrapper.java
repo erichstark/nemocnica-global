@@ -1,7 +1,5 @@
 package sk.stuba.fei.team.global.api.domain;
 
-import org.springframework.security.core.GrantedAuthority;
-import org.springframework.security.core.authority.SimpleGrantedAuthority;
 import sk.stuba.fei.team.global.domain.Employee;
 import sk.stuba.fei.team.global.domain.Specialization;
 import sk.stuba.fei.team.global.service.EmployeeService;
@@ -14,10 +12,6 @@ import java.util.stream.Collectors;
 public class EmployeeWrapper {
     private String password;
     private String username;
-    private Set<String> authorities;
-    private boolean accountNonExpired;
-    private boolean accountNonLocked;
-    private boolean credentialsNonExpired;
     private boolean enabled;
     private String firstName;
     private String lastName;
@@ -31,11 +25,6 @@ public class EmployeeWrapper {
     public EmployeeWrapper(Employee employee) {
         password = employee.getPassword();
         username = employee.getUsername();
-        authorities = new HashSet<>(employee.getAuthorities().size());
-        authorities.addAll(employee.getAuthorities().stream().map(GrantedAuthority::getAuthority).collect(Collectors.toList()));
-        accountNonExpired = employee.isAccountNonExpired();
-        accountNonLocked = employee.isAccountNonLocked();
-        credentialsNonExpired = employee.isCredentialsNonExpired();
         enabled = employee.isEnabled();
         firstName = employee.getFirstName();
         lastName = employee.getLastName();
@@ -49,12 +38,6 @@ public class EmployeeWrapper {
         Employee employee = new Employee();
         employee.setPassword(password);
         employee.setUsername(username);
-        Set<GrantedAuthority> authorities = new HashSet<>(this.authorities.size());
-        authorities.addAll(this.authorities.stream().map(SimpleGrantedAuthority::new).collect(Collectors.toSet()));
-        employee.setAuthorities(authorities);
-        employee.setAccountNonExpired(accountNonExpired);
-        employee.setAccountNonLocked(accountNonLocked);
-        employee.setCredentialsNonExpired(credentialsNonExpired);
         employee.setEnabled(enabled);
         employee.setFirstName(firstName);
         employee.setLastName(lastName);
@@ -82,38 +65,6 @@ public class EmployeeWrapper {
 
     public void setUsername(String username) {
         this.username = username;
-    }
-
-    public Set<String> getAuthorities() {
-        return authorities;
-    }
-
-    public void setAuthorities(Set<String> authorities) {
-        this.authorities = authorities;
-    }
-
-    public boolean isAccountNonExpired() {
-        return accountNonExpired;
-    }
-
-    public void setAccountNonExpired(boolean accountNonExpired) {
-        this.accountNonExpired = accountNonExpired;
-    }
-
-    public boolean isAccountNonLocked() {
-        return accountNonLocked;
-    }
-
-    public void setAccountNonLocked(boolean accountNonLocked) {
-        this.accountNonLocked = accountNonLocked;
-    }
-
-    public boolean isCredentialsNonExpired() {
-        return credentialsNonExpired;
-    }
-
-    public void setCredentialsNonExpired(boolean credentialsNonExpired) {
-        this.credentialsNonExpired = credentialsNonExpired;
     }
 
     public boolean isEnabled() {
