@@ -1,7 +1,6 @@
 package sk.stuba.fei.team.global;
 
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.beans.factory.annotation.Value;
 import org.springframework.context.ApplicationListener;
 import org.springframework.mail.SimpleMailMessage;
 import org.springframework.mail.javamail.JavaMailSender;
@@ -18,9 +17,6 @@ public class RegistrationListener implements ApplicationListener<OnRegistrationC
     private PatientService patientService;
     @Autowired
     private JavaMailSender mailSender;
-
-    @Value(value = "")
-    private String serverName;
 
     @Override
     public void onApplicationEvent(OnRegistrationCompleteEvent event) {
