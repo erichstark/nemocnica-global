@@ -46,11 +46,10 @@ public class AdminSpecializationController {
     }
 
     @RequestMapping(method = RequestMethod.POST)
-    public String save(@RequestParam("name") String name) {
+    public String save(@ModelAttribute Specialization specialization) {
 
-        Specialization sp = new Specialization(name);
-        sp.setEnabled(true);
-        specializationService.save(sp);
+        specialization.setEnabled(true);
+        specializationService.save(specialization);
 
         return "redirect:/admin/specialization";
     }

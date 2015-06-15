@@ -17,11 +17,10 @@
         </form>
     </div>
     <div class="col-md-7">
-        <form name="specialization-add" action="<@spring.url '/admin/specialization'/>" method="post" class="row">
-            <div class="form-group col-md-8">
-                <input type="text" name="name" class="form-control" id="specialization-name" placeholder="Názov">
-            </div>
-            <div class="form-group col-md-4">
+        <form name="specialization" action="<@spring.url '/admin/specialization'/>" method="post" class="form-horizontal">
+            <div class="controls form-inline">
+                <input type="text" name="id" class="form-control" id="add-specialization-id" placeholder="ID" style="width: 60px;">
+                <input type="text" name="name" class="form-control" id="add-specialization-name" placeholder="Názov">
                 <input type="submit" value="Pridaj" class="btn btn-success">
             </div>
         </form>
@@ -44,7 +43,7 @@
                 <tr>
                     <td>${specialization.id}</td>
                     <td>
-                        <input type="text" name="name" class="form-control" id="specialization-name" value="${specialization.name!""}">
+                        <input type="text" name="name" class="form-control" id="edit-specialization-name" value="${specialization.name!""}">
                     </td>
                     <td>
                         <input type="submit" value="Zmeň názov" class="btn btn-success">
