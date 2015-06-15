@@ -1,8 +1,6 @@
 package sk.stuba.fei.team.global.controller.admin;
 
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.security.core.GrantedAuthority;
-import org.springframework.security.core.authority.SimpleGrantedAuthority;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.*;
@@ -14,9 +12,7 @@ import sk.stuba.fei.team.global.service.EmployeeService;
 import sk.stuba.fei.team.global.service.OfficeService;
 import sk.stuba.fei.team.global.service.SpecializationService;
 
-import java.util.HashSet;
 import java.util.Map;
-import java.util.Set;
 import java.util.logging.Logger;
 
 /**
@@ -69,8 +65,8 @@ public class AdminEmployeeController {
     public String edit(@ModelAttribute("employee") Employee employee) {
 
         Employee temp = employeeService.findOne(employee.getUsername());
-//        employee.setOffices(temp.getOffices());
-//        employee.setSpecializations(temp.getSpecializations());
+        employee.setOffices(temp.getOffices());
+        employee.setSpecializations(temp.getSpecializations());
         employeeService.save(employee);
 
         return "redirect:/admin/employee";
@@ -79,10 +75,7 @@ public class AdminEmployeeController {
     @RequestMapping(value = "/save", method = RequestMethod.POST)
     public String save(@ModelAttribute("employee") Employee employee) {
         PasswordEncoder encoder = new PBKDF2WithHmacSHA1();
-        Set<GrantedAuthority> authorities = new HashSet<>();
-        authorities.add(new SimpleGrantedAuthority("USER"));
         employee.setPassword(encoder.encode(employee.getPassword()));
-        employee.setAuthorities(authorities);
         employeeService.save(employee);
         return "redirect:/admin/employee";
     }
