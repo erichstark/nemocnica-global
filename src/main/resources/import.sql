@@ -298,11 +298,11 @@ insert into facility(city,street_and_number,zip,enabled,name) VALUES('Bratislava
 
 
 -- Employees
-insert into employee(username, enabled, first_name, last_name, password, prefix_title, suffix_title, updated) VALUES ('user1',TRUE,TRUE,TRUE,TRUE,'Ján','Drsný','user1','Mudr','','2015-06-14 17:03:57.557');
-INSERT INTO employee(username, enabled, first_name, last_name, password, prefix_title, suffix_title, updated) VALUES ('user2',TRUE,TRUE,TRUE,TRUE,'Juraj','Kožný','user2','Mudr','','2015-06-14 17:05:57.176');
-INSERT INTO employee(username, enabled, first_name, last_name, password, prefix_title, suffix_title, updated) VALUES ('user3',TRUE,TRUE,TRUE,TRUE,'Jakub','Kornutný','user3','Mudr','','2015-06-14 17:04:57.176');
-INSERT INTO employee(username, enabled, first_name, last_name, password, prefix_title, suffix_title, updated) VALUES ('user4',TRUE,TRUE,TRUE,TRUE,'Peter','Mocný','user4','Mudr','','2015-06-14 17:03:57.176');
-INSERT INTO employee(username, enabled, first_name, last_name, password, prefix_title, suffix_title, updated) VALUES ('user5',TRUE,TRUE,TRUE,TRUE,'Marek','Hutný','user5','Mudr','','2015-06-14 17:02:57.176');
+insert into employee(username, enabled, first_name, last_name, password, prefix_title, suffix_title, updated) VALUES ('user1',TRUE,'Ján','Drsný','user1','Mudr','','2015-06-14 17:03:57.557');
+INSERT INTO employee(username, enabled, first_name, last_name, password, prefix_title, suffix_title, updated) VALUES ('user2',TRUE,'Juraj','Kožný','user2','Mudr','','2015-06-14 17:05:57.176');
+INSERT INTO employee(username, enabled, first_name, last_name, password, prefix_title, suffix_title, updated) VALUES ('user3',TRUE,'Jakub','Kornutný','user3','Mudr','','2015-06-14 17:04:57.176');
+INSERT INTO employee(username, enabled, first_name, last_name, password, prefix_title, suffix_title, updated) VALUES ('user4',TRUE,'Peter','Mocný','user4','Mudr','','2015-06-14 17:03:57.176');
+INSERT INTO employee(username, enabled, first_name, last_name, password, prefix_title, suffix_title, updated) VALUES ('user5',TRUE,'Marek','Hutný','user5','Mudr','','2015-06-14 17:02:57.176');
 
 
 
