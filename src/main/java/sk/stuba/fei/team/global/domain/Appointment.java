@@ -20,9 +20,6 @@ public class Appointment implements Serializable {
     private Date updated;
 
     public Appointment() {
-        patient = new Patient();
-        office = new Office();
-        date = new Date();
         intervalStart = 0;
         note = "";
     }
