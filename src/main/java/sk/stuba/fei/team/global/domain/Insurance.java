@@ -12,6 +12,7 @@ import java.util.Set;
 @Entity
 @XmlRootElement
 public class Insurance implements Serializable {
+    private static final long serialVersionUID = -5189106543650114809L;
     private Long id;
     private String name;
     private Set<Office> offices;

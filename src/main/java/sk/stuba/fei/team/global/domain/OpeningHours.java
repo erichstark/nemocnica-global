@@ -7,6 +7,7 @@ import java.io.Serializable;
 @Entity
 @XmlRootElement
 public class OpeningHours implements Serializable {
+    private static final long serialVersionUID = -6163945840447837521L;
     private Long Id;
     private int date;
     private Long reservationMorningFrom;

@@ -1,13 +1,16 @@
 package sk.stuba.fei.team.global.domain;
 
 import javax.persistence.*;
+import java.io.Serializable;
 import java.sql.Timestamp;
 import java.util.Calendar;
 import java.util.Date;
 
 @Entity
-public class VerificationToken {
+public class VerificationToken implements Serializable {
+
     private static final int EXPIRATION = 60 * 24;
+    private static final long serialVersionUID = -3905580968378555527L;
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)

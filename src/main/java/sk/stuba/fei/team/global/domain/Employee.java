@@ -13,6 +13,7 @@ import java.util.Set;
 @XmlRootElement
 public class Employee implements Serializable {
 
+    private static final long serialVersionUID = 6319333400005244129L;
     private String password;
     private String username;
     private boolean enabled;
