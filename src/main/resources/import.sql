@@ -307,11 +307,11 @@ INSERT INTO employee(username, enabled, first_name, last_name, password, prefix_
 
 
 -- Offices
-INSERT INTO office(id,enabled, name, facility) VALUES (1,TRUE,'Oftalmologická ambulancia',1);
-INSERT INTO office(id,enabled, name, facility) VALUES (2,TRUE,'Chirurgická ambulancia',1);
-INSERT INTO office(id,enabled, name, facility) VALUES (3,TRUE,'Hepatologická ambulancia',2);
-INSERT INTO office(id,enabled, name, facility) VALUES (4,TRUE,'Chirurgická ambulancia 1.Bratislavská',1);
-INSERT INTO office(id,enabled, name, facility) VALUES (5,TRUE,'Meditech ',2);
+INSERT INTO office(enabled, name, facility) VALUES (TRUE,'Oftalmologická ambulancia',1);
+INSERT INTO office(enabled, name, facility) VALUES (TRUE,'Chirurgická ambulancia',1);
+INSERT INTO office(enabled, name, facility) VALUES (TRUE,'Hepatologická ambulancia',2);
+INSERT INTO office(enabled, name, facility) VALUES (TRUE,'Chirurgická ambulancia 1.Bratislavská',1);
+INSERT INTO office(enabled, name, facility) VALUES (TRUE,'Meditech ',2);
 
 -- Employee -> office
 INSERT INTO employee_office(employee, office) VALUES ('user1',1);
