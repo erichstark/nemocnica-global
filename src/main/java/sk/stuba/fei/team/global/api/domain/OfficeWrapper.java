@@ -44,10 +44,12 @@ public class OfficeWrapper {
         office.getEmployees().addAll(employees.stream().map(employeeService::findOne).collect(Collectors.toSet()));
         office.getInsurances().addAll(insurances.stream().map(insuranceService::findOne).collect(Collectors.toSet()));
         office.getSpecializations().addAll(specializations.stream().map(specializationService::findOne).collect(Collectors.toSet()));
-        Office oldOffice = officeService.findOne(id);
-        if (oldOffice != null) {
-            office.getHours().addAll(oldOffice.getHours());
-            office.getAppointments().addAll(oldOffice.getAppointments());
+        if(id!=null && id!=0) {
+            Office oldOffice = officeService.findOne(id);
+            if (oldOffice != null) {
+                office.getHours().addAll(oldOffice.getHours());
+                office.getAppointments().addAll(oldOffice.getAppointments());
+            }
         }
         office.setEnabled(enabled);
         return office;
