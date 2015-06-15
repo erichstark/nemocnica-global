@@ -30,6 +30,8 @@ public class Employee implements Serializable {
         enabled = true;
         firstName = "";
         lastName = "";
+        prefix_title = "";
+        suffix_title = "";
         offices = new HashSet<Office>();
         specializations = new HashSet<Specialization>();
     }

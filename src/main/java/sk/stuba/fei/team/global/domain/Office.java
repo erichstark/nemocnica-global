@@ -3,6 +3,7 @@ package sk.stuba.fei.team.global.domain;
 import javax.persistence.*;
 import javax.xml.bind.annotation.XmlRootElement;
 import java.io.Serializable;
+import java.util.HashSet;
 import java.util.Set;
 
 @Entity
@@ -18,6 +19,17 @@ public class Office implements Serializable {
     private Set<OpeningHours> hours;
     private Set<Appointment> appointments;
     private Boolean enabled;
+
+    public Office() {
+        name = "";
+        facility = new Facility();
+        employees = new HashSet<>();
+        insurances = new HashSet<>();
+        specializations = new HashSet<>();
+        hours = new HashSet<>();
+        appointments = new HashSet<>();
+        enabled = true;
+    }
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)

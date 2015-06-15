@@ -6,6 +6,7 @@ import javax.persistence.*;
 import javax.xml.bind.annotation.XmlRootElement;
 import java.io.Serializable;
 import java.util.Date;
+import java.util.HashSet;
 import java.util.Set;
 
 @Entity
@@ -19,6 +20,10 @@ public class Insurance implements Serializable {
     private Boolean enabled;
 
     public Insurance() {
+        name = "";
+        offices = new HashSet<>();
+        patients = new HashSet<>();
+        enabled = true;
     }
 
     public Insurance(String name) {

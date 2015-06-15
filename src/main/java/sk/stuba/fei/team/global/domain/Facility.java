@@ -3,6 +3,7 @@ package sk.stuba.fei.team.global.domain;
 import javax.persistence.*;
 import javax.xml.bind.annotation.XmlRootElement;
 import java.io.Serializable;
+import java.util.HashSet;
 import java.util.Set;
 
 @Entity
@@ -16,6 +17,14 @@ public class Facility implements Serializable {
     private String city;
     private String zip;
     private Boolean enabled;
+
+    public Facility() {
+        name = "";
+        offices = new HashSet<>();
+        streetAndNumber = "";
+        city = "";
+        zip = "";
+    }
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)

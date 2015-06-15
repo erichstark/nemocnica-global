@@ -19,6 +19,14 @@ public class Appointment implements Serializable {
     private String note;
     private Date updated;
 
+    public Appointment() {
+        patient = new Patient();
+        office = new Office();
+        date = new Date();
+        intervalStart = 0;
+        note = "";
+    }
+
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     public Long getId() {
