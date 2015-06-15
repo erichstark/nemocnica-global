@@ -298,11 +298,11 @@ insert into facility(city,street_and_number,zip,enabled,name) VALUES('Bratislava
 
 
 -- Employees
-insert into employee(username, account_non_expired, account_non_locked, credentials_non_expired, enabled, first_name, last_name, password, prefix_title, suffix_title, updated) VALUES ('user1',TRUE,TRUE,TRUE,TRUE,'Ján','Drsný','user1','Mudr','','2015-06-14 17:03:57.557');
-INSERT INTO employee(username, account_non_expired, account_non_locked, credentials_non_expired, enabled, first_name, last_name, password, prefix_title, suffix_title, updated) VALUES ('user2',TRUE,TRUE,TRUE,TRUE,'Juraj','Kožný','user2','Mudr','','2015-06-14 17:05:57.176');
-INSERT INTO employee(username, account_non_expired, account_non_locked, credentials_non_expired, enabled, first_name, last_name, password, prefix_title, suffix_title, updated) VALUES ('user3',TRUE,TRUE,TRUE,TRUE,'Jakub','Kornutný','user3','Mudr','','2015-06-14 17:04:57.176');
-INSERT INTO employee(username, account_non_expired, account_non_locked, credentials_non_expired, enabled, first_name, last_name, password, prefix_title, suffix_title, updated) VALUES ('user4',TRUE,TRUE,TRUE,TRUE,'Peter','Mocný','user4','Mudr','','2015-06-14 17:03:57.176');
-INSERT INTO employee(username, account_non_expired, account_non_locked, credentials_non_expired, enabled, first_name, last_name, password, prefix_title, suffix_title, updated) VALUES ('user5',TRUE,TRUE,TRUE,TRUE,'Marek','Hutný','user5','Mudr','','2015-06-14 17:02:57.176');
+insert into employee(username, enabled, first_name, last_name, password, prefix_title, suffix_title, updated) VALUES ('user1',TRUE,TRUE,TRUE,TRUE,'Ján','Drsný','user1','Mudr','','2015-06-14 17:03:57.557');
+INSERT INTO employee(username, enabled, first_name, last_name, password, prefix_title, suffix_title, updated) VALUES ('user2',TRUE,TRUE,TRUE,TRUE,'Juraj','Kožný','user2','Mudr','','2015-06-14 17:05:57.176');
+INSERT INTO employee(username, enabled, first_name, last_name, password, prefix_title, suffix_title, updated) VALUES ('user3',TRUE,TRUE,TRUE,TRUE,'Jakub','Kornutný','user3','Mudr','','2015-06-14 17:04:57.176');
+INSERT INTO employee(username, enabled, first_name, last_name, password, prefix_title, suffix_title, updated) VALUES ('user4',TRUE,TRUE,TRUE,TRUE,'Peter','Mocný','user4','Mudr','','2015-06-14 17:03:57.176');
+INSERT INTO employee(username, enabled, first_name, last_name, password, prefix_title, suffix_title, updated) VALUES ('user5',TRUE,TRUE,TRUE,TRUE,'Marek','Hutný','user5','Mudr','','2015-06-14 17:02:57.176');
 
 
 
@@ -321,10 +321,10 @@ INSERT INTO employee_office(employee, office) VALUES ('user4',4);
 INSERT INTO employee_office(employee, office) VALUES ('user5',5);
 
 -- Office -> specializations
-INSERT INTO office_specialization(office, specialization) VALUES (1,1);
-INSERT INTO office_specialization(office, specialization) VALUES (2,1);
-INSERT INTO office_specialization(office, specialization) VALUES (3,3);
-INSERT INTO office_specialization(office, specialization) VALUES (4,4);
+INSERT INTO office_specialization(office, specialization) VALUES (1,15);
+INSERT INTO office_specialization(office, specialization) VALUES (2,10);
+INSERT INTO office_specialization(office, specialization) VALUES (3,216);
+INSERT INTO office_specialization(office, specialization) VALUES (4,10);
 INSERT INTO office_specialization(office, specialization) VALUES (5,5);
 
 
