@@ -90,4 +90,9 @@ public class Facility implements Serializable {
     public void setEnabled(Boolean enabled) {
         this.enabled = enabled;
     }
+
+    @Transient
+    public String getNameWithAddress() {
+        return name + ", " + streetAndNumber + ", " + zip + ", " + city;
+    }
 }

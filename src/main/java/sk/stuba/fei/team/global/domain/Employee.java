@@ -141,4 +141,9 @@ public class Employee implements Serializable {
     public void setUpdated(java.util.Date updated) {
         this.updated = updated;
     }
+
+    @Transient
+    public String getFullName() {
+        return prefix_title + " " + firstName + " " + lastName + ", " + suffix_title;
+    }
 }

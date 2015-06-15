@@ -141,7 +141,7 @@
                 <ul class="nav nav-sidebar">
                     <li><a href="<@spring.url '/admin'/>">Nástenka</a></li>
                     <li><a href="<@spring.url '/admin/facility'/>">Zariadenia</a></li>
-                    <li><a href="<@spring.url '/admin/office'/>">Ambulancie</a></li>
+                    <li><a href="<@spring.url '/admin/office'/>">Ordinácie</a></li>
                     <li><a href="<@spring.url '/admin/insurance'/>">Poisťovne</a></li>
                     <li><a href="<@spring.url '/admin/specialization'/>">Špecializácie</a></li>
                     <li><a href="<@spring.url '/admin/patient'/>">Pacienti</a></li>
