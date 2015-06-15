@@ -1,5 +1,6 @@
 package sk.stuba.fei.team.global.domain;
 
+import org.hibernate.annotations.UpdateTimestamp;
 import org.springframework.security.core.CredentialsContainer;
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.SpringSecurityCoreVersion;
@@ -7,13 +8,14 @@ import org.springframework.security.core.authority.SimpleGrantedAuthority;
 import org.springframework.security.core.userdetails.UserDetails;
 
 import javax.persistence.*;
-import javax.xml.bind.annotation.XmlRootElement;
 import java.io.Serializable;
-import java.util.*;
+import java.util.ArrayList;
+import java.util.Comparator;
+import java.util.Date;
+import java.util.List;
 import java.util.stream.Collectors;
 
 @Entity
-@XmlRootElement
 public class Patient implements Serializable, UserDetails, CredentialsContainer {
 
     private static final long serialVersionUID = 324553128966091993L;
@@ -198,6 +200,8 @@ public class Patient implements Serializable, UserDetails, CredentialsContainer 
         this.suffix_title = suffix_title;
     }
 
+    @UpdateTimestamp
+    @Temporal(TemporalType.TIMESTAMP)
     public Date getUpdated() {
         return updated;
     }

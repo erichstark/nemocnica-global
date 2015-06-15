@@ -16,8 +16,9 @@ public class VerificationToken {
     @Column
     private String token;
 
-    @Column(unique = true)
-    private String username;
+    @OneToOne
+    @JoinColumn(nullable = false, name = "username")
+    private Patient patient;
 
     @Column
     private Date expiryDate;
@@ -26,10 +27,10 @@ public class VerificationToken {
         super();
     }
 
-    public VerificationToken(String token, String username) {
+    public VerificationToken(String token, Patient patient) {
         super();
         this.token = token;
-        this.username = username;
+        this.patient = patient;
         this.expiryDate = calculateExpiryDate(EXPIRATION);
     }
 
@@ -57,12 +58,12 @@ public class VerificationToken {
         this.token = token;
     }
 
-    public String getUsername() {
-        return username;
+    public Patient getPatient() {
+        return patient;
     }
 
-    public void setUsername(String username) {
-        this.username = username;
+    public void setPatient(Patient patient) {
+        this.patient = patient;
     }
 
     public Date getExpiryDate() {

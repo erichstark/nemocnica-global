@@ -33,11 +33,6 @@ public class PatientServiceImpl implements PatientService {
     }
 
     @Override
-    public Patient saveAndReturn(Patient patient) {
-        return patientRepository.save(patient);
-    }
-
-    @Override
     public Patient findOne(String username) {
         return patientRepository.findOne(username);
     }
@@ -63,6 +58,12 @@ public class PatientServiceImpl implements PatientService {
     }
 
     @Override
+    public void createVerificationToken(Patient patient, String token) {
+        VerificationToken vt = new VerificationToken(token, patient);
+        tokenRepository.save(vt);
+    }
+
+    @Override
     public List<Patient> findPatientByUsernameOrFirstOrSurname(String text) {
         return patientRepository.findByUsernameOrFirstnameOrSerunameCustomQuery(text);
     }
@@ -77,8 +78,4 @@ public class PatientServiceImpl implements PatientService {
         return patientRepository.findBySurnameContainingOrEmailContainingAllIgnoreCase(searchTerm, searchTerm);
     }
 
-    @Override
-    public void saveVerificationToken(VerificationToken token) {
-        tokenRepository.save(token);
-    }
 }

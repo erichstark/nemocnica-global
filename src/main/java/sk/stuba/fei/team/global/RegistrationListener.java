@@ -1,12 +1,12 @@
 package sk.stuba.fei.team.global;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.context.ApplicationListener;
 import org.springframework.mail.SimpleMailMessage;
 import org.springframework.mail.javamail.JavaMailSender;
 import org.springframework.stereotype.Component;
 import sk.stuba.fei.team.global.domain.Patient;
-import sk.stuba.fei.team.global.domain.VerificationToken;
 import sk.stuba.fei.team.global.service.OnRegistrationCompleteEvent;
 import sk.stuba.fei.team.global.service.PatientService;
 
@@ -19,27 +19,29 @@ public class RegistrationListener implements ApplicationListener<OnRegistrationC
     @Autowired
     private JavaMailSender mailSender;
 
+    @Value(value = "")
+    private String serverName;
+
     @Override
     public void onApplicationEvent(OnRegistrationCompleteEvent event) {
         this.confirmRegistration(event);
     }
 
+
     private void confirmRegistration(OnRegistrationCompleteEvent event) {
         Patient patient = event.getPatient();
         String token = UUID.randomUUID().toString();
-        VerificationToken vtoken = new VerificationToken(token, patient.getUsername());
-        patientService.saveVerificationToken(vtoken);
-        patientService.save(patient);
+        patientService.createVerificationToken(patient, token);
 
         String recipientAddress = patient.getEmail();
         String subject = "EasyCare - potvrdenie registrácie";
         String confirmationUrl = event.getAppUrl() + "/registration/confirm?token=" + token;
-        String message = "Registrácia úspešná, pre pokračovanie použite odkaz - ";
+        String message = "Registrácia účtu " + patient.getUsername() + " úspešná, pre pokračovanie použite odkaz - ";
 
         SimpleMailMessage mailMessage = new SimpleMailMessage();
         mailMessage.setTo(recipientAddress);
         mailMessage.setSubject(subject);
-        mailMessage.setText(message + "http://localhost:8180" + confirmationUrl);
+        mailMessage.setText(message + "http://" + confirmationUrl);
         mailSender.send(mailMessage);
     }
 }

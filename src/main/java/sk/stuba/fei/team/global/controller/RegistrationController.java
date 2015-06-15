@@ -2,7 +2,7 @@ package sk.stuba.fei.team.global.controller;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.ApplicationEventPublisher;
-import org.springframework.security.core.authority.SimpleGrantedAuthority;
+import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Controller;
 import org.springframework.transaction.annotation.Transactional;
 import org.springframework.validation.BindingResult;
@@ -14,10 +14,12 @@ import org.springframework.web.context.request.WebRequest;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 import sk.stuba.fei.team.global.domain.Patient;
 import sk.stuba.fei.team.global.domain.VerificationToken;
+import sk.stuba.fei.team.global.security.PBKDF2WithHmacSHA1;
 import sk.stuba.fei.team.global.service.InsuranceService;
 import sk.stuba.fei.team.global.service.OnRegistrationCompleteEvent;
 import sk.stuba.fei.team.global.service.PatientService;
 
+import javax.servlet.ServletRequest;
 import javax.validation.Valid;
 import java.util.Calendar;
 import java.util.Locale;
@@ -49,14 +51,16 @@ public class RegistrationController {
 
 	@RequestMapping(value = "/registration/save", method = RequestMethod.POST)
 	public String registerUserAccount(@ModelAttribute("patient") @Valid Patient patient,
-                                      BindingResult result, WebRequest request, RedirectAttributes redirectAttributes) {
+                                      BindingResult result, WebRequest webRequest, ServletRequest servletRequest, RedirectAttributes redirectAttributes) {
 		if (result.hasErrors()) {
             redirectAttributes.addFlashAttribute("errors",result.getAllErrors());
 			return "redirect:/registration";
 		}
-
+        PasswordEncoder encoder = new PBKDF2WithHmacSHA1();
+        patient.setPassword(encoder.encode(patient.getPassword()));
+        patientService.save(patient);
 		try {
-			String appUrl = request.getContextPath();
+			String appUrl = servletRequest.getServerName() + ":" + servletRequest.getServerPort() + servletRequest.getServletContext().getContextPath();
 			eventPublisher.publishEvent(new OnRegistrationCompleteEvent
 					(patient, new Locale("sk_SK"), appUrl));
 		} catch (Exception me) {
@@ -86,9 +90,8 @@ public class RegistrationController {
 		}
 
 		VerificationToken vtoken = patientService.getVerificationToken(token);
-        Patient patient = patientService.findByUsername(vtoken.getUsername());
+        Patient patient = vtoken.getPatient();
 		patient.setEnabled(true);
-		patient.getAuthorities().add(new SimpleGrantedAuthority("USER"));
 		patientService.save(patient);
 
         redirectAttributes.addFlashAttribute("message", "Úspešne aktivované");

@@ -12,8 +12,6 @@ public interface PatientService {
 
     void save(Patient patient);
 
-    Patient saveAndReturn(Patient patient);
-
     Patient findOne(String username);
 
     Iterable<Patient> findAll();
@@ -22,7 +20,7 @@ public interface PatientService {
 
     void delete(String username);
 
-    void saveVerificationToken(VerificationToken token);
+    void createVerificationToken(Patient patient, String token);
 
     VerificationToken getVerificationToken(String VerificationToken);
 
