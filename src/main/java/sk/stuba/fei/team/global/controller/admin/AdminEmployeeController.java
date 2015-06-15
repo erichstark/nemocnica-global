@@ -1,6 +1,8 @@
 package sk.stuba.fei.team.global.controller.admin;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.context.MessageSource;
+import org.springframework.context.i18n.LocaleContextHolder;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.*;
@@ -27,11 +29,13 @@ public class AdminEmployeeController {
     private OfficeService officeService;
     @Autowired
     private SpecializationService specializationService;
+    @Autowired
+    private MessageSource messageSource;
 
-    @RequestMapping("")
+    @RequestMapping
     public String index(Map<String, Object> model) {
 
-        model.put("pageTitle", "Admin Zamestnanec");
+        model.put("pageTitle", messageSource.getMessage("employees",null, LocaleContextHolder.getLocale()));
         model.put("employees", employeeService.findAll());
 
         return "admin/employee/index";
