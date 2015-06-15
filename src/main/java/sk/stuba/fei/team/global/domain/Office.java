@@ -23,7 +23,6 @@ public class Office implements Serializable {
 
     public Office() {
         name = "";
-        facility = new Facility();
         employees = new HashSet<>();
         insurances = new HashSet<>();
         specializations = new HashSet<>();
