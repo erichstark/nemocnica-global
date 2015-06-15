@@ -1,5 +1,6 @@
 package sk.stuba.fei.team.global.domain;
 
+import org.hibernate.annotations.UpdateTimestamp;
 import org.springframework.security.core.CredentialsContainer;
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.SpringSecurityCoreVersion;
@@ -244,22 +245,12 @@ public class Employee implements Serializable, UserDetails, CredentialsContainer
     }
 
     @Temporal(TemporalType.TIMESTAMP)
-    @Column(name = "updated", nullable = false)
+    @UpdateTimestamp
     public java.util.Date getUpdated() {
         return updated;
     }
 
     public void setUpdated(java.util.Date updated) {
         this.updated = updated;
-    }
-
-    @PrePersist
-    protected void onCreate() {
-        updated = new java.util.Date();
-    }
-
-    @PreUpdate
-    protected void onUpdate() {
-        updated = new java.util.Date();
     }
 }

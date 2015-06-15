@@ -226,7 +226,6 @@ public class Patient implements Serializable, UserDetails, CredentialsContainer 
     }
 
     @OneToMany(cascade = CascadeType.PERSIST, mappedBy = "patient")
-    @Transient
     public List<Appointment> getAppointments() {
         return appointments;
     }

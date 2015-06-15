@@ -1,5 +1,7 @@
 package sk.stuba.fei.team.global.domain;
 
+import org.hibernate.annotations.UpdateTimestamp;
+
 import javax.persistence.*;
 import javax.xml.bind.annotation.XmlRootElement;
 import java.io.Serializable;
@@ -61,7 +63,7 @@ public class Insurance implements Serializable {
     }
 
     @Temporal(TemporalType.TIMESTAMP)
-    @Column(name = "updated", nullable = false)
+    @UpdateTimestamp
     public Date getUpdated() {
         return updated;
     }
@@ -79,13 +81,4 @@ public class Insurance implements Serializable {
         this.enabled = enabled;
     }
 
-    @PrePersist
-    protected void onCreate() {
-        updated = new Date();
-    }
-
-    @PreUpdate
-    protected void onUpdate() {
-        updated = new Date();
-    }
 }
