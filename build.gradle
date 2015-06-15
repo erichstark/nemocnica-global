@@ -19,6 +19,7 @@ apply plugin: 'idea'
 apply plugin: 'spring-boot'
 apply plugin: 'io.spring.dependency-management'
 apply plugin: 'heroku'
+apply plugin: "sonar-runner"
 
 heroku {
     //get this from heroku
@@ -55,6 +56,8 @@ dependencies {
 
     compile("org.springframework.boot:spring-boot-starter-security")
     compile("org.springframework.security.oauth:spring-security-oauth2:2.0.7.RELEASE")
+
+    compile('javax.mail:mail:1.4.7')
 
     compile("org.springframework.boot:spring-boot-starter-logging")
 
@@ -100,3 +103,13 @@ task stopServer(type: Exec) {
 }
 
 bootRun.dependsOn stopServer
+
+sonarRunner {
+    sonarProperties {
+        property "sonar.host.url", "http://localhost:9000"
+        property "sonar.jdbc.url", "jdbc:postgresql://localhost:5432/sonar"
+        property "sonar.jdbc.driverClassName", " org.postgresql.Driver"
+        property "sonar.jdbc.username", "postgres"
+        property "sonar.jdbc.password", "postgres"
+    }
+}

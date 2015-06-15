@@ -4,7 +4,9 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 import org.springframework.transaction.annotation.Transactional;
 import sk.stuba.fei.team.global.domain.Patient;
+import sk.stuba.fei.team.global.domain.VerificationToken;
 import sk.stuba.fei.team.global.repository.PatientRepository;
+import sk.stuba.fei.team.global.repository.VerificationTokenRepository;
 
 import java.util.Date;
 import java.util.List;
@@ -17,9 +19,12 @@ public class PatientServiceImpl implements PatientService {
     @Autowired
     PatientRepository patientRepository;
 
+    @Autowired
+    private VerificationTokenRepository tokenRepository;
+
     @Override
     public Patient findByUsername(String username) {
-        return patientRepository.findByUsername(username);
+        return patientRepository.findOne(username);
     }
 
     @Override
@@ -48,6 +53,17 @@ public class PatientServiceImpl implements PatientService {
     }
 
     @Override
+    public VerificationToken getVerificationToken(String VerificationToken) {
+        return tokenRepository.findByToken(VerificationToken);
+    }
+
+    @Override
+    public void createVerificationToken(Patient patient, String token) {
+        VerificationToken vt = new VerificationToken(token, patient);
+        tokenRepository.save(vt);
+    }
+
+    @Override
     public List<Patient> findPatientByUsernameOrFirstOrSurname(String text) {
         return patientRepository.findByUsernameOrFirstnameOrSerunameCustomQuery(text);
     }
@@ -61,4 +77,5 @@ public class PatientServiceImpl implements PatientService {
     public List<Patient> findBySurNameOrEmail(String searchTerm) {
         return patientRepository.findBySurnameContainingOrEmailContainingAllIgnoreCase(searchTerm, searchTerm);
     }
+
 }

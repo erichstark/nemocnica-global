@@ -4,7 +4,7 @@
 <#import "/spring.ftl" as spring>
 
 <@pt.dashboardPage>
-<h1 class="page-header">Pridanie nového pacienta</h1>
+<h1 class="page-header">Editácia pacienta</h1>
 
 <div class="row">
     <div class="col-md-12">
@@ -18,12 +18,6 @@
     <form name="patient" action="<@spring.url '/admin/patient/save'/>" method="post">
         <input type="hidden" name="username" class="form-control" id="patient-username" placeholder="Prihlasovacie meno"
                value="${patient.username!""}">
-
-        <div class="form-group">
-            <label for="patient-password">Heslo</label>
-            <input type="password" name="password" class="form-control" id="patient-password" placeholder="Heslo"
-                   value="${patient.password!""}">
-        </div>
         <div class="form-group">
             <label for="patient-prefix_title">Titul pred</label>
             <input type="text" name="prefix_title" class="form-control" id="patient-prefix_title"

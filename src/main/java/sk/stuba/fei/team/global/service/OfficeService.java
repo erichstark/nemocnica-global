@@ -1,7 +1,10 @@
 package sk.stuba.fei.team.global.service;
 
+import sk.stuba.fei.team.global.domain.Employee;
 import sk.stuba.fei.team.global.domain.Office;
+import sk.stuba.fei.team.global.domain.Specialization;
 
+import java.util.Collection;
 import java.util.List;
 
 /**
@@ -20,4 +23,6 @@ public interface OfficeService {
     void save(Office office);
 
     void delete(Long id);
+
+    List<Office> findByEmployeesInAndSpecializationsIn(Collection<Employee> employees, Collection<Specialization> specialization);
 }

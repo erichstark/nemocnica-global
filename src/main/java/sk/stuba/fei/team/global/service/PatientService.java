@@ -1,6 +1,7 @@
 package sk.stuba.fei.team.global.service;
 
 import sk.stuba.fei.team.global.domain.Patient;
+import sk.stuba.fei.team.global.domain.VerificationToken;
 
 import java.util.Date;
 import java.util.List;
@@ -18,6 +19,10 @@ public interface PatientService {
     boolean exists(String username);
 
     void delete(String username);
+
+    void createVerificationToken(Patient patient, String token);
+
+    VerificationToken getVerificationToken(String VerificationToken);
 
     List<Patient> findPatientByUsernameOrFirstOrSurname(String text);
 
