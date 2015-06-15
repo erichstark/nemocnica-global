@@ -10,6 +10,7 @@ import java.util.Set;
 @XmlRootElement
 public class Facility implements Serializable {
 
+    private static final long serialVersionUID = -8682044801981807923L;
     private Long id;
     private String name;
     private Set<Office> offices;
