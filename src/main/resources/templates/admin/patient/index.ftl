@@ -39,7 +39,6 @@
             <th>Telefón</th>
             <th>Autorita</th>
             <th>Aktivovaný účet</th>
-            <th></th>
         </tr>
         </thead>
         <tbody>
@@ -64,8 +63,6 @@
                         <input type="checkbox" disabled>
                     </#if>
                 </td>
-                <td><a class="btn btn-danger" href="<@spring.url '/admin/patient/delete/' + patient.username />"
-                       onclick="return confirm('Naozaj?');">Vymazať</a></td>
             </tr>
             </#list>
         </tbody>

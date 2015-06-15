@@ -149,6 +149,12 @@
                 </ul>
             </div>
             <div class="col-sm-9 col-sm-offset-3 col-md-10 col-md-offset-2 main">
+                <#if message??>
+                    <div class="alert alert-success" role="alert">${message}</div>
+                </#if>
+                <#if error??>
+                    <div class="alert alert-danger" role="alert">${error}</div>
+                </#if>
                 <#nested>
             </div>
         </div>

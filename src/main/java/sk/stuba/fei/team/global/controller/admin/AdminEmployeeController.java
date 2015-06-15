@@ -15,9 +15,6 @@ import sk.stuba.fei.team.global.service.SpecializationService;
 import java.util.Map;
 import java.util.logging.Logger;
 
-/**
- * Created by pallo on 5/9/15.
- */
 @Controller
 @RequestMapping("/admin/employee")
 public class AdminEmployeeController {

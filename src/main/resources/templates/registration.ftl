@@ -56,7 +56,7 @@
                 </div>
                 <div class="row">
                     <div class="form-group col-md-6">
-                        <label for="insurance"><@spring.message "Insurance"/></label>
+                        <label for="insurance"><@spring.message "insurance"/></label>
                         <select name="insurance" class="form-control" id="insurance">
                             <#list insurances as insurance>
                                 <option value="${insurance.id}">${insurance.name}</option>

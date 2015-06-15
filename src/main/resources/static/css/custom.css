@@ -418,3 +418,6 @@ header {
     display: block;
     text-align: right;
 }
+
+/* ----- bootstrap alert hack na autowidth podla content -----*/
+.alert {display:inline-block;}
