@@ -37,7 +37,6 @@
             <th>Poistovňa</th>
             <th>Email</th>
             <th>Telefón</th>
-            <th>Autorita</th>
             <th>Aktivovaný účet</th>
         </tr>
         </thead>
@@ -45,17 +44,10 @@
             <#list patients as patient>
             <tr>
                 <td><a href="<@spring.url '/admin/patient/edit/' + patient.username />">${patient.username}</a></td>
-                <td>
-                    ${patient.prefix_title!"" + ' ' + patient.firstName + ' ' + patient.surname + ', ' + patient.suffix_title!""}
-                </td>
+                <td>${patient.getFullName()}</td>
                 <td><#if patient.insurance??>${patient.insurance.name}<#else></#if></td>
                 <td>${patient.email}</td>
                 <td>${patient.phone}</td>
-                <#if patient.getStringAuthorities()?seq_contains("USER")>
-                    <td>USER</td>
-                <#else>
-                    <td>ADMIN</td>
-                </#if>
                 <td>
                     <#if patient.enabled!false>
                         <input type="checkbox" checked disabled>

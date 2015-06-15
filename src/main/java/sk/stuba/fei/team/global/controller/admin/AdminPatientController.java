@@ -67,8 +67,8 @@ public class AdminPatientController {
         else
             patient.setInsurance(null);
         if(old !=null) {
-            patient.getAuthorities().addAll(old.getAuthorities());
-            patient.getAppointments().addAll(old.getAppointments());
+            patient.setAuthorities(old.getAuthorities());
+            patient.setAppointments(old.getAppointments());
         }
 
         redirectAttributes.addFlashAttribute("message", messageSource.getMessage("save_success", null, LocaleContextHolder.getLocale()));
