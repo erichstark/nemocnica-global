@@ -106,12 +106,12 @@
 
                         </td>
                     <#else>
-                        <td><span class="not-free">Pre doobedie už nie sú bohužial voľné termíny. </span></td>
+                        <td colspan="2" ><span class="not-free">Bohužial už nie sú voľné termíny. </span></td>
                     </#if>
                     <div class="fade"></div>
 
                     <#if d.intervalList??>
-                        <div id="${d_index}" class="popup white_content">
+                        <div id="${'after'+d_index}" class="popup white_content">
 
 
                             <h3> ${employee.firstName} ${employee.lastName}</h3>
@@ -341,7 +341,7 @@
             $("#morning" + id).toggle();
         }else{
 
-            $(id).toggle();
+            $("#after"+id).toggle();
         }
 
         $(".fade").toggle();

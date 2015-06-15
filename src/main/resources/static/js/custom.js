@@ -33,3 +33,9 @@ function changeEnabled(item) {
 		dataType: "json"
 	});
 }
+
+function customConfirm(message) {
+	var evt = window.event || arguments.callee.caller.arguments[0];
+	evt.stopPropagation();
+	return confirm(message);
+}

@@ -8,7 +8,7 @@ import java.io.Serializable;
 @XmlRootElement
 public class OpeningHours implements Serializable {
     private Long Id;
-    private String date;
+    private int date;
     private Long reservationMorningFrom;
     private Long reservationMorningTo;
     private Long reservationFrom;
@@ -25,11 +25,11 @@ public class OpeningHours implements Serializable {
     }
 
     @Column
-    public String getDate() {
+    public int getDate() {
         return date;
     }
 
-    public void setDate(String date) {
+    public void setDate(int date) {
         this.date = date;
     }
 

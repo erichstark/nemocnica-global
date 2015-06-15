@@ -15,7 +15,7 @@
                 Nová objednávka úspešne vytvorená !
             </div>
         <#elseif message='fail' >
-            <div class="alert alert-dismissible alert-success">
+            <div class="alert alert-dismissible alert-danger">
                 Objednávka nemôže byť zrušena! Objednávku môžete zrušiť do 24 hodín pred termínom.
             </div>
         </#if>
@@ -45,7 +45,7 @@
 
 
                     <td>${cas}</td>
-                    <td><a href="<@spring.url '/appointment/delete/'+user.username +'/'+appointment.id />">Zrušiť
+                    <td><a class="btn btn-danger btn-sm"  href="<@spring.url '/appointment/delete/'+user.username +'/'+appointment.id />" role="button" onclick="return customConfirm('Naozaj chcete zrušiť objednávku?')" >Zrušiť
                         objednávku</a></td>
                 </tr>
                 </#list>
