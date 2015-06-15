@@ -4,190 +4,285 @@ INSERT INTO insurance (name, enabled, updated) VALUES ('Všeobecná zdravotná p
 INSERT INTO insurance (name, enabled, updated) VALUES ('Apollo', FALSE, now());
 
 -- Specializations
-INSERT INTO specialization (id, name, enabled, updated) VALUES (1, 'vnútorné lekárstvo', TRUE, now()), (2, 'infektológia', TRUE, now());
-INSERT INTO specialization (id, name, enabled, updated) VALUES (3, 'pneumológia a ftizeológia', TRUE, now()), (4, 'neurológia', TRUE, now()), (5, 'psychiatria', TRUE, now());
-INSERT INTO specialization (id, name, enabled, updated) VALUES (6, 'pracovné lekárstvo', TRUE, now()), (7, 'pediatria', TRUE, now());
-INSERT INTO specialization (id, name, enabled, updated) VALUES (8, 'všeobecná starostlivosť o deti a dorast', TRUE, now()), (9, 'gynekológia a pôrodníctvo', TRUE, now());
-INSERT INTO specialization (id, name, enabled, updated) VALUES (10, 'chirurgia', TRUE, now()), (11, 'ortopédia', TRUE, now()), (12, 'urológia', TRUE, now());
-INSERT INTO specialization (id, name, enabled, updated) VALUES (13, 'úrazová chirurgia', TRUE, now()), (14, 'otorinolaryngológia', TRUE, now()), (15, 'oftalmológia', TRUE, now());
-INSERT INTO specialization (id, name, enabled, updated) VALUES (17, 'pediatrická gynekológia', TRUE, now()), (18, 'dermatovenerológia', TRUE, now());
-INSERT INTO specialization (id, name, enabled, updated) VALUES (19, 'klinická onkológia', TRUE, now()), (20, 'všeobecné lekárstvo', TRUE, now());
-INSERT INTO specialization (id, name, enabled, updated) VALUES (22, 'dorastové lekárstvo', TRUE, now()), (23, 'rádiológia', TRUE, now()), (24, 'klinická biochémia', TRUE, now());
-INSERT INTO specialization (id, name, enabled, updated) VALUES (25, 'anestéziológia a intenzívna medicína', TRUE, now()), (26, 'telovýchovné lekárstvo', TRUE, now());
-INSERT INTO specialization (id, name, enabled, updated) VALUES (27, 'fyziatria, balneológia a liečebná rehabilitácia', TRUE, now()), (28, 'súdne lekárstvo', TRUE, now());
-INSERT INTO specialization (id, name, enabled, updated) VALUES (29, 'patologická anatómia', TRUE, now()), (31, 'hematológia a transfuziológia', TRUE, now());
-INSERT INTO specialization (id, name, enabled, updated) VALUES (32, 'urgentná medicína', TRUE, now()), (34, 'klinická mikrobiológia', TRUE, now());
-INSERT INTO specialization (id, name, enabled, updated) VALUES (37, 'neurochirurgia', TRUE, now()), (38, 'plastická chirurgia', TRUE, now());
-INSERT INTO specialization (id, name, enabled, updated) VALUES (39, 'ortopedická protetika', TRUE, now()), (40, 'klinická imunológia a alergológia', TRUE, now());
-INSERT INTO specialization (id, name, enabled, updated) VALUES (43, 'radiačná onkológia', TRUE, now()), (44, 'foniatria', TRUE, now()), (45, 'reumatológia', TRUE, now());
-INSERT INTO specialization (id, name, enabled, updated) VALUES (46, 'algeziológia', TRUE, now()), (47, 'nukleárna medicína', TRUE, now()), (48, 'gastroenterológia', TRUE, now());
-INSERT INTO specialization (id, name, enabled, updated) VALUES (49, 'kardiológia', TRUE, now()), (50, 'diabetológia, poruchy látkovej premeny a výživy', TRUE, now());
-INSERT INTO specialization (id, name, enabled, updated) VALUES (51, 'neonatológia', TRUE, now()), (52, 'hygiena detí a mládeže', TRUE, now()), (56, 'angiológia', TRUE, now());
-INSERT INTO specialization (id, name, enabled, updated) VALUES (57, 'hygiena životného prostredia', TRUE, now()), (58, 'hygiena výživy', TRUE, now());
-INSERT INTO specialization (id, name, enabled, updated) VALUES (59, 'epidemiológia', TRUE, now()), (60, 'geriatria', TRUE, now());
-INSERT INTO specialization (id, name, enabled, updated) VALUES (61, 'medicínska informatika a bioštatistika', TRUE, now()), (62, 'lekárska genetika', TRUE, now());
-INSERT INTO specialization (id, name, enabled, updated) VALUES (63, 'nefrológia', TRUE, now()), (64, 'endokrinológia', TRUE, now()), (65, 'klinická farmakológia', TRUE, now());
-INSERT INTO specialization (id, name, enabled, updated) VALUES (66, 'zdravotnícka informatika', TRUE, now()), (67, 'gynekologická sexuológia', TRUE, now());
-INSERT INTO specialization (id, name, enabled, updated) VALUES (68, 'cievna chirurgia', TRUE, now()), (69, 'kardiochirurgia', TRUE, now());
-INSERT INTO specialization (id, name, enabled, updated) VALUES (70, 'maxilofaciálna chirurgia', TRUE, now()), (73, 'medicína drogových závislostí', TRUE, now());
-INSERT INTO specialization (id, name, enabled, updated) VALUES (74, 'gerontopsychiatria', TRUE, now()), (76, 'letecké lekárstvo', TRUE, now());
-INSERT INTO specialization (id, name, enabled, updated) VALUES (88, 'lekár bez špecializácie', TRUE, now()), (99, 'lekár predpisujúci lieky pre seba a osoby blízke', TRUE, now());
-INSERT INTO specialization (id, name, enabled, updated) VALUES (100, 'posudkové lekárstvo', TRUE, now()), (102, 'ochrana zdravia pred ionizujúcim žiarením', TRUE, now());
-INSERT INTO specialization (id, name, enabled, updated) VALUES (104, 'pediatrická neurológia', TRUE, now()), (105, 'detská psychiatria', TRUE, now());
-INSERT INTO specialization (id, name, enabled, updated) VALUES (106, 'hrudníková chirurgia', TRUE, now()), (107, 'detská chirurgia', TRUE, now());
-INSERT INTO specialization (id, name, enabled, updated) VALUES (108, 'pediatrická ortopédia', TRUE, now()), (109, 'pediatrická urológia', TRUE, now());
-INSERT INTO specialization (id, name, enabled, updated) VALUES (114, 'pediatrická otorinolaryngológia', TRUE, now()), (130, 'materno', TRUE, now());
-INSERT INTO specialization (id, name, enabled, updated) VALUES (131, 'výchova k zdraviu', TRUE, now()), (140, 'pediatrická imunológia a alergiológia', TRUE, now());
-INSERT INTO specialization (id, name, enabled, updated) VALUES (145, 'pediatrická reumatológia', TRUE, now()), (153, 'pediatrická endokrinológia', TRUE, now());
-INSERT INTO specialization (id, name, enabled, updated) VALUES (154, 'pediatrická gastroenterológia, hepatológia a výživa', TRUE, now());
-INSERT INTO specialization (id, name, enabled, updated) VALUES (155, 'pediatrická kardiológia', TRUE, now()), (156, 'pediatrická pneumológia a ftizeológia', TRUE, now());
-INSERT INTO specialization (id, name, enabled, updated) VALUES (163, 'pediatrická nefrológia', TRUE, now()), (216, 'hepatológia', TRUE, now());
-INSERT INTO specialization (id, name, enabled, updated) VALUES (222, 'gastroenterologická chirurgia', TRUE, now()), (223, 'neuropsychiatria', TRUE, now());
-INSERT INTO specialization (id, name, enabled, updated) VALUES (225, 'laboratórna medicína', TRUE, now()), (226, 'tropická medicína', TRUE, now());
-INSERT INTO specialization (id, name, enabled, updated) VALUES (227, 'verejné zdravotníctvo', TRUE, now()), (229, 'onkológia v gynekológii', TRUE, now());
-INSERT INTO specialization (id, name, enabled, updated) VALUES (231, 'psychosomatická a behaviorálna medicína', TRUE, now());
-INSERT INTO specialization (id, name, enabled, updated) VALUES (247, 'ultrazvuk v gynekológii a pôrodníctve', TRUE, now());
-INSERT INTO specialization (id, name, enabled, updated) VALUES (258, 'špeciálne laboratórne a diagnostické metódy v hematológii a transfúziológii', TRUE, now());
-INSERT INTO specialization (id, name, enabled, updated) VALUES (271, 'mamológia', TRUE, now()), (289, 'reprodukčná medicína', TRUE, now()), (299, 'akupunktúra', TRUE, now());
-INSERT INTO specialization (id, name, enabled, updated) VALUES (302, 'andrológia', TRUE, now()), (306, 'klinické pracovné lekárstvo a klinická toxikológia', TRUE, now());
-INSERT INTO specialization (id, name, enabled, updated) VALUES (312, 'gynekologická urológia', TRUE, now()), (319, 'onkológia v chirurgii', TRUE, now());
-INSERT INTO specialization (id, name, enabled, updated) VALUES (322, 'onkológia v urológii', TRUE, now()), (323, 'pediatrická anestéziológia', TRUE, now());
-INSERT INTO specialization (id, name, enabled, updated) VALUES (329, 'pediatrická hematológia a onkológia', TRUE, now()), (331, 'pediatrická infektológia', TRUE, now());
-INSERT INTO specialization (id, name, enabled, updated) VALUES (332, 'pediatrická intenzívna medicína', TRUE, now()), (334, 'paliatívna medicína', TRUE, now());
-INSERT INTO specialization (id, name, enabled, updated) VALUES (336, 'pediatrická oftalmológia', TRUE, now()), (340, 'sexuológia', TRUE, now());
-INSERT INTO specialization (id, name, enabled, updated) VALUES (341, 'pediatrická urgentná medicína', TRUE, now()), (353, 'zdravotnícka ekológia', TRUE, now());
-INSERT INTO specialization (id, name, enabled, updated) VALUES (356, 'revízne lekárstvo', TRUE, now()), (366, 'preventívne pracovné lekárstvo a toxikológia', TRUE, now());
-INSERT INTO specialization (id, name, enabled, updated) VALUES (367, 'psychiatrická sexuológia', TRUE, now()), (377, 'služby zdravia pri práci', TRUE, now());
-INSERT INTO specialization (id, name, enabled, updated) VALUES (16, 'stomatológia', TRUE, now()), (53, 'čeľustná ortopédia', TRUE, now());
-INSERT INTO specialization (id, name, enabled, updated) VALUES (115, 'detské zubné lekárstvo', TRUE, now()), (361, 'revízne zubné lekárstvo', TRUE, now());
-INSERT INTO specialization (id, name, enabled, updated) VALUES (803, 'farmácia – vysokoškolské magisterské štúdium', TRUE, now());
-INSERT INTO specialization (id, name, enabled, updated) VALUES (119, 'diagnostické zdravotnícke pomôcky in vitro', TRUE, now()), (122, 'technológia rádiofarmák', TRUE, now());
-INSERT INTO specialization (id, name, enabled, updated) VALUES (125, 'farmakológioa a technológia liečiv', TRUE, now());
-INSERT INTO specialization (id, name, enabled, updated) VALUES (157, 'farmaceutická kontrola a zabezpečovanie kvality liekov', TRUE, now());
-INSERT INTO specialization (id, name, enabled, updated) VALUES (158, 'farmaceutická technológia', TRUE, now()), (159, 'klinická farmácia', TRUE, now());
-INSERT INTO specialization (id, name, enabled, updated) VALUES (160, 'lekárenstvo', TRUE, now()), (363, 'klinické skúšanie produktov a liekov', TRUE, now());
-INSERT INTO specialization (id, name, enabled, updated) VALUES (364, 'príprava cytostatík', TRUE, now()), (371, 'revízne lekárenstvo', TRUE, now());
-INSERT INTO specialization (id, name, enabled, updated) VALUES (375, 'zabezpečovanie kvality transfúznych liekov', TRUE, now());
-INSERT INTO specialization (id, name, enabled, updated) VALUES (411, 'odborník na riadenie vo verejnom zdravotníctve master of public health', TRUE, now());
-INSERT INTO specialization (id, name, enabled, updated) VALUES (497, 'sociálna farmácia a organizácia zdravotníctva', TRUE, now()), (589, 'farmakoekonomika', TRUE, now());
-INSERT INTO specialization (id, name, enabled, updated) VALUES (161, 'sestra', TRUE, now()), (193, 'ošetrovateľstvo – bakalárske štúdium', TRUE, now());
-INSERT INTO specialization (id, name, enabled, updated) VALUES (804, 'ošetrovateľstvo', TRUE, now()), (805, 'diplomovaná všeobecná sestra', TRUE, now());
-INSERT INTO specialization (id, name, enabled, updated) VALUES (240, 'ošetrovateľstvo v zdraví pri práci', TRUE, now()), (242, 'revízne ošetrovateľstvo', TRUE, now());
-INSERT INTO specialization (id, name, enabled, updated) VALUES (325, 'anestéziológia a intenzívna starostlivosť', TRUE, now());
-INSERT INTO specialization (id, name, enabled, updated) VALUES (243, 'operačné stredisko záchrannej zdravotnej služby', TRUE, now());
-INSERT INTO specialization (id, name, enabled, updated) VALUES (244, 'intenzívna ošetrovateľská starostlivosť o dospelých', TRUE, now());
-INSERT INTO specialization (id, name, enabled, updated) VALUES (245, 'intenzívna ošetrovateľská starostlivosť v pediatrii', TRUE, now());
-INSERT INTO specialization (id, name, enabled, updated) VALUES (246, 'intenzívna ošetrovateľská starostlivosť v neonatológii', TRUE, now());
-INSERT INTO specialization (id, name, enabled, updated) VALUES (129, 'inštrumentovanie v operačnej sále', TRUE, now());
-INSERT INTO specialization (id, name, enabled, updated) VALUES (248, 'ošetrovateľská starostlivosť o dialyzovaných pacientov', TRUE, now());
-INSERT INTO specialization (id, name, enabled, updated) VALUES (249, 'ošetrovateľská starostlivosť v odboroch vnútorného lekárstva', TRUE, now());
-INSERT INTO specialization (id, name, enabled, updated) VALUES (250, 'ošetrovateľská starostlivosť v odboroch chirurgie', TRUE, now());
-INSERT INTO specialization (id, name, enabled, updated) VALUES (251, 'ošetrovateľská starostlivosť v pediatrii', TRUE, now());
-INSERT INTO specialization (id, name, enabled, updated) VALUES (252, 'ošetrovateľská starostlivosť v psychiatrii', TRUE, now());
-INSERT INTO specialization (id, name, enabled, updated) VALUES (253, 'ošetrovateľská starostlivosť v komunite', TRUE, now());
-INSERT INTO specialization (id, name, enabled, updated) VALUES (254, 'ošetrovateľská starostlivosť v onkológii', TRUE, now());
-INSERT INTO specialization (id, name, enabled, updated) VALUES (255, 'špecializovaná urgentná starostlivosť', TRUE, now()), (557, 'audiometria', TRUE, now());
-INSERT INTO specialization (id, name, enabled, updated) VALUES (558, 'endoskopické vyšetrovacie metódy v jednotlivých odboroch', TRUE, now());
-INSERT INTO specialization (id, name, enabled, updated) VALUES (559, 'funkčné vyšetrovacie metódy', TRUE, now());
-INSERT INTO specialization (id, name, enabled, updated) VALUES (560, 'invazívne a intervenčné diagnostické a terapeutické metódy', TRUE, now()), (561, 'kalmetizácia', TRUE, now());
-INSERT INTO specialization (id, name, enabled, updated) VALUES (562, 'kardiologické vyšetrovacie metódy', TRUE, now());
-INSERT INTO specialization (id, name, enabled, updated) VALUES (565, 'ošetrovateľská starostlivosť o diabetikov', TRUE, now());
-INSERT INTO specialization (id, name, enabled, updated) VALUES (566, 'ošetrovateľská starostlivosť v multikultúrnych komunitách', TRUE, now());
-INSERT INTO specialization (id, name, enabled, updated) VALUES (564, 'organizácia a techniky v tkanivových bunkách', TRUE, now());
-INSERT INTO specialization (id, name, enabled, updated) VALUES (563, 'organizácia a riadenie starostlivosti o zdravotnícke pomôcky', TRUE, now());
-INSERT INTO specialization (id, name, enabled, updated) VALUES (568, 'starostlivosť o drogovo závislých', TRUE, now());
-INSERT INTO specialization (id, name, enabled, updated) VALUES (569, 'vyšetrovacie metódy v klinickej neurofyziológii a neurodiagnostike', TRUE, now());
-INSERT INTO specialization (id, name, enabled, updated) VALUES (241, 'psychoterapia', TRUE, now()), (496, 'manažment v ošetrovateľstve', TRUE, now());
-INSERT INTO specialization (id, name, enabled, updated) VALUES (605, 'pôrodná asistentka', TRUE, now()), (806, 'pôrodná asistencia', TRUE, now());
-INSERT INTO specialization (id, name, enabled, updated) VALUES (807, 'diplomovaná pôrodná asistentka', TRUE, now());
-INSERT INTO specialization (id, name, enabled, updated) VALUES (256, 'intenzívna starostlivosť v gynekológii a pôrodníctve', TRUE, now());
-INSERT INTO specialization (id, name, enabled, updated) VALUES (224, 'inštrumentovanie v operačnej sále v gynekológii a pôrodníctve', TRUE, now());
-INSERT INTO specialization (id, name, enabled, updated) VALUES (257, 'pôrodná asistencia a starostlivosť o ženu v rodine a komunite', TRUE, now());
-INSERT INTO specialization (id, name, enabled, updated) VALUES (570, 'plánované rodičovstvo a antikoncepcia', TRUE, now()), (492, 'manažment v pôrodnej asistencii', TRUE, now());
-INSERT INTO specialization (id, name, enabled, updated) VALUES (666, 'technik laboratórnej medicíny', TRUE, now()), (667, 'medicínsko', TRUE, now());
-INSERT INTO specialization (id, name, enabled, updated) VALUES (808, 'laboratórne vyšetrovacie metódy – vysokoškolské magisterské štúdium', TRUE, now());
-INSERT INTO specialization (id, name, enabled, updated) VALUES (809, 'diplomovaný medicínsko', TRUE, now());
-INSERT INTO specialization (id, name, enabled, updated) VALUES (810, 'zdravotnícky laborant – úplné stredné odborné štúdium', TRUE, now());
-INSERT INTO specialization (id, name, enabled, updated) VALUES (811, 'farmaceutický laborant – úplné stredné odborné štúdium', TRUE, now());
-INSERT INTO specialization (id, name, enabled, updated) VALUES (493, 'manažment v odboroch kategórie laborant', TRUE, now());
-INSERT INTO specialization (id, name, enabled, updated) VALUES (239, 'laboratórne a diagnostické metódy v klinickej genetike', TRUE, now());
-INSERT INTO specialization (id, name, enabled, updated) VALUES (259, 'laboratórne a diagnostické metódy v hematológii a transfúziológii', TRUE, now());
-INSERT INTO specialization (id, name, enabled, updated) VALUES (262, 'vyšetrovacie metódy v klinickej mikrobiológii', TRUE, now());
-INSERT INTO specialization (id, name, enabled, updated) VALUES (266, 'vyšetrovacie metódy v klinickej genetike', TRUE, now());
-INSERT INTO specialization (id, name, enabled, updated) VALUES (269, 'laboratórne a diagnostické metódy v klinickej biochémii', TRUE, now());
-INSERT INTO specialization (id, name, enabled, updated) VALUES (313, 'laboratórne a diagnostické metódy v klinickej mikrobiológii', TRUE, now());
-INSERT INTO specialization (id, name, enabled, updated) VALUES (314, 'laboratórne a diagnostické metódy v biológii životného prostredia', TRUE, now());
-INSERT INTO specialization (id, name, enabled, updated) VALUES (315, 'laboratórne a diagnostické metódy v mikrobiológii životného prostredia', TRUE, now());
-INSERT INTO specialization (id, name, enabled, updated) VALUES (320, 'laboratórne a diagnostické metódy v oblasti fyzikálnych a chemických analýz a faktorov', TRUE, now());
-INSERT INTO specialization (id, name, enabled, updated) VALUES (324, 'vyšetrovacie metódy v klinickej biochémii', TRUE, now());
-INSERT INTO specialization (id, name, enabled, updated) VALUES (346, 'laboratórne a diagnostické metódy v klinickej imunológii a alergológii', TRUE, now());
-INSERT INTO specialization (id, name, enabled, updated) VALUES (333, 'vyšetrovacie metódy v chemickej a fyzikálnej analýze v hygiene', TRUE, now());
-INSERT INTO specialization (id, name, enabled, updated) VALUES (260, 'vyšetrovacie metódy v mikrobiológii a biológii životného prostredia', TRUE, now());
-INSERT INTO specialization (id, name, enabled, updated) VALUES (261, 'vyšetrovacie metódy v klinickej cytológii', TRUE, now());
-INSERT INTO specialization (id, name, enabled, updated) VALUES (263, 'vyšetrovacie metódy v toxikológii a farmakológii', TRUE, now());
-INSERT INTO specialization (id, name, enabled, updated) VALUES (294, 'vyšetrovacie metódy v histopatológii', TRUE, now());
-INSERT INTO specialization (id, name, enabled, updated) VALUES (265, 'vyšetrovacie metódy v ochrane zdravia pred ionizujúcim žiarením', TRUE, now());
-INSERT INTO specialization (id, name, enabled, updated) VALUES (814, 'diplomovaný rádiologický asistent – vyššie odborné štúdium', TRUE, now());
-INSERT INTO specialization (id, name, enabled, updated) VALUES (815, 'diplomovaný zdravotnícky záchranár – vyššie odborné štúdium', TRUE, now());
-INSERT INTO specialization (id, name, enabled, updated) VALUES (816, 'diplomovaná dentálna hygienička – vyššie odborné štúdium', TRUE, now());
-INSERT INTO specialization (id, name, enabled, updated) VALUES (817, 'asistent výživy – úplné stredné odborné štúdium', TRUE, now());
-INSERT INTO specialization (id, name, enabled, updated) VALUES (818, 'masér – úplné stredné odborné štúdium', TRUE, now());
-INSERT INTO specialization (id, name, enabled, updated) VALUES (819, 'zdravotnícky asistent – úplné stredné odborné štúdium', TRUE, now());
-INSERT INTO specialization (id, name, enabled, updated) VALUES (820, 'zdravotnícky záchranár', TRUE, now()), (674, 'rádiologický asistent', TRUE, now());
-INSERT INTO specialization (id, name, enabled, updated) VALUES (675, 'zdravotnícky záchranár', TRUE, now()), (680, 'sanitár – stredné odborné štúdium', TRUE, now());
-INSERT INTO specialization (id, name, enabled, updated) VALUES (679, 'zdravotnícky asistent', TRUE, now()), (821, 'sanitár – stredné odborné štúdium', TRUE, now());
-INSERT INTO specialization (id, name, enabled, updated) VALUES (343, 'špeciálna rádiológia', TRUE, now()), (574, 'digitálna substrakčná angiografia', TRUE, now());
-INSERT INTO specialization (id, name, enabled, updated) VALUES (575, 'mamografia', TRUE, now()), (576, 'počítačová tomografia', TRUE, now()), (272, 'liečebná výživa', TRUE, now());
-INSERT INTO specialization (id, name, enabled, updated) VALUES (494, 'manažment v odboroch kategórie asistent', TRUE, now()), (685, 'fyzioterapeut', TRUE, now());
-INSERT INTO specialization (id, name, enabled, updated) VALUES (827, 'rehabilitácia – vysokoškolské magisterské štúdium', TRUE, now());
-INSERT INTO specialization (id, name, enabled, updated) VALUES (844, 'fyzioterapia – vysokoškolské bakalárske štúdium', TRUE, now());
-INSERT INTO specialization (id, name, enabled, updated) VALUES (846, 'diplomovaný fyzioterapeut – vyššie odborné štúdium', TRUE, now());
-INSERT INTO specialization (id, name, enabled, updated) VALUES (273, 'fyzioterapia porúch psychomotorického vývoja', TRUE, now());
-INSERT INTO specialization (id, name, enabled, updated) VALUES (274, 'fyzioterapia funkčných a štrukturálnych porúch pohybového systému', TRUE, now());
-INSERT INTO specialization (id, name, enabled, updated) VALUES (275, 'fyzioterapia porúch CNS', TRUE, now()), (276, 'fyzioterapia v športe a telovýchove', TRUE, now());
-INSERT INTO specialization (id, name, enabled, updated) VALUES (277, 'ergonomika a rehabilitačné inžinierstvo', TRUE, now());
-INSERT INTO specialization (id, name, enabled, updated) VALUES (278, 'fyzioterapia vybraných ochorení pohybového systému', TRUE, now());
-INSERT INTO specialization (id, name, enabled, updated) VALUES (288, 'fyzioterapia respiračných ochorení', TRUE, now());
-INSERT INTO specialization (id, name, enabled, updated) VALUES (282, 'fyzioterapia psychosomatických a civilizačných ochorení', TRUE, now()), (135, 'ergoterapia', TRUE, now());
-INSERT INTO specialization (id, name, enabled, updated) VALUES (581, 'mobilizačné techniky', TRUE, now()), (582, 'reflexná terapia podľa Vojtu', TRUE, now());
-INSERT INTO specialization (id, name, enabled, updated) VALUES (583, 'techniky terapie lymfedému', TRUE, now());
-INSERT INTO specialization (id, name, enabled, updated) VALUES (291, 'liečebná rehabilitácia a fyzioterapia porúch vybraných systémov', TRUE, now());
-INSERT INTO specialization (id, name, enabled, updated) VALUES (525, 'klinická psychofyziológia (neurofeedback a biofeedback)', TRUE, now());
-INSERT INTO specialization (id, name, enabled, updated) VALUES (829, 'psychológia – vysokoškolské magisterské štúdium', TRUE, now()), (144, 'klinická psychológia', TRUE, now());
-INSERT INTO specialization (id, name, enabled, updated) VALUES (295, 'poradenská psychológia', TRUE, now()), (296, 'pracovná a organizačná psychológia', TRUE, now());
-INSERT INTO specialization (id, name, enabled, updated) VALUES (297, 'školská psychológia', TRUE, now()), (578, 'drogové závislosti', TRUE, now());
-INSERT INTO specialization (id, name, enabled, updated) VALUES (580, 'dopravná psychológia', TRUE, now()), (828, 'logopédia – vysokoškolské magisterské štúdium', TRUE, now());
-INSERT INTO specialization (id, name, enabled, updated) VALUES (141, 'klinická logopédia', TRUE, now()), (577, 'afaziológia', TRUE, now());
-INSERT INTO specialization (id, name, enabled, updated) VALUES (499, 'manažment v príslušnom odbore', TRUE, now());
-INSERT INTO specialization (id, name, enabled, updated) VALUES (830, 'liečebná pedagogika – vysokoškolské magisterské štúdium', TRUE, now());
-INSERT INTO specialization (id, name, enabled, updated) VALUES (831, 'špeciálna pedagogika – vysokoškolské magisterské štúdium', TRUE, now());
-INSERT INTO specialization (id, name, enabled, updated) VALUES (143, 'liečebná pedagogika', TRUE, now()), (142, 'špeciálna pedagogika', TRUE, now());
-INSERT INTO specialization (id, name, enabled, updated) VALUES (843, 'sociálna práca – vysokoškolské magisterské štúdium', TRUE, now());
-INSERT INTO specialization (id, name, enabled, updated) VALUES (283, 'sociálna práca v zdravotníctve', TRUE, now());
-INSERT INTO specialization (id, name, enabled, updated) VALUES (832, 'biomedicínska fyzika – vysokoškolské inžinierske štúdium', TRUE, now());
-INSERT INTO specialization (id, name, enabled, updated) VALUES (833, 'biológia so zameraním na bunkovú a molekulárnu biológiu – vysokoškolské inžinierske štúdium', TRUE, now());
-INSERT INTO specialization (id, name, enabled, updated) VALUES (834, 'biológia so zameraním na fyziológiu živočíchov a človeka – vysokoškolské inžinierske štúdium', TRUE, now());
-INSERT INTO specialization (id, name, enabled, updated) VALUES (835, 'fyzika so zameraním na biofyziku a chemickú fyziku – vysokoškolské inžinierske štúdium', TRUE, now());
-INSERT INTO specialization (id, name, enabled, updated) VALUES (836, 'chémia so zameraním na biochémiu – vysokoškolské inžinierske štúdium', TRUE, now());
-INSERT INTO specialization (id, name, enabled, updated) VALUES (837, 'biotechnológia – vysokoškolské inžinierske štúdium', TRUE, now());
-INSERT INTO specialization (id, name, enabled, updated) VALUES (838, 'hygiena potravín – vysokoškolské inžinierske štúdium', TRUE, now());
-INSERT INTO specialization (id, name, enabled, updated) VALUES (839, 'biochémia a biotechnológia – vysokoškolské inžinierske štúdium', TRUE, now());
-INSERT INTO specialization (id, name, enabled, updated) VALUES (840, 'chémia a technológia životného prostredia', TRUE, now());
-INSERT INTO specialization (id, name, enabled, updated) VALUES (841, 'biomedicínske inžinierstvo– vysokoškolské inžinierske štúdium', TRUE, now());
-INSERT INTO specialization (id, name, enabled, updated) VALUES (842, 'výživa ľudí', TRUE, now()), (845, 'potravinárstvo – biochémia', TRUE, now());
-INSERT INTO specialization (id, name, enabled, updated) VALUES (853, 'fyzika so zameraním na lekársku fyziku alebo na dozimetriu – vysokoškolské inžinierske štúdium', TRUE, now());
-INSERT INTO specialization (id, name, enabled, updated) VALUES (854, 'chémia so zameraním na kvasnú chémiu – vysokoškolské inžinierske štúdium', TRUE, now());
-INSERT INTO specialization (id, name, enabled, updated) VALUES (847, 'chémia – chémia liečiv – úplné stredné odborné štúdium', TRUE, now());
-INSERT INTO specialization (id, name, enabled, updated) VALUES (848, 'chémia – analytická chémia – úplné stredné odborné štúdium', TRUE, now());
-INSERT INTO specialization (id, name, enabled, updated) VALUES (849, 'chémia – monitorovanie životného prostredia – úplné stredné odborné štúdium', TRUE, now());
-INSERT INTO specialization (id, name, enabled, updated) VALUES (850, 'chémia – sanácia životného prostredia – úplné stredné odborné štúdium', TRUE, now());
-INSERT INTO specialization (id, name, enabled, updated) VALUES (851, 'chemická technológia– úplné stredné odborné štúdium', TRUE, now());
-INSERT INTO specialization (id, name, enabled, updated) VALUES (280, 'hygiena pracovných podmienok', TRUE, now()), (146, 'klinická fyzika', TRUE, now());
-INSERT INTO specialization (id, name, enabled, updated) VALUES (133, 'vyšetrovacie metódy v patológii a súdnom lekárstve', TRUE, now());
-INSERT INTO specialization (id, name, enabled, updated) VALUES (286, 'vyšetrovacie metódy v preventívnom pracovnom lekárstve a toxikológii', TRUE, now());
-INSERT INTO specialization (id, name, enabled, updated) VALUES (287, 'vyšetrovacie metódy v hygiene životného prostredia', TRUE, now());
-INSERT INTO specialization (id, name, enabled, updated) VALUES (316, 'vyšetrovacie metódy v oblasti fyzikálnych a chemických analýz a faktorov', TRUE, now());
-INSERT INTO specialization (id, name, enabled, updated) VALUES (186, 'vedúci centrálnej sterilizácie', TRUE, now()), (184, 'vedúci centrálneho príjmu', TRUE, now());
+INSERT INTO specialization (id, name, enabled, updated) VALUES
+  (1, 'vnútorné lekárstvo', TRUE, now()),
+  (2, 'infektológia', TRUE, now()),
+  (3, 'pneumológia a ftizeológia', TRUE, now()),
+  (4, 'neurológia', TRUE, now()),
+  (5, 'psychiatria', TRUE, now()),
+  (6, 'pracovné lekárstvo', TRUE, now()),
+  (7, 'pediatria', TRUE, now()),
+  (8, 'všeobecná starostlivosť o deti a dorast', TRUE, now()),
+  (9, 'gynekológia a pôrodníctvo', TRUE, now()),
+  (10, 'chirurgia', TRUE, now()),
+  (11, 'ortopédia', TRUE, now()),
+  (12, 'urológia', TRUE, now()),
+  (13, 'úrazová chirurgia', TRUE, now()),
+  (14, 'otorinolaryngológia', TRUE, now()),
+  (15, 'oftalmológia', TRUE, now()),
+  (17, 'pediatrická gynekológia', TRUE, now()),
+  (18, 'dermatovenerológia', TRUE, now()),
+  (19, 'klinická onkológia', TRUE, now()),
+  (20, 'všeobecné lekárstvo', TRUE, now()),
+  (22, 'dorastové lekárstvo', TRUE, now()),
+  (23, 'rádiológia', TRUE, now()),
+  (24, 'klinická biochémia', TRUE, now()),
+  (25, 'anestéziológia a intenzívna medicína', TRUE, now()),
+  (26, 'telovýchovné lekárstvo', TRUE, now()),
+  (27, 'fyziatria, balneológia a liečebná rehabilitácia', TRUE, now()),
+  (28, 'súdne lekárstvo', TRUE, now()),
+  (29, 'patologická anatómia', TRUE, now()),
+  (31, 'hematológia a transfuziológia', TRUE, now()),
+  (32, 'urgentná medicína', TRUE, now()),
+  (34, 'klinická mikrobiológia', TRUE, now()),
+  (37, 'neurochirurgia', TRUE, now()),
+  (38, 'plastická chirurgia', TRUE, now()),
+  (39, 'ortopedická protetika', TRUE, now()),
+  (40, 'klinická imunológia a alergológia', TRUE, now()),
+  (43, 'radiačná onkológia', TRUE, now()),
+  (44, 'foniatria', TRUE, now()),
+  (45, 'reumatológia', TRUE, now()),
+  (46, 'algeziológia', TRUE, now()),
+  (47, 'nukleárna medicína', TRUE, now()),
+  (48, 'gastroenterológia', TRUE, now()),
+  (49, 'kardiológia', TRUE, now()),
+  (50, 'diabetológia, poruchy látkovej premeny a výživy', TRUE, now()),
+  (51, 'neonatológia', TRUE, now()),
+  (52, 'hygiena detí a mládeže', TRUE, now()),
+  (56, 'angiológia', TRUE, now()),
+  (57, 'hygiena životného prostredia', TRUE, now()),
+  (58, 'hygiena výživy', TRUE, now()),
+  (59, 'epidemiológia', TRUE, now()),
+  (60, 'geriatria', TRUE, now()),
+  (61, 'medicínska informatika a bioštatistika', TRUE, now()),
+  (62, 'lekárska genetika', TRUE, now()),
+  (63, 'nefrológia', TRUE, now()),
+  (64, 'endokrinológia', TRUE, now()),
+  (65, 'klinická farmakológia', TRUE, now()),
+  (66, 'zdravotnícka informatika', TRUE, now()),
+  (67, 'gynekologická sexuológia', TRUE, now()),
+  (68, 'cievna chirurgia', TRUE, now()),
+  (69, 'kardiochirurgia', TRUE, now()),
+  (70, 'maxilofaciálna chirurgia', TRUE, now()),
+  (73, 'medicína drogových závislostí', TRUE, now()),
+  (74, 'gerontopsychiatria', TRUE, now()),
+  (76, 'letecké lekárstvo', TRUE, now()),
+  (88, 'lekár bez špecializácie', TRUE, now()),
+  (99, 'lekár predpisujúci lieky pre seba a osoby blízke', TRUE, now()),
+  (100, 'posudkové lekárstvo', TRUE, now()),
+  (102, 'ochrana zdravia pred ionizujúcim žiarením', TRUE, now()),
+  (104, 'pediatrická neurológia', TRUE, now()),
+  (105, 'detská psychiatria', TRUE, now()),
+  (106, 'hrudníková chirurgia', TRUE, now()),
+  (107, 'detská chirurgia', TRUE, now()),
+  (108, 'pediatrická ortopédia', TRUE, now()),
+  (109, 'pediatrická urológia', TRUE, now()),
+  (114, 'pediatrická otorinolaryngológia', TRUE, now()),
+  (130, 'materno', TRUE, now()),
+  (131, 'výchova k zdraviu', TRUE, now()),
+  (140, 'pediatrická imunológia a alergiológia', TRUE, now()),
+  (145, 'pediatrická reumatológia', TRUE, now()),
+  (153, 'pediatrická endokrinológia', TRUE, now()),
+  (154, 'pediatrická gastroenterológia, hepatológia a výživa', TRUE, now()),
+  (155, 'pediatrická kardiológia', TRUE, now()),
+  (156, 'pediatrická pneumológia a ftizeológia', TRUE, now()),
+  (163, 'pediatrická nefrológia', TRUE, now()),
+  (216, 'hepatológia', TRUE, now()),
+  (222, 'gastroenterologická chirurgia', TRUE, now()),
+  (223, 'neuropsychiatria', TRUE, now()),
+  (225, 'laboratórna medicína', TRUE, now()),
+  (226, 'tropická medicína', TRUE, now()),
+  (227, 'verejné zdravotníctvo', TRUE, now()),
+  (229, 'onkológia v gynekológii', TRUE, now()),
+  (231, 'psychosomatická a behaviorálna medicína', TRUE, now()),
+  (247, 'ultrazvuk v gynekológii a pôrodníctve', TRUE, now()),
+  (258, 'špeciálne laboratórne a diagnostické metódy v hematológii a transfúziológii', TRUE, now()),
+  (271, 'mamológia', TRUE, now()),
+  (289, 'reprodukčná medicína', TRUE, now()),
+  (299, 'akupunktúra', TRUE, now()),
+  (302, 'andrológia', TRUE, now()),
+  (306, 'klinické pracovné lekárstvo a klinická toxikológia', TRUE, now()),
+  (312, 'gynekologická urológia', TRUE, now()),
+  (319, 'onkológia v chirurgii', TRUE, now()),
+  (322, 'onkológia v urológii', TRUE, now()),
+  (323, 'pediatrická anestéziológia', TRUE, now()),
+  (329, 'pediatrická hematológia a onkológia', TRUE, now()),
+  (331, 'pediatrická infektológia', TRUE, now()),
+  (332, 'pediatrická intenzívna medicína', TRUE, now()),
+  (334, 'paliatívna medicína', TRUE, now()),
+  (336, 'pediatrická oftalmológia', TRUE, now()),
+  (340, 'sexuológia', TRUE, now()),
+  (341, 'pediatrická urgentná medicína', TRUE, now()),
+  (353, 'zdravotnícka ekológia', TRUE, now()),
+  (356, 'revízne lekárstvo', TRUE, now()),
+  (366, 'preventívne pracovné lekárstvo a toxikológia', TRUE, now()),
+  (367, 'psychiatrická sexuológia', TRUE, now()),
+  (377, 'služby zdravia pri práci', TRUE, now()),
+  (16, 'stomatológia', TRUE, now()),
+  (53, 'čeľustná ortopédia', TRUE, now()),
+  (115, 'detské zubné lekárstvo', TRUE, now()),
+  (361, 'revízne zubné lekárstvo', TRUE, now()),
+  (803, 'farmácia – vysokoškolské magisterské štúdium', TRUE, now()),
+  (119, 'diagnostické zdravotnícke pomôcky in vitro', TRUE, now()),
+  (122, 'technológia rádiofarmák', TRUE, now()),
+  (125, 'farmakológioa a technológia liečiv', TRUE, now()),
+  (157, 'farmaceutická kontrola a zabezpečovanie kvality liekov', TRUE, now()),
+  (158, 'farmaceutická technológia', TRUE, now()),
+  (159, 'klinická farmácia', TRUE, now()),
+  (160, 'lekárenstvo', TRUE, now()),
+  (363, 'klinické skúšanie produktov a liekov', TRUE, now()),
+  (364, 'príprava cytostatík', TRUE, now()),
+  (371, 'revízne lekárenstvo', TRUE, now()),
+  (375, 'zabezpečovanie kvality transfúznych liekov', TRUE, now()),
+  (411, 'odborník na riadenie vo verejnom zdravotníctve master of public health', TRUE, now()),
+  (497, 'sociálna farmácia a organizácia zdravotníctva', TRUE, now()),
+  (589, 'farmakoekonomika', TRUE, now()),
+  (161, 'sestra', TRUE, now()),
+  (193, 'ošetrovateľstvo – bakalárske štúdium', TRUE, now()),
+  (804, 'ošetrovateľstvo', TRUE, now()),
+  (805, 'diplomovaná všeobecná sestra', TRUE, now()),
+  (240, 'ošetrovateľstvo v zdraví pri práci', TRUE, now()),
+  (242, 'revízne ošetrovateľstvo', TRUE, now()),
+  (325, 'anestéziológia a intenzívna starostlivosť', TRUE, now()),
+  (243, 'operačné stredisko záchrannej zdravotnej služby', TRUE, now()),
+  (244, 'intenzívna ošetrovateľská starostlivosť o dospelých', TRUE, now()),
+  (245, 'intenzívna ošetrovateľská starostlivosť v pediatrii', TRUE, now()),
+  (246, 'intenzívna ošetrovateľská starostlivosť v neonatológii', TRUE, now()),
+  (129, 'inštrumentovanie v operačnej sále', TRUE, now()),
+  (248, 'ošetrovateľská starostlivosť o dialyzovaných pacientov', TRUE, now()),
+  (249, 'ošetrovateľská starostlivosť v odboroch vnútorného lekárstva', TRUE, now()),
+  (250, 'ošetrovateľská starostlivosť v odboroch chirurgie', TRUE, now()),
+  (251, 'ošetrovateľská starostlivosť v pediatrii', TRUE, now()),
+  (252, 'ošetrovateľská starostlivosť v psychiatrii', TRUE, now()),
+  (253, 'ošetrovateľská starostlivosť v komunite', TRUE, now()),
+  (254, 'ošetrovateľská starostlivosť v onkológii', TRUE, now()),
+  (255, 'špecializovaná urgentná starostlivosť', TRUE, now()),
+  (557, 'audiometria', TRUE, now()),
+  (558, 'endoskopické vyšetrovacie metódy v jednotlivých odboroch', TRUE, now()),
+  (559, 'funkčné vyšetrovacie metódy', TRUE, now()),
+  (560, 'invazívne a intervenčné diagnostické a terapeutické metódy', TRUE, now()),
+  (561, 'kalmetizácia', TRUE, now()),
+  (562, 'kardiologické vyšetrovacie metódy', TRUE, now()),
+  (565, 'ošetrovateľská starostlivosť o diabetikov', TRUE, now()),
+  (566, 'ošetrovateľská starostlivosť v multikultúrnych komunitách', TRUE, now()),
+  (564, 'organizácia a techniky v tkanivových bunkách', TRUE, now()),
+  (563, 'organizácia a riadenie starostlivosti o zdravotnícke pomôcky', TRUE, now()),
+  (568, 'starostlivosť o drogovo závislých', TRUE, now()),
+  (569, 'vyšetrovacie metódy v klinickej neurofyziológii a neurodiagnostike', TRUE, now()),
+  (241, 'psychoterapia', TRUE, now()),
+  (496, 'manažment v ošetrovateľstve', TRUE, now()),
+  (605, 'pôrodná asistentka', TRUE, now()),
+  (806, 'pôrodná asistencia', TRUE, now()),
+  (807, 'diplomovaná pôrodná asistentka', TRUE, now()),
+  (256, 'intenzívna starostlivosť v gynekológii a pôrodníctve', TRUE, now()),
+  (224, 'inštrumentovanie v operačnej sále v gynekológii a pôrodníctve', TRUE, now()),
+  (257, 'pôrodná asistencia a starostlivosť o ženu v rodine a komunite', TRUE, now()),
+  (570, 'plánované rodičovstvo a antikoncepcia', TRUE, now()),
+  (492, 'manažment v pôrodnej asistencii', TRUE, now()),
+  (666, 'technik laboratórnej medicíny', TRUE, now()),
+  (667, 'medicínsko', TRUE, now()),
+  (808, 'laboratórne vyšetrovacie metódy – vysokoškolské magisterské štúdium', TRUE, now()),
+  (809, 'diplomovaný medicínsko', TRUE, now()),
+  (810, 'zdravotnícky laborant – úplné stredné odborné štúdium', TRUE, now()),
+  (811, 'farmaceutický laborant – úplné stredné odborné štúdium', TRUE, now()),
+  (493, 'manažment v odboroch kategórie laborant', TRUE, now()),
+  (239, 'laboratórne a diagnostické metódy v klinickej genetike', TRUE, now()),
+  (259, 'laboratórne a diagnostické metódy v hematológii a transfúziológii', TRUE, now()),
+  (262, 'vyšetrovacie metódy v klinickej mikrobiológii', TRUE, now()),
+  (266, 'vyšetrovacie metódy v klinickej genetike', TRUE, now()),
+  (269, 'laboratórne a diagnostické metódy v klinickej biochémii', TRUE, now()),
+  (313, 'laboratórne a diagnostické metódy v klinickej mikrobiológii', TRUE, now()),
+  (314, 'laboratórne a diagnostické metódy v biológii životného prostredia', TRUE, now()),
+  (315, 'laboratórne a diagnostické metódy v mikrobiológii životného prostredia', TRUE, now()),
+  (320, 'laboratórne a diagnostické metódy v oblasti fyzikálnych a chemických analýz a faktorov', TRUE, now()),
+  (324, 'vyšetrovacie metódy v klinickej biochémii', TRUE, now()),
+  (346, 'laboratórne a diagnostické metódy v klinickej imunológii a alergológii', TRUE, now()),
+  (333, 'vyšetrovacie metódy v chemickej a fyzikálnej analýze v hygiene', TRUE, now()),
+  (260, 'vyšetrovacie metódy v mikrobiológii a biológii životného prostredia', TRUE, now()),
+  (261, 'vyšetrovacie metódy v klinickej cytológii', TRUE, now()),
+  (263, 'vyšetrovacie metódy v toxikológii a farmakológii', TRUE, now()),
+  (294, 'vyšetrovacie metódy v histopatológii', TRUE, now()),
+  (265, 'vyšetrovacie metódy v ochrane zdravia pred ionizujúcim žiarením', TRUE, now()),
+  (814, 'diplomovaný rádiologický asistent – vyššie odborné štúdium', TRUE, now()),
+  (815, 'diplomovaný zdravotnícky záchranár – vyššie odborné štúdium', TRUE, now()),
+  (816, 'diplomovaná dentálna hygienička – vyššie odborné štúdium', TRUE, now()),
+  (817, 'asistent výživy – úplné stredné odborné štúdium', TRUE, now()),
+  (818, 'masér – úplné stredné odborné štúdium', TRUE, now()),
+  (819, 'zdravotnícky asistent – úplné stredné odborné štúdium', TRUE, now()),
+  (820, 'zdravotnícky záchranár', TRUE, now()),
+  (674, 'rádiologický asistent', TRUE, now()),
+  (675, 'zdravotnícky záchranár', TRUE, now()),
+  (680, 'sanitár – stredné odborné štúdium', TRUE, now()),
+  (679, 'zdravotnícky asistent', TRUE, now()),
+  (821, 'sanitár – stredné odborné štúdium', TRUE, now()),
+  (343, 'špeciálna rádiológia', TRUE, now()),
+  (574, 'digitálna substrakčná angiografia', TRUE, now()),
+  (575, 'mamografia', TRUE, now()),
+  (576, 'počítačová tomografia', TRUE, now()),
+  (272, 'liečebná výživa', TRUE, now()),
+  (494, 'manažment v odboroch kategórie asistent', TRUE, now()),
+  (685, 'fyzioterapeut', TRUE, now()),
+  (827, 'rehabilitácia – vysokoškolské magisterské štúdium', TRUE, now()),
+  (844, 'fyzioterapia – vysokoškolské bakalárske štúdium', TRUE, now()),
+  (846, 'diplomovaný fyzioterapeut – vyššie odborné štúdium', TRUE, now()),
+  (273, 'fyzioterapia porúch psychomotorického vývoja', TRUE, now()),
+  (274, 'fyzioterapia funkčných a štrukturálnych porúch pohybového systému', TRUE, now()),
+  (275, 'fyzioterapia porúch CNS', TRUE, now()),
+  (276, 'fyzioterapia v športe a telovýchove', TRUE, now()),
+  (277, 'ergonomika a rehabilitačné inžinierstvo', TRUE, now()),
+  (278, 'fyzioterapia vybraných ochorení pohybového systému', TRUE, now()),
+  (288, 'fyzioterapia respiračných ochorení', TRUE, now()),
+  (282, 'fyzioterapia psychosomatických a civilizačných ochorení', TRUE, now()),
+  (135, 'ergoterapia', TRUE, now()),
+  (581, 'mobilizačné techniky', TRUE, now()),
+  (582, 'reflexná terapia podľa Vojtu', TRUE, now()),
+  (583, 'techniky terapie lymfedému', TRUE, now()),
+  (291, 'liečebná rehabilitácia a fyzioterapia porúch vybraných systémov', TRUE, now()),
+  (525, 'klinická psychofyziológia (neurofeedback a biofeedback)', TRUE, now()),
+  (829, 'psychológia – vysokoškolské magisterské štúdium', TRUE, now()),
+  (144, 'klinická psychológia', TRUE, now()),
+  (295, 'poradenská psychológia', TRUE, now()),
+  (296, 'pracovná a organizačná psychológia', TRUE, now()),
+  (297, 'školská psychológia', TRUE, now()),
+  (578, 'drogové závislosti', TRUE, now()),
+  (580, 'dopravná psychológia', TRUE, now()),
+  (828, 'logopédia – vysokoškolské magisterské štúdium', TRUE, now()),
+  (141, 'klinická logopédia', TRUE, now()),
+  (577, 'afaziológia', TRUE, now()),
+  (499, 'manažment v príslušnom odbore', TRUE, now()),
+  (830, 'liečebná pedagogika – vysokoškolské magisterské štúdium', TRUE, now()),
+  (831, 'špeciálna pedagogika – vysokoškolské magisterské štúdium', TRUE, now()),
+  (143, 'liečebná pedagogika', TRUE, now()),
+  (142, 'špeciálna pedagogika', TRUE, now()),
+  (843, 'sociálna práca – vysokoškolské magisterské štúdium', TRUE, now()),
+  (283, 'sociálna práca v zdravotníctve', TRUE, now()),
+  (832, 'biomedicínska fyzika – vysokoškolské inžinierske štúdium', TRUE, now()),
+  (833, 'biológia so zameraním na bunkovú a molekulárnu biológiu – vysokoškolské inžinierske štúdium', TRUE, now()),
+  (834, 'biológia so zameraním na fyziológiu živočíchov a človeka – vysokoškolské inžinierske štúdium', TRUE, now()),
+  (835, 'fyzika so zameraním na biofyziku a chemickú fyziku – vysokoškolské inžinierske štúdium', TRUE, now()),
+  (836, 'chémia so zameraním na biochémiu – vysokoškolské inžinierske štúdium', TRUE, now()),
+  (837, 'biotechnológia – vysokoškolské inžinierske štúdium', TRUE, now()),
+  (838, 'hygiena potravín – vysokoškolské inžinierske štúdium', TRUE, now()),
+  (839, 'biochémia a biotechnológia – vysokoškolské inžinierske štúdium', TRUE, now()),
+  (840, 'chémia a technológia životného prostredia', TRUE, now()),
+  (841, 'biomedicínske inžinierstvo– vysokoškolské inžinierske štúdium', TRUE, now()),
+  (842, 'výživa ľudí', TRUE, now()),
+  (845, 'potravinárstvo – biochémia', TRUE, now()),
+  (853, 'fyzika so zameraním na lekársku fyziku alebo na dozimetriu – vysokoškolské inžinierske štúdium', TRUE, now()),
+  (854, 'chémia so zameraním na kvasnú chémiu – vysokoškolské inžinierske štúdium', TRUE, now()),
+  (847, 'chémia – chémia liečiv – úplné stredné odborné štúdium', TRUE, now()),
+  (848, 'chémia – analytická chémia – úplné stredné odborné štúdium', TRUE, now()),
+  (849, 'chémia – monitorovanie životného prostredia – úplné stredné odborné štúdium', TRUE, now()),
+  (850, 'chémia – sanácia životného prostredia – úplné stredné odborné štúdium', TRUE, now()),
+  (851, 'chemická technológia– úplné stredné odborné štúdium', TRUE, now()),
+  (280, 'hygiena pracovných podmienok', TRUE, now()),
+  (146, 'klinická fyzika', TRUE, now()),
+  (133, 'vyšetrovacie metódy v patológii a súdnom lekárstve', TRUE, now()),
+  (286, 'vyšetrovacie metódy v preventívnom pracovnom lekárstve a toxikológii', TRUE, now()),
+  (287, 'vyšetrovacie metódy v hygiene životného prostredia', TRUE, now()),
+  (316, 'vyšetrovacie metódy v oblasti fyzikálnych a chemických analýz a faktorov', TRUE, now()),
+  (186, 'vedúci centrálnej sterilizácie', TRUE, now()),
+  (184, 'vedúci centrálneho príjmu', TRUE, now());
 
 -- Patients
 INSERT INTO patient (username, account_non_expired, account_non_locked, credentials_non_expired, email, enabled, first_name, password, phone, surname, updated)
