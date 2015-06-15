@@ -117,12 +117,5 @@
 
 </div>
 
-<#list emps as e>
-    ${e.firstName} <br>
-</#list>
 
-<br>
-    <#list specs as s>
-    ${s.name} <br>
-    </#list>
 </@pt.menuFooterPage>

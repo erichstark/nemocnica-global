@@ -126,7 +126,28 @@ public class SearchController {
 
             for (OpeningHours it : hodiny) {
 
-                String d2 = it.getDate();
+                String d2;
+                switch (it.getDate()){
+                    case 1: d2 = "Pondelok";
+                        break;
+                    case 2: d2 = "Utorok";
+                        break;
+                    case 3: d2 = "Streda";
+                        break;
+                    case 4: d2 = "Štvrtok";
+                        break;
+                    case 5: d2 = "Piatok";
+                        break;
+                    case 6: d2 = "Sobota";
+                        break;
+                    case 7: d2 = "Nedeľa";
+                        break;
+
+                    default: d2 = "---";
+                        break;
+
+                }
+
                 System.out.print(it +" \n ");
                 if(d2.equals( d1 )){
 
@@ -151,16 +172,28 @@ public class SearchController {
 
 
         Iterable<Office> zoznam;
+
+
+
         List<Employee> e= employeeService.findDoctors(search.getName(), search.getSurname());
-
         List<Specialization> s=new ArrayList<>();
-        if(search.getSpecialization()== null){
-         s = (List<Specialization>) specializationService.findAll();
-        }else {
-          s = specializationService.findByName(search.getSpecialization());
-        }
-        zoznam = officeService.findByEmployeesInAndSpecializationsIn(e,s);
 
+        if(search.getSpecialization()== null){
+            s = (List<Specialization>) specializationService.findAll();
+        }else {
+            s=specializationService.findByName(search.getSpecialization());
+        }
+
+        if(search.getSpecialization() == null && search.getName()== null && search.getSurname()==null){
+
+            zoznam=officeService.findAll();
+        }else if(search.getSpecialization() != null && search.getName()== null && search.getSurname()==null){
+
+            zoznam = officeService.findBySpecializationsIn(s);
+
+        }else{
+            zoznam=officeService.findByEmployeesInAndSpecializationsIn(e,s);
+        }
         model.put("pageTitle", "Vyhľadávanie lekárov");
         model.put("name", search.getName());
         model.put("surname", search.getSurname());

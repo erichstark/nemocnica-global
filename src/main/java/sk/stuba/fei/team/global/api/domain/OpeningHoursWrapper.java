@@ -5,7 +5,7 @@ import sk.stuba.fei.team.global.service.OfficeService;
 
 public class OpeningHoursWrapper {
     private Long id;
-    private String date;
+    private int date;
     private Long reservationMorningFrom;
     private Long reservationMorningTo;
     private Long reservationFrom;
@@ -46,11 +46,11 @@ public class OpeningHoursWrapper {
         this.id = id;
     }
 
-    public String getDate() {
+    public int getDate() {
         return date;
     }
 
-    public void setDate(String date) {
+    public void setDate(int date) {
         this.date = date;
     }
 

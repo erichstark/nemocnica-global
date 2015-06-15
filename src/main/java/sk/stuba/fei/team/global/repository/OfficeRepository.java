@@ -15,5 +15,5 @@ public interface OfficeRepository extends CrudRepository<Office, Long> {
 
     List<Office> findByNameContainingIgnoreCase(String name);
     List<Office> findByEmployeesInAndSpecializationsIn(Collection<Employee> employees, Collection<Specialization> specialization);
-
+    List<Office> findBySpecializationsIn(Collection<Specialization> specializations);
 }

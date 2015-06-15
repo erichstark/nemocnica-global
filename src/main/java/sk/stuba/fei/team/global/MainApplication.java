@@ -13,17 +13,23 @@ import org.springframework.security.config.annotation.web.builders.WebSecurity;
 import org.springframework.security.config.annotation.web.configuration.EnableWebSecurity;
 import org.springframework.security.config.annotation.web.configuration.WebSecurityConfigurerAdapter;
 import org.springframework.security.config.annotation.web.servlet.configuration.EnableWebMvcSecurity;
+import org.springframework.security.core.GrantedAuthority;
+import org.springframework.security.core.authority.SimpleGrantedAuthority;
+import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.web.servlet.LocaleResolver;
 import org.springframework.web.servlet.config.annotation.InterceptorRegistry;
 import org.springframework.web.servlet.config.annotation.ViewControllerRegistry;
 import org.springframework.web.servlet.config.annotation.WebMvcConfigurerAdapter;
 import org.springframework.web.servlet.i18n.LocaleChangeInterceptor;
 import org.springframework.web.servlet.i18n.SessionLocaleResolver;
+import sk.stuba.fei.team.global.domain.Patient;
 import sk.stuba.fei.team.global.security.CustomUserDetailService;
 import sk.stuba.fei.team.global.security.PBKDF2WithHmacSHA1;
 import sk.stuba.fei.team.global.service.PatientService;
 
 import javax.sql.DataSource;
+import java.util.ArrayList;
+import java.util.List;
 import java.util.Locale;
 import java.util.logging.Logger;
 
@@ -42,15 +48,7 @@ public class MainApplication extends WebMvcConfigurerAdapter {
     }
 
     private static void initializeUsers(ConfigurableApplicationContext context) {
-//        PatientService patientService = context.getBean(PatientService.class);
-//        PasswordEncoder encoder = new PBKDF2WithHmacSHA1();
-//        if (patientService.findByUsername("admin") == null) {
-//            List<GrantedAuthority> authorities = new ArrayList<>();
-//            authorities.add(new SimpleGrantedAuthority("ADMIN"));
-//            Patient userDetails = new Patient("admin", encoder.encode("admin123"), "admin@easycare.sk", authorities);
-//            userDetails.setEnabled(true);
-//            patientService.save(userDetails);
-//        }
+  
     }
 
     @Bean
@@ -95,7 +93,7 @@ public class MainApplication extends WebMvcConfigurerAdapter {
             http.csrf().disable()
                     .authorizeRequests()
                     .antMatchers("/admin/**", "/manage").hasAuthority("ADMIN")
-                    .antMatchers("/", "/registration/**", "/search/**").permitAll()
+                    .antMatchers("/", "/registration", "/registration/save", "/search/**").permitAll()
                     .anyRequest().authenticated()
                     .and()
                     .formLogin().loginPage("/login").failureUrl("/login?error").permitAll()

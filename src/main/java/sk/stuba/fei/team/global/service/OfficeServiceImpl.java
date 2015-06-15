@@ -55,4 +55,9 @@ public class OfficeServiceImpl implements OfficeService {
     public List<Office> findByEmployeesInAndSpecializationsIn(Collection<Employee> employees, Collection<Specialization> specialization)
     {return officeRepository.findByEmployeesInAndSpecializationsIn(employees, specialization);}
 
+    @Override
+    public List<Office> findBySpecializationsIn(Collection<Specialization> specializations){
+        return officeRepository.findBySpecializationsIn(specializations);
+    }
+
 }
