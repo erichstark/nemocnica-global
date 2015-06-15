@@ -37,7 +37,9 @@ public class Patient implements Serializable, UserDetails, CredentialsContainer 
     public Patient() {
         password = "";
         username = "";
-        authorities = new ArrayList<>();
+        List<GrantedAuthority> auth = new ArrayList<>();
+        auth.add(new SimpleGrantedAuthority("USER"));
+        authorities = auth;
         accountNonExpired = true;
         accountNonLocked = true;
         credentialsNonExpired = true;
@@ -196,6 +198,14 @@ public class Patient implements Serializable, UserDetails, CredentialsContainer 
         this.suffix_title = suffix_title;
     }
 
+    public Date getUpdated() {
+        return updated;
+    }
+
+    public void setUpdated(Date updated) {
+        this.updated = updated;
+    }
+
     @ManyToOne
     @JoinColumn(name = "insurance")
     public Insurance getInsurance() {
@@ -219,26 +229,6 @@ public class Patient implements Serializable, UserDetails, CredentialsContainer 
 
     public void setAppointments(List<Appointment> appointments) {
         this.appointments = appointments;
-    }
-
-    @Temporal(TemporalType.TIMESTAMP)
-    @Column(name = "updated", nullable = false)
-    public Date getUpdated() {
-        return updated;
-    }
-
-    public void setUpdated(Date updated) {
-        this.updated = updated;
-    }
-
-    @PrePersist
-    protected void onCreate() {
-        updated = new Date();
-    }
-
-    @PreUpdate
-    protected void onUpdate() {
-        updated = new Date();
     }
 
     private static class AuthorityComparator implements Comparator<GrantedAuthority>, Serializable {

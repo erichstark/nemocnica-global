@@ -1,7 +1,6 @@
 package sk.stuba.fei.team.global.controller.admin;
 
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.authority.SimpleGrantedAuthority;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.*;
@@ -11,7 +10,6 @@ import sk.stuba.fei.team.global.service.InsuranceService;
 import sk.stuba.fei.team.global.service.PatientService;
 
 import java.util.ArrayList;
-import java.util.List;
 import java.util.Map;
 
 /**
@@ -61,21 +59,19 @@ public class AdminPatientController {
     }
 
     @RequestMapping(value = "/save", method = RequestMethod.POST)
-    public String saveAdd(@ModelAttribute("patient") Patient patient, @RequestParam(required = false) Long id_insurance) {
-        Patient old = patientService.findByUsername(patient.getUsername());
+    public String save(@ModelAttribute("patient") Patient patient, @RequestParam(required = false) Long id_insurance) {
+        Patient old = patientService.findOne(patient.getUsername());
+
         if (id_insurance != null)
             patient.setInsurance(insuranceService.findOne(id_insurance));
         else
             patient.setInsurance(null);
         if(old !=null) {
             patient.getAuthorities().addAll(old.getAuthorities());
-//            patient.getAppointments().addAll(old.getAppointments());
+            patient.getAppointments().addAll(old.getAppointments());
         }
-//            if (patient.getStringAuthorities().size()==0) patient.getStringAuthorities().add("USER");
-        List<GrantedAuthority> list = new ArrayList<GrantedAuthority>();
-            list.addAll(patient.getAuthorities());
-            patient.setAuthorities(list);
-            patientService.save(patient);
+
+        patientService.save(patient);
 
         return "redirect:/admin/patient";
     }
