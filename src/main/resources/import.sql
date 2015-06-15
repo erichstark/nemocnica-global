@@ -297,12 +297,12 @@ insert into facility(city,street_and_number,zip,enabled,name) VALUES('Bratislava
 insert into facility(city,street_and_number,zip,enabled,name) VALUES('Bratislava','Hlboká 7','81104',false,'1. ortopedická klinika');
 
 
--- Employees
-insert into employee(username, enabled, first_name, last_name, password, prefix_title, suffix_title, updated) VALUES ('user1',TRUE,'Ján','Drsný','user1','Mudr','','2015-06-14 17:03:57.557');
-INSERT INTO employee(username, enabled, first_name, last_name, password, prefix_title, suffix_title, updated) VALUES ('user2',TRUE,'Juraj','Kožný','user2','Mudr','','2015-06-14 17:05:57.176');
-INSERT INTO employee(username, enabled, first_name, last_name, password, prefix_title, suffix_title, updated) VALUES ('user3',TRUE,'Jakub','Kornutný','user3','Mudr','','2015-06-14 17:04:57.176');
-INSERT INTO employee(username, enabled, first_name, last_name, password, prefix_title, suffix_title, updated) VALUES ('user4',TRUE,'Peter','Mocný','user4','Mudr','','2015-06-14 17:03:57.176');
-INSERT INTO employee(username, enabled, first_name, last_name, password, prefix_title, suffix_title, updated) VALUES ('user5',TRUE,'Marek','Hutný','user5','Mudr','','2015-06-14 17:02:57.176');
+-- Employees - heslo je user123
+insert into employee(username, enabled, first_name, last_name, password, prefix_title, suffix_title, updated) VALUES ('user1',TRUE,'Ján','Drsný','1000:f16ff666a8ef7d831c96ead9f8f751333b9ee322614fe95c:2bd50c86a04d6f6b9b71faba73185f9a25f75ac621dc9625','Mudr','','2015-06-14 17:03:57.557');
+INSERT INTO employee(username, enabled, first_name, last_name, password, prefix_title, suffix_title, updated) VALUES ('user2',TRUE,'Juraj','Kožný','1000:f16ff666a8ef7d831c96ead9f8f751333b9ee322614fe95c:2bd50c86a04d6f6b9b71faba73185f9a25f75ac621dc9625','Mudr','','2015-06-14 17:05:57.176');
+INSERT INTO employee(username, enabled, first_name, last_name, password, prefix_title, suffix_title, updated) VALUES ('user3',TRUE,'Jakub','Kornutný','1000:f16ff666a8ef7d831c96ead9f8f751333b9ee322614fe95c:2bd50c86a04d6f6b9b71faba73185f9a25f75ac621dc9625','Mudr','','2015-06-14 17:04:57.176');
+INSERT INTO employee(username, enabled, first_name, last_name, password, prefix_title, suffix_title, updated) VALUES ('user4',TRUE,'Peter','Mocný','1000:f16ff666a8ef7d831c96ead9f8f751333b9ee322614fe95c:2bd50c86a04d6f6b9b71faba73185f9a25f75ac621dc9625','Mudr','','2015-06-14 17:03:57.176');
+INSERT INTO employee(username, enabled, first_name, last_name, password, prefix_title, suffix_title, updated) VALUES ('user5',TRUE,'Marek','Hutný','1000:f16ff666a8ef7d831c96ead9f8f751333b9ee322614fe95c:2bd50c86a04d6f6b9b71faba73185f9a25f75ac621dc9625','Mudr','','2015-06-14 17:02:57.176');
 
 
 
