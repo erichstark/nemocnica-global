@@ -40,6 +40,9 @@ public class PatientWrapper {
         p.setUsername(username);
         p.setPassword(password);
         p.setFirstName(firstName);
+        p.setAccountNonExpired(true);
+        p.setAccountNonLocked(true);
+        p.setCredentialsNonExpired(true);
         p.setSurname(surname);
         p.setPhone(phone);
         p.setEmail(email);
@@ -47,12 +50,14 @@ public class PatientWrapper {
         p.setPrefix_title(prefix_title);
         p.setSuffix_title(suffix_title);
         p.setInsurance(insuranceService.findOne(insurance));
-        List<String> auths = new ArrayList<>(1);
-        auths.add("USER");
-        p.setStringAuthorities(auths);
         Patient pold = patientService.findOne(username);
         if (pold != null) {
-           p.getAppointments().addAll(pold.getAppointments());
+            p.setStringAuthorities(pold.getStringAuthorities());
+            p.getAppointments().addAll(pold.getAppointments());
+        } else {
+            List<String> auths = new ArrayList<>(1);
+            auths.add("USER");
+            p.setStringAuthorities(auths);
         }
         return p;
     }
