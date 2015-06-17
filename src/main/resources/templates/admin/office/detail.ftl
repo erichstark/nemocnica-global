@@ -30,7 +30,7 @@
                 </p>
                 <p>
                     <span style="width: 30%; display: inline-block; text-align: right">Telefón</span>:
-                    <strong>${office.phone}</strong>
+                    <strong>${office.phone!""}</strong>
                 </p>
                 <p>
                     <span style="width: 30%; display: inline-block; text-align: right">Špecializácie</span>:
@@ -67,7 +67,30 @@
                 <h4>Ordinačné hodiny</h4>
             </div>
             <div class="panel-body">
-                <!-- TODO dorobit -->
+                <div class="table-responsive">
+                    <table class="table table-striped">
+                        <thead>
+                        <tr>
+                            <th>Deň</th>
+                            <th>Doobeda od</th>
+                            <th>Doobeda do</th>
+                            <th>Poobede od</th>
+                            <th>Poobede do</th>
+                        </tr>
+                        </thead>
+                        <tbody>
+                            <#list hours as h>
+                            <tr>
+                                <td>${h.getDayFromDate()}</td>
+                                <td>${(h.reservationMorningFrom/60)?string["0"]}:${(h.reservationMorningFrom%60)?string["00"]}</td>
+                                <td>${(h.reservationMorningTo/60)?string["0"]}:${(h.reservationMorningTo%60)?string["00"]}</td>
+                                <td>${(h.reservationFrom/60)?string["0"]}:${(h.reservationFrom%60)?string["00"]}</td>
+                                <td>${(h.reservationTo/60)?string["0"]}:${(h.reservationTo%60)?string["00"]}</td>
+                            </tr>
+                            </#list>
+                        </tbody>
+                    </table>
+                </div>
             </div>
         </div>
     </div>
@@ -79,7 +102,28 @@
                 <h4>Objednávky</h4>
             </div>
             <div class="panel-body">
-                <!-- TODO dorobit -->
+                <div class="table-responsive">
+                    <table class="table table-striped">
+                        <thead>
+                        <tr>
+                            <th>Meno</th>
+                            <th>Dátum</th>
+                            <th>Čas</th>
+                            <th>Poznámka</th>
+                        </tr>
+                        </thead>
+                        <tbody>
+                            <#list office.appointments as app>
+                            <tr>
+                                <td>${app.patient.getFullName()}</td>
+                                <td>${app.date?date}</td>
+                                <td>${(app.intervalStart/60)?string["0"]}:${(app.intervalStart%60)?string["00"]}</td>
+                                <td>${app.note}</td>
+                            </tr>
+                            </#list>
+                        </tbody>
+                    </table>
+                </div>
             </div>
         </div>
     </div>

@@ -9,9 +9,10 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import sk.stuba.fei.team.global.domain.Office;
+import sk.stuba.fei.team.global.domain.OpeningHours;
 import sk.stuba.fei.team.global.service.OfficeService;
 
-import java.util.Map;
+import java.util.*;
 
 /**
  * Created by pallo on 5/2/15.
@@ -38,8 +39,16 @@ public class AdminOfficeController {
     public String detail(@PathVariable Long id, Map<String, Object> model) {
 
         Office o = officeService.findOne(id);
+        List<OpeningHours> hours = new ArrayList<>(o.getHours());
+        Comparator<OpeningHours> cmp = new Comparator<OpeningHours>() {
+            public int compare(OpeningHours oh1, OpeningHours oh2) {
+                return Integer.valueOf(oh1.getDate()).compareTo(Integer.valueOf(oh2.getDate()));
+            }
+        };
+        Collections.sort(hours,cmp);
 
-        model.put("office",o);
+        model.put("hours",hours);
+        model.put("office", o);
         model.put("pageTitle", "Detail " + o.getName());
 
         return "admin/office/detail";
@@ -68,4 +77,6 @@ public class AdminOfficeController {
 
         return "admin/office/index";
     }
+
+
 }

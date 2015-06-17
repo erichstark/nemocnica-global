@@ -79,4 +79,18 @@ public class OpeningHours implements Serializable {
     public void setReservationMorningTo(Long reservationMorningTo) {
         this.reservationMorningTo = reservationMorningTo;
     }
+
+    @Transient
+    public String getDayFromDate() {
+        switch (date){
+            case 1: return "Pondelok";
+            case 2: return "Utorok";
+            case 3: return "Streda";
+            case 4: return "Štvrtok";
+            case 5: return "Piatok";
+            case 6: return "Sobota";
+            case 7: return "Nedeľa";
+        }
+        return "";
+    }
 }
