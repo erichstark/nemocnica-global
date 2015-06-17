@@ -1,7 +1,6 @@
-package sk.stuba.fei.team.global;
+package sk.stuba.fei.team.test;
 
 import org.junit.Before;
-import org.junit.Ignore;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.mockito.InjectMocks;
@@ -16,11 +15,18 @@ import org.springframework.test.web.servlet.MockMvc;
 import org.springframework.test.web.servlet.setup.MockMvcBuilders;
 import org.springframework.util.Base64Utils;
 import org.springframework.web.context.WebApplicationContext;
-import sk.stuba.fei.team.global.api.InsuranceApi;
-import sk.stuba.fei.team.global.domain.Insurance;
-import sk.stuba.fei.team.global.repository.InsuranceRepository;
+import sk.stuba.fei.team.global.MainApplication;
+import sk.stuba.fei.team.global.api.AppointmentApi;
+import sk.stuba.fei.team.global.api.domain.UpdateWrapper;
+import sk.stuba.fei.team.global.domain.Appointment;
+import sk.stuba.fei.team.global.repository.AppointmentRepository;
+import sk.stuba.fei.team.global.repository.OfficeRepository;
+import sk.stuba.fei.team.global.repository.PatientRepository;
 
 import java.text.SimpleDateFormat;
+import java.util.Date;
+import java.util.HashSet;
+import java.util.Set;
 import java.util.logging.Logger;
 
 import static org.hamcrest.Matchers.*;
@@ -30,10 +36,9 @@ import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.
 @RunWith(SpringJUnit4ClassRunner.class)
 @WebAppConfiguration
 @SpringApplicationConfiguration(classes = MainApplication.class)
-@Ignore
-public class InsuranceApiTest {
+public class AppointmentApiTest {
 
-    public static final Logger LOGGER = Logger.getLogger(EmployeeApiTest.class.getName());
+    public static final Logger LOGGER = Logger.getLogger(AppointmentApiTest.class.getName());
 
     @Autowired
     WebApplicationContext context;
@@ -42,16 +47,24 @@ public class InsuranceApiTest {
     private FilterChainProxy springSecurityFilterChain;
 
     @Autowired
-    private InsuranceRepository insuranceRepository;
+    private AppointmentRepository appointmentRepository;
+
+    @Autowired
+    private OfficeRepository officeRepository;
+
+    @Autowired
+    private PatientRepository patientRepository;
 
     @InjectMocks
-    InsuranceApi controller;
+    AppointmentApi controller;
+
+    private Appointment testApp;
 
     private MockMvc mvc;
 
     private String accessToken;
 
-    private static String PATH = "/ws/insurance";
+    private static String PATH = "/ws/appointment";
 
     private String getAccessToken(String username, String password) throws Exception {
         String authorization = "Basic " + new String(Base64Utils.encode("local:secret".getBytes()));
@@ -88,39 +101,53 @@ public class InsuranceApiTest {
                 .addFilter(springSecurityFilterChain)
                 .build();
 
-        accessToken = getAccessToken("user", "user123");
+        accessToken = getAccessToken("admin", "admin123");
 
-        insuranceRepository.deleteAll();
+        appointmentRepository.deleteAll();
 
-        Insurance dovera = new Insurance();
-        dovera.setName("Dovera");
-        dovera.setEnabled(true);
-        insuranceRepository.save(dovera);
 
-        Insurance vzp = new Insurance("Vseobecna zdravotna poistovna");
-        vzp.setEnabled(true);
-        insuranceRepository.save(vzp);
+        testApp = new Appointment();
+        testApp.setDate(new Date());
+        testApp.setIntervalStart(0);
+        testApp.setNote("omg");
+        testApp.setOffice(officeRepository.findOne(new Long(1)));
+        testApp.setPatient(patientRepository.findOne("admin"));
+        appointmentRepository.save(testApp);
+
+        Appointment ap2 = new Appointment();
+        ap2.setDate(new Date());
+        ap2.setIntervalStart(1);
+        ap2.setNote("omg");
+        ap2.setOffice(officeRepository.findOne(new Long(1)));
+        ap2.setPatient(patientRepository.findOne("admin"));
+        appointmentRepository.save(ap2);
+
+        Appointment ap3 = new Appointment();
+        ap3.setDate(new Date());
+        ap3.setIntervalStart(1);
+        ap3.setNote("omg");
+        ap3.setOffice(officeRepository.findOne(new Long(2)));
+        ap3.setPatient(patientRepository.findOne("admin"));
+        appointmentRepository.save(ap3);
+
     }
 
     @Test
-    public void getExpectEmpty() throws Exception {
-        mvc.perform(post(PATH+"/update")
-                .contentType(TestUtil.APPLICATION_JSON_UTF8)
-                .content(TestUtil.convertObjectToJsonBytes(new SimpleDateFormat("yyyy-MM-dd").parse("2026-01-01")))
-                .header("Authorization", "Bearer " + accessToken))
-                .andExpect(status().isOk())
-                .andExpect(content().string("[]"));
-    }
+    public void updateExpectTwoReturned() throws Exception {
 
-    @Test
-    public void getExpectedCollection() throws Exception {
-        mvc.perform(post(PATH+"/update")
+        Set<Long> ids = new HashSet<>();
+        ids.add(testApp.getOffice().getId());
+
+        UpdateWrapper<Long> uw = new UpdateWrapper<>(ids, new SimpleDateFormat("yyyy-MM-dd").parse("2000-01-01"));
+
+        mvc.perform(post(PATH + "/update")
                 .contentType(TestUtil.APPLICATION_JSON_UTF8)
-                .content(TestUtil.convertObjectToJsonBytes(new SimpleDateFormat("yyyy-MM-dd").parse("2000-01-01")))
+                .content(TestUtil.convertObjectToJsonBytes(uw))
                 .header("Authorization", "Bearer " + accessToken))
                 .andExpect(status().isOk())
                 .andExpect(jsonPath("$[0].id").exists())
-                .andExpect(jsonPath("$[1].id").exists());
+                .andExpect(jsonPath("$[1].id").exists())
+                .andExpect(jsonPath("$[2].id").doesNotExist());
     }
 
 }

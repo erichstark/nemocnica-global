@@ -1,4 +1,4 @@
-package sk.stuba.fei.team.global;
+package sk.stuba.fei.team.test;
 
 import com.fasterxml.jackson.annotation.JsonInclude;
 import com.fasterxml.jackson.databind.ObjectMapper;
