@@ -39,7 +39,9 @@
                                 <li>
                                     <a href="<@spring.url '/appointment/${user.username}'/>">Moje Objednavky</a>
                                 </li>
-
+                                <li>
+                                    <a href="<@spring.url '/patient/detail'/>">Môj profil</a>
+                                </li>
                                 <li class="divider"></li>
                                 <li>
                                     <a href="<@spring.url '/logout'/>"><i class="glyphicon glyphicon-log-out"></i> <@spring.message "SignOut" /></a>
