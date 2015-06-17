@@ -1,8 +1,10 @@
 package sk.stuba.fei.team.global.api.domain;
 
 import sk.stuba.fei.team.global.domain.Employee;
+import sk.stuba.fei.team.global.domain.Office;
 import sk.stuba.fei.team.global.domain.Specialization;
 import sk.stuba.fei.team.global.service.EmployeeService;
+import sk.stuba.fei.team.global.service.OfficeService;
 import sk.stuba.fei.team.global.service.SpecializationService;
 
 import java.util.HashSet;
@@ -18,6 +20,7 @@ public class EmployeeWrapper {
     private String prefix_title;
     private String suffix_title;
     private Set<Long> specializations;
+    private Set<Long> offices;
 
     public EmployeeWrapper() {
     }
@@ -31,10 +34,12 @@ public class EmployeeWrapper {
         prefix_title = employee.getPrefix_title();
         suffix_title = employee.getSuffix_title();
         specializations = new HashSet<>(employee.getSpecializations().size());
-        specializations.addAll(employee.getSpecializations().stream().map(Specialization::getId).collect(Collectors.toList()));
+        specializations.addAll(employee.getSpecializations().stream().map(Specialization::getId).collect(Collectors.toSet()));
+        offices = new HashSet<>(employee.getOffices().size());
+        offices.addAll(employee.getOffices().stream().map(Office::getId).collect(Collectors.toSet()));
     }
 
-    public Employee build(SpecializationService specializationService, EmployeeService employeeService) {
+    public Employee build(SpecializationService specializationService, EmployeeService employeeService, OfficeService officeService) {
         Employee employee = new Employee();
         employee.setPassword(password);
         employee.setUsername(username);
@@ -44,9 +49,11 @@ public class EmployeeWrapper {
         employee.setPrefix_title(prefix_title);
         employee.setSuffix_title(suffix_title);
         employee.getSpecializations().addAll(this.specializations.stream().map(specializationService::findOne).collect(Collectors.toSet()));
+        employee.getOffices().addAll(this.offices.stream().map(officeService::findOne).collect(Collectors.toSet()));
         Employee oldEmployee = employeeService.findOne(username);
         if (oldEmployee != null) {
             employee.getOffices().addAll(oldEmployee.getOffices());
+            employee.getSpecializations().addAll(oldEmployee.getSpecializations());
         }
         return employee;
     }
@@ -113,5 +120,13 @@ public class EmployeeWrapper {
 
     public void setSpecializations(Set<Long> specializations) {
         this.specializations = specializations;
+    }
+
+    public Set<Long> getOffices() {
+        return offices;
+    }
+
+    public void setOffices(Set<Long> offices) {
+        this.offices = offices;
     }
 }
