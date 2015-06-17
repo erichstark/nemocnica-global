@@ -68,6 +68,7 @@ public class AdminEmployeeController {
         Employee temp = employeeService.findOne(employee.getUsername());
         employee.setOffices(temp.getOffices());
         employee.setSpecializations(temp.getSpecializations());
+        employee.setPassword(temp.getPassword());
         employeeService.save(employee);
 
         return "redirect:/admin/employee";

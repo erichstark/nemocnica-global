@@ -14,6 +14,7 @@ public class Office implements Serializable {
     private Long id;
     private String name;
     private Facility facility;
+    private String phone;
     private Set<Employee> employees;
     private Set<Insurance> insurances;
     private Set<Specialization> specializations;
@@ -23,6 +24,7 @@ public class Office implements Serializable {
 
     public Office() {
         name = "";
+        phone = "";
         employees = new HashSet<>();
         insurances = new HashSet<>();
         specializations = new HashSet<>();
@@ -128,5 +130,13 @@ public class Office implements Serializable {
 
     public void setEnabled(Boolean enabled) {
         this.enabled = enabled;
+    }
+
+    public String getPhone() {
+        return phone;
+    }
+
+    public void setPhone(String phone) {
+        this.phone = phone;
     }
 }

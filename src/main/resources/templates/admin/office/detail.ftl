@@ -29,6 +29,10 @@
                     <strong><@spring.message "enabled."+office.enabled?c /></strong>
                 </p>
                 <p>
+                    <span style="width: 30%; display: inline-block; text-align: right">Telefón</span>:
+                    <strong>${office.phone}</strong>
+                </p>
+                <p>
                     <span style="width: 30%; display: inline-block; text-align: right">Špecializácie</span>:
                     <strong>
                         <#list office.specializations as s>
