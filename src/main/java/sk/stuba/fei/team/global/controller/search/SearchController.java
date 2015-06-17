@@ -168,12 +168,7 @@ public class SearchController {
     @RequestMapping(value = "/search", method = RequestMethod.POST)
     public String search( @ModelAttribute("searchUser") FormEmployeeSearch search, Map<String, Object> model ) {
 
-
-
-
         Iterable<Office> zoznam;
-
-
 
         List<Employee> e= employeeService.findDoctors(search.getName(), search.getSurname());
         List<Specialization> s=new ArrayList<>();
