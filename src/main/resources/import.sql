@@ -287,10 +287,12 @@ INSERT INTO specialization (id, name, enabled, updated) VALUES
 -- Patients
 insert into patient(username,account_non_expired,account_non_locked,credentials_non_expired,email,enabled,first_name,password,phone,surname,updated,insurance) VALUES('admin',true,true,true,'admin@easycare.sk',true,'Admin','1000:670cf1510ec7137f59a409c5c3af8533f34a93496e4c77a5:4c1ca5b461e019c831ec38da6a9e4c3086fc158136b6c1ee','+42108080808','Admin',now(),1);
 insert into patient(username,account_non_expired,account_non_locked,credentials_non_expired,email,enabled,first_name,password,phone,surname,updated,insurance) VALUES('user',true,true,true,'user@easycare.sk',true,'User','1000:f16ff666a8ef7d831c96ead9f8f751333b9ee322614fe95c:2bd50c86a04d6f6b9b71faba73185f9a25f75ac621dc9625','+42108080808','User',now(),1);
+insert into patient(username,account_non_expired,account_non_locked,credentials_non_expired,email,enabled,first_name,password,phone,surname,updated,insurance) VALUES('wsuser',true,true,true,'wsuser@easycare.sk',true,'WS User','1000:f16ff666a8ef7d831c96ead9f8f751333b9ee322614fe95c:2bd50c86a04d6f6b9b71faba73185f9a25f75ac621dc9625','+42108080808','WS User',now(),1);
 
 -- Authorities
 insert into patient_authorities(username, authority) VALUES ('admin','ADMIN');
 insert into patient_authorities(username, authority) VALUES ('user','USER');
+insert into patient_authorities(username, authority) VALUES ('wsuser','WS_USER');
 
 -- Facilities
 insert into facility(city,street_and_number,zip,enabled,name) VALUES('Bratislava','Mickiewiczova 13','81369',true,'Nemocnica Staré Mesto');
