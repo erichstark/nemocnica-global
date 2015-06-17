@@ -1,6 +1,7 @@
 package sk.stuba.fei.team.global.controller.patient;
 
 
+import com.sun.org.apache.bcel.internal.generic.NEW;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.MessageSource;
 import org.springframework.context.i18n.LocaleContextHolder;
@@ -16,6 +17,7 @@ import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 import sk.stuba.fei.team.global.domain.Insurance;
 import sk.stuba.fei.team.global.domain.Patient;
 import sk.stuba.fei.team.global.security.CustomUser;
+import sk.stuba.fei.team.global.security.PBKDF2WithHmacSHA1;
 import sk.stuba.fei.team.global.service.InsuranceService;
 import sk.stuba.fei.team.global.service.PatientService;
 
@@ -64,6 +66,13 @@ public class PatientController {
         return "patient/index";
     }
 
+    @RequestMapping("/password")
+    public String password(Map<String, Object> model) {
+
+        model.put("pageTitle","Zmena hesla");
+        return "patient/password";
+    }
+
     // save udajov
     @RequestMapping(value = "/detail/save", method = RequestMethod.POST)
     public String saveDetail(@ModelAttribute("patient") PatientForm form, RedirectAttributes redirectAttributes) {
@@ -87,5 +96,38 @@ public class PatientController {
         redirectAttributes.addFlashAttribute("message",messageSource.getMessage("save_success", null, LocaleContextHolder.getLocale()));
 
         return "redirect:/patient/detail";
+    }
+
+    @RequestMapping(value = "/password/new", method = RequestMethod.POST)
+    public String newPassword(@ModelAttribute("password") NewPassword form, RedirectAttributes redirectAttributes) {
+
+        PBKDF2WithHmacSHA1 h = new PBKDF2WithHmacSHA1();
+
+
+
+        Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
+        Object principal = authentication.getPrincipal();
+        CustomUser  userDetails = (CustomUser) principal;
+        Patient patient= patientService.findByUsername(userDetails.getUsername());
+
+        if(h.matches(form.getOldPassword(),patient.getPassword())){
+
+            if(form.getNewPasswordAgain().equals(form.getNewPassword())){
+                patient.setPassword(h.encode(form.getNewPassword()));
+
+                redirectAttributes.addFlashAttribute("message", messageSource.getMessage("new_password", null, LocaleContextHolder.getLocale()));
+
+                return "redirect:/patient/detail";
+            }else{
+                redirectAttributes.addFlashAttribute("error","Nové heslo sa nezhoduje s opakovaným");
+
+                return "redirect:/patient/password";
+
+            }
+        }
+        redirectAttributes.addFlashAttribute("error",messageSource.getMessage("wrong_old_password", null, LocaleContextHolder.getLocale()));
+
+        return "redirect:/patient/password";
+
     }
 }

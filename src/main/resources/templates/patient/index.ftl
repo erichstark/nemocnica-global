@@ -4,7 +4,7 @@
 <#import "/spring.ftl" as spring>
 <@pt.menuFooterPage>
 <div class="head row">
-    <h1 class="">Môj profil</h1>
+    <h1 class="">Môj profil  <a class="btn btn-default" href="<@spring.url '/patient/password'/>">Zmeniť heslo</a></h1>
 </div>
 
 <div class="row">
