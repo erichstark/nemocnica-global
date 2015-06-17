@@ -1,4 +1,4 @@
-package sk.stuba.fei.team.global.controller.Order;
+package sk.stuba.fei.team.global.controller.appointment;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;

@@ -1,4 +1,4 @@
-package sk.stuba.fei.team.global.controller.Office;
+package sk.stuba.fei.team.global.controller.office;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
