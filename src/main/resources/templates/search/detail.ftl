@@ -25,7 +25,7 @@
                     </li>
                     <li class="row">
                         <div class="col-md-4"><strong>Telefón :</strong></div>
-                        <div class="col-md-8">${office.phone}</div>
+                        <div class="col-md-8">${office.phone!""}</div>
                     </li>
                 </ul>
 

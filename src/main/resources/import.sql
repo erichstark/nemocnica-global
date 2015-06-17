@@ -307,8 +307,8 @@ INSERT INTO employee(username, enabled, first_name, last_name, password, prefix_
 
 
 -- Offices
-INSERT INTO office(enabled, name, facility) VALUES (TRUE,'Oftalmologická ambulancia',1);
-INSERT INTO office(enabled, name, facility) VALUES (TRUE,'Chirurgická ambulancia',1);
+INSERT INTO office(enabled, name, phone, facility) VALUES (TRUE,'Oftalmologická ambulancia', '+421908879654',1);
+INSERT INTO office(enabled, name, phone, facility) VALUES (TRUE,'Chirurgická ambulancia', '+421908879654',1);
 INSERT INTO office(enabled, name, facility) VALUES (TRUE,'Hepatologická ambulancia',2);
 INSERT INTO office(enabled, name, facility) VALUES (TRUE,'Chirurgická ambulancia 1.Bratislavská',1);
 INSERT INTO office(enabled, name, facility) VALUES (TRUE,'Meditech ',2);
