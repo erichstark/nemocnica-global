@@ -1,11 +1,9 @@
 package sk.stuba.fei.team.global.domain;
 
 import javax.persistence.*;
-import javax.xml.bind.annotation.XmlRootElement;
 import java.io.Serializable;
 
 @Entity
-@XmlRootElement
 public class OpeningHours implements Serializable {
     private static final long serialVersionUID = -6163945840447837521L;
     private Long Id;
@@ -17,6 +15,7 @@ public class OpeningHours implements Serializable {
     private Office office;
 
     @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     public Long getId() {
         return Id;
     }
