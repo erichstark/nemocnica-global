@@ -104,7 +104,7 @@
                 <label for="employee-office">Pridanie ambulancie:</label>
                 <select name="id_office" class="form-control" id="employee-office">
                     <#list offices as office>
-                        <option value="${office.id}">${office.name}</option>
+                        <option value="${office.id}">${office.name}, ${office.facility.nameWithAddress}</option>
                     </#list>
                 </select>
                 <input type="hidden" name="id_employee" value="${employee.username}">
@@ -129,7 +129,7 @@
                     <tr>
                         <td>${office_index + 1}</td>
                         <td>${office.id}</td>
-                        <td>${office.name}</td>
+                        <td>${office.name}, ${office.facility.nameWithAddress}</td>
                         <td>
                             <a href="<@spring.url '/admin/employee/'+employee.username+'/office/'+office.id+'/delete' />"
                                onclick="return confirm('Naozaj?');">Zmazať</a></td>
