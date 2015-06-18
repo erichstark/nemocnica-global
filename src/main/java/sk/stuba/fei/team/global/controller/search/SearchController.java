@@ -3,6 +3,7 @@ package sk.stuba.fei.team.global.controller.search;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.*;
+import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 import sk.stuba.fei.team.global.calendar.Day;
 import sk.stuba.fei.team.global.calendar.Interval;
 import sk.stuba.fei.team.global.domain.*;
@@ -230,7 +231,7 @@ public class SearchController {
 
 
     @RequestMapping(value = "/save", method = RequestMethod.POST)
-    public String save(@ModelAttribute("order") FormOrder order, Map<String, Object> model) throws ParseException {
+    public String save(@ModelAttribute("order") FormOrder order, RedirectAttributes redirectAttributes) throws ParseException {
 
         Appointment newOrd = new Appointment();
 
@@ -248,10 +249,8 @@ public class SearchController {
         Office office =officeService.findOne(order.getOffice_id());
         newOrd.setOffice(office);
 
-
         appointmentService.save(newOrd);
-        model.put("amessage","nova");
-        model.put("pageTitle", "Vyhľadávanie lekárov");
-        return "/appointment/"+order.getUserName();
+        redirectAttributes.addFlashAttribute("amessage","nova");
+        return "redirect:/appointment";
     }
 }

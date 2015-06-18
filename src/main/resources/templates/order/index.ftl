@@ -45,8 +45,14 @@
 
 
                     <td>${cas}</td>
-                    <td><a class="btn btn-danger btn-sm"  href="<@spring.url '/appointment/delete/'+user.username +'/'+appointment.id />" role="button" onclick="return customConfirm('Naozaj chcete zrušiť objednávku?')" >Zrušiť
-                        objednávku</a></td>
+                    <td>
+                        <#if appointment.enabled>
+                            <a class="btn btn-danger btn-sm"  href="<@spring.url '/appointment/delete/'+appointment.id />" role="button" onclick="return customConfirm('Naozaj chcete zrušiť objednávku?')" >Zrušiť
+                                objednávku</a>
+                        <#else>
+                            Zrušená
+                        </#if>
+                    </td>
                 </tr>
                 </#list>
             </tbody>

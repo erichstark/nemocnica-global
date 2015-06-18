@@ -110,6 +110,7 @@
                             <th>Dátum</th>
                             <th>Čas</th>
                             <th>Poznámka</th>
+                            <th>Stav</th>
                         </tr>
                         </thead>
                         <tbody>
@@ -119,6 +120,7 @@
                                 <td>${app.date?date}</td>
                                 <td>${(app.intervalStart/60)?string["0"]}:${(app.intervalStart%60)?string["00"]}</td>
                                 <td>${app.note}</td>
+                                <td><@spring.message "canceled."+app.enabled?c/></td>
                             </tr>
                             </#list>
                         </tbody>

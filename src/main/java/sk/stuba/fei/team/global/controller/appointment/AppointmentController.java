@@ -48,8 +48,8 @@ public class AppointmentController {
         return "order/index";
     }
 
-    @RequestMapping("/delete/{username}/{order_id}")
-    public String delete(@PathVariable String username,@PathVariable Long order_id , RedirectAttributes redirectAttributes) {
+    @RequestMapping("/delete/{order_id}")
+    public String delete(@PathVariable Long order_id , RedirectAttributes redirectAttributes) {
 
         Appointment appointment = orderService.findById(order_id);
         Date d= appointment.getDate();
@@ -68,7 +68,8 @@ public class AppointmentController {
             e.printStackTrace();
         }
         if(cal.getTime().before(c.getTime())){
-            orderService.delete(order_id);
+            appointment.setEnabled(false);
+            orderService.save(appointment);
             redirectAttributes.addFlashAttribute("amessage","ok");
             return "redirect:/appointment";
         }

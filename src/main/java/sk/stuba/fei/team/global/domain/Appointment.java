@@ -19,9 +19,11 @@ public class Appointment implements Serializable {
     private int intervalStart;
     private String note;
     private Date updated;
+    private boolean enabled;
 
     public Appointment() {
         intervalStart = 0;
+        enabled = true;
         note = "";
     }
 
@@ -81,6 +83,14 @@ public class Appointment implements Serializable {
 
     public void setNote(String note) {
         this.note = note;
+    }
+
+    public boolean isEnabled() {
+        return enabled;
+    }
+
+    public void setEnabled(boolean enabled) {
+        this.enabled = enabled;
     }
 
     @Temporal(TemporalType.TIMESTAMP)

@@ -25,18 +25,15 @@
     <table class="table table-striped">
         <thead>
         <tr>
-            <th style="width: 60px;">#</th>
             <th>Username</th>
             <th>Meno zamestnanca</th>
             <th>Telefón</th>
             <th>E-mail</th>
-            <th style="width: 60px;">Akcia</th>
         </tr>
         </thead>
         <tbody>
             <#list employees as employee>
             <tr>
-                <td>${employee_index + 1}</td>
                 <td>${employee.username}</td>
                 <td>
                     <a href="<@spring.url '/admin/employee/edit/' + employee.username />">
@@ -46,8 +43,6 @@
                 </td>
                 <td>${employee.phone!""}</td>
                 <td>${employee.email!""}</td>
-                <td><a href="<@spring.url '/admin/employee/delete/' + employee.username />"
-                       onclick="return confirm('Naozaj?');">Zmazať</a></td>
             </tr>
             </#list>
         </tbody>
