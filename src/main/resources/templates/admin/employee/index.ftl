@@ -37,8 +37,7 @@
                 <td>${employee.username}</td>
                 <td>
                     <a href="<@spring.url '/admin/employee/edit/' + employee.username />">
-                    ${employee.prefix_title + ' ' + employee.firstName + ' ' + employee.lastName}
-                        <#if employee.suffix_title?length gt 0>${', ' + employee.suffix_title}</#if>
+                    ${employee.prefix_title!""} ${employee.firstName!""} ${employee.lastName!""}, ${employee.suffix_title!""}
                     </a>
                 </td>
                 <td>${employee.phone!""}</td>
