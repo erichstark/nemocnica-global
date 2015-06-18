@@ -1,13 +1,13 @@
 package sk.stuba.fei.team.global.controller.admin;
 
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.security.crypto.password.PasswordEncoder;
+import org.springframework.context.MessageSource;
+import org.springframework.context.i18n.LocaleContextHolder;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.*;
 import sk.stuba.fei.team.global.domain.Employee;
 import sk.stuba.fei.team.global.domain.Office;
 import sk.stuba.fei.team.global.domain.Specialization;
-import sk.stuba.fei.team.global.security.PBKDF2WithHmacSHA1;
 import sk.stuba.fei.team.global.service.EmployeeService;
 import sk.stuba.fei.team.global.service.OfficeService;
 import sk.stuba.fei.team.global.service.SpecializationService;
@@ -15,9 +15,6 @@ import sk.stuba.fei.team.global.service.SpecializationService;
 import java.util.Map;
 import java.util.logging.Logger;
 
-/**
- * Created by pallo on 5/9/15.
- */
 @Controller
 @RequestMapping("/admin/employee")
 public class AdminEmployeeController {
@@ -30,23 +27,16 @@ public class AdminEmployeeController {
     private OfficeService officeService;
     @Autowired
     private SpecializationService specializationService;
+    @Autowired
+    private MessageSource messageSource;
 
-    @RequestMapping("")
+    @RequestMapping
     public String index(Map<String, Object> model) {
 
-        model.put("pageTitle", "Admin Zamestnanec");
+        model.put("pageTitle", messageSource.getMessage("employees",null, LocaleContextHolder.getLocale()));
         model.put("employees", employeeService.findAll());
 
         return "admin/employee/index";
-    }
-
-    @RequestMapping(value = "/add")
-    public String add(Map<String, Object> model) {
-
-        model.put("pageTitle", "Admin Zamestnanec");
-        model.put("employee", new Employee());
-
-        return "admin/employee/add";
     }
 
     @RequestMapping(value = "/edit/{username}")
@@ -67,23 +57,8 @@ public class AdminEmployeeController {
         Employee temp = employeeService.findOne(employee.getUsername());
         employee.setOffices(temp.getOffices());
         employee.setSpecializations(temp.getSpecializations());
+        employee.setPassword(temp.getPassword());
         employeeService.save(employee);
-
-        return "redirect:/admin/employee";
-    }
-
-    @RequestMapping(value = "/save", method = RequestMethod.POST)
-    public String save(@ModelAttribute("employee") Employee employee) {
-        PasswordEncoder encoder = new PBKDF2WithHmacSHA1();
-        employee.setPassword(encoder.encode(employee.getPassword()));
-        employeeService.save(employee);
-        return "redirect:/admin/employee";
-    }
-
-    @RequestMapping(value = "/delete/{username}")
-    public String delete(@PathVariable String username) {
-
-        employeeService.delete(username);
 
         return "redirect:/admin/employee";
     }

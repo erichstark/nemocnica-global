@@ -342,10 +342,6 @@ header {
 
 /* ---------------------------------------- doktor detail -----------------------------*/
 
-.detail-doktor {
-
-}
-
 .detail-doktor h3 {
     margin-top: 0;
 }
@@ -417,4 +413,16 @@ header {
 .floating-buttons {
     display: block;
     text-align: right;
+}
+
+/* ----- bootstrap alert hack na autowidth podla content -----*/
+.alert {display:inline-block;}
+
+
+.fullSearch select {
+    border: 2px solid #dce4ec;
+    border-radius: 4px;
+    float: right;
+    height: 41px;
+    width: 70%;
 }

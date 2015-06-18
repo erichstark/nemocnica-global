@@ -5,17 +5,17 @@
     <h1 class="">Moje objednávky</h1>
 </div>
 <div class="row">
-    <#if message??>
-        <#if message= 'ok'>
+    <#if amessage??>
+        <#if amessage= 'ok'>
             <div class="alert alert-dismissible alert-success">
                 Objednávka úspešne vymazaná !
             </div>
-        <#elseif message ='nova'>
+        <#elseif amessage ='nova'>
             <div class="alert alert-dismissible alert-success">
                 Nová objednávka úspešne vytvorená !
             </div>
-        <#elseif message='fail' >
-            <div class="alert alert-dismissible alert-success">
+        <#elseif amessage='fail' >
+            <div class="alert alert-dismissible alert-danger">
                 Objednávka nemôže byť zrušena! Objednávku môžete zrušiť do 24 hodín pred termínom.
             </div>
         </#if>
@@ -45,8 +45,14 @@
 
 
                     <td>${cas}</td>
-                    <td><a href="<@spring.url '/appointment/delete/'+user.username +'/'+appointment.id />">Zrušiť
-                        objednávku</a></td>
+                    <td>
+                        <#if appointment.enabled>
+                            <a class="btn btn-danger btn-sm"  href="<@spring.url '/appointment/delete/'+appointment.id />" role="button" onclick="return customConfirm('Naozaj chcete zrušiť objednávku?')" >Zrušiť
+                                objednávku</a>
+                        <#else>
+                            Zrušená
+                        </#if>
+                    </td>
                 </tr>
                 </#list>
             </tbody>

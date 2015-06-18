@@ -39,16 +39,6 @@
                    placeholder="Titul za menom"
                    value="${employee.suffix_title!""}">
         </div>
-        <div class="form-group">
-            <label for="employee-phone">Telefón</label>
-            <input type="text" name="phone" class="form-control" id="employee-phone" placeholder="Telefón"
-                   value="${employee.phone!""}">
-        </div>
-        <div class="form-group">
-            <label for="employee-email">E-mail</label>
-            <input type="text" name="email" class="form-control" id="employee-email" placeholder="E-mail"
-                   value="${employee.phone!""}">
-        </div>
 
         <div class="form-group">
             <div>
@@ -84,7 +74,6 @@
         <table class="table table-striped">
             <thead>
             <tr>
-                <th style="width: 60px;">#</th>
                 <th>Názov špecializácie</th>
                 <th style="width: 60px;">Akcia</th>
             </tr>
@@ -93,8 +82,7 @@
                 <#if employee.specializations??>
                     <#list employee.specializations as specialization>
                     <tr>
-                        <td>${specialization_index + 1}</td>
-                        <td>${specialization}</td>
+                        <td>${specialization.name}</td>
                         <td>
                             <a href="<@spring.url '/admin/employee/'+employee.username+'/specialization/'+specialization.id+'/delete' />"
                                onclick="return confirm('Naozaj?');">Zmazať</a></td>
@@ -116,7 +104,7 @@
                 <label for="employee-office">Pridanie ambulancie:</label>
                 <select name="id_office" class="form-control" id="employee-office">
                     <#list offices as office>
-                        <option value="${office.id}">${office.name}</option>
+                        <option value="${office.id}">${office.name}, ${office.facility.nameWithAddress}</option>
                     </#list>
                 </select>
                 <input type="hidden" name="id_employee" value="${employee.username}">
@@ -141,7 +129,7 @@
                     <tr>
                         <td>${office_index + 1}</td>
                         <td>${office.id}</td>
-                        <td>${office.name}</td>
+                        <td>${office.name}, ${office.facility.nameWithAddress}</td>
                         <td>
                             <a href="<@spring.url '/admin/employee/'+employee.username+'/office/'+office.id+'/delete' />"
                                onclick="return confirm('Naozaj?');">Zmazať</a></td>

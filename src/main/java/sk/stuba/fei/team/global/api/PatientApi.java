@@ -47,9 +47,8 @@ public class PatientApi {
     }
 
     @RequestMapping(method = RequestMethod.POST)
-    public String save(@RequestBody PatientWrapper patientWrapper) {
+    public void save(@RequestBody PatientWrapper patientWrapper) {
         Patient p = patientWrapper.build(patientService, insuranceService);
         patientService.save(p);
-        return p.getUsername();
     }
 }

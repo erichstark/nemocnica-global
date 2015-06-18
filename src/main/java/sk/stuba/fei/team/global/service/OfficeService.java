@@ -25,4 +25,7 @@ public interface OfficeService {
     void delete(Long id);
 
     List<Office> findByEmployeesInAndSpecializationsIn(Collection<Employee> employees, Collection<Specialization> specialization);
+
+    List<Office> findBySpecializationsIn(Collection<Specialization> specializations);
+
 }

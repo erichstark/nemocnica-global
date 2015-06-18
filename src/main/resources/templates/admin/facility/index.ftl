@@ -34,7 +34,7 @@
                 <td>${facility.id}</td>
                 <td>${facility.name}</td>
                 <td>${facility.streetAndNumber+', '+facility.zip+' '+facility.city}</td>
-                <td><@spring.message "Enabled"+facility.enabled?c /></td>
+                <td><@spring.message "enabled."+facility.enabled?c /></td>
             </tr>
             </#list>
         </tbody>

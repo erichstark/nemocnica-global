@@ -15,7 +15,7 @@ import java.util.List;
 /**
  * Created by jakubrehak on 10/05/15.
  */
-@Component("patientOrderService")
+@Component
 @Transactional
 public class AppointmentServiceImpl implements AppointmentService {
 
@@ -30,6 +30,11 @@ public class AppointmentServiceImpl implements AppointmentService {
     @Override
     public List<Appointment> findByDateAndOffice(Date date,Office office){
         return appointmentRepository.findByDateAndOffice(date,office);
+    }
+
+    @Override
+    public List<Appointment> findByTimestampAndOffice(Date timestamp, Office office) {
+        return appointmentRepository.findByUpdatedGreaterThanAndOffice(timestamp, office);
     }
 
     @Override

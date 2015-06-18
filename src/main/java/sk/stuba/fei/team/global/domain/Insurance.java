@@ -6,11 +6,13 @@ import javax.persistence.*;
 import javax.xml.bind.annotation.XmlRootElement;
 import java.io.Serializable;
 import java.util.Date;
+import java.util.HashSet;
 import java.util.Set;
 
 @Entity
 @XmlRootElement
 public class Insurance implements Serializable {
+    private static final long serialVersionUID = -5189106543650114809L;
     private Long id;
     private String name;
     private Set<Office> offices;
@@ -19,6 +21,10 @@ public class Insurance implements Serializable {
     private Boolean enabled;
 
     public Insurance() {
+        name = "";
+        offices = new HashSet<>();
+        patients = new HashSet<>();
+        enabled = true;
     }
 
     public Insurance(String name) {

@@ -14,6 +14,7 @@ public class AppointmentWrapper {
     private Date date;
     private int intervalStart;
     private String note;
+    private boolean enabled;
 
     public AppointmentWrapper() {
     }
@@ -25,6 +26,7 @@ public class AppointmentWrapper {
         date = appointment.getDate();
         intervalStart = appointment.getIntervalStart();
         note = appointment.getNote();
+        enabled = appointment.isEnabled();
     }
 
     public Appointment build(PatientService patientService, OfficeService officeService) {
@@ -35,6 +37,7 @@ public class AppointmentWrapper {
         appointment.setDate(date);
         appointment.setIntervalStart(intervalStart);
         appointment.setNote(note);
+        appointment.setEnabled(enabled);
         return appointment;
     }
 
@@ -84,5 +87,13 @@ public class AppointmentWrapper {
 
     public void setNote(String note) {
         this.note = note;
+    }
+
+    public boolean isEnabled() {
+        return enabled;
+    }
+
+    public void setEnabled(boolean enabled) {
+        this.enabled = enabled;
     }
 }

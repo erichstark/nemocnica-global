@@ -1,6 +1,6 @@
 #!/bin/bash
 
-PID=$(netstat -tulpn | grep :8080 | sed 's/\s\s*/ /g' |cut -d' ' -f7 | cut -d'/' -f1 | awk '{ print $1 }')
+PID=$(netstat -tulpn | grep :8180 | sed 's/\s\s*/ /g' |cut -d' ' -f7 | cut -d'/' -f1 | awk '{ print $1 }')
 if [ -z "$PID" ]
 then
     echo "Application is already stopped"

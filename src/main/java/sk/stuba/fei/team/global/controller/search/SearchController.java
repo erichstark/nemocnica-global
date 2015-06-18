@@ -3,6 +3,7 @@ package sk.stuba.fei.team.global.controller.search;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.*;
+import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 import sk.stuba.fei.team.global.calendar.Day;
 import sk.stuba.fei.team.global.calendar.Interval;
 import sk.stuba.fei.team.global.domain.*;
@@ -126,7 +127,28 @@ public class SearchController {
 
             for (OpeningHours it : hodiny) {
 
-                String d2 = it.getDate();
+                String d2;
+                switch (it.getDate()){
+                    case 1: d2 = "Pondelok";
+                        break;
+                    case 2: d2 = "Utorok";
+                        break;
+                    case 3: d2 = "Streda";
+                        break;
+                    case 4: d2 = "Štvrtok";
+                        break;
+                    case 5: d2 = "Piatok";
+                        break;
+                    case 6: d2 = "Sobota";
+                        break;
+                    case 7: d2 = "Nedeľa";
+                        break;
+
+                    default: d2 = "---";
+                        break;
+
+                }
+
                 System.out.print(it +" \n ");
                 if(d2.equals( d1 )){
 
@@ -147,20 +169,27 @@ public class SearchController {
     @RequestMapping(value = "/search", method = RequestMethod.POST)
     public String search( @ModelAttribute("searchUser") FormEmployeeSearch search, Map<String, Object> model ) {
 
-
-
-
         Iterable<Office> zoznam;
+
         List<Employee> e= employeeService.findDoctors(search.getName(), search.getSurname());
-
         List<Specialization> s=new ArrayList<>();
-        if(search.getSpecialization()== null){
-         s = (List<Specialization>) specializationService.findAll();
-        }else {
-          s = specializationService.findByName(search.getSpecialization());
-        }
-        zoznam = officeService.findByEmployeesInAndSpecializationsIn(e,s);
 
+        if(search.getSpecialization()== null){
+            s = (List<Specialization>) specializationService.findAll();
+        }else {
+            s=specializationService.findByName(search.getSpecialization());
+        }
+
+        if(search.getSpecialization() == null && search.getName()== null && search.getSurname()==null){
+
+            zoznam=officeService.findAll();
+        }else if(search.getSpecialization() != null && search.getName()== null && search.getSurname()==null){
+
+            zoznam = officeService.findBySpecializationsIn(s);
+
+        }else{
+            zoznam=officeService.findByEmployeesInAndSpecializationsIn(e,s);
+        }
         model.put("pageTitle", "Vyhľadávanie lekárov");
         model.put("name", search.getName());
         model.put("surname", search.getSurname());
@@ -202,7 +231,7 @@ public class SearchController {
 
 
     @RequestMapping(value = "/save", method = RequestMethod.POST)
-    public String save(@ModelAttribute("order") FormOrder order, Map<String, Object> model) throws ParseException {
+    public String save(@ModelAttribute("order") FormOrder order, RedirectAttributes redirectAttributes) throws ParseException {
 
         Appointment newOrd = new Appointment();
 
@@ -220,10 +249,8 @@ public class SearchController {
         Office office =officeService.findOne(order.getOffice_id());
         newOrd.setOffice(office);
 
-
         appointmentService.save(newOrd);
-        model.put("message","nova");
-        model.put("pageTitle", "Vyhľadávanie lekárov");
-        return "/appointment/"+order.getUserName();
+        redirectAttributes.addFlashAttribute("amessage","nova");
+        return "redirect:/appointment";
     }
 }

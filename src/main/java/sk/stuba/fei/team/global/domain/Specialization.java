@@ -6,12 +6,14 @@ import javax.persistence.*;
 import javax.xml.bind.annotation.XmlRootElement;
 import java.io.Serializable;
 import java.util.Date;
+import java.util.HashSet;
 import java.util.Set;
 
 @Entity
 @XmlRootElement
 public class Specialization implements Serializable {
 
+    private static final long serialVersionUID = 4194878815273884321L;
     private Long id;
     private String name;
     private Set<Office> offices;
@@ -20,6 +22,10 @@ public class Specialization implements Serializable {
     private Boolean enabled;
 
     public Specialization() {
+        name = "";
+        offices = new HashSet<>();
+        employees = new HashSet<>();
+        enabled = true;
     }
 
     public Specialization(String name) {

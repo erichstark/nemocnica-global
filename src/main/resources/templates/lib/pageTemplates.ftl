@@ -33,18 +33,20 @@
                 <ul class="nav navbar-nav navbar-right">
                     <li class="dropdown">
                         <#if user??>
-                        <a href="#" class="dropdown-toggle" data-toggle="dropdown" aria-expanded="false"> <i
-                                class="glyphicon glyphicon-user"></i>${user.getUsername()}</a>
-                        <ul class="dropdown-menu">
-                            <li>
-                                <a href="<@spring.url '/appointment/${user.username}'/>">Moje Objednavky</a>
-                            </li>
-
-                            <li class="divider"></li>
-                            <li>
-                                <a href="<@spring.url '/logout'/>"><i class="glyphicon glyphicon-log-out"></i> <@spring.message "SignOut" /></a>
-                            </li>
-                        </ul>
+                            <a href="#" class="dropdown-toggle" data-toggle="dropdown" aria-expanded="false"> <i
+                                    class="glyphicon glyphicon-user"></i>${user.getUsername()}</a>
+                            <ul class="dropdown-menu">
+                                <li>
+                                    <a href="<@spring.url '/appointment'/>">Moje Objednávky</a>
+                                </li>
+                                <li>
+                                    <a href="<@spring.url '/patient/detail'/>">Môj profil</a>
+                                </li>
+                                <li class="divider"></li>
+                                <li>
+                                    <a href="<@spring.url '/logout'/>"><i class="glyphicon glyphicon-log-out"></i> <@spring.message "SignOut" /></a>
+                                </li>
+                            </ul>
                         <#else>
                             <a class="btn btn-primary" id="" href="<@spring.url '/login'/>" >Prihlásenie</a>
                         </#if>
@@ -52,13 +54,13 @@
                 </ul>
             </div>
             <div id="navbar" class="navbar-collapse collapse">
-                <ul class="nav navbar-nav">
-                    <#if user??>
+            <ul class="nav navbar-nav">
+                <#if user??>
                     <#if user.stringAuthorities?seq_contains("ADMIN")>
                         <li><a href="<@spring.url '/admin'/>">Administrácia</a></li>
                     </#if>
-                    </ul>
-                    </#if>
+                </ul>
+                </#if>
 
                 </ul>
             </div>
@@ -75,22 +77,24 @@
     </div>
     <footer class="footer">
         <div class="container">
-         <div class="left-aside">
-          <p>Tímovy projekt tímu WeCare 2014-2015</p>
-           <p>Fakulta elektrotechniky a informatiky, Slovenská technická univerzita , Bratislava</p>
-         </div>
-          <div class="footer-nav">
-            <ul class="list-unstyled">
-                <li><a>Vyhľadávanie</a></li>
-                <li><a href="<@spring.url '/login'/>">Prihlásenie</a></li>
-                <li><a href="<@spring.url '/registration'/>">Registrácia</a></li>
-                <li><a>Návod</a></li>
-            </ul>
-          </div>
-          <div style="float:left;width:200px;padding-left:50px;">
-             <span style="text-decoration: underline;display:block">Kontakt</span>
-              Email: timovyprojekt.nemocnica@gmail.com
-          </div>
+            <div class="left-aside">
+                <p>Tímovy projekt tímu WeCare 2014-2015</p>
+                <p>Fakulta elektrotechniky a informatiky, Slovenská technická univerzita , Bratislava</p>
+            </div>
+            <div class="footer-nav">
+                <ul class="list-unstyled">
+                    <li><a>Vyhľadávanie</a></li>
+                    <#if !user??>
+                        <li><a href="<@spring.url '/login'/>">Prihlásenie</a></li>
+                        <li><a href="<@spring.url '/registration'/>">Registrácia</a></li>
+                    </#if>
+                    <li><a>Návod</a></li>
+                </ul>
+            </div>
+            <div style="float:left;width:200px;padding-left:50px;">
+                <span style="text-decoration: underline;display:block">Kontakt</span>
+                Email: timovyprojekt.nemocnica@gmail.com
+            </div>
         </div>
     </footer>
     </@genericPage>
@@ -137,9 +141,9 @@
         <div class="row">
             <div id="side-navbar" class="col-sm-3 col-md-2 sidebar">
                 <ul class="nav nav-sidebar">
-                    <li><a href="<@spring.url '/admin'/>">Prehľad</a></li>
+                    <li><a href="<@spring.url '/admin'/>">Nástenka</a></li>
                     <li><a href="<@spring.url '/admin/facility'/>">Zariadenia</a></li>
-                    <li><a href="<@spring.url '/admin/office'/>">Ambulancie</a></li>
+                    <li><a href="<@spring.url '/admin/office'/>">Ordinácie</a></li>
                     <li><a href="<@spring.url '/admin/insurance'/>">Poisťovne</a></li>
                     <li><a href="<@spring.url '/admin/specialization'/>">Špecializácie</a></li>
                     <li><a href="<@spring.url '/admin/patient'/>">Pacienti</a></li>
@@ -147,6 +151,12 @@
                 </ul>
             </div>
             <div class="col-sm-9 col-sm-offset-3 col-md-10 col-md-offset-2 main">
+                <#if message??>
+                    <div class="alert alert-success" role="alert">${message}</div>
+                </#if>
+                <#if error??>
+                    <div class="alert alert-danger" role="alert">${error}</div>
+                </#if>
                 <#nested>
             </div>
         </div>
@@ -159,30 +169,30 @@
 <div class="row">
 
 
-        <form name="searchUser" class="form-horizontal simpleSearch" method="POST" action="<@spring.url '/search/search'/>" >
-            <div class="form-group">
-                <label for="name">Meno:</label>
-                <input type="text" name="name" class="form-control" id="name" placeholder="Meno"
-                       value="${name!""}">
-            </div>
-            <div class="form-group">
-                <label for="surname">Priezvisko:</label>
-                <input type="text" name="surname" class="form-control" id="surname" placeholder="Priezvisko"
-                       value="${surname!""}">
-            </div>
-            <div class="form-group">
-                <label for="specialization">Špecializácia:</label>
-                <input type="text" name="specialization" class="form-control" id="specialization" placeholder="Specializacia"
-                       value="${specialization!""}">
-            </div>
-            <div class="form-group">
+    <form name="searchUser" class="form-horizontal simpleSearch" method="POST" action="<@spring.url '/search/search'/>" >
+        <div class="form-group">
+            <label for="name">Meno:</label>
+            <input type="text" name="name" class="form-control" id="name" placeholder="Meno"
+                   value="${name!""}">
+        </div>
+        <div class="form-group">
+            <label for="surname">Priezvisko:</label>
+            <input type="text" name="surname" class="form-control" id="surname" placeholder="Priezvisko"
+                   value="${surname!""}">
+        </div>
+        <div class="form-group">
+            <label for="specialization">Špecializácia:</label>
+            <input type="text" name="specialization" class="form-control" id="specialization" placeholder="Specializacia"
+                   value="${specialization!""}">
+        </div>
+        <div class="form-group">
 
-                <input type="hidden" name="town" class="form-control" id="town" placeholder="Mesto"
-                       value="${town!""}">
-            </div>
-            <input type="submit" value="Hľadaj" class="btn btn-primary">
+            <input type="hidden" name="town" class="form-control" id="town" placeholder="Mesto"
+                   value="${town!""}">
+        </div>
+        <input type="submit" value="Hľadaj" class="btn btn-primary">
 
-        </form>
+    </form>
 
 </div>
 </#macro>

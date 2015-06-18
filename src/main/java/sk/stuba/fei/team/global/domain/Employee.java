@@ -13,6 +13,7 @@ import java.util.Set;
 @XmlRootElement
 public class Employee implements Serializable {
 
+    private static final long serialVersionUID = 6319333400005244129L;
     private String password;
     private String username;
     private boolean enabled;
@@ -30,6 +31,8 @@ public class Employee implements Serializable {
         enabled = true;
         firstName = "";
         lastName = "";
+        prefix_title = "";
+        suffix_title = "";
         offices = new HashSet<Office>();
         specializations = new HashSet<Specialization>();
     }
@@ -137,5 +140,10 @@ public class Employee implements Serializable {
 
     public void setUpdated(java.util.Date updated) {
         this.updated = updated;
+    }
+
+    @Transient
+    public String getFullName() {
+        return prefix_title + " " + firstName + " " + lastName + ", " + suffix_title;
     }
 }

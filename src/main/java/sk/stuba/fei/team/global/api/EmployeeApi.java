@@ -8,6 +8,7 @@ import sk.stuba.fei.team.global.api.domain.EmployeeWrapper;
 import sk.stuba.fei.team.global.api.domain.UpdateWrapper;
 import sk.stuba.fei.team.global.domain.Employee;
 import sk.stuba.fei.team.global.service.EmployeeService;
+import sk.stuba.fei.team.global.service.OfficeService;
 import sk.stuba.fei.team.global.service.SpecializationService;
 
 import java.text.ParseException;
@@ -24,6 +25,9 @@ public class EmployeeApi {
 
     @Autowired
     SpecializationService specializationService;
+
+    @Autowired
+    OfficeService officeService;
 
     @RequestMapping(value = "/{username}", method = RequestMethod.GET)
     public EmployeeWrapper findByUsername(@PathVariable String username) {
@@ -44,7 +48,7 @@ public class EmployeeApi {
 
     @RequestMapping(method = RequestMethod.POST)
     public String save(@RequestBody EmployeeWrapper ew) throws JsonProcessingException {
-        Employee e = ew.build(specializationService, employeeService);
+        Employee e = ew.build(specializationService, employeeService, officeService);
         employeeService.save(e);
         return new ObjectMapper().writeValueAsString(e.getUsername());
     }

@@ -18,6 +18,7 @@ public class OfficeWrapper {
     private Set<String> employees;
     private Set<Long> insurances;
     private Set<Long> specializations;
+    private String phone;
     private Boolean enabled;
 
     public OfficeWrapper() {
@@ -26,6 +27,7 @@ public class OfficeWrapper {
     public OfficeWrapper(Office office) {
         id = office.getId();
         name = office.getName();
+        phone = office.getPhone();
         facility = office.getFacility().getId();
         employees = new HashSet<>(office.getEmployees().size());
         employees.addAll(office.getEmployees().stream().map(Employee::getUsername).collect(Collectors.toList()));
@@ -40,14 +42,17 @@ public class OfficeWrapper {
         Office office = new Office();
         office.setId(id);
         office.setName(name);
+        office.setPhone(phone);
         office.setFacility(facilityService.findOne(facility));
         office.getEmployees().addAll(employees.stream().map(employeeService::findOne).collect(Collectors.toSet()));
         office.getInsurances().addAll(insurances.stream().map(insuranceService::findOne).collect(Collectors.toSet()));
         office.getSpecializations().addAll(specializations.stream().map(specializationService::findOne).collect(Collectors.toSet()));
-        Office oldOffice = officeService.findOne(id);
-        if (oldOffice != null) {
-            office.getHours().addAll(oldOffice.getHours());
-            office.getAppointments().addAll(oldOffice.getAppointments());
+        if(id!=null && id!=0) {
+            Office oldOffice = officeService.findOne(id);
+            if (oldOffice != null) {
+                office.getHours().addAll(oldOffice.getHours());
+                office.getAppointments().addAll(oldOffice.getAppointments());
+            }
         }
         office.setEnabled(enabled);
         return office;
@@ -107,5 +112,13 @@ public class OfficeWrapper {
 
     public void setEnabled(Boolean enabled) {
         this.enabled = enabled;
+    }
+
+    public String getPhone() {
+        return phone;
+    }
+
+    public void setPhone(String phone) {
+        this.phone = phone;
     }
 }

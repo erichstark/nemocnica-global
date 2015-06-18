@@ -1,6 +1,8 @@
 package sk.stuba.fei.team.global.controller.admin;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.context.MessageSource;
+import org.springframework.context.i18n.LocaleContextHolder;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.*;
 import sk.stuba.fei.team.global.domain.Facility;
@@ -8,9 +10,6 @@ import sk.stuba.fei.team.global.service.FacilityService;
 
 import java.util.Map;
 
-/**
- * Created by pallo on 5/3/15.
- */
 @Controller
 @RequestMapping("/admin/facility")
 public class AdminFacilityController {
@@ -18,10 +17,13 @@ public class AdminFacilityController {
     @Autowired
     private FacilityService facilityService;
 
+    @Autowired
+    private MessageSource messageSource;
+
     @RequestMapping(method = RequestMethod.GET)
     public String index(Map<String, Object> model) {
 
-        model.put("pageTitle", "Admin Ambulancia");
+        model.put("pageTitle", messageSource.getMessage("facilities",null, LocaleContextHolder.getLocale()));
         model.put("facilities", facilityService.findAll());
 
         return "admin/facility/index";
@@ -32,7 +34,7 @@ public class AdminFacilityController {
 
         Iterable<Facility> facilities = facilityService.findByName(text);
 
-        model.put("pageTitle", "Admin Facilities");
+        model.put("pageTitle", messageSource.getMessage("facilities",null, LocaleContextHolder.getLocale()));
         model.put("search", text);
         model.put("facilities", facilities);
 
@@ -41,7 +43,7 @@ public class AdminFacilityController {
 
     @RequestMapping(value = "/clear")
     public String clear(Map<String, Object> model) {
-        model.put("pageTitle", "Admin Facilities");
+        model.put("pageTitle", messageSource.getMessage("facilities",null, LocaleContextHolder.getLocale()));
         model.put("facilities", facilityService.findAll());
 
         return "admin/facility/index";

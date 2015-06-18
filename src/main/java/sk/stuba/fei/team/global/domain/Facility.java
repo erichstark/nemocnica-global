@@ -3,12 +3,14 @@ package sk.stuba.fei.team.global.domain;
 import javax.persistence.*;
 import javax.xml.bind.annotation.XmlRootElement;
 import java.io.Serializable;
+import java.util.HashSet;
 import java.util.Set;
 
 @Entity
 @XmlRootElement
 public class Facility implements Serializable {
 
+    private static final long serialVersionUID = -8682044801981807923L;
     private Long id;
     private String name;
     private Set<Office> offices;
@@ -16,6 +18,14 @@ public class Facility implements Serializable {
     private String city;
     private String zip;
     private Boolean enabled;
+
+    public Facility() {
+        name = "";
+        offices = new HashSet<>();
+        streetAndNumber = "";
+        city = "";
+        zip = "";
+    }
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -79,5 +89,10 @@ public class Facility implements Serializable {
 
     public void setEnabled(Boolean enabled) {
         this.enabled = enabled;
+    }
+
+    @Transient
+    public String getNameWithAddress() {
+        return name + ", " + streetAndNumber + ", " + zip + ", " + city;
     }
 }

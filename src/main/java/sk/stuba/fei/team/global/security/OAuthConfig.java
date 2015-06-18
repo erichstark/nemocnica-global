@@ -85,7 +85,7 @@ public class OAuthConfig {
             clients.inMemory()
                     .withClient("local")
                     .authorizedGrantTypes("password", "authorization_code", "refresh_token", "implicit")
-                    .authorities("USER", "ADMIN")
+                    .authorities("WS_USER")
                     .scopes("read", "write", "trust")
                     .secret("secret");
         }

@@ -9,6 +9,7 @@ import java.util.List;
 
 public class PatientWrapper {
     private String username;
+    private String password;
     private String firstName;
     private String surname;
     private String phone;
@@ -16,11 +17,14 @@ public class PatientWrapper {
     private String prefix_title;
     private String suffix_title;
     private Long insurance;
+    private boolean enabled;
 
     public PatientWrapper() {
     }
 
     public PatientWrapper(Patient patient) {
+        username = patient.getUsername();
+        password = patient.getPassword();
         firstName = patient.getFirstName();
         surname = patient.getSurname();
         phone = patient.getPhone();
@@ -28,23 +32,32 @@ public class PatientWrapper {
         prefix_title = patient.getPrefix_title();
         suffix_title = patient.getSuffix_title();
         insurance = patient.getInsurance().getId();
+        enabled = patient.isEnabled();
     }
 
     public Patient build(PatientService patientService, InsuranceService insuranceService) {
         Patient p = new Patient();
+        p.setUsername(username);
+        p.setPassword(password);
         p.setFirstName(firstName);
+        p.setAccountNonExpired(true);
+        p.setAccountNonLocked(true);
+        p.setCredentialsNonExpired(true);
         p.setSurname(surname);
         p.setPhone(phone);
         p.setEmail(email);
+        p.setEnabled(enabled);
         p.setPrefix_title(prefix_title);
         p.setSuffix_title(suffix_title);
         p.setInsurance(insuranceService.findOne(insurance));
-        List<String> auths = new ArrayList<>(1);
-        auths.add("USER");
-        p.setStringAuthorities(auths);
         Patient pold = patientService.findOne(username);
         if (pold != null) {
-           p.getAppointments().addAll(pold.getAppointments());
+            p.setStringAuthorities(pold.getStringAuthorities());
+            p.getAppointments().addAll(pold.getAppointments());
+        } else {
+            List<String> auths = new ArrayList<>(1);
+            auths.add("USER");
+            p.setStringAuthorities(auths);
         }
         return p;
     }
@@ -111,5 +124,21 @@ public class PatientWrapper {
 
     public void setInsurance(Long insurance) {
         this.insurance = insurance;
+    }
+
+    public boolean isEnabled() {
+        return enabled;
+    }
+
+    public void setEnabled(boolean enabled) {
+        this.enabled = enabled;
+    }
+
+    public String getPassword() {
+        return password;
+    }
+
+    public void setPassword(String password) {
+        this.password = password;
     }
 }

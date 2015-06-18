@@ -3,21 +3,35 @@ package sk.stuba.fei.team.global.domain;
 import javax.persistence.*;
 import javax.xml.bind.annotation.XmlRootElement;
 import java.io.Serializable;
+import java.util.HashSet;
 import java.util.Set;
 
 @Entity
 @XmlRootElement
 public class Office implements Serializable {
 
+    private static final long serialVersionUID = 563004025850191193L;
     private Long id;
     private String name;
     private Facility facility;
+    private String phone;
     private Set<Employee> employees;
     private Set<Insurance> insurances;
     private Set<Specialization> specializations;
     private Set<OpeningHours> hours;
     private Set<Appointment> appointments;
     private Boolean enabled;
+
+    public Office() {
+        name = "";
+        phone = "";
+        employees = new HashSet<>();
+        insurances = new HashSet<>();
+        specializations = new HashSet<>();
+        hours = new HashSet<>();
+        appointments = new HashSet<>();
+        enabled = true;
+    }
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -116,5 +130,13 @@ public class Office implements Serializable {
 
     public void setEnabled(Boolean enabled) {
         this.enabled = enabled;
+    }
+
+    public String getPhone() {
+        return phone;
+    }
+
+    public void setPhone(String phone) {
+        this.phone = phone;
     }
 }

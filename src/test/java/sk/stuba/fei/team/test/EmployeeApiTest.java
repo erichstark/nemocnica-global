@@ -1,4 +1,4 @@
-package sk.stuba.fei.team.global;
+package sk.stuba.fei.team.test;
 
 import org.junit.Before;
 import org.junit.Ignore;
@@ -16,6 +16,7 @@ import org.springframework.test.web.servlet.MockMvc;
 import org.springframework.test.web.servlet.setup.MockMvcBuilders;
 import org.springframework.util.Base64Utils;
 import org.springframework.web.context.WebApplicationContext;
+import sk.stuba.fei.team.global.MainApplication;
 import sk.stuba.fei.team.global.api.EmployeeApi;
 import sk.stuba.fei.team.global.api.domain.UpdateWrapper;
 import sk.stuba.fei.team.global.domain.Employee;

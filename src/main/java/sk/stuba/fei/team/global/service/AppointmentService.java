@@ -16,6 +16,8 @@ public interface AppointmentService {
 
     List<Appointment> findByDateAndOffice(Date date,Office office);
 
+    List<Appointment> findByTimestampAndOffice(Date timestamp, Office office);
+
     Iterable<Appointment> findAll();
 
     Iterable<Appointment> findByPatient( Patient patient);

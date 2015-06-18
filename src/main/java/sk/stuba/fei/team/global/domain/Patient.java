@@ -251,4 +251,9 @@ public class Patient implements Serializable, UserDetails, CredentialsContainer 
             return g1.getAuthority().compareTo(g2.getAuthority());
         }
     }
+
+    @Transient
+    public String getFullName() {
+        return (prefix_title!=null&&prefix_title!="" ? prefix_title : "") + " " + firstName + " " + surname + ", " + (suffix_title!=null&&suffix_title!="" ? suffix_title : "");
+    }
 }

@@ -2,14 +2,7 @@
 <#import "../../lib/pageTemplates.ftl" as pt>
 <#import "/spring.ftl" as spring>
 <@pt.dashboardPage>
-<h1 class="page-header">Administracia zamestnancov</h1>
-
-<div class="row">
-    <div class="col-md-12">
-        <a class="btn btn-info btn-sm" href="<@spring.url '/admin/employee/add'/>" role="button">Vytvoriť
-            zamestnanca</a>
-    </div>
-</div>
+<h1 class="page-header">Administrácia zamestnancov</h1>
 
 <h2 class="sub-header">Zoznam zamestnancov</h2>
 
@@ -32,29 +25,23 @@
     <table class="table table-striped">
         <thead>
         <tr>
-            <th style="width: 60px;">#</th>
             <th>Username</th>
             <th>Meno zamestnanca</th>
             <th>Telefón</th>
             <th>E-mail</th>
-            <th style="width: 60px;">Akcia</th>
         </tr>
         </thead>
         <tbody>
             <#list employees as employee>
             <tr>
-                <td>${employee_index + 1}</td>
                 <td>${employee.username}</td>
                 <td>
                     <a href="<@spring.url '/admin/employee/edit/' + employee.username />">
-                    ${employee.prefix_title + ' ' + employee.firstName + ' ' + employee.lastName}
-                        <#if employee.suffix_title?length gt 0>${', ' + employee.suffix_title}</#if>
+                    ${employee.prefix_title!""} ${employee.firstName!""} ${employee.lastName!""}, ${employee.suffix_title!""}
                     </a>
                 </td>
                 <td>${employee.phone!""}</td>
                 <td>${employee.email!""}</td>
-                <td><a href="<@spring.url '/admin/employee/delete/' + employee.username />"
-                       onclick="return confirm('Naozaj?');">Zmazať</a></td>
             </tr>
             </#list>
         </tbody>

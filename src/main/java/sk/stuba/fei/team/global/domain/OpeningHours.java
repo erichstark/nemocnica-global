@@ -1,14 +1,13 @@
 package sk.stuba.fei.team.global.domain;
 
 import javax.persistence.*;
-import javax.xml.bind.annotation.XmlRootElement;
 import java.io.Serializable;
 
 @Entity
-@XmlRootElement
 public class OpeningHours implements Serializable {
+    private static final long serialVersionUID = -6163945840447837521L;
     private Long Id;
-    private String date;
+    private int date;
     private Long reservationMorningFrom;
     private Long reservationMorningTo;
     private Long reservationFrom;
@@ -16,6 +15,7 @@ public class OpeningHours implements Serializable {
     private Office office;
 
     @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     public Long getId() {
         return Id;
     }
@@ -25,11 +25,11 @@ public class OpeningHours implements Serializable {
     }
 
     @Column
-    public String getDate() {
+    public int getDate() {
         return date;
     }
 
-    public void setDate(String date) {
+    public void setDate(int date) {
         this.date = date;
     }
 
@@ -77,5 +77,19 @@ public class OpeningHours implements Serializable {
 
     public void setReservationMorningTo(Long reservationMorningTo) {
         this.reservationMorningTo = reservationMorningTo;
+    }
+
+    @Transient
+    public String getDayFromDate() {
+        switch (date){
+            case 1: return "Pondelok";
+            case 2: return "Utorok";
+            case 3: return "Streda";
+            case 4: return "Štvrtok";
+            case 5: return "Piatok";
+            case 6: return "Sobota";
+            case 7: return "Nedeľa";
+        }
+        return "";
     }
 }

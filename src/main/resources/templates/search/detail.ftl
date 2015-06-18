@@ -2,24 +2,30 @@
 <#import "/spring.ftl" as spring>
 <@pt.menuFooterPage>
 
-
-<div class="detail-doktor row head">
-    <div class=" col-md-12">
-        <div class=" col-md-2"><img src="/img/profile/avatar.png" width="100px"></div>
+<div class="container">
+    <div class="detail-doktor row head">
+        <div class=" col-md-2">
+            <img src="/img/profile/avatar.png" width="100px">
+        </div>
         <div class="col-md-10">
-            <div class="col-md-12"><h3>${employee.firstName} ${employee.lastName}</h3></div>
-            <div class="  col-md-6">
+            <div clas="row">
+                <h3>${employee.firstName} ${employee.lastName}</h3></div>
+            <div class="col-md-6">
 
                 <ul>
-                    <li class="col-md-12">
+                    <li class="row">
                         <div class="col-md-4"><strong>Špecializácia :</strong></div>
                         <#list office.specializations as spec>
                             <div class="col-md-8">${spec.name!"--"}</div>
                         </#list>
                     </li>
-                    <li class="col-md-12">
+                    <li class="row">
                         <div class="col-md-4"><strong>Ambulancia :</strong></div>
                         <div class="col-md-8">${office.name}</div>
+                    </li>
+                    <li class="row">
+                        <div class="col-md-4"><strong>Telefón :</strong></div>
+                        <div class="col-md-8">${office.phone!""}</div>
                     </li>
                 </ul>
 
@@ -32,7 +38,6 @@
                 </div>
             </div>
         </div>
-
     </div>
 </div>
 <div class="row">
@@ -67,7 +72,7 @@
                             <#assign  casTo = hodinaTo?string['0'] +":00 " />
                         </#if>
 
-                        <#--Morning-->
+                    <#--Morning-->
                         <#assign hodinaMorningFrom=d.hour.reservationMorningFrom/60 />
                         <#assign minutaMorningFrom= d.hour.reservationMorningFrom % 60 />
                         <#if minutaMorningFrom = 30>
@@ -106,12 +111,12 @@
 
                         </td>
                     <#else>
-                        <td><span class="not-free">Pre doobedie už nie sú bohužial voľné termíny. </span></td>
+                        <td colspan="2" ><span class="not-free">Bohužial už nie sú voľné termíny. </span></td>
                     </#if>
                     <div class="fade"></div>
 
                     <#if d.intervalList??>
-                        <div id="${d_index}" class="popup white_content">
+                        <div id="${'after'+d_index}" class="popup white_content">
 
 
                             <h3> ${employee.firstName} ${employee.lastName}</h3>
@@ -198,7 +203,7 @@
 
                     </#if>
 
-                    <#--Formular pre ranne objednavky-->
+                <#--Formular pre ranne objednavky-->
 
                     <#if d.intervalList??>
                         <div id="${'morning'+d_index}" class="popup white_content">
@@ -234,8 +239,8 @@
                                                     <#else>
                                                         <#assign  casIntervalTo = hodinaIntervalTo?keep_before(",") +":00 " />
                                                     </#if>
-                                                    <#--<option value="${interval.s}">${casIntervalFrom}-->
-                                                        <#--- ${casIntervalTo}</option>-->
+                                                <#--<option value="${interval.s}">${casIntervalFrom}-->
+                                                <#--- ${casIntervalTo}</option>-->
                                                     <option value="${interval.s}">${casIntervalFrom}
                                                         - ${casIntervalTo}</option>
                                                 </#if>
@@ -300,6 +305,8 @@
         Poznamky
     </div>
 </div>
+</div>
+
 <div id="login-message" class="popup white_content_login">
     <div id="login-panel" class="panel panel-default">
         <div class="panel-heading"><h3 class="panel-title"><strong><@spring.message "SignIn"/></strong></h3></div>
@@ -332,6 +339,7 @@
         </div>
     </div>
 
+
 </div>
 <script>
     function showReservations(part,id) {
@@ -341,7 +349,7 @@
             $("#morning" + id).toggle();
         }else{
 
-            $(id).toggle();
+            $("#after"+id).toggle();
         }
 
         $(".fade").toggle();
