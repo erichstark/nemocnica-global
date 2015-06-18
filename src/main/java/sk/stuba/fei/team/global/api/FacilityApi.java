@@ -19,9 +19,12 @@ public class FacilityApi {
     @RequestMapping(method = RequestMethod.POST)
     public Long save(@RequestBody FacilityWrapper facilityWrapper) {
         Facility f = facilityWrapper.build(facilityService);
-        facilityService.save(f);
-
-        return f.getId();
+        try {
+            facilityService.save(f);
+            return f.getId();
+        } catch(Exception e) {
+            return new Long(-1);
+        }
     }
 
 }
