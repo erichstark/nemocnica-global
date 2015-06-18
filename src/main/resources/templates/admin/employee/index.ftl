@@ -2,14 +2,7 @@
 <#import "../../lib/pageTemplates.ftl" as pt>
 <#import "/spring.ftl" as spring>
 <@pt.dashboardPage>
-<h1 class="page-header">Administracia zamestnancov</h1>
-
-<div class="row">
-    <div class="col-md-12">
-        <a class="btn btn-info btn-sm" href="<@spring.url '/admin/employee/add'/>" role="button">Vytvoriť
-            zamestnanca</a>
-    </div>
-</div>
+<h1 class="page-header">Administrácia zamestnancov</h1>
 
 <h2 class="sub-header">Zoznam zamestnancov</h2>
 
