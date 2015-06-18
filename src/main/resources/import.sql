@@ -311,9 +311,9 @@ INSERT INTO employee(username, enabled, first_name, last_name, password, prefix_
 -- Offices
 INSERT INTO office(enabled, name, phone, facility) VALUES (TRUE,'Oftalmologická ambulancia', '+421908879654',1);
 INSERT INTO office(enabled, name, phone, facility) VALUES (TRUE,'Chirurgická ambulancia', '+421908879654',1);
-INSERT INTO office(enabled, name, facility) VALUES (TRUE,'Hepatologická ambulancia',2);
+INSERT INTO office(enabled, name, facility) VALUES (FALSE,'Hepatologická ambulancia',2);
 INSERT INTO office(enabled, name, facility) VALUES (TRUE,'Chirurgická ambulancia 1.Bratislavská',1);
-INSERT INTO office(enabled, name, facility) VALUES (TRUE,'Meditech ',2);
+INSERT INTO office(enabled, name, facility) VALUES (FALSE,'Meditech ',2);
 
 -- Employee -> office
 INSERT INTO employee_office(employee, office) VALUES ('user1',1);
@@ -331,11 +331,11 @@ INSERT INTO office_specialization(office, specialization) VALUES (5,5);
 
 
 -- Opening Hours
-INSERT INTO opening_hours(id,date, reservation_from, reservation_morning_from, reservation_morning_to, reservation_to, office) VALUES (1,'1','780','420','720','900',1);
-INSERT INTO opening_hours(id,date, reservation_from, reservation_morning_from, reservation_morning_to, reservation_to, office) VALUES (2,2,780,420,720,900,1);
-INSERT INTO opening_hours(id,date, reservation_from, reservation_morning_from, reservation_morning_to, reservation_to, office) VALUES (3,3,780,420,720,900,1);
-INSERT INTO opening_hours(id,date, reservation_from, reservation_morning_from, reservation_morning_to, reservation_to, office) VALUES (4,4,780,420,720,900,1);
-INSERT INTO opening_hours(id,date, reservation_from, reservation_morning_from, reservation_morning_to, reservation_to, office) VALUES (5,5,780,420,720,900,1);
+INSERT INTO opening_hours(date, reservation_from, reservation_morning_from, reservation_morning_to, reservation_to, office) VALUES (1,780,420,720,900,1);
+INSERT INTO opening_hours(date, reservation_from, reservation_morning_from, reservation_morning_to, reservation_to, office) VALUES (2,780,420,720,900,1);
+INSERT INTO opening_hours(date, reservation_from, reservation_morning_from, reservation_morning_to, reservation_to, office) VALUES (3,780,420,720,900,1);
+INSERT INTO opening_hours(date, reservation_from, reservation_morning_from, reservation_morning_to, reservation_to, office) VALUES (4,780,420,720,900,1);
+INSERT INTO opening_hours(date, reservation_from, reservation_morning_from, reservation_morning_to, reservation_to, office) VALUES (5,780,420,720,900,1);
 
 
 
