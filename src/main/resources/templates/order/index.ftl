@@ -5,16 +5,16 @@
     <h1 class="">Moje objednávky</h1>
 </div>
 <div class="row">
-    <#if message??>
-        <#if message= 'ok'>
+    <#if amessage??>
+        <#if amessage= 'ok'>
             <div class="alert alert-dismissible alert-success">
                 Objednávka úspešne vymazaná !
             </div>
-        <#elseif message ='nova'>
+        <#elseif amessage ='nova'>
             <div class="alert alert-dismissible alert-success">
                 Nová objednávka úspešne vytvorená !
             </div>
-        <#elseif message='fail' >
+        <#elseif amessage='fail' >
             <div class="alert alert-dismissible alert-danger">
                 Objednávka nemôže byť zrušena! Objednávku môžete zrušiť do 24 hodín pred termínom.
             </div>

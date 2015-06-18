@@ -250,7 +250,7 @@ public class SearchController {
 
 
         appointmentService.save(newOrd);
-        model.put("message","nova");
+        model.put("amessage","nova");
         model.put("pageTitle", "Vyhľadávanie lekárov");
         return "/appointment/"+order.getUserName();
     }
